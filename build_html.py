@@ -38,6 +38,22 @@ BTN = """
 </a>"""
 
 
+def fmt_won(amount: int | None) -> str:
+    if amount is None:
+        return "-"
+    return f"₩{amount:,}"
+
+
+def flight_per_person(total: int | None) -> int | None:
+    if total is None:
+        return None
+    return round(total / GUESTS)
+
+
+def flight_per_person_text(total: int | None) -> str:
+    return fmt_won(flight_per_person(total))
+
+
 def load_list(path: Path) -> list[dict]:
     if not path.exists():
         return []
@@ -80,7 +96,7 @@ def flight_pick_cell(source: str, ret: str, row: dict | None, cheapest: int | No
             <label class="pick-label">
               <input type="radio" name="flight-pick" class="flight-pick" value="{pid}"
                 data-price="{row['price']}" data-return="{ret}" data-source="{source}">
-              <span>{row['price_text']}</span>
+              <span>{flight_per_person_text(row['price'])}</span>
             </label>
           </td>
           <td>{row.get('duration_text', '-')}</td>
@@ -114,6 +130,8 @@ def build_trip_data(sky: dict, kayak: dict, google: dict, airbnb: dict) -> dict:
                         "return_date": ret,
                         "price": row["price"],
                         "price_text": row["price_text"],
+                        "price_per_person": flight_per_person(row["price"]),
+                        "price_per_person_text": flight_per_person_text(row["price"]),
                         "duration_text": row.get("duration_text", ""),
                         "carrier_text": row.get("carrier_text", ""),
                         "seller_url": row.get("seller_url", ""),
@@ -198,7 +216,8 @@ def render_flights(sky: dict, kayak: dict, google: dict) -> str:
         hero = f"""
         <section class="hero card">
           <h2>전체 최저가 ({src})</h2>
-          <p class="hero-price" style="color:{color}">{o['price_text']}</p>
+          <p class="hero-price" style="color:{color}">{flight_per_person_text(o['price'])}</p>
+          <p class="muted">1인당 · 4명 합계 {o['price_text']}</p>
           <p>출발 {OUTBOUND} · 귀국 {o['return_date']}</p>
           <p>{o.get('duration_text','')}</p>
           <p>{o.get('carrier_text','')}</p>
@@ -225,15 +244,15 @@ def render_flights(sky: dict, kayak: dict, google: dict) -> str:
             <th rowspan="2">최저</th>
           </tr>
           <tr>
-            <th class="sky">가격·선택</th><th class="sky">비행</th><th class="sky">항공사</th><th class="sky">예약</th>
-            <th class="kayak">가격·선택</th><th class="kayak">비행</th><th class="kayak">항공사</th><th class="kayak">예약</th>
-            <th class="google">가격·선택</th><th class="google">비행</th><th class="google">항공사</th><th class="google">예약</th>
+            <th class="sky">1인당·선택</th><th class="sky">비행</th><th class="sky">항공사</th><th class="sky">예약</th>
+            <th class="kayak">1인당·선택</th><th class="kayak">비행</th><th class="kayak">항공사</th><th class="kayak">예약</th>
+            <th class="google">1인당·선택</th><th class="google">비행</th><th class="google">항공사</th><th class="google">예약</th>
           </tr>
         </thead>
         <tbody>{''.join(rows)}</tbody>
       </table>
       </div>
-      <p class="muted" style="margin-top:12px;">※ 4명(성인 2+어린이 2) 총액 · 가격 왼쪽 ○ 선택 시 여행경비 탭에 반영됩니다.</p>
+      <p class="muted" style="margin-top:12px;">※ 항공권 가격은 1인당(성인·어린이 동일 적용) · 4명 일행 합계는 여행경비 탭에 반영 · ○ 선택으로 담기</p>
     </section>"""
 
 
@@ -319,6 +338,7 @@ def render_dashboard_shell() -> str:
       <article class="dash-card" data-kind="flight">
         <div class="dash-card-head"><span>✈️</span><h3>항공권</h3></div>
         <p class="dash-amount" id="amt-flight">₩0</p>
+        <p class="dash-sub" id="sub-flight">1인당</p>
         <p class="dash-detail" id="detail-flight">미선택 · <a href="#" data-goto="flights">항공권 탭에서 선택</a></p>
       </article>
       <article class="dash-card" data-kind="lodging">
@@ -595,7 +615,11 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       const total = flightAmt + lodgingAmt + foodAmt + carAmt + giftAmt + miscAmt;
 
       document.getElementById('total-budget').textContent = fmt(total);
-      document.getElementById('amt-flight').textContent = fmt(flightAmt);
+      const flightPerPerson = flight?.price_per_person || (flightAmt ? Math.round(flightAmt / TRIP.guests) : 0);
+      document.getElementById('amt-flight').textContent = fmt(flightPerPerson);
+      document.getElementById('sub-flight').textContent = flight
+        ? `1인당 · 4명 합계 ${{fmt(flightAmt)}}`
+        : '1인당';
       document.getElementById('amt-lodging').textContent = fmt(lodgingAmt);
       document.getElementById('amt-food').textContent = fmt(foodAmt);
       document.getElementById('amt-car').textContent = fmt(carAmt);
@@ -603,7 +627,7 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       document.getElementById('amt-misc').textContent = fmt(miscAmt);
 
       document.getElementById('detail-flight').innerHTML = flight
-        ? `${{flight.source_label}} · 귀국 ${{flight.return_date}}<br><span class="muted">${{flight.carrier_text}}</span> · <a href="#" data-goto="flights">변경</a>`
+        ? `${{flight.source_label}} · 귀국 ${{flight.return_date}} · 1인 ${{flight.price_per_person_text || fmt(flightPerPerson)}}<br><span class="muted">${{flight.carrier_text}}</span> · <a href="#" data-goto="flights">변경</a>`
         : '미선택 · <a href="#" data-goto="flights">항공권 탭에서 선택</a>';
 
       document.getElementById('detail-lodging').innerHTML = lodging
@@ -621,10 +645,10 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       const mismatch = flight && lodging && flight.return_date !== lodging.checkout_date;
       document.getElementById('trip-summary').textContent = mismatch
         ? '⚠️ 항공 귀국일과 숙박 체크아웃이 다릅니다. 일정을 맞추면 더 정확합니다.'
-        : (total ? `항공 ${{fmt(flightAmt)}} + 숙박 ${{fmt(lodgingAmt)}} + 식비·렌트·선물·기타 ${{fmt(total - flightAmt - lodgingAmt)}}` : '항공권과 숙박을 선택하세요.');
+        : (total ? `항공 4명 ${{fmt(flightAmt)}} + 숙박 ${{fmt(lodgingAmt)}} + 식비·렌트·선물·기타 ${{fmt(total - flightAmt - lodgingAmt)}}` : '항공권과 숙박을 선택하세요.');
 
       const items = [
-        ['항공권', flightAmt, 'flight'],
+        ['항공권 (4명)', flightAmt, 'flight'],
         ['숙박', lodgingAmt, 'lodging'],
         ['식비', foodAmt, 'food'],
         ['자동차 렌트', carAmt, 'car'],
