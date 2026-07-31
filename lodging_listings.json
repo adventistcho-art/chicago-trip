@@ -1,0 +1,56 @@
+[
+  {
+    "checkout_date": "2026-10-08",
+    "room_id": "1212764577801308328",
+    "title": "침실 3개, 안마의자 있음 • UChicago까지 5분",
+    "location_text": "사우스사이드 (Washington Park 인근)",
+    "distance_text": "시카고대 차로 약 6분",
+    "distance_km": null,
+    "amenities_text": "주방 · 집 전체"
+  },
+  {
+    "checkout_date": "2026-10-09",
+    "room_id": "1212764577801308328",
+    "title": "침실 3개, 안마의자 있음 • UChicago까지 5분",
+    "location_text": "사우스사이드 (Washington Park 인근)",
+    "distance_text": "시카고대 차로 약 6분",
+    "distance_km": null,
+    "amenities_text": "주방 · 집 전체"
+  },
+  {
+    "checkout_date": "2026-10-10",
+    "room_id": "779923069020350721",
+    "title": "1층, 시내까지 15분, 대학교 옆",
+    "location_text": "시카고 (대학교 인근)",
+    "distance_text": "시카고대 바로 옆 (도보)",
+    "distance_km": null,
+    "amenities_text": "주방 · 집 전체"
+  },
+  {
+    "checkout_date": "2026-10-11",
+    "room_id": "1603735542683351715",
+    "title": "UChicago 근처, 3BR 아파트, 주차장, W/D",
+    "location_text": "사우스사이드",
+    "distance_text": "시카고대 캠퍼스 1.2마일 (약 1.9km)",
+    "distance_km": 1.9,
+    "amenities_text": "주방 · 집 전체"
+  },
+  {
+    "checkout_date": "2026-10-12",
+    "room_id": "716715389736721196",
+    "title": "시카고 대학교 인근 침실 2개 숙소",
+    "location_text": "우드론 (Woodlawn)",
+    "distance_text": "시카고대 캠퍼스 몇 블록 (도보)",
+    "distance_km": null,
+    "amenities_text": "주방 · 집 전체"
+  },
+  {
+    "checkout_date": "2026-10-13",
+    "room_id": "716715389736721196",
+    "title": "시카고 대학교 인근 침실 2개 숙소",
+    "location_text": "우드론 (Woodlawn)",
+    "distance_text": "시카고대 캠퍼스 몇 블록 (도보)",
+    "distance_km": null,
+    "amenities_text": "주방 · 집 전체"
+  }
+]

@@ -21,7 +21,8 @@ AIRBNB_LODGING = ROOT / "airbnb_lodging_data.json"
 ADULTS = 2
 CHILD_AGES = [7, 8]
 OUTBOUND = "2026-09-23"
-CHECKIN = "2026-09-23"
+CHECKIN = "2026-09-26"
+LODGING_NOTE = "9/23 도착 · Airbnb 9/26부터"
 GUESTS = ADULTS + len(CHILD_AGES)
 
 FLIGHT_LABELS = {"sky": "Skyscanner", "kayak": "KAYAK", "google": "Google"}
@@ -52,6 +53,58 @@ def flight_per_person(total: int | None) -> int | None:
 
 def flight_per_person_text(total: int | None) -> str:
     return fmt_won(flight_per_person(total))
+
+
+def best_flight_for_date(sky: dict, kayak: dict, google: dict, ret: str) -> dict | None:
+    best: dict | None = None
+    for source, data in (("sky", sky), ("kayak", kayak), ("google", google)):
+        row = data.get(ret)
+        if not row or row.get("price") is None:
+            continue
+        price = row["price"]
+        if best is None or price < best["price"]:
+            best = {
+                "id": f"{source}:{ret}",
+                "source": source,
+                "source_label": FLIGHT_LABELS[source],
+                "return_date": ret,
+                "price": price,
+                "price_text": row["price_text"],
+                "price_per_person": flight_per_person(price),
+                "price_per_person_text": flight_per_person_text(price),
+                "duration_text": row.get("duration_text", ""),
+                "carrier_text": row.get("carrier_text", ""),
+                "seller_url": row.get("seller_url", ""),
+            }
+    return best
+
+
+def analyze_combos(sky: dict, kayak: dict, google: dict, airbnb: dict) -> list[dict]:
+    dates = sorted(set(sky) | set(kayak) | set(google) | set(airbnb))
+    combos: list[dict] = []
+    for ret in dates:
+        flight = best_flight_for_date(sky, kayak, google, ret)
+        lodging = airbnb.get(ret)
+        if not flight or not lodging or lodging.get("price") is None:
+            continue
+        combos.append(
+            {
+                "return_date": ret,
+                "flight_id": flight["id"],
+                "flight_source": flight["source_label"],
+                "flight_price": flight["price"],
+                "flight_per_person_text": flight["price_per_person_text"],
+                "flight_carrier": flight.get("carrier_text", ""),
+                "lodging_checkout": lodging["checkout_date"],
+                "lodging_price": lodging["price"],
+                "lodging_price_text": lodging.get("price_text", fmt_won(lodging["price"])),
+                "lodging_nights": lodging.get("nights", 0),
+                "lodging_title": lodging.get("title", ""),
+                "combined": flight["price"] + lodging["price"],
+            }
+        )
+    combos.sort(key=lambda x: x["combined"])
+    return combos
 
 
 def load_list(path: Path) -> list[dict]:
@@ -155,14 +208,23 @@ def build_trip_data(sky: dict, kayak: dict, google: dict, airbnb: dict) -> dict:
 
     best_flight = flights[0] if flights else None
     best_lodging = lodging[0] if lodging else None
-    if best_flight and best_lodging:
-        matched = next((l for l in lodging if l["checkout_date"] == best_flight["return_date"]), None)
-        if matched:
-            best_lodging = matched
+    combos = analyze_combos(sky, kayak, google, airbnb)
+    recommended = combos[0] if combos else None
+    if recommended:
+        best_flight_id = recommended["flight_id"]
+        best_lodging_checkout = recommended["lodging_checkout"]
+    else:
+        best_flight_id = best_flight["id"] if best_flight else None
+        best_lodging_checkout = best_lodging["checkout_date"] if best_lodging else None
+        if best_flight and best_lodging:
+            matched = next((l for l in lodging if l["checkout_date"] == best_flight["return_date"]), None)
+            if matched:
+                best_lodging_checkout = matched["checkout_date"]
 
     return {
         "outbound": OUTBOUND,
         "checkin": CHECKIN,
+        "lodging_note": LODGING_NOTE,
         "guests": GUESTS,
         "defaults": {
             "food_per_day": DEFAULT_FOOD_PER_DAY,
@@ -172,8 +234,10 @@ def build_trip_data(sky: dict, kayak: dict, google: dict, airbnb: dict) -> dict:
         },
         "flights": flights,
         "lodging": lodging,
-        "best_flight_id": best_flight["id"] if best_flight else None,
-        "best_lodging_checkout": best_lodging["checkout_date"] if best_lodging else None,
+        "combos": combos,
+        "recommended": recommended,
+        "best_flight_id": best_flight_id,
+        "best_lodging_checkout": best_lodging_checkout,
     }
 
 
@@ -311,13 +375,58 @@ def render_lodging(airbnb: dict[str, dict]) -> str:
       </table>
       </div>
       <p class="muted" style="margin-top:12px;">
-        ※ 시카고대 근처 · 주방 포함 · 집 전체 · 게스트 4명 · 귀국일과 체크아웃을 맞추면 일정이 깔끔합니다.
+        ※ {LODGING_NOTE} · 체크인 {CHECKIN} · 시카고대 근처 · 주방 · 집 전체 · 4명<br>
+        ※ 귀국일=체크아웃 맞춤 · 아래 분석표에서 항공+숙박 최저 조합 확인
       </p>
     </section>"""
 
 
-def render_dashboard_shell() -> str:
-    return """
+def render_combo_analysis(combos: list[dict]) -> str:
+    if not combos:
+        return ""
+    best = combos[0]
+    rows = []
+    for i, c in enumerate(combos):
+        badge = "★ 추천" if i == 0 else ""
+        rows.append(f"""
+        <tr class="{'best' if i == 0 else ''}" data-return="{c['return_date']}">
+          <td>{badge}</td>
+          <td><strong>{c['return_date']}</strong></td>
+          <td>{c['flight_source']}<br><span class="muted">1인 {c['flight_per_person_text']}</span></td>
+          <td class="price">{fmt_won(c['flight_price'])}</td>
+          <td>{c['lodging_nights']}박<br><span class="muted">{c['lodging_title'][:28]}…</span></td>
+          <td class="price airbnb">{c['lodging_price_text']}</td>
+          <td class="price"><strong>{fmt_won(c['combined'])}</strong></td>
+          <td><button type="button" class="cta-btn combo-apply" data-flight="{c['flight_id']}" data-lodging="{c['lodging_checkout']}">적용</button></td>
+        </tr>""")
+
+    return f"""
+    <section class="card">
+      <h3>📊 귀국일 분석 — 항공+숙박 최저 조합</h3>
+      <p class="muted">출발 {OUTBOUND} · {LODGING_NOTE} · Airbnb 체크인 {CHECKIN} · 귀국일=체크아웃</p>
+      <div class="combo-hero">
+        <strong>추천: {best['return_date']} 귀국</strong>
+        · {best['flight_source']} + Airbnb {best['lodging_nights']}박
+        · 항공+숙박 <span class="price">{fmt_won(best['combined'])}</span>
+      </div>
+      <div class="table-wrap">
+      <table class="combo-table">
+        <thead>
+          <tr>
+            <th></th><th>귀국/체크아웃</th><th>항공(최저)</th><th>항공 4명</th>
+            <th>숙박</th><th>숙박 총액</th><th>합계</th><th></th>
+          </tr>
+        </thead>
+        <tbody>{''.join(rows)}</tbody>
+      </table>
+      </div>
+      <p class="muted" style="margin-top:12px;">※ 각 귀국일별 Skyscanner/KAYAK/Google 중 최저 항공 + 해당일 Airbnb 숙박 합계입니다.</p>
+    </section>"""
+
+
+def render_dashboard_shell(combo_html: str) -> str:
+    return f"""
+    {combo_html}
     <section class="dashboard-hero card">
       <div class="dash-hero-inner">
         <div>
@@ -459,6 +568,11 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
     .table-wrap {{ overflow-x: auto; }}
     table {{ width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 1100px; }}
     table.lodging-table {{ min-width: 800px; }}
+    table.combo-table {{ min-width: 900px; font-size: 0.82rem; }}
+    .combo-hero {{
+      background: var(--best); border-radius: 8px; padding: 12px 16px;
+      margin: 12px 0 16px; font-size: 0.95rem;
+    }}
     th, td {{ padding: 10px 8px; border-bottom: 1px solid #e0e4ea; vertical-align: middle; }}
     th {{ background: #fafbfc; color: var(--muted); font-size: 0.78rem; }}
     th.sky {{ color: var(--sky); border-top: 3px solid var(--sky); }}
@@ -515,12 +629,12 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
     </div>
 
     <div id="flights" class="panel" role="tabpanel">
-      <p class="meta">출발 {OUTBOUND} · 귀국 10/8~10/13 · Skyscanner · KAYAK · Google Flights</p>
+      <p class="meta">출발 {OUTBOUND} · 귀국 10/8~10/13 · {LODGING_NOTE}</p>
       {flights_html}
     </div>
 
     <div id="lodging" class="panel" role="tabpanel">
-      <p class="meta">체크인 {CHECKIN} · 체크아웃 10/8~10/13 · 시카고대 근처 · 주방 포함 · 집 전체</p>
+      <p class="meta">체크인 {CHECKIN} · 체크아웃 10/8~10/13 · 시카고대 · 주방 · 집 전체</p>
       {lodging_html}
     </div>
 
@@ -535,7 +649,7 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
   <script id="trip-data" type="application/json">{trip_json}</script>
   <script>
     const TRIP = JSON.parse(document.getElementById('trip-data').textContent);
-    const STORE_KEY = 'chicago-trip-budget-v1';
+    const STORE_KEY = 'chicago-trip-budget-v2';
 
     const fmt = n => '₩' + Math.round(n || 0).toLocaleString('ko-KR');
     const pct = (part, total) => total ? Math.round(part / total * 100) : 0;
@@ -637,7 +751,7 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       document.getElementById('food-calc').textContent = `${{nights}}박 × ${{fmt(state.foodPerDay)}}/일 = ${{fmt(foodAmt)}}`;
 
       const schedule = flight && lodging
-        ? `${{TRIP.outbound}} → ${{lodging.checkout_date}}`
+        ? `${{TRIP.outbound}} 도착 · 숙박 ${{TRIP.checkin}}~${{lodging.checkout_date}}`
         : (flight ? `${{TRIP.outbound}} → ${{flight.return_date}}` : '-');
       document.getElementById('dash-schedule').textContent = schedule;
       document.getElementById('dash-nights').textContent = nights ? `${{nights}}박` : '-';
@@ -721,6 +835,16 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
         document.getElementById(id).addEventListener('input', renderDashboard);
       }});
 
+      document.querySelectorAll('.combo-apply').forEach(btn => {{
+        btn.addEventListener('click', () => {{
+          const s = getState();
+          s.flightId = btn.dataset.flight;
+          s.lodgingCheckout = btn.dataset.lodging;
+          saveState(s);
+          renderDashboard();
+        }});
+      }});
+
       renderDashboard();
     }}
 
@@ -756,7 +880,8 @@ def main() -> None:
     trip_data = build_trip_data(sky, kayak, google, airbnb)
     flights_html = render_flights(sky, kayak, google)
     lodging_html = render_lodging(airbnb)
-    dashboard_html = render_dashboard_shell()
+    combo_html = render_combo_analysis(trip_data.get("combos", []))
+    dashboard_html = render_dashboard_shell(combo_html)
     page = render_page(flights_html, lodging_html, dashboard_html, trip_data, now_kst)
     HTML.write_text(page, encoding="utf-8")
     INDEX_HTML.write_text(page, encoding="utf-8")
