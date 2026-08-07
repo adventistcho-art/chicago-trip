@@ -491,11 +491,20 @@ def render_cars(car_days: list[dict]) -> str:
             f'{fmt_won(cars[0]["price"]) if cars else "-"}</span></button>'
         )
 
+        # Show 전기차 first, then others by cheapest
+        cat_order = sorted(
+            by_cat.keys(),
+            key=lambda k: (0 if k == "전기차" else 1, min(c.get("price") or 10**12 for c in by_cat[k])),
+        )
         cat_blocks = []
-        for cat, rows in by_cat.items():
+        for cat in cat_order:
+            rows = by_cat[cat]
             cards = []
             for c in rows:
-                opts = "".join(f'<span class="car-pill">{o}</span>' for o in (c.get("options") or []))
+                opts = "".join(
+                    f'<span class="car-pill{" ev" if ("electric" in o.lower() or "전기" in o or o.startswith("Fully")) else ""}">{o}</span>'
+                    for o in (c.get("options") or [])
+                )
                 specs = " · ".join(
                     x
                     for x in [
@@ -527,7 +536,7 @@ def render_cars(car_days: list[dict]) -> str:
                   </div>
                 </article>""")
             cat_blocks.append(
-                f'<div class="car-cat-block"><h3 class="car-cat-title">{cat}</h3>'
+                f'<div class="car-cat-block" data-cat="{cat}"><h3 class="car-cat-title">{cat}</h3>'
                 f'<div class="car-grid">{"".join(cards)}</div></div>'
             )
 
@@ -897,6 +906,12 @@ def render_page(
       margin: 0 0 10px; font-size: 1rem; padding-left: 10px;
       border-left: 4px solid #6366f1;
     }}
+    .car-cat-block[data-cat="전기차"] .car-cat-title {{ border-left-color: #059669; color: #047857; }}
+    .car-cat-block[data-cat="전기차"] .car-card {{
+      background: linear-gradient(180deg, #ecfdf5 0%, #fff 45%);
+      border-color: #a7f3d0;
+    }}
+    .car-pill.ev {{ background: #d1fae5; color: #065f46; }}
     .car-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }}
     .car-card {{
       background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px;
