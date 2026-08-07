@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
-"""Compare ORD car rentals: DiscoverCars · Rentalcars.com · Expedia (+ KAYAK merge)."""
+"""Compare ORD car rentals: DiscoverCars · Rentalcars.com · KAYAK (incl. EVs)."""
 
 from __future__ import annotations
 
 import json
-import re
-import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from urllib.parse import quote, quote_plus
+from urllib.parse import quote_plus
 
-from playwright.sync_api import TimeoutError as PlaywrightTimeout
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent
@@ -28,15 +25,12 @@ DROPOFF_DATES = [
     "2026-10-13",
 ]
 TOP_PER_SOURCE = 8
+TOP_EV_PER_SOURCE = 10
 
 # DiscoverCars Chicago O'Hare (ORD)
 DC_COUNTRY_ID = "5003"
 DC_CITY_ID = "4737"
 DC_PLACE_ID = "4739"
-
-# CarTrawler client IDs to try for Expedia white-label (first working wins).
-# Expedia.com itself is usually bot-gated from automation.
-EXPEDIA_CT_CLIENTS: list[str] = []
 
 
 def now_kst() -> str:
@@ -53,8 +47,9 @@ def fmt_won(amount: int | None) -> str:
     return f"₩{amount:,}"
 
 
-def kayak_url(drop: str) -> str:
-    return f"https://www.kayak.co.kr/cars/ORD/{PICKUP}/{drop}?sort=price_a"
+def kayak_url(drop: str, electric: bool = False) -> str:
+    base = f"https://www.kayak.co.kr/cars/ORD/{PICKUP}/{drop}?sort=price_a"
+    return base + "&fs=ecoclass=Electric" if electric else base
 
 
 def discover_url(guid: str, sq: str) -> str:
@@ -66,25 +61,6 @@ def rentalcars_url(drop: str) -> str:
         "https://www.rentalcars.com/SearchResults.do?"
         f"locationCode=ORD&driversAge=30&puDate={PICKUP.replace('-', '/')}&puTime=12:00"
         f"&doDate={drop.replace('-', '/')}&doTime=12:00&currency=KRW"
-    )
-
-
-def expedia_url(drop: str) -> str:
-    # US-format deep link (may hit bot check; still useful as booking link)
-    pu = datetime.strptime(PICKUP, "%Y-%m-%d")
-    do = datetime.strptime(drop, "%Y-%m-%d")
-    return (
-        "https://www.expedia.com/carsearch?"
-        f"locn=ORD&date1={pu.month}/{pu.day}/{pu.year}&date2={do.month}/{do.day}/{do.year}"
-        "&time1=1200PM&time2=1200PM"
-    )
-
-
-def expedia_ct_url(drop: str, client_id: str) -> str:
-    return (
-        f"https://cars.cartrawler.com/expedia/en/book?clientId={client_id}"
-        f"&pickupIATACode=ORD&pickupDateTime={PICKUP}T12:00"
-        f"&returnDateTime={drop}T12:00&residenceID=KR&currency=KRW&age=30#/vehicles"
     )
 
 
@@ -124,6 +100,30 @@ def normalize_category(raw: str) -> str:
     return raw.strip() if raw else "기타"
 
 
+def is_ev_car(c: dict) -> bool:
+    if c.get("electric") or c.get("category") == "전기차":
+        return True
+    opts = " ".join(c.get("options") or [])
+    return "Fully electric" in opts or "전기" in opts
+
+
+def keep_gas_and_ev(cars: list[dict]) -> list[dict]:
+    """Keep cheapest gas cars + EV cars (so EVs are not cut by price top-N)."""
+    cars = sorted(cars, key=lambda c: c["price"])
+    evs = [c for c in cars if is_ev_car(c)][:TOP_EV_PER_SOURCE]
+    gas = [c for c in cars if not is_ev_car(c)][:TOP_PER_SOURCE]
+    merged: list[dict] = []
+    seen: set[tuple] = set()
+    for c in evs + gas:
+        key = (c["model"], c["category"], c["price"], c.get("source"))
+        if key in seen:
+            continue
+        seen.add(key)
+        merged.append(c)
+    merged.sort(key=lambda c: (0 if is_ev_car(c) else 1, c["price"]))
+    return merged
+
+
 def offer_row(
     *,
     source: str,
@@ -138,7 +138,10 @@ def offer_row(
     options: list[str] | None = None,
     seller_url: str = "",
     supplier: str = "",
+    electric: bool = False,
 ) -> dict:
+    if electric and category != "전기차":
+        category = "전기차"
     return {
         "id": f"car:{source}:{drop}:{category}:{model}:{price}",
         "source": source,
@@ -152,6 +155,7 @@ def offer_row(
         "location": location,
         "options": options or [],
         "supplier": supplier,
+        "electric": electric or category == "전기차",
         "seller_url": seller_url,
         "synced_at": now_kst(),
     }
@@ -235,15 +239,14 @@ def scrape_discover(page, drop: str) -> list[dict]:
         model = (veh.get("carName") or "차량").strip()
         category = normalize_category(veh.get("sippGroup") or "")
         supplier = ((o.get("supplier") or {}).get("name") or "").strip()
-        opts = []
+        opts: list[str] = []
         if o.get("isFreeCancellation"):
             opts.append("무료 취소")
-        fuel = (spec.get("fuelType") or "") if isinstance(spec.get("fuelType"), str) else ""
-        if fuel and "electric" in fuel.lower():
-            category = "전기차"
-            opts.append("Fully electric")
+        fuel = spec.get("fuelType")
+        fuel_s = fuel if isinstance(fuel, str) else ""
         badges = o.get("badges") or {}
-        if badges.get("zero_emission"):
+        electric = bool(badges.get("zero_emission")) or ("electric" in fuel_s.lower())
+        if electric:
             category = "전기차"
             opts.append("Fully electric")
         book = o.get("bookUrl") or url
@@ -263,19 +266,11 @@ def scrape_discover(page, drop: str) -> list[dict]:
                 options=opts,
                 seller_url=book,
                 supplier=supplier,
+                electric=electric,
             )
         )
-    # Dedupe identical model/category/price
-    deduped: list[dict] = []
-    seen: set[tuple] = set()
-    for c in sorted(cars, key=lambda x: x["price"]):
-        key = (c["model"], c["category"], c["price"])
-        if key in seen:
-            continue
-        seen.add(key)
-        deduped.append(c)
-    cars = deduped[:TOP_PER_SOURCE]
-    print(f"  found {len(cars)}")
+    cars = keep_gas_and_ev(cars)
+    print(f"  found {len(cars)} (ev={sum(1 for c in cars if c.get('electric'))})")
     for c in cars[:3]:
         print(f"  - {c['price_text']} | {c['category']} | {c['model']}")
     return cars
@@ -307,7 +302,7 @@ def scrape_rentalcars(page, drop: str) -> list[dict]:
         'serviceFeatures=["RETURN_EXTRAS_IN_MULTI_CAR_RESPONSE"]'
     )
     matches = []
-    for i in range(8):
+    for _ in range(8):
         r = page.request.get(api_url, headers={"accept": "application/json"})
         if r.status == 200:
             try:
@@ -331,10 +326,12 @@ def scrape_rentalcars(page, drop: str) -> list[dict]:
         model = (veh.get("makeAndModel") or "차량").strip()
         cats = veh.get("carCategories") or []
         category = normalize_category(cats[0] if cats else veh.get("carClass") or "")
-        opts = []
+        opts: list[str] = []
         if veh.get("freeCancellation"):
             opts.append("무료 취소")
-        if (veh.get("fuel") or "").lower() in ("electric", "ev"):
+        fuel = (veh.get("fuel") or "").lower()
+        electric = fuel in ("electric", "ev") or "electric" in fuel
+        if electric:
             category = "전기차"
             opts.append("Fully electric")
         cars.append(
@@ -350,151 +347,18 @@ def scrape_rentalcars(page, drop: str) -> list[dict]:
                 location="ORD · Rentalcars.com",
                 options=opts,
                 seller_url=url,
-                supplier="",
+                electric=electric,
             )
         )
-    cars.sort(key=lambda c: c["price"])
-    cars = cars[:TOP_PER_SOURCE]
-    print(f"  found {len(cars)}")
+    cars = keep_gas_and_ev(cars)
+    print(f"  found {len(cars)} (ev={sum(1 for c in cars if c.get('electric'))})")
     for c in cars[:3]:
         print(f"  - {c['price_text']} | {c['category']} | {c['model']}")
     return cars
 
 
-# ---------- Expedia via CarTrawler UI ----------
-def scrape_expedia_ct(page, drop: str, client_id: str) -> list[dict]:
-    print(f"\n=== Expedia/CT({client_id}) ORD {PICKUP} -> {drop} ===")
-    url = expedia_ct_url(drop, client_id)
-    try:
-        page.goto(url, wait_until="domcontentloaded", timeout=60000)
-    except PlaywrightTimeout:
-        print("  nav timeout")
-    page.wait_for_timeout(8000)
-    dismiss(page)
-    # Fill pickup if empty
-    try:
-        loc = page.locator("#pickupLocation")
-        if loc.count() and not (loc.input_value() or "").strip():
-            loc.click()
-            loc.fill("ORD")
-            page.wait_for_timeout(1500)
-            page.keyboard.press("ArrowDown")
-            page.keyboard.press("Enter")
-            page.wait_for_timeout(800)
-            page.evaluate(
-                """() => {
-              const b = [...document.querySelectorAll('button')].find(el =>
-                /search cars|search|find cars/i.test((el.innerText||'').trim())
-              );
-              if (b) b.click();
-            }"""
-            )
-            page.wait_for_timeout(12000)
-    except Exception as e:
-        print("  fill err", e)
-
-    deadline = time.time() + 45
-    cars: list[dict] = []
-    while time.time() < deadline:
-        text = page.inner_text("body")
-        if re.search(r"₩[\d,]+|\$[\d,]+", text) and ("or similar" in text.lower() or "seat" in text.lower() or "동급" in text):
-            cars = parse_expedia_dom(page, drop, url)
-            if cars:
-                break
-        page.wait_for_timeout(1500)
-    print(f"  found {len(cars)}")
-    for c in cars[:3]:
-        print(f"  - {c['price_text']} | {c['category']} | {c['model']}")
-    return cars
-
-
-def parse_expedia_dom(page, drop: str, url: str) -> list[dict]:
-    raw = page.evaluate(
-        """() => {
-      const text = document.body.innerText || '';
-      const blocks = text.split(/\\n(?=[A-Z][a-z]+\\s+[A-Z])/);
-      // Fallback: line-scan for price + model patterns
-      const lines = text.split('\\n').map(s => s.trim()).filter(Boolean);
-      const out = [];
-      for (let i = 0; i < lines.length; i++) {
-        const pm = lines[i].match(/^(₩[\\d,]+|\\$[\\d,.]+)$/) || lines[i].match(/(₩[\\d,]+)/);
-        if (!pm) continue;
-        // look back for model-ish line
-        let model = '';
-        let cat = '';
-        for (let j = i - 1; j >= Math.max(0, i - 8); j--) {
-          if (/or similar|Economy|Compact|Standard|Intermediate|Full|SUV|Van|Premium|Luxury/i.test(lines[j])) {
-            if (/or similar/i.test(lines[j])) model = lines[j].replace(/\\s*or similar.*/i, '').trim();
-            else if (!cat) cat = lines[j];
-          }
-          if (/^[A-Z][A-Za-z0-9\\-\\s]{2,40}$/.test(lines[j]) && !/Search|Filter|Options|Pick-up|Return|Korea|Currency/i.test(lines[j])) {
-            if (!model) model = lines[j];
-          }
-        }
-        if (!model) continue;
-        out.push({ model, category: cat, price_raw: pm[1] || pm[0], nearby: lines.slice(Math.max(0,i-6), i+3) });
-      }
-      return out.slice(0, 40);
-    }"""
-    )
-    cars: list[dict] = []
-    seen: set[tuple] = set()
-    for item in raw or []:
-        pr = item.get("price_raw") or ""
-        if pr.startswith("₩"):
-            price = int(pr.replace("₩", "").replace(",", ""))
-        elif pr.startswith("$"):
-            # rough USD->KRW if needed (prefer KRW page)
-            price = int(round(float(pr.replace("$", "").replace(",", "")) * 1380))
-        else:
-            continue
-        model = (item.get("model") or "").strip()
-        category = normalize_category(item.get("category") or "")
-        key = (model, price)
-        if not model or key in seen:
-            continue
-        seen.add(key)
-        cars.append(
-            offer_row(
-                source="expedia",
-                drop=drop,
-                model=model,
-                category=category,
-                price=price,
-                location="ORD · Expedia",
-                options=[],
-                seller_url=url,
-            )
-        )
-    cars.sort(key=lambda c: c["price"])
-    return cars[:TOP_PER_SOURCE]
-
-
-def pick_expedia_client(page) -> str | None:
-    for cid in EXPEDIA_CT_CLIENTS:
-        url = expedia_ct_url(DROPOFF_DATES[0], cid)
-        try:
-            page.goto(url, wait_until="domcontentloaded", timeout=45000)
-        except PlaywrightTimeout:
-            continue
-        page.wait_for_timeout(8000)
-        # Look at network-ish errors in body / try parse
-        text = page.inner_text("body")
-        if "Invalid POS" in text:
-            continue
-        prices = re.findall(r"₩[\d,]+|\$[\d,]+", text)
-        if prices:
-            print(f"Expedia CT client OK: {cid}")
-            return cid
-        # Try fill+search once
-        cars = scrape_expedia_ct(page, DROPOFF_DATES[0], cid)
-        if cars:
-            print(f"Expedia CT client OK: {cid}")
-            return cid
-    return None
-
-
-def load_kayak_cheapest() -> dict[str, list[dict]]:
+def load_kayak() -> dict[str, list[dict]]:
+    """Load KAYAK cars including electric (not cut off by cheapest-only top-N)."""
     if not KAYAK_FILE.exists():
         return {}
     rows = json.loads(KAYAK_FILE.read_text(encoding="utf-8"))
@@ -502,9 +366,13 @@ def load_kayak_cheapest() -> dict[str, list[dict]]:
     for day in rows:
         drop = day.get("dropoff_date")
         cars = []
-        for c in (day.get("cars") or [])[:TOP_PER_SOURCE]:
+        for c in day.get("cars") or []:
             if c.get("price") is None:
                 continue
+            electric = bool(c.get("electric") or c.get("category") == "전기차")
+            opts = list(c.get("options") or [])
+            if electric and not any("electric" in o.lower() or "전기" in o for o in opts):
+                opts.insert(0, "Fully electric")
             cars.append(
                 offer_row(
                     source="kayak",
@@ -516,17 +384,17 @@ def load_kayak_cheapest() -> dict[str, list[dict]]:
                     bags=c.get("bags"),
                     doors=c.get("doors"),
                     location=c.get("location") or "ORD · KAYAK",
-                    options=c.get("options") or [],
-                    seller_url=c.get("seller_url") or kayak_url(drop),
+                    options=opts,
+                    seller_url=c.get("seller_url") or kayak_url(drop, electric=electric),
+                    electric=electric,
                 )
             )
-        cars.sort(key=lambda x: x["price"])
-        out[drop] = cars
+        out[drop] = keep_gas_and_ev(cars)
     return out
 
 
 def main() -> int:
-    kayak_by_drop = load_kayak_cheapest()
+    kayak_by_drop = load_kayak()
     results: list[dict] = []
 
     with sync_playwright() as p:
@@ -539,43 +407,26 @@ def main() -> int:
         )
         page = context.pages[0] if context.pages else context.new_page()
 
-        # Warm DiscoverCars + Rentalcars
         page.goto("https://www.discovercars.com/", wait_until="domcontentloaded", timeout=60000)
         page.wait_for_timeout(2000)
         dismiss(page)
 
-        # Expedia.com/Travelocity family is bot-gated; try CarTrawler once, else link-only.
-        exp_client = None
-        try:
-            exp_client = pick_expedia_client(page)
-        except Exception as e:
-            print("Expedia client probe failed:", e)
-        if not exp_client:
-            print("Expedia live scrape unavailable (bot/POS). Will store search links only.")
-
         for drop in DROPOFF_DATES:
             discover = scrape_discover(page, drop)
             rentalcars = scrape_rentalcars(page, drop)
-            expedia: list[dict] = []
-            if exp_client:
-                expedia = scrape_expedia_ct(page, drop, exp_client)
             kayak = kayak_by_drop.get(drop) or []
 
             sources = {
                 "discover": discover,
                 "rentalcars": rentalcars,
-                "expedia": expedia,
                 "kayak": kayak,
             }
-            cheapest_by_source = {}
-            for key, cars in sources.items():
-                cheapest_by_source[key] = cars[0] if cars else None
+            cheapest_by_source = {key: (cars[0] if cars else None) for key, cars in sources.items()}
 
-            # Flat list for dashboard picks (tag source in id already)
-            all_cars = []
-            for key in ("discover", "rentalcars", "expedia", "kayak"):
+            all_cars: list[dict] = []
+            for key in ("discover", "rentalcars", "kayak"):
                 all_cars.extend(sources[key])
-            all_cars.sort(key=lambda c: c["price"])
+            all_cars.sort(key=lambda c: (0 if c.get("electric") else 1, c["price"]))
 
             results.append(
                 {
@@ -587,7 +438,9 @@ def main() -> int:
                     "sources": {
                         "discover": {
                             "label": "DiscoverCars",
-                            "url": discover[0]["seller_url"] if discover else f"https://www.discovercars.com/usa-illinois/chicago/ord",
+                            "url": discover[0]["seller_url"]
+                            if discover
+                            else "https://www.discovercars.com/usa-illinois/chicago/ord",
                             "cars": discover,
                             "cheapest": cheapest_by_source["discover"],
                         },
@@ -596,13 +449,6 @@ def main() -> int:
                             "url": rentalcars_url(drop),
                             "cars": rentalcars,
                             "cheapest": cheapest_by_source["rentalcars"],
-                        },
-                        "expedia": {
-                            "label": "Expedia",
-                            "url": expedia_url(drop),
-                            "cars": expedia,
-                            "cheapest": cheapest_by_source["expedia"],
-                            "note": None if expedia else "사이트 봇 차단으로 실시간 수집 불가 · 링크에서 직접 확인",
                         },
                         "kayak": {
                             "label": "KAYAK",
@@ -622,17 +468,13 @@ def main() -> int:
     print(f"\nwrote {OUT_FILE.name}")
     for day in results:
         bits = []
-        for key, label in (
-            ("discover", "DC"),
-            ("rentalcars", "RC"),
-            ("expedia", "EX"),
-            ("kayak", "KY"),
-        ):
-            c = (day["sources"][key].get("cheapest") or {})
+        for key, label in (("discover", "DC"), ("rentalcars", "RC"), ("kayak", "KY")):
+            c = day["sources"][key].get("cheapest") or {}
             bits.append(f"{label}:{c.get('price_text', '-')}")
-        print(day["dropoff_date"], " · ".join(bits))
+        ev_n = sum(1 for c in day["cars"] if c.get("electric") or c.get("category") == "전기차")
+        print(day["dropoff_date"], " · ".join(bits), f"· EV:{ev_n}")
     ok = any(
-        (d["sources"]["discover"]["cars"] or d["sources"]["rentalcars"]["cars"])
+        (d["sources"]["discover"]["cars"] or d["sources"]["rentalcars"]["cars"] or d["sources"]["kayak"]["cars"])
         for d in results
     )
     return 0 if ok else 1

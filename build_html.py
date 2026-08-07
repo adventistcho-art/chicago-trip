@@ -27,7 +27,6 @@ CAR_PICKUP = "2026-09-23"
 CAR_SOURCE_META = {
     "discover": {"label": "DiscoverCars", "color": "#1f6feb", "css": "discover"},
     "rentalcars": {"label": "Rentalcars.com", "color": "#0d9488", "css": "rentalcars"},
-    "expedia": {"label": "Expedia", "color": "#ffc700", "css": "expedia"},
     "kayak": {"label": "KAYAK", "color": "#ff690f", "css": "kayak"},
 }
 
@@ -291,6 +290,7 @@ def build_trip_data(
         lodging.append(
             {
                 "id": lodging_id(a),
+                "checkin_date": a.get("checkin") or CHECKIN,
                 "checkout_date": a["checkout_date"],
                 "nights": a.get("nights", 0),
                 "price": a.get("price"),
@@ -329,12 +329,29 @@ def build_trip_data(
     elif cars:
         best_car_id = cars[0]["id"]
 
+    return_dates = sorted({f["return_date"] for f in flights})
+    checkout_dates = sorted({l["checkout_date"] for l in lodging})
+    dropoff_dates = sorted({c["dropoff_date"] for c in cars}) or return_dates
+    checkin_dates = sorted({l.get("checkin_date") or CHECKIN for l in lodging}) or [CHECKIN]
+    outbound_dates = sorted({OUTBOUND})
+    pickup_dates = sorted({c.get("pickup_date") or CAR_PICKUP for c in cars}) or [CAR_PICKUP]
+
     return {
         "outbound": OUTBOUND,
         "checkin": CHECKIN,
         "lodging_note": LODGING_NOTE,
         "guests": GUESTS,
+        "adults": ADULTS,
+        "child_ages": CHILD_AGES,
         "car_pickup": CAR_PICKUP,
+        "date_options": {
+            "outbound": outbound_dates,
+            "return": return_dates,
+            "checkin": checkin_dates,
+            "checkout": checkout_dates,
+            "pickup": pickup_dates,
+            "dropoff": dropoff_dates,
+        },
         "defaults": {
             "food_per_day": DEFAULT_FOOD_PER_DAY,
             "car_rental": DEFAULT_CAR_RENTAL,
@@ -351,6 +368,62 @@ def build_trip_data(
         "best_lodging_checkout": best_lodging_id,
         "best_car_id": best_car_id,
     }
+
+
+def _date_options_html(dates: list[str], selected: str | None = None) -> str:
+    if not dates:
+        return ""
+    sel = selected if selected in dates else dates[0]
+    parts = []
+    for d in dates:
+        parts.append(
+            f'<option value="{d}"{" selected" if d == sel else ""}>{_fmt_date_ko(d)} ({d})</option>'
+        )
+    return "".join(parts)
+
+
+def render_date_filter(
+    *,
+    prefix: str,
+    start_id: str,
+    end_id: str,
+    start_label: str,
+    end_label: str,
+    start_dates: list[str],
+    end_dates: list[str],
+    start_selected: str | None = None,
+    end_selected: str | None = None,
+    note: str = "",
+) -> str:
+    guests_note = (
+        f"성인 {ADULTS}명 · 아동 {len(CHILD_AGES)}명 "
+        f"(만 {CHILD_AGES[0]}·{CHILD_AGES[1]}세) · 인원 고정"
+    )
+    return f"""
+    <section class="date-filter card" data-date-filter="{prefix}">
+      <div class="date-filter-head">
+        <div>
+          <p class="date-kicker">DATE FILTER</p>
+          <h3 class="date-filter-title">날짜 선택</h3>
+        </div>
+        <p class="date-filter-guests">{guests_note}</p>
+      </div>
+      <div class="date-filter-grid">
+        <label class="date-field">
+          <span class="field-label">{start_label}</span>
+          <select id="{start_id}" class="date-select" data-date-role="start">
+            {_date_options_html(start_dates, start_selected)}
+          </select>
+        </label>
+        <label class="date-field">
+          <span class="field-label">{end_label}</span>
+          <select id="{end_id}" class="date-select" data-date-role="end">
+            {_date_options_html(end_dates, end_selected)}
+          </select>
+        </label>
+      </div>
+      <p class="muted date-filter-note">{note or "선택한 날짜에 맞는 결과만 아래에 표시됩니다."}</p>
+    </section>"""
 
 
 def _fmt_date_ko(iso: str) -> str:
@@ -448,7 +521,24 @@ def _route_panel(route_key: str, days: list[dict], active: bool) -> str:
 
 
 def render_flights(chi_days: list[dict], nyc_days: list[dict]) -> str:
+    returns = sorted(
+        {d["return_date"] for d in chi_days + nyc_days}
+        or {"2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"}
+    )
+    date_bar = render_date_filter(
+        prefix="flights",
+        start_id="flight-outbound",
+        end_id="flight-return",
+        start_label="출국일",
+        end_label="귀국일",
+        start_dates=[OUTBOUND],
+        end_dates=returns,
+        start_selected=OUTBOUND,
+        end_selected=returns[0] if returns else None,
+        note="출국·귀국일을 고르면 해당 일정의 최저가 / 최단시간만 표시됩니다.",
+    )
     return f"""
+    {date_bar}
     <div class="route-switch" role="tablist" aria-label="항공 루트">
       <button type="button" class="route-tab active" role="tab" aria-selected="true" data-route="nyc_in">
         <span class="route-tab-title">뉴욕 인 · 시카고 아웃</span>
@@ -459,7 +549,8 @@ def render_flights(chi_days: list[dict], nyc_days: list[dict]) -> str:
         <span class="route-tab-sub">SEL↔ORD 왕복</span>
       </button>
     </div>
-    <p class="flight-hint muted">귀국일별로 <strong>최저가</strong>와 <strong>최단시간</strong>을 나란히 비교합니다. ○ 경비에 담기 → 여행경비 탭에 반영됩니다.</p>
+    <p class="flight-hint muted">선택한 귀국일의 <strong>최저가</strong>와 <strong>최단시간</strong>을 나란히 비교합니다. ○ 경비에 담기 → 여행경비 탭에 반영됩니다.</p>
+    <p id="flight-empty" class="empty-filter muted" hidden>선택한 날짜의 항공 데이터가 없습니다.</p>
     {_route_panel("nyc_in", nyc_days, True)}
     {_route_panel("chi_round", chi_days, False)}
     """
@@ -528,12 +619,7 @@ def render_cars(car_days: list[dict]) -> str:
                     all_cars.append(src["cheapest"])
     cheapest = min((c for c in all_cars if c.get("price")), key=lambda x: x["price"], default=None)
 
-    source_keys = ["discover", "rentalcars", "expedia"]
-    # Keep KAYAK as reference column when present
-    if any((day.get("sources") or {}).get("kayak", {}).get("cheapest") for day in car_days) or (
-        not compare_mode and all_cars
-    ):
-        source_keys = ["discover", "rentalcars", "expedia", "kayak"]
+    source_keys = ["discover", "rentalcars", "kayak"]
 
     date_tabs = []
     panels = []
@@ -646,7 +732,7 @@ def render_cars(car_days: list[dict]) -> str:
           <div class="route-hero-copy">
             <p class="route-kicker">ORD RENTAL COMPARE</p>
             <h2>렌트카 · 사이트 비교</h2>
-            <p class="muted">DiscoverCars · Rentalcars.com · Expedia · (참고 KAYAK) · 인수 {CAR_PICKUP}</p>
+            <p class="muted">DiscoverCars · Rentalcars.com · KAYAK · 전기차 포함 · 인수 {CAR_PICKUP}</p>
           </div>
           <div class="route-stats">
             <div class="route-stat">
@@ -671,7 +757,7 @@ def render_cars(car_days: list[dict]) -> str:
         compare_table = f"""
         <section class="card">
           <div class="legend">{legend}</div>
-          <p class="muted" style="margin:0 0 12px;">귀국(반납)일별 사이트 최저가입니다. ○ 선택 → 여행경비 반영 · Expedia는 봇 차단 시 링크만 제공합니다.</p>
+          <p class="muted" style="margin:0 0 12px;">귀국(반납)일별 사이트 최저가입니다. ○ 선택 → 여행경비 반영 · 아래 목록에 전기차(EV)도 포함됩니다.</p>
           <div class="table-wrap">
           <table class="car-compare-table">
             <thead>
@@ -685,11 +771,27 @@ def render_cars(car_days: list[dict]) -> str:
           </div>
         </section>"""
 
+    pickups = sorted({day.get("pickup_date", CAR_PICKUP) for day in car_days}) or [CAR_PICKUP]
+    dropoffs = sorted({day["dropoff_date"] for day in car_days})
+    date_bar = render_date_filter(
+        prefix="cars",
+        start_id="car-pickup",
+        end_id="car-dropoff",
+        start_label="인수일",
+        end_label="반납일",
+        start_dates=pickups,
+        end_dates=dropoffs,
+        start_selected=pickups[0],
+        end_selected=dropoffs[0] if dropoffs else None,
+        note="인수·반납일을 고르면 해당 기간의 사이트 비교·차종 목록만 표시됩니다.",
+    )
     return f"""
+    {date_bar}
     {hero}
     {compare_table}
-    <p class="flight-hint muted">날짜별 상세 차종·옵션은 아래에서 확인하세요.</p>
-    <div class="car-date-switch" role="tablist">{''.join(date_tabs)}</div>
+    <p class="flight-hint muted">선택한 반납일의 상세 차종·옵션입니다.</p>
+    <p id="car-empty" class="empty-filter muted" hidden>선택한 날짜의 렌트카 데이터가 없습니다.</p>
+    <div class="car-date-switch" role="tablist" hidden>{''.join(date_tabs)}</div>
     {''.join(panels)}
     """
 
@@ -697,29 +799,51 @@ def render_cars(car_days: list[dict]) -> str:
 def render_lodging(airbnb_all: list[dict], airbnb: dict[str, dict]) -> str:
     merged = sorted(airbnb_all, key=lambda x: (x.get("checkout_date", ""), x.get("price") or 10**12))
     cheapest_by_date = {co: row.get("price") for co, row in airbnb.items()}
-    best = airbnb.get("2026-10-08") or (sorted(airbnb.values(), key=lambda x: x.get("price") or 10**12)[0] if airbnb else None)
+    checkins = sorted({a.get("checkin") or CHECKIN for a in airbnb_all}) or [CHECKIN]
+    checkouts = sorted({a["checkout_date"] for a in airbnb_all})
+    best = airbnb.get(checkouts[0] if checkouts else "") or (
+        sorted(airbnb.values(), key=lambda x: x.get("price") or 10**12)[0] if airbnb else None
+    )
+
+    date_bar = render_date_filter(
+        prefix="lodging",
+        start_id="lodging-checkin",
+        end_id="lodging-checkout",
+        start_label="체크인",
+        end_label="체크아웃",
+        start_dates=checkins,
+        end_dates=checkouts,
+        start_selected=checkins[0],
+        end_selected=checkouts[0] if checkouts else None,
+        note="체크인·체크아웃을 고르면 해당 기간 숙소만 표시됩니다. (인원 4명 고정)",
+    )
 
     hero = ""
     if best:
         hero = f"""
-        <section class="hero card">
+        <section class="hero card" id="lodging-hero">
           <h2>숙박 후보 (Airbnb 검색 · 주방·집 전체)</h2>
-          <p class="hero-price" style="color:var(--airbnb)">{best['price_text']}</p>
-          <p>체크인 {CHECKIN} · 체크아웃 {best['checkout_date']} · {best.get('nights','')}박 · 해당일 최저</p>
-          <p>{best.get('title','')}</p>
-          <p>{best.get('distance_text','')} · {best.get('amenities_text','')}</p>
-          {BTN.format(url=best['seller_url'])}
-          <p class="muted" style="margin-top:10px;">아래 표에 체크아웃별 후보(최대 8곳) · ○ 선택으로 여행경비에 반영</p>
+          <p class="hero-price" id="lodging-hero-price" style="color:var(--airbnb)">{best['price_text']}</p>
+          <p id="lodging-hero-dates">체크인 {best.get('checkin') or CHECKIN} · 체크아웃 {best['checkout_date']} · {best.get('nights','')}박 · 해당일 최저</p>
+          <p id="lodging-hero-title">{best.get('title','')}</p>
+          <p id="lodging-hero-meta">{best.get('distance_text','')} · {best.get('amenities_text','')}</p>
+          <span id="lodging-hero-cta">{BTN.format(url=best['seller_url'])}</span>
+          <p class="muted" style="margin-top:10px;">아래 표 · ○ 선택으로 여행경비에 반영</p>
         </section>"""
 
     rows = []
-    for i, a in enumerate(merged):
+    for a in merged:
         co = a["checkout_date"]
+        ci = a.get("checkin") or CHECKIN
         is_best = a.get("price") == cheapest_by_date.get(co)
         row_cls = "best" if is_best else ""
         lid = lodging_id(a)
         rows.append(f"""
-        <tr class="{row_cls}" data-checkout="{co}" data-lodging-id="{lid}">
+        <tr class="{row_cls}" data-checkout="{co}" data-checkin="{ci}" data-lodging-id="{lid}"
+            data-price="{a.get('price') or 0}" data-price-text="{a.get('price_text','')}"
+            data-title="{a.get('title','')}" data-distance="{a.get('distance_text','')}"
+            data-amenities="{a.get('amenities_text','')}" data-nights="{a.get('nights','')}"
+            data-url="{a.get('seller_url','#')}">
           {lodging_pick_cell(a, is_best)}
           <td>{co}<br><span class="muted">{a.get('nights','')}박</span></td>
           <td class="price airbnb{price_cls(a.get('price'), cheapest_by_date.get(co) if is_best else None)}">{a['price_text']}</td>
@@ -730,11 +854,13 @@ def render_lodging(airbnb_all: list[dict], airbnb: dict[str, dict]) -> str:
         </tr>""")
 
     return f"""
+    {date_bar}
     {hero}
     <section class="card">
       <div class="legend">
         <span><i class="dot" style="background:var(--airbnb)"></i> Airbnb · 시카고대(University of Chicago) 기준 거리</span>
       </div>
+      <p id="lodging-empty" class="empty-filter muted" hidden>선택한 날짜의 숙소 데이터가 없습니다.</p>
       <div class="table-wrap">
       <table class="lodging-table">
         <thead>
@@ -752,8 +878,8 @@ def render_lodging(airbnb_all: list[dict], airbnb: dict[str, dict]) -> str:
       </table>
       </div>
       <p class="muted" style="margin-top:12px;">
-        ※ {LODGING_NOTE} · 체크인 {CHECKIN} · 시카고대 인근 · 주방 · 집 전체 · 4명<br>
-        ※ 체크아웃(귀국일)별 주방 있는 집 전체 후보 · 3시간마다 갱신
+        ※ {LODGING_NOTE} · 시카고대 인근 · 주방 · 집 전체 · 성인 {ADULTS} + 아동 {len(CHILD_AGES)}<br>
+        ※ 선택한 체크아웃(귀국일) 후보 · 3시간마다 갱신
       </p>
     </section>"""
 
@@ -898,7 +1024,7 @@ def render_page(
   <style>
     :root {{
       --sky: #0770e3; --kayak: #ff690f; --google: #1a73e8;
-      --discover: #1f6feb; --rentalcars: #0d9488; --expedia: #b8860b;
+      --discover: #1f6feb; --rentalcars: #0d9488;
       --airbnb: #ff385c; --budget: #0d7a5f;
       --bg: #eef1f6; --card: #fff; --text: #14171c; --muted: #5f6773;
       --best: #e8f4fd; --highlight: #fff8e1; --picked: #e7f7f0;
@@ -967,11 +1093,39 @@ def render_page(
       border-radius: 14px; padding: 14px 16px; display: grid; gap: 4px;
     }}
     .route-stat strong {{ font-size: 1.2rem; }}
+    .date-filter {{
+      background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+      border: 1px solid var(--line);
+      margin-bottom: 16px;
+    }}
+    .date-filter-head {{
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+      flex-wrap: wrap; margin-bottom: 14px;
+    }}
+    .date-filter-title {{ margin: 0; font-size: 1.15rem; }}
+    .date-filter-guests {{
+      margin: 0; font-size: 0.85rem; font-weight: 700; color: #334155;
+      background: #eef2ff; border-radius: 999px; padding: 8px 12px;
+    }}
+    .date-filter-grid {{
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }}
+    .date-field {{ display: block; }}
+    .date-select {{
+      width: 100%; padding: 12px 14px; border: 1px solid #d7dbe3; border-radius: 10px;
+      font-size: 1rem; font-family: inherit; background: #fff; font-weight: 600;
+    }}
+    .date-filter-note {{ margin: 12px 0 0; }}
+    .empty-filter {{
+      background: #fff7ed; border: 1px dashed #fdba74; border-radius: 12px;
+      padding: 14px 16px; margin: 0 0 16px;
+    }}
     .date-stack {{ display: grid; gap: 16px; }}
     .date-card {{
       background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px;
       box-shadow: 0 6px 18px rgba(24,33,50,.05);
     }}
+    .date-card[hidden], .car-date-panel[hidden], tr[hidden] {{ display: none !important; }}
     .date-card-head {{
       display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 14px;
     }}
@@ -1137,7 +1291,6 @@ def render_page(
     th.google {{ color: var(--google); border-top: 3px solid var(--google); }}
     th.discover {{ color: var(--discover); border-top: 3px solid var(--discover); }}
     th.rentalcars {{ color: var(--rentalcars); border-top: 3px solid var(--rentalcars); }}
-    th.expedia {{ color: var(--expedia); border-top: 3px solid var(--expedia); }}
     th.airbnb {{ color: var(--airbnb); border-top: 3px solid var(--airbnb); }}
     tr.best {{ background: var(--best); }}
     tr.picked-row {{ background: var(--picked) !important; }}
@@ -1147,7 +1300,6 @@ def render_page(
     .price.google {{ color: var(--google); }}
     .price.discover {{ color: var(--discover); }}
     .price.rentalcars {{ color: var(--rentalcars); }}
-    .price.expedia {{ color: var(--expedia); }}
     .price.airbnb {{ color: var(--airbnb); }}
     .price.highlight {{ background: var(--highlight); border-radius: 4px; }}
     table.car-compare-table {{ min-width: 960px; }}
@@ -1158,7 +1310,6 @@ def render_page(
     }}
     .car-src-tag.discover {{ background: #dbeafe; color: #1e40af; }}
     .car-src-tag.rentalcars {{ background: #ccfbf1; color: #115e59; }}
-    .car-src-tag.expedia {{ background: #fef3c7; color: #92400e; }}
     .car-src-tag.kayak {{ background: #ffedd5; color: #9a3412; }}
     .pick-label {{ display: flex; align-items: center; gap: 8px; cursor: pointer; }}
     .pick-label input {{ accent-color: var(--budget); }}
@@ -1179,7 +1330,7 @@ def render_page(
       .cta-btn {{ padding: 6px 10px; }}
       .breakdown-wrap {{ grid-template-columns: 1fr; }}
       .total-price {{ font-size: 2rem; }}
-      .route-switch, .opt-grid, .car-grid, .east-switch {{ grid-template-columns: 1fr; }}
+      .route-switch, .opt-grid, .car-grid, .east-switch, .date-filter-grid {{ grid-template-columns: 1fr; }}
       .route-hero {{ padding: 18px; }}
       .opt-price {{ font-size: 1.35rem; }}
       .tab {{ padding: 10px 14px; font-size: 0.9rem; }}
@@ -1210,17 +1361,17 @@ def render_page(
     </div>
 
     <div id="flights" class="panel" role="tabpanel">
-      <p class="meta">출발 {OUTBOUND} · 귀국 10/8~10/13 · 루트별 최저가 / 최단시간 · {LODGING_NOTE}</p>
+      <p class="meta">위에서 출국·귀국일을 고르면 해당 일정 결과만 표시됩니다 · 성인 {ADULTS} · 아동 {len(CHILD_AGES)}</p>
       {flights_html}
     </div>
 
     <div id="lodging" class="panel" role="tabpanel">
-      <p class="meta">체크인 {CHECKIN} · 체크아웃 10/8~10/13 · 시카고대 · 주방 · 집 전체</p>
+      <p class="meta">위에서 체크인·체크아웃을 고르면 해당 숙소만 표시됩니다 · 시카고대 · 주방 · 집 전체</p>
       {lodging_html}
     </div>
 
     <div id="cars" class="panel" role="tabpanel">
-      <p class="meta">인수 {CAR_PICKUP} · 반납 10/8~10/13 · ORD · DiscoverCars / Rentalcars / Expedia 비교</p>
+      <p class="meta">위에서 인수·반납일을 고르면 해당 렌트 결과만 표시됩니다 · ORD · 사이트 비교</p>
       {cars_html}
     </div>
 
@@ -1245,7 +1396,8 @@ def render_page(
   <script id="trip-data" type="application/json">{trip_json}</script>
   <script>
     const TRIP = JSON.parse(document.getElementById('trip-data').textContent);
-    const STORE_KEY = 'chicago-trip-budget-v4';
+    const STORE_KEY = 'chicago-trip-budget-v5';
+    const DATE_OPTS = TRIP.date_options || {{}};
 
     const fmt = n => '₩' + Math.round(n || 0).toLocaleString('ko-KR');
     const pct = (part, total) => total ? Math.round(part / total * 100) : 0;
@@ -1262,6 +1414,196 @@ def render_page(
 
     function saveState(state) {{
       localStorage.setItem(STORE_KEY, JSON.stringify(state));
+    }}
+
+    function firstAvailable(list, preferred) {{
+      const arr = list || [];
+      if (preferred && arr.includes(preferred)) return preferred;
+      return arr[0] || '';
+    }}
+
+    function getTripDates() {{
+      const saved = loadState();
+      const rec = TRIP.recommended?.return_date;
+      return {{
+        outbound: firstAvailable(DATE_OPTS.outbound, saved.outbound || TRIP.outbound),
+        returnDate: firstAvailable(DATE_OPTS.return, saved.returnDate || rec || TRIP.outbound),
+        checkin: firstAvailable(DATE_OPTS.checkin, saved.checkin || TRIP.checkin),
+        checkout: firstAvailable(DATE_OPTS.checkout, saved.checkout || rec),
+        pickup: firstAvailable(DATE_OPTS.pickup, saved.pickup || TRIP.car_pickup),
+        dropoff: firstAvailable(DATE_OPTS.dropoff, saved.dropoff || rec),
+      }};
+    }}
+
+    function setSelectValue(id, value) {{
+      const el = document.getElementById(id);
+      if (!el || !value) return;
+      if ([...el.options].some(o => o.value === value)) el.value = value;
+    }}
+
+    function syncDateSelects(dates) {{
+      setSelectValue('flight-outbound', dates.outbound);
+      setSelectValue('flight-return', dates.returnDate);
+      setSelectValue('lodging-checkin', dates.checkin);
+      setSelectValue('lodging-checkout', dates.checkout);
+      setSelectValue('car-pickup', dates.pickup);
+      setSelectValue('car-dropoff', dates.dropoff);
+    }}
+
+    function persistTripDates(dates) {{
+      const s = loadState();
+      Object.assign(s, {{
+        outbound: dates.outbound,
+        returnDate: dates.returnDate,
+        checkin: dates.checkin,
+        checkout: dates.checkout,
+        pickup: dates.pickup,
+        dropoff: dates.dropoff,
+      }});
+      saveState(s);
+    }}
+
+    function updateLodgingHero(checkout, checkin) {{
+      const rows = [...document.querySelectorAll('tr[data-lodging-id]')].filter(tr =>
+        tr.dataset.checkout === checkout && (!checkin || tr.dataset.checkin === checkin)
+      );
+      const hero = document.getElementById('lodging-hero');
+      if (!hero) return;
+      if (!rows.length) {{
+        hero.hidden = true;
+        return;
+      }}
+      hero.hidden = false;
+      const best = rows.reduce((a, b) => (Number(a.dataset.price) <= Number(b.dataset.price) ? a : b));
+      const priceEl = document.getElementById('lodging-hero-price');
+      const datesEl = document.getElementById('lodging-hero-dates');
+      const titleEl = document.getElementById('lodging-hero-title');
+      const metaEl = document.getElementById('lodging-hero-meta');
+      const ctaEl = document.getElementById('lodging-hero-cta');
+      if (priceEl) priceEl.textContent = best.dataset.priceText || fmt(Number(best.dataset.price));
+      if (datesEl) datesEl.textContent = `체크인 ${{checkin}} · 체크아웃 ${{checkout}} · ${{best.dataset.nights || ''}}박 · 해당일 최저`;
+      if (titleEl) titleEl.textContent = best.dataset.title || '';
+      if (metaEl) metaEl.textContent = `${{best.dataset.distance || ''}} · ${{best.dataset.amenities || ''}}`;
+      if (ctaEl) {{
+        ctaEl.innerHTML = `<a class="cta-link" href="${{best.dataset.url || '#'}}" target="_blank" rel="noopener noreferrer"><button type="button" class="cta-btn">선택하기</button></a>`;
+      }}
+    }}
+
+    function applyDateFilters() {{
+      const dates = getTripDates();
+      syncDateSelects(dates);
+
+      let flightVisible = 0;
+      document.querySelectorAll('.date-card').forEach(card => {{
+        const on = card.dataset.return === dates.returnDate;
+        card.hidden = !on;
+        if (on) flightVisible += 1;
+      }});
+      const flightEmpty = document.getElementById('flight-empty');
+      if (flightEmpty) flightEmpty.hidden = flightVisible > 0;
+
+      let lodgingVisible = 0;
+      document.querySelectorAll('tr[data-lodging-id]').forEach(tr => {{
+        const on = tr.dataset.checkout === dates.checkout
+          && (!dates.checkin || tr.dataset.checkin === dates.checkin);
+        tr.hidden = !on;
+        if (on) lodgingVisible += 1;
+      }});
+      const lodgingEmpty = document.getElementById('lodging-empty');
+      if (lodgingEmpty) lodgingEmpty.hidden = lodgingVisible > 0;
+      const lodgingTable = document.querySelector('.lodging-table');
+      if (lodgingTable) lodgingTable.closest('.table-wrap').hidden = lodgingVisible === 0;
+      updateLodgingHero(dates.checkout, dates.checkin);
+
+      let carVisible = 0;
+      document.querySelectorAll('.car-date-panel').forEach(p => {{
+        const on = p.dataset.carPanel === dates.dropoff;
+        p.hidden = !on;
+        p.classList.toggle('active', on);
+        if (on) carVisible += 1;
+      }});
+      document.querySelectorAll('.car-compare-table tbody tr[data-dropoff]').forEach(tr => {{
+        tr.hidden = tr.dataset.dropoff !== dates.dropoff;
+      }});
+      const carEmpty = document.getElementById('car-empty');
+      if (carEmpty) carEmpty.hidden = carVisible > 0;
+      showCarDate(dates.dropoff);
+    }}
+
+    function onEndDateChange(nextEnd, opts = {{}}) {{
+      const dates = getTripDates();
+      dates.returnDate = firstAvailable(DATE_OPTS.return, nextEnd);
+      dates.checkout = firstAvailable(DATE_OPTS.checkout, nextEnd);
+      dates.dropoff = firstAvailable(DATE_OPTS.dropoff, nextEnd);
+      persistTripDates(dates);
+
+      const s = getState();
+      if (!opts.keepFlight) {{
+        const sameFlight = (TRIP.flights || []).filter(f => f.return_date === dates.returnDate);
+        if (sameFlight.length) {{
+          const current = findFlight(s.flightId);
+          if (!current || current.return_date !== dates.returnDate) {{
+            sameFlight.sort((a, b) => (a.price || 1e12) - (b.price || 1e12));
+            s.flightId = sameFlight[0].id;
+          }}
+        }}
+      }}
+      if (!opts.keepLodging) {{
+        const currentLod = findLodging(s.lodgingCheckout);
+        if (!currentLod || currentLod.checkout_date !== dates.checkout) {{
+          const matchedLodging = cheapestLodgingForCheckout(dates.checkout);
+          if (matchedLodging) s.lodgingCheckout = matchedLodging.id;
+        }}
+      }}
+      if (!opts.keepCar) {{
+        const currentCar = findCar(s.carId);
+        if (!currentCar || currentCar.dropoff_date !== dates.dropoff) {{
+          const matchedCar = (TRIP.cars || [])
+            .filter(c => c.dropoff_date === dates.dropoff)
+            .sort((a, b) => (a.price || 1e12) - (b.price || 1e12))[0];
+          if (matchedCar) {{
+            s.carId = matchedCar.id;
+            s.car = matchedCar.price;
+            const carInput = document.getElementById('cost-car');
+            if (carInput) carInput.value = matchedCar.price;
+          }}
+        }}
+      }}
+      saveState(s);
+      applyDateFilters();
+      renderDashboard();
+    }}
+
+    function bindDateFilters() {{
+      const dates = getTripDates();
+      persistTripDates(dates);
+      syncDateSelects(dates);
+
+      const flightReturn = document.getElementById('flight-return');
+      const lodgingCheckout = document.getElementById('lodging-checkout');
+      const carDropoff = document.getElementById('car-dropoff');
+      const flightOutbound = document.getElementById('flight-outbound');
+      const lodgingCheckin = document.getElementById('lodging-checkin');
+      const carPickup = document.getElementById('car-pickup');
+
+      if (flightReturn) flightReturn.addEventListener('change', () => onEndDateChange(flightReturn.value));
+      if (lodgingCheckout) lodgingCheckout.addEventListener('change', () => onEndDateChange(lodgingCheckout.value));
+      if (carDropoff) carDropoff.addEventListener('change', () => onEndDateChange(carDropoff.value));
+
+      const bindStart = (el, key) => {{
+        if (!el) return;
+        el.addEventListener('change', () => {{
+          const d = getTripDates();
+          d[key] = el.value;
+          persistTripDates(d);
+          applyDateFilters();
+        }});
+      }};
+      bindStart(flightOutbound, 'outbound');
+      bindStart(lodgingCheckin, 'checkin');
+      bindStart(carPickup, 'pickup');
+
+      applyDateFilters();
     }}
 
     function findFlight(id) {{
@@ -1443,19 +1785,16 @@ def render_page(
       document.getElementById('cost-gift').value = state.gift;
       document.getElementById('cost-misc').value = state.misc;
 
+      bindDateFilters();
+
       document.querySelectorAll('.flight-pick').forEach(el => {{
         el.addEventListener('change', () => {{
           const s = getState();
           s.flightId = el.value;
           saveState(s);
-          const lod = findLodging(s.lodgingCheckout);
           const fl = findFlight(s.flightId);
-          if (fl && lod && lod.checkout_date !== fl.return_date) {{
-            const matched = cheapestLodgingForCheckout(fl.return_date);
-            if (matched) s.lodgingCheckout = matched.id;
-          }}
-          saveState(s);
-          renderDashboard();
+          if (fl?.return_date) onEndDateChange(fl.return_date, {{ keepFlight: true }});
+          else renderDashboard();
         }});
       }});
 
@@ -1464,7 +1803,9 @@ def render_page(
           const s = getState();
           s.lodgingCheckout = el.value;
           saveState(s);
-          renderDashboard();
+          const lod = findLodging(s.lodgingCheckout);
+          if (lod?.checkout_date) onEndDateChange(lod.checkout_date, {{ keepLodging: true }});
+          else renderDashboard();
         }});
       }});
 
@@ -1476,15 +1817,17 @@ def render_page(
           if (picked) {{
             s.car = picked.price;
             document.getElementById('cost-car').value = picked.price;
-            showCarDate(picked.dropoff_date);
+            saveState(s);
+            onEndDateChange(picked.dropoff_date, {{ keepCar: true }});
+          }} else {{
+            saveState(s);
+            renderDashboard();
           }}
-          saveState(s);
-          renderDashboard();
         }});
       }});
 
       document.querySelectorAll('.car-date-tab').forEach(btn => {{
-        btn.addEventListener('click', () => showCarDate(btn.dataset.carDate));
+        btn.addEventListener('click', () => onEndDateChange(btn.dataset.carDate));
       }});
 
       ['food-per-day', 'cost-car', 'cost-gift', 'cost-misc'].forEach(id => {{
@@ -1504,15 +1847,16 @@ def render_page(
             document.getElementById('cost-car').value = matchedCar.price;
           }}
           saveState(s);
-          renderDashboard();
+          const fl = findFlight(s.flightId);
+          if (fl?.return_date) onEndDateChange(fl.return_date);
+          else renderDashboard();
         }});
       }});
 
       renderDashboard();
       const selected = findFlight(getState().flightId);
       if (selected?.route) showRoute(selected.route);
-      const selectedCar = findCar(getState().carId);
-      if (selectedCar?.dropoff_date) showCarDate(selectedCar.dropoff_date);
+      applyDateFilters();
     }}
 
     function showRoute(route) {{
