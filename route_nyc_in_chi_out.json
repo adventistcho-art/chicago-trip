@@ -6,32 +6,33 @@
     "route_label": "뉴욕 인 · 시카고 아웃",
     "cheapest": {
       "kind": "cheapest",
-      "price_per_person": 1449700,
-      "price_per_person_text": "₩1,449,700",
-      "price": 5798800,
-      "price_text": "₩5,798,800",
-      "duration_text": "13시간 45분 / 18시간 53분",
-      "duration_minutes": 1958,
+      "price_per_person": 1537200,
+      "price_per_person_text": "₩1,537,200",
+      "price": 6148800,
+      "price_text": "₩6,148,800",
+      "duration_text": "14시간 55분 / 19시간 20분",
+      "duration_minutes": 2055,
       "stops_text": "직항 / 1회 경유",
-      "carrier_text": "유나이티드항공",
+      "carrier_text": "아시아나항공, 아메리칸항공",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-08/1adults?sort=price_a",
-      "synced_at": "2026-08-07T09:59:27+09:00"
+      "synced_at": "2026-08-07T20:06:15+09:00"
     },
     "shortest": {
       "kind": "shortest",
-      "price_per_person": 2657800,
-      "price_per_person_text": "₩2,657,800",
-      "price": 10631200,
-      "price_text": "₩10,631,200",
+      "price_per_person": 2799800,
+      "price_per_person_text": "₩2,799,800",
+      "price": 11199200,
+      "price_text": "₩11,199,200",
       "duration_text": "14시간 00분 / 14시간 40분",
       "duration_minutes": 1720,
       "stops_text": "직항 / 직항",
-      "carrier_text": "대한항공",
+      "carrier_text": "델타항공",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-08/1adults?sort=duration_a",
-      "synced_at": "2026-08-07T09:59:33+09:00"
-    }
+      "synced_at": "2026-08-07T20:06:22+09:00"
+    },
+    "cheap_under_17h": []
   },
   {
     "outbound_date": "2026-09-23",
@@ -40,32 +41,33 @@
     "route_label": "뉴욕 인 · 시카고 아웃",
     "cheapest": {
       "kind": "cheapest",
-      "price_per_person": 1468800,
-      "price_per_person_text": "₩1,468,800",
-      "price": 5875200,
-      "price_text": "₩5,875,200",
-      "duration_text": "14시간 55분 / 20시간 44분",
-      "duration_minutes": 2139,
+      "price_per_person": 1612200,
+      "price_per_person_text": "₩1,612,200",
+      "price": 6448800,
+      "price_text": "₩6,448,800",
+      "duration_text": "14시간 55분 / 18시간 18분",
+      "duration_minutes": 1993,
       "stops_text": "직항 / 1회 경유",
-      "carrier_text": "아시아나항공, 알래스카항공",
+      "carrier_text": "아시아나항공, 유나이티드항공",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-09/1adults?sort=price_a",
-      "synced_at": "2026-08-07T09:59:39+09:00"
+      "synced_at": "2026-08-07T20:06:30+09:00"
     },
     "shortest": {
       "kind": "shortest",
-      "price_per_person": 2936500,
-      "price_per_person_text": "₩2,936,500",
-      "price": 11746000,
-      "price_text": "₩11,746,000",
+      "price_per_person": 3099800,
+      "price_per_person_text": "₩3,099,800",
+      "price": 12399200,
+      "price_text": "₩12,399,200",
       "duration_text": "14시간 00분 / 14시간 40분",
       "duration_minutes": 1720,
       "stops_text": "직항 / 직항",
-      "carrier_text": "대한항공",
+      "carrier_text": "델타항공",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-09/1adults?sort=duration_a",
-      "synced_at": "2026-08-07T09:59:45+09:00"
-    }
+      "synced_at": "2026-08-07T20:06:36+09:00"
+    },
+    "cheap_under_17h": []
   },
   {
     "outbound_date": "2026-09-23",
@@ -84,7 +86,7 @@
       "carrier_text": "에어캐나다",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-10/1adults?sort=price_a",
-      "synced_at": "2026-08-07T09:59:50+09:00"
+      "synced_at": "2026-08-07T20:06:47+09:00"
     },
     "shortest": {
       "kind": "shortest",
@@ -98,8 +100,9 @@
       "carrier_text": "대한항공",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-10/1adults?sort=duration_a",
-      "synced_at": "2026-08-07T09:59:56+09:00"
-    }
+      "synced_at": "2026-08-07T20:06:53+09:00"
+    },
+    "cheap_under_17h": []
   },
   {
     "outbound_date": "2026-09-23",
@@ -108,32 +111,33 @@
     "route_label": "뉴욕 인 · 시카고 아웃",
     "cheapest": {
       "kind": "cheapest",
-      "price_per_person": 1243800,
-      "price_per_person_text": "₩1,243,800",
-      "price": 4975200,
-      "price_text": "₩4,975,200",
-      "duration_text": "32시간 38분 / 54시간 11분",
-      "duration_minutes": 5209,
-      "stops_text": "2회 경유 / 2회 경유",
-      "carrier_text": "에어캐나다",
+      "price_per_person": 1537200,
+      "price_per_person_text": "₩1,537,200",
+      "price": 6148800,
+      "price_text": "₩6,148,800",
+      "duration_text": "14시간 55분 / 19시간 20분",
+      "duration_minutes": 2055,
+      "stops_text": "직항 / 1회 경유",
+      "carrier_text": "아시아나항공, 아메리칸항공",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-11/1adults?sort=price_a",
-      "synced_at": "2026-08-07T10:00:03+09:00"
+      "synced_at": "2026-08-07T20:06:57+09:00"
     },
     "shortest": {
       "kind": "shortest",
-      "price_per_person": 2053300,
-      "price_per_person_text": "₩2,053,300",
-      "price": 8213200,
-      "price_text": "₩8,213,200",
+      "price_per_person": 2149800,
+      "price_per_person_text": "₩2,149,800",
+      "price": 8599200,
+      "price_text": "₩8,599,200",
       "duration_text": "14시간 00분 / 14시간 40분",
       "duration_minutes": 1720,
       "stops_text": "직항 / 직항",
-      "carrier_text": "대한항공",
+      "carrier_text": "델타항공",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-11/1adults?sort=duration_a",
-      "synced_at": "2026-08-07T10:00:09+09:00"
-    }
+      "synced_at": "2026-08-07T20:07:03+09:00"
+    },
+    "cheap_under_17h": []
   },
   {
     "outbound_date": "2026-09-23",
@@ -142,32 +146,33 @@
     "route_label": "뉴욕 인 · 시카고 아웃",
     "cheapest": {
       "kind": "cheapest",
-      "price_per_person": 1255300,
-      "price_per_person_text": "₩1,255,300",
-      "price": 5021200,
-      "price_text": "₩5,021,200",
-      "duration_text": "32시간 38분 / 42시간 56분",
-      "duration_minutes": 4534,
-      "stops_text": "2회 경유 / 2회 경유",
-      "carrier_text": "에어캐나다",
+      "price_per_person": 1537200,
+      "price_per_person_text": "₩1,537,200",
+      "price": 6148800,
+      "price_text": "₩6,148,800",
+      "duration_text": "14시간 55분 / 19시간 20분",
+      "duration_minutes": 2055,
+      "stops_text": "직항 / 1회 경유",
+      "carrier_text": "아시아나항공, 아메리칸항공",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-12/1adults?sort=price_a",
-      "synced_at": "2026-08-07T10:00:14+09:00"
+      "synced_at": "2026-08-07T20:07:11+09:00"
     },
     "shortest": {
       "kind": "shortest",
-      "price_per_person": 2890100,
-      "price_per_person_text": "₩2,890,100",
-      "price": 11560400,
-      "price_text": "₩11,560,400",
+      "price_per_person": 2915800,
+      "price_per_person_text": "₩2,915,800",
+      "price": 11663200,
+      "price_text": "₩11,663,200",
       "duration_text": "14시간 00분 / 14시간 40분",
       "duration_minutes": 1720,
       "stops_text": "직항 / 직항",
       "carrier_text": "대한항공",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-12/1adults?sort=duration_a",
-      "synced_at": "2026-08-07T10:00:20+09:00"
-    }
+      "synced_at": "2026-08-07T20:07:27+09:00"
+    },
+    "cheap_under_17h": []
   },
   {
     "outbound_date": "2026-09-23",
@@ -176,31 +181,32 @@
     "route_label": "뉴욕 인 · 시카고 아웃",
     "cheapest": {
       "kind": "cheapest",
-      "price_per_person": 1255300,
-      "price_per_person_text": "₩1,255,300",
-      "price": 5021200,
-      "price_text": "₩5,021,200",
-      "duration_text": "32시간 38분 / 29시간 25분",
-      "duration_minutes": 3723,
-      "stops_text": "2회 경유 / 2회 경유",
-      "carrier_text": "에어캐나다",
+      "price_per_person": 1537200,
+      "price_per_person_text": "₩1,537,200",
+      "price": 6148800,
+      "price_text": "₩6,148,800",
+      "duration_text": "14시간 55분 / 18시간 18분",
+      "duration_minutes": 1993,
+      "stops_text": "직항 / 1회 경유",
+      "carrier_text": "아시아나항공, 유나이티드항공",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-13/1adults?sort=price_a",
-      "synced_at": "2026-08-07T10:00:25+09:00"
+      "synced_at": "2026-08-07T20:07:34+09:00"
     },
     "shortest": {
       "kind": "shortest",
-      "price_per_person": 2445100,
-      "price_per_person_text": "₩2,445,100",
-      "price": 9780400,
-      "price_text": "₩9,780,400",
+      "price_per_person": 2398800,
+      "price_per_person_text": "₩2,398,800",
+      "price": 9595200,
+      "price_text": "₩9,595,200",
       "duration_text": "14시간 00분 / 14시간 40분",
       "duration_minutes": 1720,
       "stops_text": "직항 / 직항",
       "carrier_text": "대한항공",
       "self_transfer": false,
       "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-13/1adults?sort=duration_a",
-      "synced_at": "2026-08-07T10:00:32+09:00"
-    }
+      "synced_at": "2026-08-07T20:07:41+09:00"
+    },
+    "cheap_under_17h": []
   }
 ]
