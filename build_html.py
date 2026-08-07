@@ -18,7 +18,9 @@ KAYAK_FILE = ROOT / "kayak_flight_data.json"
 GOOGLE_FILE = ROOT / "google_flight_data.json"
 ROUTE_CHI_FILE = ROOT / "route_chi_roundtrip.json"
 ROUTE_NYC_FILE = ROOT / "route_nyc_in_chi_out.json"
+CAR_FILE = ROOT / "car_rental_data.json"
 AIRBNB_LODGING = ROOT / "airbnb_lodging_data.json"
+CAR_PICKUP = "2026-09-23"
 
 ADULTS = 2
 CHILD_AGES = [7, 8]
@@ -230,12 +232,46 @@ def lodging_pick_cell(a: dict, is_best: bool) -> str:
           </td>"""
 
 
+def flatten_cars(car_days: list[dict]) -> list[dict]:
+    out: list[dict] = []
+    seen: set[str] = set()
+    for day in car_days:
+        drop = day.get("dropoff_date", "")
+        for car in day.get("cars") or []:
+            cid = car.get("id") or f"car:{drop}:{car.get('model')}:{car.get('price')}"
+            if cid in seen:
+                continue
+            seen.add(cid)
+            out.append(
+                {
+                    "id": cid,
+                    "pickup_date": day.get("pickup_date", CAR_PICKUP),
+                    "dropoff_date": drop,
+                    "nights": day.get("nights", 0),
+                    "model": car.get("model", ""),
+                    "category": car.get("category", "기타"),
+                    "price": car.get("price"),
+                    "price_text": car.get("price_text", fmt_won(car.get("price"))),
+                    "seats": car.get("seats"),
+                    "bags": car.get("bags"),
+                    "doors": car.get("doors"),
+                    "location": car.get("location", ""),
+                    "options": car.get("options") or [],
+                    "seller_url": car.get("seller_url", ""),
+                }
+            )
+    out.sort(key=lambda x: (x.get("price") or 10**12, x.get("dropoff_date", "")))
+    return out
+
+
 def build_trip_data(
     route_flights: list[dict],
     airbnb_all: list[dict],
     airbnb: dict[str, dict],
+    car_days: list[dict] | None = None,
 ) -> dict:
     flights = list(route_flights)
+    cars = flatten_cars(car_days or [])
 
     lodging = []
     for a in sorted(airbnb_all, key=lambda x: (x.get("checkout_date", ""), x.get("price") or 10**12)):
@@ -272,11 +308,20 @@ def build_trip_data(
             if matched:
                 best_lodging_id = matched["id"]
 
+    best_car_id = None
+    if cars and recommended:
+        same_day = [c for c in cars if c["dropoff_date"] == recommended["return_date"]]
+        pool = same_day or cars
+        best_car_id = min(pool, key=lambda x: x.get("price") or 10**12)["id"]
+    elif cars:
+        best_car_id = cars[0]["id"]
+
     return {
         "outbound": OUTBOUND,
         "checkin": CHECKIN,
         "lodging_note": LODGING_NOTE,
         "guests": GUESTS,
+        "car_pickup": CAR_PICKUP,
         "defaults": {
             "food_per_day": DEFAULT_FOOD_PER_DAY,
             "car_rental": DEFAULT_CAR_RENTAL,
@@ -285,11 +330,13 @@ def build_trip_data(
         },
         "flights": flights,
         "lodging": lodging,
+        "cars": cars,
         "combos": combos,
         "recommended": recommended,
         "best_flight_id": best_flight_id,
         "best_lodging_id": best_lodging_id,
         "best_lodging_checkout": best_lodging_id,
+        "best_car_id": best_car_id,
     }
 
 
@@ -402,6 +449,117 @@ def render_flights(chi_days: list[dict], nyc_days: list[dict]) -> str:
     <p class="flight-hint muted">귀국일별로 <strong>최저가</strong>와 <strong>최단시간</strong>을 나란히 비교합니다. ○ 경비에 담기 → 여행경비 탭에 반영됩니다.</p>
     {_route_panel("nyc_in", nyc_days, True)}
     {_route_panel("chi_round", chi_days, False)}
+    """
+
+
+def _dedupe_cars(cars: list[dict]) -> list[dict]:
+    seen: set[tuple] = set()
+    out: list[dict] = []
+    for c in cars:
+        key = (c.get("model"), c.get("category"), c.get("price"), c.get("location"))
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(c)
+    return out
+
+
+def render_cars(car_days: list[dict]) -> str:
+    if not car_days:
+        return '<section class="card"><p class="muted">렌트카 데이터가 없습니다. sync_cars.py를 실행하세요.</p></section>'
+
+    all_cars = []
+    for day in car_days:
+        all_cars.extend(day.get("cars") or [])
+    cheapest = min((c for c in all_cars if c.get("price")), key=lambda x: x["price"], default=None)
+
+    date_tabs = []
+    panels = []
+    for i, day in enumerate(car_days):
+        drop = day["dropoff_date"]
+        active = "active" if i == 0 else ""
+        cars = _dedupe_cars(day.get("cars") or [])
+        cars.sort(key=lambda x: (x.get("price") or 10**12))
+        by_cat: dict[str, list[dict]] = {}
+        for c in cars:
+            by_cat.setdefault(c.get("category") or "기타", []).append(c)
+
+        date_tabs.append(
+            f'<button type="button" class="car-date-tab {active}" data-car-date="{drop}" role="tab" aria-selected="{"true" if i == 0 else "false"}">'
+            f'<span class="car-date-main">{_fmt_date_ko(drop)} 반납</span>'
+            f'<span class="car-date-sub">{day.get("nights", 0)}일 · 최저 '
+            f'{fmt_won(cars[0]["price"]) if cars else "-"}</span></button>'
+        )
+
+        cat_blocks = []
+        for cat, rows in by_cat.items():
+            cards = []
+            for c in rows:
+                opts = "".join(f'<span class="car-pill">{o}</span>' for o in (c.get("options") or []))
+                specs = " · ".join(
+                    x
+                    for x in [
+                        f"좌석 {c['seats']}" if c.get("seats") else "",
+                        f"짐 {c['bags']}" if c.get("bags") is not None else "",
+                        f"도어 {c['doors']}" if c.get("doors") else "",
+                    ]
+                    if x
+                )
+                cards.append(f"""
+                <article class="car-card">
+                  <div class="car-card-top">
+                    <div>
+                      <p class="car-cat">{cat}</p>
+                      <h3 class="car-model">{c.get('model','')}</h3>
+                      <p class="muted">{specs or '스펙 정보 없음'}</p>
+                    </div>
+                    <p class="car-price">{c.get('price_text') or fmt_won(c.get('price'))}</p>
+                  </div>
+                  <p class="car-loc muted">{c.get('location') or 'ORD'}</p>
+                  <div class="car-pills">{opts or '<span class="muted">추가 옵션 정보 없음</span>'}</div>
+                  <div class="opt-actions">
+                    <label class="pick-label">
+                      <input type="radio" name="car-pick" class="car-pick" value="{c['id']}"
+                        data-price="{c.get('price') or 0}" data-dropoff="{drop}">
+                      <span>경비에 담기</span>
+                    </label>
+                    {BTN.format(url=c.get('seller_url', '#'))}
+                  </div>
+                </article>""")
+            cat_blocks.append(
+                f'<div class="car-cat-block"><h3 class="car-cat-title">{cat}</h3>'
+                f'<div class="car-grid">{"".join(cards)}</div></div>'
+            )
+
+        panels.append(f"""
+        <div class="car-date-panel {active}" data-car-panel="{drop}">
+          <p class="muted" style="margin:0 0 12px;">인수 {_fmt_date_ko(day.get('pickup_date', CAR_PICKUP))} 정오 · 반납 {_fmt_date_ko(drop)} 정오 · ORD</p>
+          {''.join(cat_blocks) if cat_blocks else '<p class="muted">결과 없음</p>'}
+        </div>""")
+
+    hero = ""
+    if cheapest:
+        hero = f"""
+        <section class="route-hero card car-hero">
+          <div class="route-hero-copy">
+            <p class="route-kicker">ORD RENTAL</p>
+            <h2>렌트카 · 차종 / 날짜 / 옵션</h2>
+            <p class="muted">인수 {CAR_PICKUP} · 반납 귀국일 · KAYAK 시카고 오헤어</p>
+          </div>
+          <div class="route-stats">
+            <div class="route-stat">
+              <span class="muted">전체 최저가</span>
+              <strong>{cheapest.get('price_text')}</strong>
+              <span class="muted">{cheapest.get('category')} · {cheapest.get('model')}</span>
+            </div>
+          </div>
+        </section>"""
+
+    return f"""
+    {hero}
+    <p class="flight-hint muted">날짜를 고른 뒤 차종별로 비교하세요. 옵션(터미널/셔틀·인원 등)도 함께 표시됩니다.</p>
+    <div class="car-date-switch" role="tablist">{''.join(date_tabs)}</div>
+    {''.join(panels)}
     """
 
 
@@ -552,9 +710,10 @@ def render_dashboard_shell(combo_html: str) -> str:
       </article>
       <article class="dash-card" data-kind="car">
         <div class="dash-card-head"><span>🚗</span><h3>자동차 렌트</h3></div>
-        <label class="field-label" for="cost-car">렌트 총액</label>
-        <input id="cost-car" type="number" min="0" step="10000" class="cost-input">
         <p class="dash-amount" id="amt-car">₩0</p>
+        <p class="dash-detail" id="detail-car">미선택 · <a href="#" data-goto="cars">렌트카 탭에서 선택</a></p>
+        <label class="field-label" for="cost-car">직접 수정 (총액)</label>
+        <input id="cost-car" type="number" min="0" step="10000" class="cost-input">
       </article>
       <article class="dash-card" data-kind="gift">
         <div class="dash-card-head"><span>🎁</span><h3>선물비</h3></div>
@@ -582,12 +741,19 @@ def render_dashboard_shell(combo_html: str) -> str:
         <div class="bar-chart" id="bar-chart"></div>
       </div>
       <p class="muted" style="margin-top:12px;">
-        ※ 항공권·숙박은 각 탭에서 선택한 값이 자동 반영됩니다. 식비·렌트·선물·기타는 직접 수정 가능하며 브라우저에 저장됩니다.
+        ※ 항공권·숙박·렌트카는 각 탭에서 선택한 값이 자동 반영됩니다. 식비·렌트 금액·선물·기타는 직접 수정 가능하며 브라우저에 저장됩니다.
       </p>
     </section>"""
 
 
-def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_data: dict, now_kst: str) -> str:
+def render_page(
+    flights_html: str,
+    lodging_html: str,
+    cars_html: str,
+    dashboard_html: str,
+    trip_data: dict,
+    now_kst: str,
+) -> str:
     trip_json = json.dumps(trip_data, ensure_ascii=False).replace("</", "<\\/")
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -708,6 +874,47 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
     .date-card.is-picked, .date-card:has(.flight-pick:checked) {{
       border-color: rgba(13,122,95,.35); box-shadow: 0 0 0 2px rgba(13,122,95,.12);
     }}
+    .car-hero {{ background: linear-gradient(135deg, #312e81 0%, #4338ca 55%, #6366f1 100%); }}
+    .car-date-switch {{
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px; margin-bottom: 16px;
+    }}
+    .car-date-tab {{
+      text-align: left; border: 1px solid var(--line); background: rgba(255,255,255,.9);
+      border-radius: 14px; padding: 12px 14px; cursor: pointer;
+    }}
+    .car-date-tab.active {{
+      border-color: rgba(99,102,241,.45);
+      background: linear-gradient(135deg, #e0e7ff 0%, #fff 70%);
+      box-shadow: 0 8px 18px rgba(99,102,241,.12);
+    }}
+    .car-date-main {{ display: block; font-weight: 800; margin-bottom: 2px; }}
+    .car-date-sub {{ display: block; color: var(--muted); font-size: 0.78rem; }}
+    .car-date-panel {{ display: none; }}
+    .car-date-panel.active {{ display: block; }}
+    .car-cat-block {{ margin-bottom: 22px; }}
+    .car-cat-title {{
+      margin: 0 0 10px; font-size: 1rem; padding-left: 10px;
+      border-left: 4px solid #6366f1;
+    }}
+    .car-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }}
+    .car-card {{
+      background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px;
+      box-shadow: 0 4px 14px rgba(24,33,50,.04);
+    }}
+    .car-card:has(.car-pick:checked) {{
+      border-color: rgba(99,102,241,.45); box-shadow: 0 0 0 2px rgba(99,102,241,.12);
+    }}
+    .car-card-top {{ display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }}
+    .car-cat {{ margin: 0; font-size: 0.75rem; font-weight: 800; color: #6366f1; letter-spacing: .04em; }}
+    .car-model {{ margin: 2px 0 4px; font-size: 1.05rem; }}
+    .car-price {{ margin: 0; font-size: 1.25rem; font-weight: 800; color: #312e81; white-space: nowrap; }}
+    .car-loc {{ margin: 8px 0; font-size: 0.8rem; }}
+    .car-pills {{ display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; min-height: 24px; }}
+    .car-pill {{
+      background: #eef2ff; color: #3730a3; border-radius: 999px;
+      padding: 4px 9px; font-size: 0.72rem; font-weight: 700;
+    }}
     .dashboard-hero {{ background: linear-gradient(135deg, #0d7a5f 0%, #0a5c48 100%); color: #fff; }}
     .dashboard-hero .muted {{ color: rgba(255,255,255,.78); }}
     .dash-hero-inner {{ display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; }}
@@ -782,7 +989,7 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       .cta-btn {{ padding: 6px 10px; }}
       .breakdown-wrap {{ grid-template-columns: 1fr; }}
       .total-price {{ font-size: 2rem; }}
-      .route-switch, .opt-grid {{ grid-template-columns: 1fr; }}
+      .route-switch, .opt-grid, .car-grid {{ grid-template-columns: 1fr; }}
       .route-hero {{ padding: 18px; }}
       .opt-price {{ font-size: 1.35rem; }}
     }}
@@ -799,11 +1006,12 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
         <button class="tab active" role="tab" aria-selected="true" data-panel="dashboard">💰 여행경비</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="flights">✈️ 항공권</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="lodging">🏠 숙박</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="cars">🚗 렌트카</button>
       </nav>
     </header>
 
     <div id="dashboard" class="panel active" role="tabpanel">
-      <p class="meta">선택한 항공권·숙박 + 식비·렌트·선물·기타 = 총 여행경비</p>
+      <p class="meta">선택한 항공권·숙박·렌트카 + 식비·선물·기타 = 총 여행경비</p>
       {dashboard_html}
     </div>
 
@@ -817,6 +1025,11 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       {lodging_html}
     </div>
 
+    <div id="cars" class="panel" role="tabpanel">
+      <p class="meta">인수 {CAR_PICKUP} · 반납 10/8~10/13 · ORD(오헤어) · 차종·옵션 비교</p>
+      {cars_html}
+    </div>
+
     <footer>
       <a href="https://www.skyscanner.co.kr/" target="_blank">Skyscanner</a> ·
       <a href="https://www.kayak.co.kr/" target="_blank">KAYAK</a> ·
@@ -828,7 +1041,7 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
   <script id="trip-data" type="application/json">{trip_json}</script>
   <script>
     const TRIP = JSON.parse(document.getElementById('trip-data').textContent);
-    const STORE_KEY = 'chicago-trip-budget-v3';
+    const STORE_KEY = 'chicago-trip-budget-v4';
 
     const fmt = n => '₩' + Math.round(n || 0).toLocaleString('ko-KR');
     const pct = (part, total) => total ? Math.round(part / total * 100) : 0;
@@ -856,6 +1069,10 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
         || TRIP.lodging.find(l => l.checkout_date === idOrCheckout) || null;
     }}
 
+    function findCar(id) {{
+      return (TRIP.cars || []).find(c => c.id === id) || null;
+    }}
+
     function cheapestLodgingForCheckout(checkout) {{
       const rows = TRIP.lodging.filter(l => l.checkout_date === checkout);
       if (!rows.length) return null;
@@ -866,13 +1083,16 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       const saved = loadState();
       const d = TRIP.defaults;
       const flightId = findFlight(saved.flightId) ? saved.flightId : TRIP.best_flight_id;
+      const carId = findCar(saved.carId) ? saved.carId : TRIP.best_car_id;
+      const pickedCar = findCar(carId);
       return {{
         flightId,
         lodgingCheckout: findLodging(saved.lodgingCheckout)
           ? saved.lodgingCheckout
           : (TRIP.best_lodging_id || TRIP.best_lodging_checkout),
+        carId,
         foodPerDay: saved.foodPerDay ?? d.food_per_day,
-        car: saved.car ?? d.car_rental,
+        car: saved.car ?? (pickedCar ? pickedCar.price : d.car_rental),
         gift: saved.gift ?? d.gifts,
         misc: saved.misc ?? d.misc,
       }};
@@ -885,6 +1105,9 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       document.querySelectorAll('.lodging-pick').forEach(el => {{
         el.checked = el.value === state.lodgingCheckout;
       }});
+      document.querySelectorAll('.car-pick').forEach(el => {{
+        el.checked = el.value === state.carId;
+      }});
       document.querySelectorAll('.date-card').forEach(card => {{
         const checked = card.querySelector('.flight-pick:checked');
         card.classList.toggle('is-picked', !!checked);
@@ -894,6 +1117,17 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       }});
       document.querySelectorAll('tr[data-lodging-id]').forEach(tr => {{
         tr.classList.toggle('picked-row', tr.dataset.lodgingId === state.lodgingCheckout);
+      }});
+    }}
+
+    function showCarDate(drop) {{
+      document.querySelectorAll('.car-date-tab').forEach(b => {{
+        const on = b.dataset.carDate === drop;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      }});
+      document.querySelectorAll('.car-date-panel').forEach(p => {{
+        p.classList.toggle('active', p.dataset.carPanel === drop);
       }});
     }}
 
@@ -911,6 +1145,7 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       const state = readInputs();
       const flight = findFlight(state.flightId);
       const lodging = findLodging(state.lodgingCheckout);
+      const car = findCar(state.carId);
       const nights = lodging?.nights || 0;
 
       const flightAmt = flight?.price || 0;
@@ -940,6 +1175,11 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       document.getElementById('detail-lodging').innerHTML = lodging
         ? `${{lodging.title}}<br><span class="muted">체크아웃 ${{lodging.checkout_date}} · ${{nights}}박 · ${{lodging.distance_text}}</span> · <a href="#" data-goto="lodging">변경</a>`
         : '미선택 · <a href="#" data-goto="lodging">숙박 탭에서 선택</a>';
+
+      const carOpts = car ? ((car.options || []).slice(0, 2).join(' · ') || car.location || 'ORD') : '';
+      document.getElementById('detail-car').innerHTML = car
+        ? `${{car.category}} · ${{car.model}} · ${{fmt(carAmt)}}<br><span class="muted">${{car.pickup_date}}~${{car.dropoff_date}} · ${{carOpts}}</span> · <a href="#" data-goto="cars">변경</a>`
+        : '미선택 · <a href="#" data-goto="cars">렌트카 탭에서 선택</a>';
 
       document.getElementById('food-calc').textContent = `${{nights}}박 × ${{fmt(state.foodPerDay)}}/일 = ${{fmt(foodAmt)}}`;
 
@@ -1024,6 +1264,25 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
         }});
       }});
 
+      document.querySelectorAll('.car-pick').forEach(el => {{
+        el.addEventListener('change', () => {{
+          const s = getState();
+          s.carId = el.value;
+          const picked = findCar(s.carId);
+          if (picked) {{
+            s.car = picked.price;
+            document.getElementById('cost-car').value = picked.price;
+            showCarDate(picked.dropoff_date);
+          }}
+          saveState(s);
+          renderDashboard();
+        }});
+      }});
+
+      document.querySelectorAll('.car-date-tab').forEach(btn => {{
+        btn.addEventListener('click', () => showCarDate(btn.dataset.carDate));
+      }});
+
       ['food-per-day', 'cost-car', 'cost-gift', 'cost-misc'].forEach(id => {{
         document.getElementById(id).addEventListener('input', renderDashboard);
       }});
@@ -1033,6 +1292,13 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
           const s = getState();
           s.flightId = btn.dataset.flight;
           s.lodgingCheckout = btn.dataset.lodging;
+          const matchedCar = (TRIP.cars || []).filter(c => c.dropoff_date === findFlight(s.flightId)?.return_date)
+            .sort((a, b) => a.price - b.price)[0];
+          if (matchedCar) {{
+            s.carId = matchedCar.id;
+            s.car = matchedCar.price;
+            document.getElementById('cost-car').value = matchedCar.price;
+          }}
           saveState(s);
           renderDashboard();
         }});
@@ -1041,6 +1307,8 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       renderDashboard();
       const selected = findFlight(getState().flightId);
       if (selected?.route) showRoute(selected.route);
+      const selectedCar = findCar(getState().carId);
+      if (selectedCar?.dropoff_date) showCarDate(selectedCar.dropoff_date);
     }}
 
     function showRoute(route) {{
@@ -1072,7 +1340,7 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       btn.addEventListener('click', () => showRoute(btn.dataset.route));
     }});
 
-    const hashPanel = {{ '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging' }}[location.hash];
+    const hashPanel = {{ '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging', '#cars': 'cars' }}[location.hash];
     if (hashPanel) document.querySelector(`[data-panel="${{hashPanel}}"]`).click();
 
     initBudget();
@@ -1085,16 +1353,18 @@ def main() -> None:
     now_kst = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S KST")
     chi_days = load_route_rows(ROUTE_CHI_FILE)
     nyc_days = load_route_rows(ROUTE_NYC_FILE)
+    car_days = load_route_rows(CAR_FILE)
     route_flights = flatten_route_flights(nyc_days) + flatten_route_flights(chi_days)
     route_flights.sort(key=lambda x: (x["price"], x.get("duration_minutes") or 10**9))
     airbnb_all = load_lodging_list(AIRBNB_LODGING)
     airbnb = load_lodging_cheapest(airbnb_all)
-    trip_data = build_trip_data(route_flights, airbnb_all, airbnb)
+    trip_data = build_trip_data(route_flights, airbnb_all, airbnb, car_days)
     flights_html = render_flights(chi_days, nyc_days)
     lodging_html = render_lodging(airbnb_all, airbnb)
+    cars_html = render_cars(car_days)
     combo_html = render_combo_analysis(trip_data.get("combos", []))
     dashboard_html = render_dashboard_shell(combo_html)
-    page = render_page(flights_html, lodging_html, dashboard_html, trip_data, now_kst)
+    page = render_page(flights_html, lodging_html, cars_html, dashboard_html, trip_data, now_kst)
     HTML.write_text(page, encoding="utf-8")
     INDEX_HTML.write_text(page, encoding="utf-8")
     DOCS_INDEX.parent.mkdir(parents=True, exist_ok=True)
@@ -1102,7 +1372,7 @@ def main() -> None:
     print(f"Wrote {HTML}")
     print(f"Wrote {INDEX_HTML}")
     print(f"Wrote {DOCS_INDEX}")
-    print(f"Route flights: {len(route_flights)}")
+    print(f"Route flights: {len(route_flights)} · cars: {len(trip_data.get('cars') or [])}")
 
 
 if __name__ == "__main__":

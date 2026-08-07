@@ -1,0 +1,1369 @@
+[
+  {
+    "pickup_date": "2026-09-23",
+    "dropoff_date": "2026-10-08",
+    "pickup_location": "ORD",
+    "dropoff_location": "ORD",
+    "nights": 15,
+    "cars": [
+      {
+        "id": "car:2026-10-08:스탠다드:쉐보레 Cruze:594480",
+        "model": "쉐보레 Cruze",
+        "category": "스탠다드",
+        "price": 594480,
+        "price_text": "₩594,480",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 10개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+        "synced_at": "2026-08-07T11:02:57+09:00"
+      },
+      {
+        "id": "car:2026-10-08:이코노미:쉐보레 Spark:604170",
+        "model": "쉐보레 Spark",
+        "category": "이코노미",
+        "price": 604170,
+        "price_text": "₩604,170",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 9개 사이트"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+        "synced_at": "2026-08-07T11:02:57+09:00"
+      },
+      {
+        "id": "car:2026-10-08:컴팩트 SUV:뷰익 Encore:607650",
+        "model": "뷰익 Encore",
+        "category": "컴팩트 SUV",
+        "price": 607650,
+        "price_text": "₩607,650",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 9개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+        "synced_at": "2026-08-07T11:02:57+09:00"
+      },
+      {
+        "id": "car:2026-10-08:컴팩트 SUV:닛산 Juke:607650",
+        "model": "닛산 Juke",
+        "category": "컴팩트 SUV",
+        "price": 607650,
+        "price_text": "₩607,650",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 10개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+        "synced_at": "2026-08-07T11:02:57+09:00"
+      },
+      {
+        "id": "car:2026-10-08:컴팩트:포드 Focus:612510",
+        "model": "포드 Focus",
+        "category": "컴팩트",
+        "price": 612510,
+        "price_text": "₩612,510",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 9개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+        "synced_at": "2026-08-07T11:02:57+09:00"
+      },
+      {
+        "id": "car:2026-10-08:컴팩트:닛산 베르사 세단:612510",
+        "model": "닛산 베르사 세단",
+        "category": "컴팩트",
+        "price": 612510,
+        "price_text": "₩612,510",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 8개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+        "synced_at": "2026-08-07T11:02:57+09:00"
+      },
+      {
+        "id": "car:2026-10-08:중형:토요타 Corolla:620835",
+        "model": "토요타 Corolla",
+        "category": "중형",
+        "price": 620835,
+        "price_text": "₩620,835",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 9개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+        "synced_at": "2026-08-07T11:02:57+09:00"
+      },
+      {
+        "id": "car:2026-10-08:중형:기아 K4:620835",
+        "model": "기아 K4",
+        "category": "중형",
+        "price": 620835,
+        "price_text": "₩620,835",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 9개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+        "synced_at": "2026-08-07T11:02:57+09:00"
+      },
+      {
+        "id": "car:2026-10-08:풀사이즈:쉐보레 Malibu:631920",
+        "model": "쉐보레 Malibu",
+        "category": "풀사이즈",
+        "price": 631920,
+        "price_text": "₩631,920",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 10개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+        "synced_at": "2026-08-07T11:02:57+09:00"
+      },
+      {
+        "id": "car:2026-10-08:이코노미:토요타 야리스:826395",
+        "model": "토요타 야리스",
+        "category": "이코노미",
+        "price": 826395,
+        "price_text": "₩826,395",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "",
+        "options": [],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+        "synced_at": "2026-08-07T11:02:57+09:00"
+      }
+    ],
+    "synced_at": "2026-08-07T11:02:57+09:00"
+  },
+  {
+    "pickup_date": "2026-09-23",
+    "dropoff_date": "2026-10-09",
+    "pickup_location": "ORD",
+    "dropoff_location": "ORD",
+    "nights": 16,
+    "cars": [
+      {
+        "id": "car:2026-10-09:이코노미:토요타 야리스:881104",
+        "model": "토요타 야리스",
+        "category": "이코노미",
+        "price": 881104,
+        "price_text": "₩881,104",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 3개 사이트"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+        "synced_at": "2026-08-07T11:03:02+09:00"
+      },
+      {
+        "id": "car:2026-10-09:이코노미:토요타 야리스:881104",
+        "model": "토요타 야리스",
+        "category": "이코노미",
+        "price": 881104,
+        "price_text": "₩881,104",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "",
+        "options": [],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+        "synced_at": "2026-08-07T11:03:02+09:00"
+      },
+      {
+        "id": "car:2026-10-09:컴팩트:닛산 베르사 세단:897904",
+        "model": "닛산 베르사 세단",
+        "category": "컴팩트",
+        "price": 897904,
+        "price_text": "₩897,904",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 3개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+        "synced_at": "2026-08-07T11:03:02+09:00"
+      },
+      {
+        "id": "car:2026-10-09:중형:토요타 Corolla:935408",
+        "model": "토요타 Corolla",
+        "category": "중형",
+        "price": 935408,
+        "price_text": "₩935,408",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+        "synced_at": "2026-08-07T11:03:02+09:00"
+      },
+      {
+        "id": "car:2026-10-09:중형:토요타 Corolla:971600",
+        "model": "토요타 Corolla",
+        "category": "중형",
+        "price": 971600,
+        "price_text": "₩971,600",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+        "synced_at": "2026-08-07T11:03:02+09:00"
+      },
+      {
+        "id": "car:2026-10-09:컴팩트 SUV:닛산 Juke:971600",
+        "model": "닛산 Juke",
+        "category": "컴팩트 SUV",
+        "price": 971600,
+        "price_text": "₩971,600",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+        "synced_at": "2026-08-07T11:03:02+09:00"
+      },
+      {
+        "id": "car:2026-10-09:컴팩트:포드 Focus:971600",
+        "model": "포드 Focus",
+        "category": "컴팩트",
+        "price": 971600,
+        "price_text": "₩971,600",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+        "synced_at": "2026-08-07T11:03:02+09:00"
+      },
+      {
+        "id": "car:2026-10-09:이코노미:쉐보레 Spark:971600",
+        "model": "쉐보레 Spark",
+        "category": "이코노미",
+        "price": 971600,
+        "price_text": "₩971,600",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+        "synced_at": "2026-08-07T11:03:02+09:00"
+      },
+      {
+        "id": "car:2026-10-09:컴팩트 SUV:지프 Compass:975104",
+        "model": "지프 Compass",
+        "category": "컴팩트 SUV",
+        "price": 975104,
+        "price_text": "₩975,104",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+        "synced_at": "2026-08-07T11:03:02+09:00"
+      },
+      {
+        "id": "car:2026-10-09:스탠다드:쉐보레 Cruze:995749",
+        "model": "쉐보레 Cruze",
+        "category": "스탠다드",
+        "price": 995749,
+        "price_text": "₩995,749",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 5개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+        "synced_at": "2026-08-07T11:03:02+09:00"
+      },
+      {
+        "id": "car:2026-10-09:스탠다드:쉐보레 Cruze:997696",
+        "model": "쉐보레 Cruze",
+        "category": "스탠다드",
+        "price": 997696,
+        "price_text": "₩997,696",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+        "synced_at": "2026-08-07T11:03:02+09:00"
+      }
+    ],
+    "synced_at": "2026-08-07T11:03:02+09:00"
+  },
+  {
+    "pickup_date": "2026-09-23",
+    "dropoff_date": "2026-10-10",
+    "pickup_location": "ORD",
+    "dropoff_location": "ORD",
+    "nights": 17,
+    "cars": [
+      {
+        "id": "car:2026-10-10:이코노미:토요타 야리스:935901",
+        "model": "토요타 야리스",
+        "category": "이코노미",
+        "price": 935901,
+        "price_text": "₩935,901",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 3개 사이트"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      },
+      {
+        "id": "car:2026-10-10:이코노미:토요타 야리스:935901",
+        "model": "토요타 야리스",
+        "category": "이코노미",
+        "price": 935901,
+        "price_text": "₩935,901",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "",
+        "options": [],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      },
+      {
+        "id": "car:2026-10-10:컴팩트:닛산 베르사 세단:953700",
+        "model": "닛산 베르사 세단",
+        "category": "컴팩트",
+        "price": 953700,
+        "price_text": "₩953,700",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 3개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      },
+      {
+        "id": "car:2026-10-10:중형:쉐보레 Cruze:993497",
+        "model": "쉐보레 Cruze",
+        "category": "중형",
+        "price": 993497,
+        "price_text": "₩993,497",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      },
+      {
+        "id": "car:2026-10-10:컴팩트 SUV:지프 Compass:1035708",
+        "model": "지프 Compass",
+        "category": "컴팩트 SUV",
+        "price": 1035708,
+        "price_text": "₩1,035,708",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      },
+      {
+        "id": "car:2026-10-10:스탠다드:쉐보레 Cruze:1050249",
+        "model": "쉐보레 Cruze",
+        "category": "스탠다드",
+        "price": 1050249,
+        "price_text": "₩1,050,249",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 3개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      },
+      {
+        "id": "car:2026-10-10:컴팩트:닛산 베르사 세단:1072728",
+        "model": "닛산 베르사 세단",
+        "category": "컴팩트",
+        "price": 1072728,
+        "price_text": "₩1,072,728",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      },
+      {
+        "id": "car:2026-10-10:이코노미:쉐보레 Spark:1072728",
+        "model": "쉐보레 Spark",
+        "category": "이코노미",
+        "price": 1072728,
+        "price_text": "₩1,072,728",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      },
+      {
+        "id": "car:2026-10-10:중형 SUV:기아 스포티지:1075505",
+        "model": "기아 스포티지",
+        "category": "중형 SUV",
+        "price": 1075505,
+        "price_text": "₩1,075,505",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      },
+      {
+        "id": "car:2026-10-10:풀사이즈:쉐보레 Malibu:1075505",
+        "model": "쉐보레 Malibu",
+        "category": "풀사이즈",
+        "price": 1075505,
+        "price_text": "₩1,075,505",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 2개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      },
+      {
+        "id": "car:2026-10-10:스탠다드:쉐보레 Cruze:1075629",
+        "model": "쉐보레 Cruze",
+        "category": "스탠다드",
+        "price": 1075629,
+        "price_text": "₩1,075,629",
+        "seats": 5,
+        "bags": 4,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      },
+      {
+        "id": "car:2026-10-10:중형:토요타 Corolla:1101492",
+        "model": "토요타 Corolla",
+        "category": "중형",
+        "price": 1101492,
+        "price_text": "₩1,101,492",
+        "seats": 5,
+        "bags": 3,
+        "doors": null,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T11:03:07+09:00"
+      }
+    ],
+    "synced_at": "2026-08-07T11:03:07+09:00"
+  },
+  {
+    "pickup_date": "2026-09-23",
+    "dropoff_date": "2026-10-11",
+    "pickup_location": "ORD",
+    "dropoff_location": "ORD",
+    "nights": 18,
+    "cars": [
+      {
+        "id": "car:2026-10-11:이코노미:토요타 야리스:990594",
+        "model": "토요타 야리스",
+        "category": "이코노미",
+        "price": 990594,
+        "price_text": "₩990,594",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      },
+      {
+        "id": "car:2026-10-11:이코노미:토요타 야리스:990594",
+        "model": "토요타 야리스",
+        "category": "이코노미",
+        "price": 990594,
+        "price_text": "₩990,594",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "",
+        "options": [],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      },
+      {
+        "id": "car:2026-10-11:컴팩트:닛산 베르사 세단:1009494",
+        "model": "닛산 베르사 세단",
+        "category": "컴팩트",
+        "price": 1009494,
+        "price_text": "₩1,009,494",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      },
+      {
+        "id": "car:2026-10-11:중형:쉐보레 Cruze:1051596",
+        "model": "쉐보레 Cruze",
+        "category": "중형",
+        "price": 1051596,
+        "price_text": "₩1,051,596",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      },
+      {
+        "id": "car:2026-10-11:컴팩트 SUV:지프 Compass:1096308",
+        "model": "지프 Compass",
+        "category": "컴팩트 SUV",
+        "price": 1096308,
+        "price_text": "₩1,096,308",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      },
+      {
+        "id": "car:2026-10-11:스탠다드:쉐보레 Cruze:1104862",
+        "model": "쉐보레 Cruze",
+        "category": "스탠다드",
+        "price": 1104862,
+        "price_text": "₩1,104,862",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 3개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      },
+      {
+        "id": "car:2026-10-11:스탠다드:쉐보레 Cruze:1131479",
+        "model": "쉐보레 Cruze",
+        "category": "스탠다드",
+        "price": 1131479,
+        "price_text": "₩1,131,479",
+        "seats": 5,
+        "bags": 4,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      },
+      {
+        "id": "car:2026-10-11:컴팩트:닛산 베르사 세단:1134806",
+        "model": "닛산 베르사 세단",
+        "category": "컴팩트",
+        "price": 1134806,
+        "price_text": "₩1,134,806",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      },
+      {
+        "id": "car:2026-10-11:이코노미:쉐보레 Spark:1134806",
+        "model": "쉐보레 Spark",
+        "category": "이코노미",
+        "price": 1134806,
+        "price_text": "₩1,134,806",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      },
+      {
+        "id": "car:2026-10-11:중형 SUV:포드 Escape:1138392",
+        "model": "포드 Escape",
+        "category": "중형 SUV",
+        "price": 1138392,
+        "price_text": "₩1,138,392",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      },
+      {
+        "id": "car:2026-10-11:풀사이즈:쉐보레 Malibu:1138392",
+        "model": "쉐보레 Malibu",
+        "category": "풀사이즈",
+        "price": 1138392,
+        "price_text": "₩1,138,392",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 2개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      },
+      {
+        "id": "car:2026-10-11:중형:토요타 Corolla:1165262",
+        "model": "토요타 Corolla",
+        "category": "중형",
+        "price": 1165262,
+        "price_text": "₩1,165,262",
+        "seats": 5,
+        "bags": 3,
+        "doors": null,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+        "synced_at": "2026-08-07T11:03:13+09:00"
+      }
+    ],
+    "synced_at": "2026-08-07T11:03:13+09:00"
+  },
+  {
+    "pickup_date": "2026-09-23",
+    "dropoff_date": "2026-10-12",
+    "pickup_location": "ORD",
+    "dropoff_location": "ORD",
+    "nights": 19,
+    "cars": [
+      {
+        "id": "car:2026-10-12:이코노미:토요타 야리스:1045304",
+        "model": "토요타 야리스",
+        "category": "이코노미",
+        "price": 1045304,
+        "price_text": "₩1,045,304",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:이코노미:토요타 야리스:1045304",
+        "model": "토요타 야리스",
+        "category": "이코노미",
+        "price": 1045304,
+        "price_text": "₩1,045,304",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "",
+        "options": [],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:컴팩트:닛산 베르사 세단:1065292",
+        "model": "닛산 베르사 세단",
+        "category": "컴팩트",
+        "price": 1065292,
+        "price_text": "₩1,065,292",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:중형:토요타 Corolla:1109695",
+        "model": "토요타 Corolla",
+        "category": "중형",
+        "price": 1109695,
+        "price_text": "₩1,109,695",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:컴팩트 SUV:지프 Compass:1156891",
+        "model": "지프 Compass",
+        "category": "컴팩트 SUV",
+        "price": 1156891,
+        "price_text": "₩1,156,891",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:스탠다드:쉐보레 Cruze:1159219",
+        "model": "쉐보레 Cruze",
+        "category": "스탠다드",
+        "price": 1159219,
+        "price_text": "₩1,159,219",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 3개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:스탠다드:쉐보레 Cruze:1187315",
+        "model": "쉐보레 Cruze",
+        "category": "스탠다드",
+        "price": 1187315,
+        "price_text": "₩1,187,315",
+        "seats": 5,
+        "bags": 4,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:컴팩트:닛산 베르사 세단:1196770",
+        "model": "닛산 베르사 세단",
+        "category": "컴팩트",
+        "price": 1196770,
+        "price_text": "₩1,196,770",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:이코노미:쉐보레 Spark:1196770",
+        "model": "쉐보레 Spark",
+        "category": "이코노미",
+        "price": 1196770,
+        "price_text": "₩1,196,770",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:중형 SUV:기아 스포티지:1201294",
+        "model": "기아 스포티지",
+        "category": "중형 SUV",
+        "price": 1201294,
+        "price_text": "₩1,201,294",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:풀사이즈:쉐보레 Malibu:1201294",
+        "model": "쉐보레 Malibu",
+        "category": "풀사이즈",
+        "price": 1201294,
+        "price_text": "₩1,201,294",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 2개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:풀사이즈:닛산 알티마:1228108",
+        "model": "닛산 알티마",
+        "category": "풀사이즈",
+        "price": 1228108,
+        "price_text": "₩1,228,108",
+        "seats": 5,
+        "bags": 4,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 3개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      },
+      {
+        "id": "car:2026-10-12:중형:토요타 Corolla:1228648",
+        "model": "토요타 Corolla",
+        "category": "중형",
+        "price": 1228648,
+        "price_text": "₩1,228,648",
+        "seats": 5,
+        "bags": 3,
+        "doors": null,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 2개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+        "synced_at": "2026-08-07T11:03:19+09:00"
+      }
+    ],
+    "synced_at": "2026-08-07T11:03:19+09:00"
+  },
+  {
+    "pickup_date": "2026-09-23",
+    "dropoff_date": "2026-10-13",
+    "pickup_location": "ORD",
+    "dropoff_location": "ORD",
+    "nights": 20,
+    "cars": [
+      {
+        "id": "car:2026-10-13:이코노미:토요타 야리스:1093400",
+        "model": "토요타 야리스",
+        "category": "이코노미",
+        "price": 1093400,
+        "price_text": "₩1,093,400",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 7개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:이코노미:토요타 야리스:1100100",
+        "model": "토요타 야리스",
+        "category": "이코노미",
+        "price": 1100100,
+        "price_text": "₩1,100,100",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "",
+        "options": [],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:컴팩트:닛산 베르사 세단:1114260",
+        "model": "닛산 베르사 세단",
+        "category": "컴팩트",
+        "price": 1114260,
+        "price_text": "₩1,114,260",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 7개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:중형:혼다 Civic:1158220",
+        "model": "혼다 Civic",
+        "category": "중형",
+        "price": 1158220,
+        "price_text": "₩1,158,220",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:컴팩트:닛산 베르사 세단:1158220",
+        "model": "닛산 베르사 세단",
+        "category": "컴팩트",
+        "price": 1158220,
+        "price_text": "₩1,158,220",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 3개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:이코노미:쉐보레 Spark:1158220",
+        "model": "쉐보레 Spark",
+        "category": "이코노미",
+        "price": 1158220,
+        "price_text": "₩1,158,220",
+        "seats": 4,
+        "bags": 1,
+        "doors": 2,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:스탠다드:쉐보레 Cruze:1158220",
+        "model": "쉐보레 Cruze",
+        "category": "스탠다드",
+        "price": 1158220,
+        "price_text": "₩1,158,220",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:중형:토요타 Corolla:1160720",
+        "model": "토요타 Corolla",
+        "category": "중형",
+        "price": 1160720,
+        "price_text": "₩1,160,720",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 7개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:컴팩트 SUV:지프 Compass:1210140",
+        "model": "지프 Compass",
+        "category": "컴팩트 SUV",
+        "price": 1210140,
+        "price_text": "₩1,210,140",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 공항 터미널",
+        "options": [
+          "공항 터미널 인수",
+          "비교 7개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:풀사이즈:쉐보레 Malibu:1211740",
+        "model": "쉐보레 Malibu",
+        "category": "풀사이즈",
+        "price": 1211740,
+        "price_text": "₩1,211,740",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:스탠다드:쉐보레 Cruze:1213974",
+        "model": "쉐보레 Cruze",
+        "category": "스탠다드",
+        "price": 1213974,
+        "price_text": "₩1,213,974",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 5개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:컴팩트:포드 Focus:1222560",
+        "model": "포드 Focus",
+        "category": "컴팩트",
+        "price": 1222560,
+        "price_text": "₩1,222,560",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:이코노미:쉐보레 Spark:1222560",
+        "model": "쉐보레 Spark",
+        "category": "이코노미",
+        "price": 1222560,
+        "price_text": "₩1,222,560",
+        "seats": 4,
+        "bags": 1,
+        "doors": 2,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 5개 사이트"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:이코노미:쉐보레 Spark:1222700",
+        "model": "쉐보레 Spark",
+        "category": "이코노미",
+        "price": 1222700,
+        "price_text": "₩1,222,700",
+        "seats": 5,
+        "bags": 1,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트",
+          "5인 이상"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      },
+      {
+        "id": "car:2026-10-13:컴팩트:포드 Focus:1222700",
+        "model": "포드 Focus",
+        "category": "컴팩트",
+        "price": 1222700,
+        "price_text": "₩1,222,700",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항 • 셔틀",
+        "options": [
+          "셔틀 이동",
+          "비교 4개 사이트",
+          "5인 이상",
+          "짐칸 여유"
+        ],
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+        "synced_at": "2026-08-07T11:03:26+09:00"
+      }
+    ],
+    "synced_at": "2026-08-07T11:03:26+09:00"
+  }
+]
