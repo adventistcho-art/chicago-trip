@@ -21,8 +21,15 @@ GOOGLE_FILE = ROOT / "google_flight_data.json"
 ROUTE_CHI_FILE = ROOT / "route_chi_roundtrip.json"
 ROUTE_NYC_FILE = ROOT / "route_nyc_in_chi_out.json"
 CAR_FILE = ROOT / "car_rental_data.json"
+CAR_COMPARE_FILE = ROOT / "car_compare_data.json"
 AIRBNB_LODGING = ROOT / "airbnb_lodging_data.json"
 CAR_PICKUP = "2026-09-23"
+CAR_SOURCE_META = {
+    "discover": {"label": "DiscoverCars", "color": "#1f6feb", "css": "discover"},
+    "rentalcars": {"label": "Rentalcars.com", "color": "#0d9488", "css": "rentalcars"},
+    "expedia": {"label": "Expedia", "color": "#ffc700", "css": "expedia"},
+    "kayak": {"label": "KAYAK", "color": "#ff690f", "css": "kayak"},
+}
 
 ADULTS = 2
 CHILD_AGES = [7, 8]
@@ -244,9 +251,13 @@ def flatten_cars(car_days: list[dict]) -> list[dict]:
             if cid in seen:
                 continue
             seen.add(cid)
+            source = car.get("source") or "kayak"
+            source_label = CAR_SOURCE_META.get(source, {}).get("label", source)
             out.append(
                 {
                     "id": cid,
+                    "source": source,
+                    "source_label": source_label,
                     "pickup_date": day.get("pickup_date", CAR_PICKUP),
                     "dropoff_date": drop,
                     "nights": day.get("nights", 0),
@@ -466,34 +477,109 @@ def _dedupe_cars(cars: list[dict]) -> list[dict]:
     return out
 
 
+def _car_source_cell(
+    src: dict | None, drop: str, source_key: str, day_best_price: int | None = None
+) -> str:
+    meta = CAR_SOURCE_META.get(source_key, {"label": source_key, "css": source_key})
+    css = meta.get("css", source_key)
+    if not src:
+        return f'<td class="price {css}"><span class="muted">-</span></td>'
+    cheap = src.get("cheapest")
+    url = src.get("url") or "#"
+    note = src.get("note")
+    if not cheap:
+        link = BTN.format(url=url).replace("선택하기", "사이트에서 보기")
+        tip = f'<br><span class="muted">{note}</span>' if note else ""
+        return (
+            f'<td class="price {css}"><span class="muted">수집 불가</span>{tip}'
+            f'<div style="margin-top:8px">{link}</div></td>'
+        )
+    cls = price_cls(cheap.get("price"), day_best_price)
+    best_cls = " best-src" if day_best_price is not None and cheap.get("price") == day_best_price else ""
+    return f"""
+    <td class="price {css}{cls}{best_cls}">
+      <label class="pick-label" style="flex-direction:column;align-items:flex-start;gap:4px;">
+        <span style="display:inline-flex;align-items:center;gap:6px;">
+          <input type="radio" name="car-pick" class="car-pick" value="{cheap['id']}"
+            data-price="{cheap.get('price') or 0}" data-dropoff="{drop}">
+          <strong>{cheap.get('price_text') or fmt_won(cheap.get('price'))}</strong>
+        </span>
+        <span class="muted">{cheap.get('category','')} · {cheap.get('model','')}</span>
+      </label>
+      <div style="margin-top:8px;">{BTN.format(url=cheap.get('seller_url') or url)}</div>
+    </td>"""
+
+
 def render_cars(car_days: list[dict]) -> str:
     if not car_days:
-        return '<section class="card"><p class="muted">렌트카 데이터가 없습니다. sync_cars.py를 실행하세요.</p></section>'
+        return (
+            '<section class="card"><p class="muted">'
+            "렌트카 데이터가 없습니다. sync_car_compare.py 또는 sync_cars.py를 실행하세요."
+            "</p></section>"
+        )
 
+    compare_mode = any(day.get("sources") for day in car_days)
     all_cars = []
     for day in car_days:
         all_cars.extend(day.get("cars") or [])
+        if day.get("sources"):
+            for src in day["sources"].values():
+                if src.get("cheapest"):
+                    all_cars.append(src["cheapest"])
     cheapest = min((c for c in all_cars if c.get("price")), key=lambda x: x["price"], default=None)
+
+    source_keys = ["discover", "rentalcars", "expedia"]
+    # Keep KAYAK as reference column when present
+    if any((day.get("sources") or {}).get("kayak", {}).get("cheapest") for day in car_days) or (
+        not compare_mode and all_cars
+    ):
+        source_keys = ["discover", "rentalcars", "expedia", "kayak"]
 
     date_tabs = []
     panels = []
+    compare_rows = []
+
     for i, day in enumerate(car_days):
         drop = day["dropoff_date"]
         active = "active" if i == 0 else ""
+        sources = day.get("sources") or {}
         cars = _dedupe_cars(day.get("cars") or [])
         cars.sort(key=lambda x: (x.get("price") or 10**12))
-        by_cat: dict[str, list[dict]] = {}
-        for c in cars:
-            by_cat.setdefault(c.get("category") or "기타", []).append(c)
+
+        day_best = None
+        if sources:
+            cands = [sources[k]["cheapest"] for k in source_keys if sources.get(k, {}).get("cheapest")]
+            day_best = min(cands, key=lambda x: x["price"]) if cands else None
+        elif cars:
+            day_best = cars[0]
 
         date_tabs.append(
             f'<button type="button" class="car-date-tab {active}" data-car-date="{drop}" role="tab" aria-selected="{"true" if i == 0 else "false"}">'
             f'<span class="car-date-main">{_fmt_date_ko(drop)} 반납</span>'
             f'<span class="car-date-sub">{day.get("nights", 0)}일 · 최저 '
-            f'{fmt_won(cars[0]["price"]) if cars else "-"}</span></button>'
+            f'{fmt_won(day_best["price"]) if day_best else "-"}</span></button>'
         )
 
-        # Show 전기차 first, then others by cheapest
+        if compare_mode and sources:
+            best_price = day_best.get("price") if day_best else None
+            cells = [_car_source_cell(sources.get(key), drop, key, best_price) for key in source_keys]
+            winner = ""
+            if day_best:
+                lab = CAR_SOURCE_META.get(day_best.get("source", ""), {}).get(
+                    "label", day_best.get("source", "")
+                )
+                winner = f'{lab} {day_best.get("price_text")}'
+            compare_rows.append(
+                f'<tr class="{"best" if i == 0 else ""}" data-dropoff="{drop}">'
+                f"<td><strong>{_fmt_date_ko(drop)}</strong><br>"
+                f'<span class="muted">{day.get("nights", 0)}일 · 최저 {winner or "-"}</span></td>'
+                f'{"".join(cells)}</tr>'
+            )
+
+        by_cat: dict[str, list[dict]] = {}
+        for c in cars:
+            by_cat.setdefault(c.get("category") or "기타", []).append(c)
+
         cat_order = sorted(
             by_cat.keys(),
             key=lambda k: (0 if k == "전기차" else 1, min(c.get("price") or 10**12 for c in by_cat[k])),
@@ -503,6 +589,8 @@ def render_cars(car_days: list[dict]) -> str:
             rows = by_cat[cat]
             cards = []
             for c in rows:
+                src = c.get("source") or "kayak"
+                src_label = CAR_SOURCE_META.get(src, {}).get("label", src)
                 opts = "".join(
                     f'<span class="car-pill{" ev" if ("electric" in o.lower() or "전기" in o or o.startswith("Fully")) else ""}">{o}</span>'
                     for o in (c.get("options") or [])
@@ -520,7 +608,7 @@ def render_cars(car_days: list[dict]) -> str:
                 <article class="car-card">
                   <div class="car-card-top">
                     <div>
-                      <p class="car-cat">{cat}</p>
+                      <p class="car-cat"><span class="car-src-tag {src}">{src_label}</span> {cat}</p>
                       <h3 class="car-model">{c.get('model','')}</h3>
                       <p class="muted">{specs or '스펙 정보 없음'}</p>
                     </div>
@@ -545,30 +633,62 @@ def render_cars(car_days: list[dict]) -> str:
         panels.append(f"""
         <div class="car-date-panel {active}" data-car-panel="{drop}">
           <p class="muted" style="margin:0 0 12px;">인수 {_fmt_date_ko(day.get('pickup_date', CAR_PICKUP))} 정오 · 반납 {_fmt_date_ko(drop)} 정오 · ORD</p>
-          {''.join(cat_blocks) if cat_blocks else '<p class="muted">결과 없음</p>'}
+          {''.join(cat_blocks) if cat_blocks else '<p class="muted">상세 목록 없음 · 위 사이트별 최저가를 확인하세요.</p>'}
         </div>""")
 
     hero = ""
     if cheapest:
+        src_label = CAR_SOURCE_META.get(cheapest.get("source", ""), {}).get(
+            "label", cheapest.get("source") or ""
+        )
         hero = f"""
         <section class="route-hero card car-hero">
           <div class="route-hero-copy">
-            <p class="route-kicker">ORD RENTAL</p>
-            <h2>렌트카 · 차종 / 날짜 / 옵션</h2>
-            <p class="muted">인수 {CAR_PICKUP} · 반납 귀국일 · KAYAK 시카고 오헤어</p>
+            <p class="route-kicker">ORD RENTAL COMPARE</p>
+            <h2>렌트카 · 사이트 비교</h2>
+            <p class="muted">DiscoverCars · Rentalcars.com · Expedia · (참고 KAYAK) · 인수 {CAR_PICKUP}</p>
           </div>
           <div class="route-stats">
             <div class="route-stat">
               <span class="muted">전체 최저가</span>
               <strong>{cheapest.get('price_text')}</strong>
-              <span class="muted">{cheapest.get('category')} · {cheapest.get('model')}</span>
+              <span class="muted">{src_label} · {cheapest.get('category')} · {cheapest.get('model')}</span>
             </div>
+          </div>
+        </section>"""
+
+    legend = "".join(
+        f'<span><i class="dot" style="background:{CAR_SOURCE_META[k]["color"]}"></i> {CAR_SOURCE_META[k]["label"]}</span>'
+        for k in source_keys
+        if k in CAR_SOURCE_META
+    )
+
+    compare_table = ""
+    if compare_rows:
+        heads = "".join(
+            f'<th class="{CAR_SOURCE_META[k]["css"]}">{CAR_SOURCE_META[k]["label"]}</th>' for k in source_keys
+        )
+        compare_table = f"""
+        <section class="card">
+          <div class="legend">{legend}</div>
+          <p class="muted" style="margin:0 0 12px;">귀국(반납)일별 사이트 최저가입니다. ○ 선택 → 여행경비 반영 · Expedia는 봇 차단 시 링크만 제공합니다.</p>
+          <div class="table-wrap">
+          <table class="car-compare-table">
+            <thead>
+              <tr>
+                <th>반납일</th>
+                {heads}
+              </tr>
+            </thead>
+            <tbody>{''.join(compare_rows)}</tbody>
+          </table>
           </div>
         </section>"""
 
     return f"""
     {hero}
-    <p class="flight-hint muted">날짜를 고른 뒤 차종별로 비교하세요. 옵션(터미널/셔틀·인원 등)도 함께 표시됩니다.</p>
+    {compare_table}
+    <p class="flight-hint muted">날짜별 상세 차종·옵션은 아래에서 확인하세요.</p>
     <div class="car-date-switch" role="tablist">{''.join(date_tabs)}</div>
     {''.join(panels)}
     """
@@ -778,6 +898,7 @@ def render_page(
   <style>
     :root {{
       --sky: #0770e3; --kayak: #ff690f; --google: #1a73e8;
+      --discover: #1f6feb; --rentalcars: #0d9488; --expedia: #b8860b;
       --airbnb: #ff385c; --budget: #0d7a5f;
       --bg: #eef1f6; --card: #fff; --text: #14171c; --muted: #5f6773;
       --best: #e8f4fd; --highlight: #fff8e1; --picked: #e7f7f0;
@@ -1014,6 +1135,9 @@ def render_page(
     th.sky {{ color: var(--sky); border-top: 3px solid var(--sky); }}
     th.kayak {{ color: var(--kayak); border-top: 3px solid var(--kayak); }}
     th.google {{ color: var(--google); border-top: 3px solid var(--google); }}
+    th.discover {{ color: var(--discover); border-top: 3px solid var(--discover); }}
+    th.rentalcars {{ color: var(--rentalcars); border-top: 3px solid var(--rentalcars); }}
+    th.expedia {{ color: var(--expedia); border-top: 3px solid var(--expedia); }}
     th.airbnb {{ color: var(--airbnb); border-top: 3px solid var(--airbnb); }}
     tr.best {{ background: var(--best); }}
     tr.picked-row {{ background: var(--picked) !important; }}
@@ -1021,8 +1145,21 @@ def render_page(
     .price.sky {{ color: var(--sky); }}
     .price.kayak {{ color: var(--kayak); }}
     .price.google {{ color: var(--google); }}
+    .price.discover {{ color: var(--discover); }}
+    .price.rentalcars {{ color: var(--rentalcars); }}
+    .price.expedia {{ color: var(--expedia); }}
     .price.airbnb {{ color: var(--airbnb); }}
     .price.highlight {{ background: var(--highlight); border-radius: 4px; }}
+    table.car-compare-table {{ min-width: 960px; }}
+    td.best-src {{ background: var(--highlight); }}
+    .car-src-tag {{
+      display: inline-block; font-size: 0.68rem; padding: 2px 6px; border-radius: 999px;
+      background: #eef2ff; color: #3730a3; margin-right: 4px; vertical-align: middle;
+    }}
+    .car-src-tag.discover {{ background: #dbeafe; color: #1e40af; }}
+    .car-src-tag.rentalcars {{ background: #ccfbf1; color: #115e59; }}
+    .car-src-tag.expedia {{ background: #fef3c7; color: #92400e; }}
+    .car-src-tag.kayak {{ background: #ffedd5; color: #9a3412; }}
     .pick-label {{ display: flex; align-items: center; gap: 8px; cursor: pointer; }}
     .pick-label input {{ accent-color: var(--budget); }}
     .lodging-pick-label span {{ font-size: 0.78rem; font-weight: 700; color: var(--budget); }}
@@ -1083,7 +1220,7 @@ def render_page(
     </div>
 
     <div id="cars" class="panel" role="tabpanel">
-      <p class="meta">인수 {CAR_PICKUP} · 반납 10/8~10/13 · ORD(오헤어) · 차종·옵션 비교</p>
+      <p class="meta">인수 {CAR_PICKUP} · 반납 10/8~10/13 · ORD · DiscoverCars / Rentalcars / Expedia 비교</p>
       {cars_html}
     </div>
 
@@ -1245,7 +1382,7 @@ def render_page(
 
       const carOpts = car ? ((car.options || []).slice(0, 2).join(' · ') || car.location || 'ORD') : '';
       document.getElementById('detail-car').innerHTML = car
-        ? `${{car.category}} · ${{car.model}} · ${{fmt(carAmt)}}<br><span class="muted">${{car.pickup_date}}~${{car.dropoff_date}} · ${{carOpts}}</span> · <a href="#" data-goto="cars">변경</a>`
+        ? `${{car.source_label || ''}} · ${{car.category}} · ${{car.model}} · ${{fmt(carAmt)}}<br><span class="muted">${{car.pickup_date}}~${{car.dropoff_date}} · ${{carOpts}}</span> · <a href="#" data-goto="cars">변경</a>`
         : '미선택 · <a href="#" data-goto="cars">렌트카 탭에서 선택</a>';
 
       document.getElementById('food-calc').textContent = `${{nights}}박 × ${{fmt(state.foodPerDay)}}/일 = ${{fmt(foodAmt)}}`;
@@ -1437,7 +1574,7 @@ def main() -> None:
     now_kst = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S KST")
     chi_days = load_route_rows(ROUTE_CHI_FILE)
     nyc_days = load_route_rows(ROUTE_NYC_FILE)
-    car_days = load_route_rows(CAR_FILE)
+    car_days = load_route_rows(CAR_COMPARE_FILE) or load_route_rows(CAR_FILE)
     route_flights = flatten_route_flights(nyc_days) + flatten_route_flights(chi_days)
     route_flights.sort(key=lambda x: (x["price"], x.get("duration_minutes") or 10**9))
     airbnb_all = load_lodging_list(AIRBNB_LODGING)
