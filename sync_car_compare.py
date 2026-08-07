@@ -120,7 +120,8 @@ def keep_gas_and_ev(cars: list[dict]) -> list[dict]:
             continue
         seen.add(key)
         merged.append(c)
-    merged.sort(key=lambda c: (0 if is_ev_car(c) else 1, c["price"]))
+    # Overall price order (cheapest[0] must be true site minimum, not EV-first)
+    merged.sort(key=lambda c: c["price"])
     return merged
 
 
