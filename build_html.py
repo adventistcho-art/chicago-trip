@@ -20,6 +20,7 @@ KAYAK_FILE = ROOT / "kayak_flight_data.json"
 GOOGLE_FILE = ROOT / "google_flight_data.json"
 ROUTE_CHI_FILE = ROOT / "route_chi_roundtrip.json"
 ROUTE_NYC_FILE = ROOT / "route_nyc_in_chi_out.json"
+BOOKED_FLIGHT_FILE = ROOT / "booked_flight.json"
 CAR_FILE = ROOT / "car_rental_data.json"
 CAR_COMPARE_FILE = ROOT / "car_compare_data.json"
 AIRBNB_LODGING = ROOT / "airbnb_lodging_data.json"
@@ -43,6 +44,7 @@ FLIGHT_KIND_META = {
     "cheapest": ("💰 최저가", "cheapest"),
     "shortest": ("⚡ 최단시간", "shortest"),
     "cheap17": ("⏱ 17h 이내", "cheap17"),
+    "booked": ("✅ 예약완료", "booked"),
 }
 ROUTE_META = {
     "nyc_in": {
@@ -89,6 +91,45 @@ def flight_per_person_text(total: int | None) -> str:
 
 def load_route_rows(path: Path) -> list[dict]:
     return load_list(path)
+
+
+def load_booked_flight() -> dict | None:
+    if not BOOKED_FLIGHT_FILE.exists():
+        return None
+    data = json.loads(BOOKED_FLIGHT_FILE.read_text(encoding="utf-8"))
+    return data if data and data.get("price") is not None else None
+
+
+def booked_flight_option(booked: dict) -> dict:
+    route = booked.get("route", "nyc_in")
+    route_label = booked.get("route_label") or ROUTE_META.get(route, {}).get("label", route)
+    ret = booked["return_date"]
+    return {
+        "id": booked.get("id") or f"{route}:booked:{ret}",
+        "source": route,
+        "source_label": f"{route_label} · 예약완료",
+        "route": route,
+        "route_label": route_label,
+        "kind": "booked",
+        "kind_label": "예약완료",
+        "return_date": ret,
+        "outbound_date": booked.get("outbound_date") or OUTBOUND,
+        "price": booked["price"],
+        "price_text": booked.get("price_text", fmt_won(booked["price"])),
+        "price_per_person": booked.get("price_per_person") or flight_per_person(booked["price"]),
+        "price_per_person_text": booked.get("price_per_person_text")
+        or flight_per_person_text(booked["price"]),
+        "duration_text": booked.get("duration_text", ""),
+        "duration_minutes": booked.get("duration_minutes"),
+        "stops_text": booked.get("stops_text", ""),
+        "carrier_text": booked.get("carrier_text", ""),
+        "self_transfer": booked.get("self_transfer", False),
+        "seller_url": booked.get("seller_url", ""),
+        "booked": True,
+        "image": booked.get("image", ""),
+        "fare_note": booked.get("fare_note", ""),
+        "itinerary": booked.get("itinerary") or {},
+    }
 
 
 def flatten_route_flights(route_rows: list[dict]) -> list[dict]:
@@ -319,8 +360,12 @@ def build_trip_data(
     airbnb_all: list[dict],
     airbnb: dict[str, dict],
     car_days: list[dict] | None = None,
+    booked_flight: dict | None = None,
 ) -> dict:
     flights = list(route_flights)
+    booked_opt = booked_flight_option(booked_flight) if booked_flight else None
+    if booked_opt and not any(f["id"] == booked_opt["id"] for f in flights):
+        flights.insert(0, booked_opt)
     cars = flatten_cars(car_days or [])
 
     lodging = []
@@ -359,8 +404,9 @@ def build_trip_data(
         best_lodging = booked_lodging
     combos = analyze_combos(flights, airbnb)
     recommended = combos[0] if combos else None
-    if booked_lodging:
-        best_lodging_id = booked_lodging["id"]
+    if booked_opt:
+        best_flight_id = booked_opt["id"]
+    elif booked_lodging:
         best_flight_id = recommended["flight_id"] if recommended else (best_flight["id"] if best_flight else None)
         if best_flight and booked_lodging["checkout_date"]:
             matched_flight = next(
@@ -375,11 +421,22 @@ def build_trip_data(
                 best_flight_id = matched_flight["id"]
     elif recommended:
         best_flight_id = recommended["flight_id"]
-        best_lodging_id = recommended.get("lodging_id") or recommended["lodging_checkout"]
     else:
         best_flight_id = best_flight["id"] if best_flight else None
+
+    if booked_lodging:
+        best_lodging_id = booked_lodging["id"]
+    elif recommended and not booked_opt:
+        best_lodging_id = recommended.get("lodging_id") or recommended["lodging_checkout"]
+    elif recommended and booked_opt:
+        best_lodging_id = recommended.get("lodging_id") or recommended["lodging_checkout"]
+        if not booked_lodging:
+            matched = next((l for l in lodging if l["checkout_date"] == booked_opt["return_date"]), None)
+            if matched:
+                best_lodging_id = matched["id"]
+    else:
         best_lodging_id = best_lodging["id"] if best_lodging else None
-        if best_flight and best_lodging:
+        if best_flight and best_lodging and not booked_opt:
             matched = next((l for l in lodging if l["checkout_date"] == best_flight["return_date"]), None)
             if matched:
                 best_lodging_id = matched["id"]
@@ -404,6 +461,7 @@ def build_trip_data(
         "checkin": (booked_row_raw or {}).get("checkin") or CHECKIN,
         "lodging_note": LODGING_NOTE,
         "booked_lodging_id": booked_lodging["id"] if booked_lodging else None,
+        "booked_flight_id": booked_opt["id"] if booked_opt else None,
         "guests": GUESTS,
         "adults": ADULTS,
         "child_ages": CHILD_AGES,
@@ -597,11 +655,59 @@ def _route_panel(route_key: str, days: list[dict], active: bool) -> str:
     </div>"""
 
 
-def render_flights(chi_days: list[dict], nyc_days: list[dict]) -> str:
+def render_booked_flight(booked: dict | None) -> str:
+    if not booked:
+        return ""
+    opt = booked_flight_option(booked)
+    ret = opt["return_date"]
+    itin = (booked.get("itinerary") or {}).get("return") or {}
+    legs = itin.get("legs") or []
+    leg_html = ""
+    if legs:
+        parts = []
+        for leg in legs:
+            parts.append(
+                f"<li><strong>{leg.get('from')}→{leg.get('to')}</strong> "
+                f"{leg.get('depart')}–{leg.get('arrive')} · {leg.get('flight','')}"
+                f"{(' · ' + leg['operated_by']) if leg.get('operated_by') else ''}</li>"
+            )
+        layover = f"<p class='muted'>경유 {itin.get('layover','')}</p>" if itin.get("layover") else ""
+        leg_html = f"<ul class='booked-flight-legs'>{''.join(parts)}</ul>{layover}"
+    img = booked.get("image") or "assets/booked-flight.png"
+    return f"""
+    <section class="hero card booked-flight-hero" id="booked-flight-hero">
+      <div class="booked-flight-copy">
+        <p class="route-kicker">✅ 예약 완료 항공권</p>
+        <h2>{opt['route_label']}</h2>
+        <p class="hero-price" style="color:var(--sky)">{opt['price_per_person_text']}</p>
+        <p class="opt-sub">1인 · 4명 합계 {opt['price_text']}</p>
+        <p><strong>출국</strong> {_fmt_date_ko(opt.get('outbound_date') or OUTBOUND)} ·
+           <strong>귀국</strong> {_fmt_date_ko(ret)} · {opt.get('duration_text','')}</p>
+        <p>{opt.get('carrier_text','')} · {opt.get('stops_text','')}</p>
+        <p class="muted">{booked.get('fare_note','')}</p>
+        {leg_html}
+        <div class="opt-actions" style="margin-top:12px;">
+          <label class="pick-label">
+            <input type="radio" name="flight-pick" class="flight-pick" value="{opt['id']}"
+              data-price="{opt['price']}" data-return="{ret}" data-source="{opt['route']}" checked>
+            <span>예약 · 경비에 담김</span>
+          </label>
+          {BTN.format(url=opt.get('seller_url', '#'))}
+        </div>
+      </div>
+      <figure class="booked-flight-shot">
+        <img src="{img}" alt="예약 항공권 스크린샷 · ORD→LAX→ICN 아시아나" loading="lazy">
+        <figcaption class="muted">귀국편 운임 선택 화면</figcaption>
+      </figure>
+    </section>"""
+
+
+def render_flights(chi_days: list[dict], nyc_days: list[dict], booked: dict | None = None) -> str:
     returns = sorted(
         {d["return_date"] for d in chi_days + nyc_days}
         or {"2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"}
     )
+    end_selected = (booked or {}).get("return_date") or (returns[0] if returns else None)
     date_bar = render_date_filter(
         prefix="flights",
         start_id="flight-outbound",
@@ -611,10 +717,11 @@ def render_flights(chi_days: list[dict], nyc_days: list[dict]) -> str:
         start_dates=[OUTBOUND],
         end_dates=returns,
         start_selected=OUTBOUND,
-        end_selected=returns[0] if returns else None,
+        end_selected=end_selected,
         note="출국·귀국일을 고르면 해당 일정의 최저가 / 최단시간만 표시됩니다.",
     )
     return f"""
+    {render_booked_flight(booked)}
     {date_bar}
     <div class="route-switch" role="tablist" aria-label="항공 루트">
       <button type="button" class="route-tab active" role="tab" aria-selected="true" data-route="nyc_in">
@@ -626,7 +733,7 @@ def render_flights(chi_days: list[dict], nyc_days: list[dict]) -> str:
         <span class="route-tab-sub">SEL↔ORD 왕복</span>
       </button>
     </div>
-    <p class="flight-hint muted">선택한 귀국일의 <strong>최저가</strong>·<strong>최단시간</strong>과, 최저가 순 <strong>17시간 이내</strong> 후보 5개를 표시합니다. ○ 경비에 담기 → 여행경비 탭에 반영됩니다.</p>
+    <p class="flight-hint muted">위에 <strong>예약 완료</strong> 항공권이 기본 선택됩니다. 아래는 같은 루트의 비교 후보입니다.</p>
     <p id="flight-empty" class="empty-filter muted" hidden>선택한 날짜의 항공 데이터가 없습니다.</p>
     {_route_panel("nyc_in", nyc_days, True)}
     {_route_panel("chi_round", chi_days, False)}
@@ -1259,6 +1366,19 @@ def render_page(
     .opt-card.opt-shortest {{ border-top: 4px solid var(--fast); }}
     .opt-card.opt-cheap17 {{ border-top: 4px solid #0ea5e9; }}
     .opt-cheap17 .opt-badge {{ color: #0ea5e9; }}
+    .booked-flight-hero {{
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; align-items: start;
+      border-top: 4px solid var(--sky);
+    }}
+    .booked-flight-shot {{ margin: 0; }}
+    .booked-flight-shot img {{
+      width: 100%; border-radius: 10px; border: 1px solid var(--border);
+      display: block; background: #fff;
+    }}
+    .booked-flight-legs {{ margin: 8px 0 0; padding-left: 1.1rem; line-height: 1.55; }}
+    @media (max-width: 900px) {{
+      .booked-flight-hero {{ grid-template-columns: 1fr; }}
+    }}
     .opt-extra {{ margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border); }}
     .opt-extra-title {{ font-size: 0.88rem; font-weight: 700; margin: 0 0 10px; color: #0369a1; }}
     .opt-grid-extra {{ grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }}
@@ -1521,7 +1641,7 @@ def render_page(
   <script id="trip-data" type="application/json">{trip_json}</script>
   <script>
     const TRIP = JSON.parse(document.getElementById('trip-data').textContent);
-    const STORE_KEY = 'chicago-trip-budget-v7';
+    const STORE_KEY = 'chicago-trip-budget-v8';
     const DATE_OPTS = TRIP.date_options || {{}};
 
     const fmt = n => '₩' + Math.round(n || 0).toLocaleString('ko-KR');
@@ -1553,19 +1673,25 @@ def render_page(
       return (TRIP.lodging || []).find(l => l.booked) || findLodging(TRIP.booked_lodging_id);
     }}
 
+    function getBookedFlight() {{
+      return (TRIP.flights || []).find(f => f.booked || f.kind === 'booked')
+        || findFlight(TRIP.booked_flight_id);
+    }}
+
     function getTripDates() {{
       const saved = loadState();
       const rec = TRIP.recommended?.return_date;
-      const booked = getBookedLodging();
-      const preferCheckout = booked?.checkout_date || saved.checkout || rec;
-      const preferReturn = booked?.checkout_date || saved.returnDate || rec || TRIP.outbound;
+      const bookedLod = getBookedLodging();
+      const bookedFlight = getBookedFlight();
+      const preferCheckout = bookedLod?.checkout_date || saved.checkout || rec;
+      const preferReturn = bookedFlight?.return_date || bookedLod?.checkout_date || saved.returnDate || rec || TRIP.outbound;
       return {{
         outbound: firstAvailable(DATE_OPTS.outbound, saved.outbound || TRIP.outbound),
         returnDate: firstAvailable(DATE_OPTS.return, preferReturn),
-        checkin: firstAvailable(DATE_OPTS.checkin, booked?.checkin_date || saved.checkin || TRIP.checkin),
+        checkin: firstAvailable(DATE_OPTS.checkin, bookedLod?.checkin_date || saved.checkin || TRIP.checkin),
         checkout: firstAvailable(DATE_OPTS.checkout, preferCheckout),
         pickup: firstAvailable(DATE_OPTS.pickup, saved.pickup || TRIP.car_pickup),
-        dropoff: firstAvailable(DATE_OPTS.dropoff, booked?.checkout_date || saved.dropoff || rec),
+        dropoff: firstAvailable(DATE_OPTS.dropoff, bookedFlight?.return_date || bookedLod?.checkout_date || saved.dropoff || rec),
       }};
     }}
 
@@ -1828,7 +1954,8 @@ def render_page(
       const saved = loadState();
       const d = TRIP.defaults;
       const dates = getTripDates();
-      const flightId = findFlight(saved.flightId) ? saved.flightId : TRIP.best_flight_id;
+      const flightId = TRIP.booked_flight_id
+        || (findFlight(saved.flightId) ? saved.flightId : TRIP.best_flight_id);
       const carId = findCar(saved.carId) ? saved.carId : TRIP.best_car_id;
       const pickedCar = findCar(carId);
       return {{
@@ -2125,13 +2252,14 @@ def main() -> None:
     now_kst = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S KST")
     chi_days = load_route_rows(ROUTE_CHI_FILE)
     nyc_days = load_route_rows(ROUTE_NYC_FILE)
+    booked_flight = load_booked_flight()
     car_days = load_route_rows(CAR_COMPARE_FILE) or load_route_rows(CAR_FILE)
     route_flights = flatten_route_flights(nyc_days) + flatten_route_flights(chi_days)
     route_flights.sort(key=lambda x: (x["price"], x.get("duration_minutes") or 10**9))
     airbnb_all = load_lodging_list(AIRBNB_LODGING)
     airbnb = load_lodging_cheapest(airbnb_all)
-    trip_data = build_trip_data(route_flights, airbnb_all, airbnb, car_days)
-    flights_html = render_flights(chi_days, nyc_days)
+    trip_data = build_trip_data(route_flights, airbnb_all, airbnb, car_days, booked_flight)
+    flights_html = render_flights(chi_days, nyc_days, booked_flight)
     lodging_html = render_lodging(airbnb_all, airbnb)
     cars_html = render_cars(car_days)
     chicago_plan_html = itinerary_plans.render_chicago_plan()

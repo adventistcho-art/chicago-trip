@@ -1,0 +1,49 @@
+{
+  "id": "nyc_in:booked:2026-10-10",
+  "booked": true,
+  "route": "nyc_in",
+  "route_label": "뉴욕 인 · 시카고 아웃",
+  "kind": "booked",
+  "kind_label": "예약완료",
+  "outbound_date": "2026-09-24",
+  "return_date": "2026-10-10",
+  "price_per_person": 1440000,
+  "price_per_person_text": "₩1,440,000",
+  "price": 5760000,
+  "price_text": "₩5,760,000",
+  "duration_text": "출국 아시아나 / 귀국 19시간 20분",
+  "duration_minutes": 1160,
+  "stops_text": "경유 / 1회 경유 (LAX)",
+  "carrier_text": "아시아나항공",
+  "self_transfer": false,
+  "image": "assets/booked-flight.png",
+  "itinerary": {
+    "return": {
+      "summary": "ORD → LAX → ICN · 19시간 20분",
+      "date": "2026-10-10",
+      "legs": [
+        {
+          "from": "ORD",
+          "to": "LAX",
+          "depart": "06:00",
+          "arrive": "08:27",
+          "flight": "OZ6275",
+          "operated_by": "United Airlines",
+          "aircraft": "Boeing 737MAX9"
+        },
+        {
+          "from": "LAX",
+          "to": "ICN",
+          "depart": "10:10",
+          "arrive": "15:20+1",
+          "flight": "OZ201",
+          "aircraft": "Airbus A380-800"
+        }
+      ],
+      "layover": "LAX 1시간 43분 · T7→TB"
+    }
+  },
+  "fare_note": "일반석 · 기내수하물 1 · 위탁 23kg×2 · 4석 남음",
+  "seller_url": "https://flyasiana.com/",
+  "synced_at": "2026-08-07T21:38:00+09:00"
+}
