@@ -728,17 +728,19 @@ def render_cars(car_days: list[dict]) -> str:
             "label", cheapest.get("source") or ""
         )
         hero = f"""
-        <section class="route-hero card car-hero">
+        <section class="route-hero card car-hero" id="car-hero"
+          data-price-text="{cheapest.get('price_text') or ''}"
+          data-meta="{src_label} · {cheapest.get('category') or ''} · {cheapest.get('model') or ''}">
           <div class="route-hero-copy">
             <p class="route-kicker">ORD RENTAL COMPARE</p>
             <h2>렌트카 · 사이트 비교</h2>
-            <p class="muted">DiscoverCars · Rentalcars.com · KAYAK · 전기차 포함 · 인수 {CAR_PICKUP}</p>
+            <p class="muted" id="car-hero-blurb">DiscoverCars · Rentalcars.com · KAYAK · 전기차 포함 · 인수 {CAR_PICKUP}</p>
           </div>
           <div class="route-stats">
             <div class="route-stat">
-              <span class="muted">전체 최저가</span>
-              <strong>{cheapest.get('price_text')}</strong>
-              <span class="muted">{src_label} · {cheapest.get('category')} · {cheapest.get('model')}</span>
+              <span class="muted" id="car-hero-label">선택일 최저가</span>
+              <strong id="car-hero-price">{cheapest.get('price_text')}</strong>
+              <span class="muted" id="car-hero-meta">{src_label} · {cheapest.get('category')} · {cheapest.get('model')}</span>
             </div>
           </div>
         </section>"""
@@ -755,9 +757,9 @@ def render_cars(car_days: list[dict]) -> str:
             f'<th class="{CAR_SOURCE_META[k]["css"]}">{CAR_SOURCE_META[k]["label"]}</th>' for k in source_keys
         )
         compare_table = f"""
-        <section class="card">
+        <section class="card" id="car-compare-card">
           <div class="legend">{legend}</div>
-          <p class="muted" style="margin:0 0 12px;">귀국(반납)일별 사이트 최저가입니다. ○ 선택 → 여행경비 반영 · 아래 목록에 전기차(EV)도 포함됩니다.</p>
+          <p class="muted" style="margin:0 0 12px;" id="car-compare-hint">반납일을 고르면 해당일 사이트 최저가만 표시됩니다. ○ 선택 → 여행경비 반영 · 아래 목록에 전기차(EV)도 포함됩니다.</p>
           <div class="table-wrap">
           <table class="car-compare-table">
             <thead>
@@ -789,9 +791,9 @@ def render_cars(car_days: list[dict]) -> str:
     {date_bar}
     {hero}
     {compare_table}
-    <p class="flight-hint muted">선택한 반납일의 상세 차종·옵션입니다.</p>
+    <p class="flight-hint muted" id="car-detail-hint">선택한 반납일의 상세 차종·옵션입니다.</p>
     <p id="car-empty" class="empty-filter muted" hidden>선택한 날짜의 렌트카 데이터가 없습니다.</p>
-    <div class="car-date-switch" role="tablist" hidden>{''.join(date_tabs)}</div>
+    <div class="car-date-switch" role="tablist" aria-label="반납일">{''.join(date_tabs)}</div>
     {''.join(panels)}
     """
 
@@ -1396,7 +1398,7 @@ def render_page(
   <script id="trip-data" type="application/json">{trip_json}</script>
   <script>
     const TRIP = JSON.parse(document.getElementById('trip-data').textContent);
-    const STORE_KEY = 'chicago-trip-budget-v5';
+    const STORE_KEY = 'chicago-trip-budget-v6';
     const DATE_OPTS = TRIP.date_options || {{}};
 
     const fmt = n => '₩' + Math.round(n || 0).toLocaleString('ko-KR');
@@ -1413,7 +1415,9 @@ def render_page(
     }}
 
     function saveState(state) {{
-      localStorage.setItem(STORE_KEY, JSON.stringify(state));
+      // Merge so budget saves never wipe date filters.
+      const merged = Object.assign({{}}, loadState(), state);
+      localStorage.setItem(STORE_KEY, JSON.stringify(merged));
     }}
 
     function firstAvailable(list, preferred) {{
@@ -1489,13 +1493,62 @@ def render_page(
       }}
     }}
 
+    function fmtDateKo(iso) {{
+      if (!iso) return '';
+      const parts = iso.split('-');
+      return `${{Number(parts[1])}}월 ${{Number(parts[2])}}일`;
+    }}
+
+    function updateCarHero(dropoff) {{
+      const row = document.querySelector(`.car-compare-table tbody tr[data-dropoff="${{dropoff}}"]`);
+      const priceEl = document.getElementById('car-hero-price');
+      const metaEl = document.getElementById('car-hero-meta');
+      const labelEl = document.getElementById('car-hero-label');
+      const blurbEl = document.getElementById('car-hero-blurb');
+      const hintEl = document.getElementById('car-compare-hint');
+      const detailHint = document.getElementById('car-detail-hint');
+      if (labelEl) labelEl.textContent = dropoff ? `${{fmtDateKo(dropoff)}} 반납 최저가` : '선택일 최저가';
+      if (blurbEl) blurbEl.textContent = dropoff
+        ? `DiscoverCars · Rentalcars.com · KAYAK · 인수 ${{TRIP.car_pickup}} · 반납 ${{dropoff}}`
+        : `DiscoverCars · Rentalcars.com · KAYAK · 전기차 포함 · 인수 ${{TRIP.car_pickup}}`;
+      if (hintEl) hintEl.textContent = dropoff
+        ? `${{fmtDateKo(dropoff)}} 반납 기준 사이트 최저가입니다. ○ 선택 → 여행경비 반영 · 아래 목록에 전기차(EV)도 포함됩니다.`
+        : '반납일을 고르면 해당일 사이트 최저가만 표시됩니다.';
+      if (detailHint) detailHint.textContent = dropoff
+        ? `${{fmtDateKo(dropoff)}} 반납 · 상세 차종·옵션입니다.`
+        : '선택한 반납일의 상세 차종·옵션입니다.';
+
+      const picks = row
+        ? [...row.querySelectorAll('.car-pick')].map(el => ({{
+            price: Number(el.dataset.price) || 0,
+            label: (el.closest('label')?.querySelector('.muted')?.textContent || '').trim(),
+            priceText: el.closest('label')?.querySelector('strong')?.textContent || fmt(Number(el.dataset.price)),
+          }})).filter(x => x.price > 0)
+        : [];
+      if (picks.length) {{
+        const best = picks.reduce((a, b) => (a.price <= b.price ? a : b));
+        if (priceEl) priceEl.textContent = best.priceText;
+        if (metaEl) metaEl.textContent = best.label || '';
+        return;
+      }}
+      const cars = (TRIP.cars || []).filter(c => c.dropoff_date === dropoff && c.price);
+      if (cars.length) {{
+        const best = cars.reduce((a, b) => (a.price <= b.price ? a : b));
+        if (priceEl) priceEl.textContent = best.price_text || fmt(best.price);
+        if (metaEl) {{
+          metaEl.textContent = `${{best.source_label || best.source || ''}} · ${{best.category || ''}} · ${{best.model || ''}}`;
+        }}
+      }}
+    }}
+
     function applyDateFilters() {{
       const dates = getTripDates();
       syncDateSelects(dates);
 
       let flightVisible = 0;
       document.querySelectorAll('.date-card').forEach(card => {{
-        const on = card.dataset.return === dates.returnDate;
+        const cardReturn = card.getAttribute('data-return') || card.dataset.return;
+        const on = cardReturn === dates.returnDate;
         card.hidden = !on;
         if (on) flightVisible += 1;
       }});
@@ -1523,11 +1576,14 @@ def render_page(
         if (on) carVisible += 1;
       }});
       document.querySelectorAll('.car-compare-table tbody tr[data-dropoff]').forEach(tr => {{
-        tr.hidden = tr.dataset.dropoff !== dates.dropoff;
+        const on = tr.dataset.dropoff === dates.dropoff;
+        tr.hidden = !on;
+        tr.classList.toggle('best', on);
       }});
       const carEmpty = document.getElementById('car-empty');
       if (carEmpty) carEmpty.hidden = carVisible > 0;
       showCarDate(dates.dropoff);
+      updateCarHero(dates.dropoff);
     }}
 
     function onEndDateChange(nextEnd, opts = {{}}) {{
@@ -1570,6 +1626,8 @@ def render_page(
         }}
       }}
       saveState(s);
+      // Re-persist dates after budget save so filters never get wiped.
+      persistTripDates(dates);
       applyDateFilters();
       renderDashboard();
     }}
@@ -1628,6 +1686,7 @@ def render_page(
     function getState() {{
       const saved = loadState();
       const d = TRIP.defaults;
+      const dates = getTripDates();
       const flightId = findFlight(saved.flightId) ? saved.flightId : TRIP.best_flight_id;
       const carId = findCar(saved.carId) ? saved.carId : TRIP.best_car_id;
       const pickedCar = findCar(carId);
@@ -1641,6 +1700,12 @@ def render_page(
         car: saved.car ?? (pickedCar ? pickedCar.price : d.car_rental),
         gift: saved.gift ?? d.gifts,
         misc: saved.misc ?? d.misc,
+        outbound: dates.outbound,
+        returnDate: dates.returnDate,
+        checkin: dates.checkin,
+        checkout: dates.checkout,
+        pickup: dates.pickup,
+        dropoff: dates.dropoff,
       }};
     }}
 
