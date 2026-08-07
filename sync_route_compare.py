@@ -24,6 +24,8 @@ RETURN_DATES = [
     "2026-10-13",
 ]
 GUESTS = 4  # dashboard total = 1인 × 4
+MAX_CHEAP_UNDER_17H = 5
+MAX_LEG_MINUTES = 17 * 60
 
 ROUTES = {
     "chi_round": {
@@ -54,11 +56,21 @@ def now_kst() -> str:
     return datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%dT%H:%M:%S+09:00")
 
 
-def parse_duration_minutes(text: str) -> int | None:
-    parts = re.findall(r"(\d+)\s*시간\s*(\d+)\s*분", text or "")
-    if not parts:
-        return None
-    return sum(int(h) * 60 + int(m) for h, m in parts)
+def leg_minutes(duration_text: str) -> list[int]:
+    return [int(h) * 60 + int(m) for h, m in re.findall(r"(\d+)\s*시간\s*(\d+)\s*분", duration_text or "")]
+
+
+def within_17h(duration_text: str) -> bool:
+    legs = leg_minutes(duration_text)
+    return bool(legs) and all(m <= MAX_LEG_MINUTES for m in legs)
+
+
+def flight_fingerprint(row: dict) -> tuple:
+    return (
+        row.get("price_per_person"),
+        row.get("duration_text"),
+        row.get("carrier_text"),
+    )
 
 
 def dismiss(page) -> None:
@@ -74,44 +86,106 @@ def dismiss(page) -> None:
     )
 
 
+def parse_duration_minutes(text: str) -> int | None:
+    legs = leg_minutes(text)
+    if not legs:
+        return None
+    return sum(legs)
+
+
 def extract_top(page) -> dict | None:
+    rows = extract_results(page, limit=1)
+    return rows[0] if rows else None
+
+
+def extract_results(page, limit: int = 60) -> list[dict]:
     return page.evaluate(
-        """() => {
-      const text = document.body.innerText || '';
-      const blocks = text.split('다음 검색 결과로 이동').slice(1);
-      for (const b of blocks) {
+        """(limit) => {
+      const carrierRe = /항공|Air|United|Delta|Korean|Asiana|에어|알래스카|델타|대한|아시아나|에바|아메리칸|터키|캐세이|프론티어|캐나다|제트블루|ANA|JAL/i;
+      const parseBlock = (b) => {
         const pm = b.match(/([\\d,]+)원/);
-        if (!pm) continue;
+        if (!pm) return null;
+        const price = parseInt(pm[1].replace(/,/g, ''), 10);
+        if (!price || price < 200000) return null;
         const lines = b.split('\\n').map(s => s.trim()).filter(Boolean);
-        const carrier = lines.find(l =>
-          /항공|Air|United|Delta|Korean|Asiana|에어|알래스카|델타|대한|아시아나|에바|아메리칸|터키|캐세이|프론티어|캐나다|제트블루|ANA|JAL/i.test(l)
-        ) || '';
+        const carrier = lines.find(l => carrierRe.test(l)) || '';
         const durs = b.match(/(\\d+시간\\s*\\d+분)/g) || [];
+        if (!durs.length) return null;
         const stops = (b.match(/(\\d+회\\s*경유|직항)/g) || []).slice(0, 2);
         return {
-          price_per_person: parseInt(pm[1].replace(/,/g, ''), 10),
+          price_per_person: price,
           price_text_pp: pm[1] + '원',
           duration_text: durs.slice(0, 2).join(' / ') || '',
           stops_text: stops.join(' / ') || '',
           carrier_text: carrier,
           self_transfer: b.includes('자가 환승'),
         };
+      };
+      const out = [];
+      const seen = new Set();
+      const push = (row) => {
+        if (!row) return;
+        const key = row.price_per_person + '|' + row.duration_text + '|' + row.carrier_text;
+        if (seen.has(key)) return;
+        seen.add(key);
+        out.push(row);
+      };
+      const text = document.body.innerText || '';
+      for (const b of text.split('다음 검색 결과로 이동').slice(1)) {
+        push(parseBlock(b));
+        if (out.length >= limit) return out;
       }
-      return null;
-    }"""
+      const priceRe = /([\\d,]+)원/g;
+      let m;
+      while ((m = priceRe.exec(text)) !== null) {
+        push(parseBlock(text.slice(Math.max(0, m.index - 40), m.index + 420)));
+        if (out.length >= limit) break;
+      }
+      return out;
+    }""",
+        limit,
     )
 
 
-def wait_top(page, timeout_s: float = 50) -> dict | None:
+def scroll_results(page) -> None:
+    for y in (700, 1400, 2200, 3200, 4500, 6000):
+        page.evaluate(f"window.scrollTo(0, {y})")
+        page.wait_for_timeout(700)
+
+
+def wait_results(page, timeout_s: float = 50) -> list[dict]:
     deadline = time.time() + timeout_s
+    best: list[dict] = []
     while time.time() < deadline:
         dismiss(page)
-        info = extract_top(page)
+        scroll_results(page)
+        rows = extract_results(page, limit=60)
+        if len(rows) > len(best):
+            best = rows
         body = page.inner_text("body")
-        if info and ("결과" in body or "완료" in body):
-            return info
+        if len(best) >= 8 and ("결과" in body or "완료" in body):
+            return best
         time.sleep(0.7)
-    return extract_top(page)
+    scroll_results(page)
+    return extract_results(page, limit=60) or best
+
+
+def pick_cheap_under_17h(
+    price_rows: list[dict], url: str, skip: set[tuple]
+) -> list[dict]:
+    picked: list[dict] = []
+    for info in price_rows:
+        if not within_17h(info.get("duration_text") or ""):
+            continue
+        row = enrich(info, url, "cheap17")
+        fp = flight_fingerprint(row)
+        if fp in skip:
+            continue
+        skip.add(fp)
+        picked.append(row)
+        if len(picked) >= MAX_CHEAP_UNDER_17H:
+            break
+    return picked
 
 
 def enrich(info: dict, url: str, kind: str) -> dict:
@@ -155,25 +229,57 @@ def main() -> int:
                     "route": route_key,
                     "route_label": route["label"],
                 }
-                for kind, sort in SORTS.items():
-                    url = route["url"](ret, sort)
-                    print(f"\n=== {route['short']} | {ret} | {kind} ===")
-                    print(url)
-                    try:
-                        page.goto(url, wait_until="domcontentloaded", timeout=60000)
-                    except PlaywrightTimeout:
-                        print("nav timeout")
-                    page.wait_for_timeout(2000)
-                    dismiss(page)
-                    info = wait_top(page)
-                    if not info:
-                        print("FAILED")
-                        by_date[ret][kind] = None
-                        continue
-                    row = enrich(info, url, kind)
-                    by_date[ret][kind] = row
+                price_url = route["url"](ret, SORTS["cheapest"])
+                print(f"\n=== {route['short']} | {ret} | cheapest + 17h ===")
+                print(price_url)
+                try:
+                    page.goto(price_url, wait_until="domcontentloaded", timeout=60000)
+                except PlaywrightTimeout:
+                    print("nav timeout (price)")
+                page.wait_for_timeout(2000)
+                dismiss(page)
+                price_rows = wait_results(page)
+                if price_rows:
+                    cheap_row = enrich(price_rows[0], price_url, "cheapest")
+                    by_date[ret]["cheapest"] = cheap_row
                     print(
-                        f"  {row['price_per_person']:,} KRW | {row['duration_text']} | {row['carrier_text']}"
+                        f"  cheapest {cheap_row['price_per_person']:,} | {cheap_row['duration_text']}"
+                    )
+                else:
+                    by_date[ret]["cheapest"] = None
+                    print("  cheapest FAILED")
+
+                skip: set[tuple] = set()
+                if by_date[ret].get("cheapest"):
+                    skip.add(flight_fingerprint(by_date[ret]["cheapest"]))
+
+                short_url = route["url"](ret, SORTS["shortest"])
+                print(f"=== {route['short']} | {ret} | shortest ===")
+                print(short_url)
+                try:
+                    page.goto(short_url, wait_until="domcontentloaded", timeout=60000)
+                except PlaywrightTimeout:
+                    print("nav timeout (shortest)")
+                page.wait_for_timeout(2000)
+                dismiss(page)
+                short_rows = wait_results(page, timeout_s=50)
+                if short_rows:
+                    short_row = enrich(short_rows[0], short_url, "shortest")
+                    by_date[ret]["shortest"] = short_row
+                    skip.add(flight_fingerprint(short_row))
+                    print(
+                        f"  shortest {short_row['price_per_person']:,} | {short_row['duration_text']}"
+                    )
+                else:
+                    by_date[ret]["shortest"] = None
+                    print("  shortest FAILED")
+
+                under_17 = pick_cheap_under_17h(price_rows or [], price_url, skip)
+                by_date[ret]["cheap_under_17h"] = under_17
+                print(f"  17h under {len(under_17)} options")
+                for i, row in enumerate(under_17, 1):
+                    print(
+                        f"    {i}. {row['price_per_person']:,} | {row['duration_text']} | {row['carrier_text']}"
                     )
             results[route_key] = [by_date[d] for d in RETURN_DATES]
 

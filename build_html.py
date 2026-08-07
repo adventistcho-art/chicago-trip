@@ -37,7 +37,11 @@ CHECKIN = "2026-09-26"
 LODGING_NOTE = "9/23 도착 · Airbnb 9/26부터"
 GUESTS = ADULTS + len(CHILD_AGES)
 
-FLIGHT_LABELS = {"sky": "Skyscanner", "kayak": "KAYAK", "google": "Google"}
+FLIGHT_KIND_META = {
+    "cheapest": ("💰 최저가", "cheapest"),
+    "shortest": ("⚡ 최단시간", "shortest"),
+    "cheap17": ("⏱ 17h 이내", "cheap17"),
+}
 ROUTE_META = {
     "nyc_in": {
         "key": "nyc_in",
@@ -96,7 +100,11 @@ def flatten_route_flights(route_rows: list[dict]) -> list[dict]:
             opt = day.get(kind)
             if not opt or opt.get("price") is None:
                 continue
-            kind_label = "최저가" if kind == "cheapest" else "최단시간"
+            kind_label = FLIGHT_KIND_META[kind][0].split(" ", 1)[-1]
+            if kind == "cheapest":
+                kind_label = "최저가"
+            elif kind == "shortest":
+                kind_label = "최단시간"
             out.append(
                 {
                     "id": f"{route}:{kind}:{ret}",
@@ -106,6 +114,32 @@ def flatten_route_flights(route_rows: list[dict]) -> list[dict]:
                     "route_label": route_label,
                     "kind": kind,
                     "kind_label": kind_label,
+                    "return_date": ret,
+                    "price": opt["price"],
+                    "price_text": opt.get("price_text", fmt_won(opt["price"])),
+                    "price_per_person": opt.get("price_per_person") or flight_per_person(opt["price"]),
+                    "price_per_person_text": opt.get("price_per_person_text")
+                    or flight_per_person_text(opt["price"]),
+                    "duration_text": opt.get("duration_text", ""),
+                    "duration_minutes": opt.get("duration_minutes"),
+                    "stops_text": opt.get("stops_text", ""),
+                    "carrier_text": opt.get("carrier_text", ""),
+                    "self_transfer": opt.get("self_transfer", False),
+                    "seller_url": opt.get("seller_url", ""),
+                }
+            )
+        for i, opt in enumerate(day.get("cheap_under_17h") or []):
+            if not opt or opt.get("price") is None:
+                continue
+            out.append(
+                {
+                    "id": f"{route}:cheap17:{ret}:{i}",
+                    "source": route,
+                    "source_label": f"{route_label} · 17h 이내",
+                    "route": route,
+                    "route_label": route_label,
+                    "kind": "cheap17",
+                    "kind_label": "17h 이내",
                     "return_date": ret,
                     "price": opt["price"],
                     "price_text": opt.get("price_text", fmt_won(opt["price"])),
@@ -432,18 +466,18 @@ def _fmt_date_ko(iso: str) -> str:
 
 
 def _opt_card(flight_id: str, opt: dict | None, kind: str, route: str, ret: str) -> str:
+    badge_text, css_kind = FLIGHT_KIND_META.get(kind, (kind, kind))
     if not opt:
         return f"""
-        <article class="opt-card opt-{kind} is-empty">
-          <header class="opt-head"><span class="opt-badge">{'최저가' if kind == 'cheapest' else '최단시간'}</span></header>
+        <article class="opt-card opt-{css_kind} is-empty">
+          <header class="opt-head"><span class="opt-badge">{badge_text}</span></header>
           <p class="muted">데이터 없음</p>
         </article>"""
-    badge = "💰 최저가" if kind == "cheapest" else "⚡ 최단시간"
     note = '<span class="pill warn">자가환승</span>' if opt.get("self_transfer") else ""
     return f"""
-    <article class="opt-card opt-{kind}">
+    <article class="opt-card opt-{css_kind}">
       <header class="opt-head">
-        <span class="opt-badge">{badge}</span>
+        <span class="opt-badge">{badge_text}</span>
         {note}
       </header>
       <p class="opt-price">{opt.get('price_per_person_text') or flight_per_person_text(opt.get('price'))}</p>
@@ -490,6 +524,18 @@ def _route_panel(route_key: str, days: list[dict], active: bool) -> str:
         ret = day["return_date"]
         cheap = day.get("cheapest")
         short = day.get("shortest")
+        under_17 = day.get("cheap_under_17h") or []
+        extra_block = ""
+        if under_17:
+            extra_cards = "".join(
+                _opt_card(f"{route_key}:cheap17:{ret}:{i}", opt, "cheap17", route_key, ret)
+                for i, opt in enumerate(under_17)
+            )
+            extra_block = f"""
+          <div class="opt-extra">
+            <p class="opt-extra-title">최저가 중 편도 17시간 이내 · {len(under_17)}개</p>
+            <div class="opt-grid opt-grid-extra">{extra_cards}</div>
+          </div>"""
         day_cards.append(f"""
         <section class="date-card" data-return="{ret}">
           <div class="date-card-head">
@@ -504,6 +550,7 @@ def _route_panel(route_key: str, days: list[dict], active: bool) -> str:
             {_opt_card(f"{route_key}:cheapest:{ret}", cheap, "cheapest", route_key, ret)}
             {_opt_card(f"{route_key}:shortest:{ret}", short, "shortest", route_key, ret)}
           </div>
+          {extra_block}
         </section>""")
 
     return f"""
@@ -512,7 +559,7 @@ def _route_panel(route_key: str, days: list[dict], active: bool) -> str:
         <div class="route-hero-copy">
           <p class="route-kicker">{meta['chip']}</p>
           <h2>{meta['label']}</h2>
-          <p class="muted">{meta['blurb']} · KAYAK 1인 기준 · 일정별 최저가 / 최단시간</p>
+          <p class="muted">{meta['blurb']} · KAYAK 1인 기준 · 최저가 / 최단시간 / 17h 이내 5개</p>
         </div>
         <div class="route-stats">{''.join(hero_bits)}</div>
       </section>
@@ -549,7 +596,7 @@ def render_flights(chi_days: list[dict], nyc_days: list[dict]) -> str:
         <span class="route-tab-sub">SEL↔ORD 왕복</span>
       </button>
     </div>
-    <p class="flight-hint muted">선택한 귀국일의 <strong>최저가</strong>와 <strong>최단시간</strong>을 나란히 비교합니다. ○ 경비에 담기 → 여행경비 탭에 반영됩니다.</p>
+    <p class="flight-hint muted">선택한 귀국일의 <strong>최저가</strong>·<strong>최단시간</strong>과, 최저가 순 <strong>17시간 이내</strong> 후보 5개를 표시합니다. ○ 경비에 담기 → 여행경비 탭에 반영됩니다.</p>
     <p id="flight-empty" class="empty-filter muted" hidden>선택한 날짜의 항공 데이터가 없습니다.</p>
     {_route_panel("nyc_in", nyc_days, True)}
     {_route_panel("chi_round", chi_days, False)}
@@ -1144,6 +1191,11 @@ def render_page(
     }}
     .opt-card.opt-cheapest {{ border-top: 4px solid var(--cheap); }}
     .opt-card.opt-shortest {{ border-top: 4px solid var(--fast); }}
+    .opt-card.opt-cheap17 {{ border-top: 4px solid #0ea5e9; }}
+    .opt-cheap17 .opt-badge {{ color: #0ea5e9; }}
+    .opt-extra {{ margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border); }}
+    .opt-extra-title {{ font-size: 0.88rem; font-weight: 700; margin: 0 0 10px; color: #0369a1; }}
+    .opt-grid-extra {{ grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }}
     .opt-card.is-empty {{ opacity: .65; }}
     .opt-head {{ display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 8px; }}
     .opt-badge {{ font-size: 0.82rem; font-weight: 800; }}
