@@ -25,6 +25,8 @@ CAR_FILE = ROOT / "car_rental_data.json"
 CAR_COMPARE_FILE = ROOT / "car_compare_data.json"
 AIRBNB_LODGING = ROOT / "airbnb_lodging_data.json"
 CAR_PICKUP = "2026-09-24"
+CAR_DROPOFF_DEFAULT = "2026-10-10"
+CAR_ROUTE_NOTE = "뉴욕(JFK/LGA/EWR) 인수 → 시카고 ORD 반납 · 편도"
 CAR_SOURCE_META = {
     "discover": {"label": "DiscoverCars", "color": "#1f6feb", "css": "discover"},
     "rentalcars": {"label": "Rentalcars.com", "color": "#0d9488", "css": "rentalcars"},
@@ -442,12 +444,15 @@ def build_trip_data(
                 best_lodging_id = matched["id"]
 
     best_car_id = None
-    if cars and recommended:
-        same_day = [c for c in cars if c["dropoff_date"] == recommended["return_date"]]
+    prefer_drop = None
+    if booked_opt:
+        prefer_drop = booked_opt.get("return_date")
+    elif recommended:
+        prefer_drop = recommended.get("return_date")
+    if cars:
+        same_day = [c for c in cars if prefer_drop and c["dropoff_date"] == prefer_drop]
         pool = same_day or cars
         best_car_id = min(pool, key=lambda x: x.get("price") or 10**12)["id"]
-    elif cars:
-        best_car_id = cars[0]["id"]
 
     return_dates = sorted({f["return_date"] for f in flights})
     checkout_dates = sorted({l["checkout_date"] for l in lodging})
@@ -884,13 +889,16 @@ def render_cars(car_days: list[dict]) -> str:
                     ]
                     if x
                 )
+                route_loc = c.get("location") or ""
+                pu = c.get("pickup_code") or ""
+                route_bit = f"{pu}→ORD" if pu else ""
                 cards.append(f"""
                 <article class="car-card">
                   <div class="car-card-top">
                     <div>
-                      <p class="car-cat"><span class="car-src-tag {src}">{src_label}</span> {cat}</p>
+                      <p class="car-cat"><span class="car-src-tag {src}">{src_label}</span> {cat}{' · '+route_bit if route_bit else ''}</p>
                       <h3 class="car-model">{c.get('model','')}</h3>
-                      <p class="muted">{specs or '스펙 정보 없음'}</p>
+                      <p class="muted">{specs or '스펙 정보 없음'}{(' · '+route_loc) if route_loc else ''}</p>
                     </div>
                     <p class="car-price">{c.get('price_text') or fmt_won(c.get('price'))}</p>
                   </div>
@@ -912,7 +920,7 @@ def render_cars(car_days: list[dict]) -> str:
 
         panels.append(f"""
         <div class="car-date-panel {active}" data-car-panel="{drop}">
-          <p class="muted" style="margin:0 0 12px;">인수 {_fmt_date_ko(day.get('pickup_date', CAR_PICKUP))} 정오 · 반납 {_fmt_date_ko(drop)} 정오 · ORD</p>
+          <p class="muted" style="margin:0 0 12px;">인수 {_fmt_date_ko(day.get('pickup_date', CAR_PICKUP))} {day.get('pickup_time', '18:00')} · 뉴욕 → 반납 {_fmt_date_ko(drop)} {day.get('dropoff_time', '10:00')} · ORD 편도</p>
           {''.join(cat_blocks) if cat_blocks else '<p class="muted">상세 목록 없음 · 위 사이트별 최저가를 확인하세요.</p>'}
         </div>""")
 
@@ -926,9 +934,9 @@ def render_cars(car_days: list[dict]) -> str:
           data-price-text="{cheapest.get('price_text') or ''}"
           data-meta="{src_label} · {cheapest.get('category') or ''} · {cheapest.get('model') or ''}">
           <div class="route-hero-copy">
-            <p class="route-kicker">ORD RENTAL COMPARE</p>
-            <h2>렌트카 · 사이트 비교</h2>
-            <p class="muted" id="car-hero-blurb">DiscoverCars · Rentalcars.com · KAYAK · 전기차 포함 · 인수 {CAR_PICKUP}</p>
+            <p class="route-kicker">NYC → ORD ONE-WAY</p>
+            <h2>렌트카 · 뉴욕 인수 · 시카고 반납</h2>
+            <p class="muted" id="car-hero-blurb">DiscoverCars · Rentalcars.com · KAYAK · {CAR_ROUTE_NOTE} · 인수 {CAR_PICKUP} 18:00 · 반납 {CAR_DROPOFF_DEFAULT}</p>
           </div>
           <div class="route-stats">
             <div class="route-stat">
@@ -953,7 +961,7 @@ def render_cars(car_days: list[dict]) -> str:
         compare_table = f"""
         <section class="card" id="car-compare-card">
           <div class="legend">{legend}</div>
-          <p class="muted" style="margin:0 0 12px;" id="car-compare-hint">반납일을 고르면 해당일 사이트 최저가만 표시됩니다. ○ 선택 → 여행경비 반영 · 아래 목록에 전기차(EV)도 포함됩니다.</p>
+          <p class="muted" style="margin:0 0 12px;" id="car-compare-hint">편도 뉴욕(JFK/LGA/EWR)→시카고 ORD · 사이트별 최저가 · ○ 선택 → 여행경비 반영 · 전기차·미니밴 포함 · 귀국편 10/10 06:00이면 반납 시각을 앞당기세요.</p>
           <div class="table-wrap">
           <table class="car-compare-table">
             <thead>
@@ -1631,7 +1639,7 @@ def render_page(
     </div>
 
     <div id="cars" class="panel" role="tabpanel">
-      <p class="meta">위에서 인수·반납일을 고르면 해당 렌트 결과만 표시됩니다 · ORD · 사이트 비교</p>
+      <p class="meta">뉴욕 인수 → 시카고 ORD 반납(편도) · DiscoverCars · Rentalcars · KAYAK · 전기차 포함</p>
       {cars_html}
     </div>
 
