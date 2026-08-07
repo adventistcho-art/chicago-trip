@@ -655,7 +655,7 @@ def _route_panel(route_key: str, days: list[dict], active: bool) -> str:
     </div>"""
 
 
-def render_booked_flight(booked: dict | None) -> str:
+def render_booked_flight(booked: dict | None, *, interactive: bool = True, dom_id: str = "booked-flight-hero") -> str:
     if not booked:
         return ""
     opt = booked_flight_option(booked)
@@ -674,9 +674,25 @@ def render_booked_flight(booked: dict | None) -> str:
         layover = f"<p class='muted'>경유 {itin.get('layover','')}</p>" if itin.get("layover") else ""
         leg_html = f"<ul class='booked-flight-legs'>{''.join(parts)}</ul>{layover}"
     img = booked.get("image") or "assets/booked-flight.png"
-    img_src = f"{img}?v=2"
+    img_src = f"{img}?v=3"
+    if interactive:
+        actions = f"""
+        <div class="opt-actions" style="margin-top:12px;">
+          <label class="pick-label">
+            <input type="radio" name="flight-pick" class="flight-pick" value="{opt['id']}"
+              data-price="{opt['price']}" data-return="{ret}" data-source="{opt['route']}" checked>
+            <span>예약 · 경비에 담김</span>
+          </label>
+          {BTN.format(url=opt.get('seller_url', '#'))}
+        </div>"""
+    else:
+        actions = f"""
+        <div class="opt-actions" style="margin-top:12px;">
+          <button type="button" class="cta-btn" data-goto="flights">항공권 탭에서 보기</button>
+          {BTN.format(url=opt.get('seller_url', '#'))}
+        </div>"""
     return f"""
-    <section class="hero card booked-flight-hero" id="booked-flight-hero">
+    <section class="hero card booked-flight-hero" id="{dom_id}">
       <div class="booked-flight-copy">
         <p class="route-kicker">✅ 예약 완료 항공권 · 여행경비 기본 선택</p>
         <h2>{opt['route_label']}</h2>
@@ -687,14 +703,7 @@ def render_booked_flight(booked: dict | None) -> str:
         <p>{opt.get('carrier_text','')} · {opt.get('stops_text','')}</p>
         <p class="muted">{booked.get('fare_note','')}</p>
         {leg_html}
-        <div class="opt-actions" style="margin-top:12px;">
-          <label class="pick-label">
-            <input type="radio" name="flight-pick" class="flight-pick" value="{opt['id']}"
-              data-price="{opt['price']}" data-return="{ret}" data-source="{opt['route']}" checked>
-            <span>예약 · 경비에 담김</span>
-          </label>
-          {BTN.format(url=opt.get('seller_url', '#'))}
-        </div>
+        {actions}
       </div>
       <figure class="booked-flight-shot">
         <img src="{img_src}" alt="예약 항공권 스크린샷 · ORD→LAX→ICN 아시아나" loading="eager">
@@ -2272,7 +2281,9 @@ def main() -> None:
     chicago_plan_html = itinerary_plans.render_chicago_plan()
     east_plan_html = itinerary_plans.render_east_plan()
     combo_html = render_combo_analysis(trip_data.get("combos", []))
-    booked_flight_html = render_booked_flight(booked_flight)
+    booked_flight_html = render_booked_flight(
+        booked_flight, interactive=False, dom_id="booked-flight-dash"
+    )
     dashboard_html = render_dashboard_shell(combo_html, booked_flight_html)
     page = render_page(
         flights_html,
