@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="refresh" content="10800">
-  <title>서울→시카고 여행경비 | 항공권 · 숙박 · 대시보드</title>
+  <title>서울→시카고 여행계획 | 항공 · 숙박 · 렌트 · 일정</title>
   <style>
     :root {
       --sky: #0770e3; --kayak: #ff690f; --google: #1a73e8;
@@ -164,6 +164,40 @@
       background: #eef2ff; color: #3730a3; border-radius: 999px;
       padding: 4px 9px; font-size: 0.72rem; font-weight: 700;
     }
+    .itin-hero.chi-itin-hero {
+      background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 55%, #0ea5e9 100%);
+    }
+    .itin-hero.east-itin-hero {
+      background: linear-gradient(135deg, #3b0764 0%, #6d28d9 50%, #a78bfa 100%);
+    }
+    .itin-stack { display: grid; gap: 14px; }
+    .itin-day {
+      background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px;
+      box-shadow: 0 4px 14px rgba(24,33,50,.04);
+    }
+    .itin-day-head {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 10px;
+    }
+    .itin-day-num {
+      background: #0ea5e9; color: #fff; font-size: 0.75rem; font-weight: 800;
+      border-radius: 999px; padding: 4px 10px;
+    }
+    .east-nyc .itin-day-num { background: #4f46e5; }
+    .east-dc .itin-day-num { background: #b45309; }
+    .east-bos .itin-day-num { background: #047857; }
+    .itin-day-head h3 { margin: 0; flex: 1; font-size: 1.1rem; }
+    .itin-day-total { font-weight: 800; color: var(--budget); white-space: nowrap; }
+    .itin-places { margin: 0 0 10px; padding-left: 18px; color: #334155; line-height: 1.5; }
+    .itin-tip {
+      margin: 0 0 10px; padding: 8px 12px; background: #f8fafc; border-radius: 10px;
+      color: var(--muted); font-size: 0.85rem;
+    }
+    .itin-spend { width: 100%; border-collapse: collapse; font-size: 0.86rem; min-width: 0 !important; }
+    .itin-spend th, .itin-spend td { padding: 8px 6px; border-bottom: 1px solid #eef2f7; text-align: left; }
+    .itin-spend th { background: transparent; color: var(--muted); font-size: 0.75rem; }
+    .east-panel { display: none; }
+    .east-panel.active { display: block; }
+    .east-switch { margin-bottom: 16px; }
     .dashboard-hero { background: linear-gradient(135deg, #0d7a5f 0%, #0a5c48 100%); color: #fff; }
     .dashboard-hero .muted { color: rgba(255,255,255,.78); }
     .dash-hero-inner { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
@@ -238,24 +272,28 @@
       .cta-btn { padding: 6px 10px; }
       .breakdown-wrap { grid-template-columns: 1fr; }
       .total-price { font-size: 2rem; }
-      .route-switch, .opt-grid, .car-grid { grid-template-columns: 1fr; }
+      .route-switch, .opt-grid, .car-grid, .east-switch { grid-template-columns: 1fr; }
       .route-hero { padding: 18px; }
       .opt-price { font-size: 1.35rem; }
+      .tab { padding: 10px 14px; font-size: 0.9rem; }
+      .itin-day-head { align-items: flex-start; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <h1>서울 → 시카고 여행경비</h1>
+      <h1>서울 → 시카고 여행계획</h1>
       <p class="meta">
-        성인 2명 · 유소아 2명 (만 7·8세) · 동기화: 2026-08-07 11:13:15 KST · 3시간마다 자동 갱신
+        성인 2명 · 유소아 2명 (만 7·8세) · 동기화: 2026-08-07 11:14:37 KST · 3시간마다 자동 갱신
       </p>
       <nav class="tabs" role="tablist">
         <button class="tab active" role="tab" aria-selected="true" data-panel="dashboard">💰 여행경비</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="flights">✈️ 항공권</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="lodging">🏠 숙박</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="cars">🚗 렌트카</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="chi-plan">🗺️ 시카고 10일</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="east-plan">🗽 동부 3일</button>
       </nav>
     </header>
 
@@ -5450,6 +5488,310 @@
     
     </div>
 
+    <div id="chi-plan" class="panel" role="tabpanel">
+      <p class="meta">시카고 현지 10일 동선 · 대략 지출(항공·숙박·렌트 제외)</p>
+      
+    <section class="route-hero card itin-hero chi-itin-hero">
+      <div class="route-hero-copy">
+        <p class="route-kicker">CHICAGO · 10 DAYS</p>
+        <h2>시카고 10일 여행계획</h2>
+        <p class="muted">가족 4명(성인2·어린이2) · Hyde Park/UChicago 거점 · 대략 지출 포함</p>
+      </div>
+      <div class="route-stats">
+        <div class="route-stat">
+          <span class="muted">현지 활동비 합계(대략)</span>
+          <strong>₩3,700,000</strong>
+          <span class="muted">항공·숙박·렌트 제외 · 4명</span>
+        </div>
+      </div>
+    </section>
+    <p class="flight-hint muted">위 금액은 4명 기준 대략치(KRW)이며 시즌·환율·할인에 따라 달라집니다. 항공·숙박·렌트 총액은 다른 탭 선택값을 참고하세요.</p>
+    <div class="itin-stack">
+    <article class="itin-day ">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 1</span>
+        <h3>도착 · 시내 첫인상</h3>
+        <span class="itin-day-total">₩240,000</span>
+      </header>
+      <ul class="itin-places"><li>ORD 도착 · 숙소 체크인</li><li>Millennium Park · Cloud Gate</li><li>Michigan Avenue 산책</li></ul>
+      <p class="itin-tip">시차 적응 위주 · 가볍게 걷기</p>
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>시내 교통/우버</td><td class='price'>₩80,000</td></tr><tr><td>식사</td><td class='price'>₩120,000</td></tr><tr><td>간식·기타</td><td class='price'>₩40,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day ">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 2</span>
+        <h3>미술관 · 강변</h3>
+        <span class="itin-day-total">₩360,000</span>
+      </header>
+      <ul class="itin-places"><li>Art Institute of Chicago</li><li>Chicago Riverwalk</li><li>Navy Pier (야경)</li></ul>
+      <p class="itin-tip">미술관은 어린이 할인/무료 요일 확인</p>
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>미술관 입장(4명)</td><td class='price'>₩180,000</td></tr><tr><td>식사</td><td class='price'>₩130,000</td></tr><tr><td>교통</td><td class='price'>₩50,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day ">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 3</span>
+        <h3>박물관 캠퍼스</h3>
+        <span class="itin-day-total">₩510,000</span>
+      </header>
+      <ul class="itin-places"><li>Shedd Aquarium</li><li>Field Museum 또는 Adler Planetarium</li><li>Grant Park</li></ul>
+      <p class="itin-tip">CityPASS/박물관 콤보권 비교 추천</p>
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>수족관·박물관(4명)</td><td class='price'>₩320,000</td></tr><tr><td>식사</td><td class='price'>₩140,000</td></tr><tr><td>교통</td><td class='price'>₩50,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day ">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 4</span>
+        <h3>하이드파크 데이</h3>
+        <span class="itin-day-total">₩380,000</span>
+      </header>
+      <ul class="itin-places"><li>Museum of Science and Industry</li><li>University of Chicago 캠퍼스</li><li>Promontory Point</li></ul>
+      <p class="itin-tip">숙소 근처라 이동 부담 적음 · 아이 친화</p>
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>MSI 입장(4명)</td><td class='price'>₩200,000</td></tr><tr><td>식사</td><td class='price'>₩120,000</td></tr><tr><td>간식·기념품</td><td class='price'>₩60,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day ">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 5</span>
+        <h3>링컨파크 · 동물원</h3>
+        <span class="itin-day-total">₩230,000</span>
+      </header>
+      <ul class="itin-places"><li>Lincoln Park Zoo (무료)</li><li>Lincoln Park Conservatory</li><li>North Avenue Beach</li></ul>
+      <p class="itin-tip">무료 코스로 예산 절약 데이</p>
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>식사</td><td class='price'>₩130,000</td></tr><tr><td>교통</td><td class='price'>₩60,000</td></tr><tr><td>아이스크림·기타</td><td class='price'>₩40,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day ">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 6</span>
+        <h3>건축 크루즈 · 루프</h3>
+        <span class="itin-day-total">₩560,000</span>
+      </header>
+      <ul class="itin-places"><li>Architecture River Cruise</li><li>The Loop 워킹</li><li>Willis Tower Skydeck (선택)</li></ul>
+      <p class="itin-tip">크루즈는 주말 오전 예약 권장</p>
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>크루즈(4명)</td><td class='price'>₩220,000</td></tr><tr><td>스카이덱(선택)</td><td class='price'>₩180,000</td></tr><tr><td>식사·교통</td><td class='price'>₩160,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day ">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 7</span>
+        <h3>매그니피션트 마일</h3>
+        <span class="itin-day-total">₩510,000</span>
+      </header>
+      <ul class="itin-places"><li>360 CHICAGO / John Hancock</li><li>Water Tower · 쇼핑</li><li>American Girl / Lego Store</li></ul>
+      <p class="itin-tip">쇼핑·기념품은 예산 상한 정해두기</p>
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>전망대(4명)</td><td class='price'>₩160,000</td></tr><tr><td>식사</td><td class='price'>₩150,000</td></tr><tr><td>기념품·쇼핑</td><td class='price'>₩200,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day ">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 8</span>
+        <h3>근교 데이트립</h3>
+        <span class="itin-day-total">₩360,000</span>
+      </header>
+      <ul class="itin-places"><li>Oak Park (Frank Lloyd Wright) 또는</li><li>Suburban outlet / 지역 공원</li><li>저녁은 숙소 근처</li></ul>
+      <p class="itin-tip">렌트카 있으면 여유 · 대중교통도 가능</p>
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>유류/주차 또는 교통</td><td class='price'>₩100,000</td></tr><tr><td>입장·액티비티</td><td class='price'>₩120,000</td></tr><tr><td>식사</td><td class='price'>₩140,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day ">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 9</span>
+        <h3>여유 · 재방문</h3>
+        <span class="itin-day-total">₩280,000</span>
+      </header>
+      <ul class="itin-places"><li>좋아하는 장소 재방문</li><li>호숫가 피크닉</li><li>시카고 딥디시 피자</li></ul>
+      <p class="itin-tip">짐 정리·세탁 · 귀국 전 여유 일정</p>
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>식사(피자 포함)</td><td class='price'>₩160,000</td></tr><tr><td>교통</td><td class='price'>₩40,000</td></tr><tr><td>여유 예산</td><td class='price'>₩80,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day ">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 10</span>
+        <h3>출국 준비</h3>
+        <span class="itin-day-total">₩270,000</span>
+      </header>
+      <ul class="itin-places"><li>숙소 체크아웃</li><li>ORD 이동</li><li>공항 식사·쇼핑</li></ul>
+      <p class="itin-tip">공항 3시간 전 도착 권장 · 짐 여유</p>
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>공항 이동</td><td class='price'>₩100,000</td></tr><tr><td>공항 식사</td><td class='price'>₩120,000</td></tr><tr><td>잡비</td><td class='price'>₩50,000</td></tr></tbody>
+      </table>
+    </article></div>
+    
+    </div>
+
+    <div id="east-plan" class="panel" role="tabpanel">
+      <p class="meta">뉴욕 · 워싱턴 · 보스턴 각 3일 코스 · 대략 지출(도시 간 이동비 별도)</p>
+      
+    <section class="route-hero card itin-hero east-itin-hero">
+      <div class="route-hero-copy">
+        <p class="route-kicker">EAST COAST · 3 DAYS</p>
+        <h2>동부 3일 여행계획</h2>
+        <p class="muted">뉴욕 인 루트/별도 일정용 · 도시별 3일 코스 · 대략 지출 포함</p>
+      </div>
+      <div class="route-stats">
+        <div class="route-stat">
+          <span class="muted">도시 선택</span>
+          <strong>NYC · DC · BOS</strong>
+          <span class="muted">각 3일 코스</span>
+        </div>
+      </div>
+    </section>
+    <p class="flight-hint muted">동부 3일은 시카고와 별도 일정/연결 일정으로 쓰세요. NYC 입국 후 시카고로 이동하는 루트와 잘 맞습니다. 도시 간 이동(기차·항공) 비용은 별도입니다.</p>
+    <div class="route-switch east-switch" role="tablist"><button type="button" class="east-tab active" data-east="nyc" role="tab" aria-selected="true"><span class="route-tab-title">뉴욕 3일</span><span class="route-tab-sub">NYC 3일 · 약 ₩1,450,000</span></button><button type="button" class="east-tab " data-east="dc" role="tab" aria-selected="false"><span class="route-tab-title">워싱턴 3일</span><span class="route-tab-sub">DC 3일 · 약 ₩840,000</span></button><button type="button" class="east-tab " data-east="bos" role="tab" aria-selected="false"><span class="route-tab-title">보스턴 3일</span><span class="route-tab-sub">BOS 3일 · 약 ₩1,050,000</span></button></div>
+    
+        <div class="east-panel active" data-east-panel="nyc">
+          <p class="muted" style="margin:0 0 14px;">맨해튼 핵심 · 아이와 걷기 좋은 코스</p>
+          <div class="itin-stack">
+    <article class="itin-day east-nyc">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 1</span>
+        <h3>미드타운 · 센트럴파크</h3>
+        <span class="itin-day-total">₩380,000</span>
+      </header>
+      <ul class="itin-places"><li>Times Square</li><li>Rockefeller Center</li><li>Central Park · Zoo</li></ul>
+      
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>교통(MetroCard/우버)</td><td class='price'>₩80,000</td></tr><tr><td>식사</td><td class='price'>₩180,000</td></tr><tr><td>동물원·잡비</td><td class='price'>₩120,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day east-nyc">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 2</span>
+        <h3>박물관 · 5번가</h3>
+        <span class="itin-day-total">₩600,000</span>
+      </header>
+      <ul class="itin-places"><li>American Museum of Natural History 또는 MoMA</li><li>5th Avenue</li><li>Empire State (선택)</li></ul>
+      
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>박물관(4명)</td><td class='price'>₩220,000</td></tr><tr><td>식사</td><td class='price'>₩180,000</td></tr><tr><td>전망대(선택)</td><td class='price'>₩200,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day east-nyc">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 3</span>
+        <h3>다운타운 · 자유의 여신</h3>
+        <span class="itin-day-total">₩470,000</span>
+      </header>
+      <ul class="itin-places"><li>Statue of Cruise / Ferry</li><li>Wall Street · 9/11 Memorial</li><li>Brooklyn Bridge 산책</li></ul>
+      
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>페리·입장</td><td class='price'>₩200,000</td></tr><tr><td>식사</td><td class='price'>₩170,000</td></tr><tr><td>교통·기념품</td><td class='price'>₩100,000</td></tr></tbody>
+      </table>
+    </article></div>
+        </div>
+        <div class="east-panel " data-east-panel="dc">
+          <p class="muted" style="margin:0 0 14px;">내셔널몰 박물관이 대부분 무료 · 예산 친화</p>
+          <div class="itin-stack">
+    <article class="itin-day east-dc">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 1</span>
+        <h3>내셔널몰 입문</h3>
+        <span class="itin-day-total">₩260,000</span>
+      </header>
+      <ul class="itin-places"><li>National Mall</li><li>Lincoln Memorial</li><li>Washington Monument 주변</li></ul>
+      
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>교통</td><td class='price'>₩70,000</td></tr><tr><td>식사</td><td class='price'>₩150,000</td></tr><tr><td>간식·물</td><td class='price'>₩40,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day east-dc">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 2</span>
+        <h3>스미스소니언 데이</h3>
+        <span class="itin-day-total">₩300,000</span>
+      </header>
+      <ul class="itin-places"><li>Air and Space Museum</li><li>Natural History Museum</li><li>National Gallery (선택)</li></ul>
+      
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>식사</td><td class='price'>₩160,000</td></tr><tr><td>교통</td><td class='price'>₩60,000</td></tr><tr><td>기념품</td><td class='price'>₩80,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day east-dc">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 3</span>
+        <h3>국회 · 백악관 주변</h3>
+        <span class="itin-day-total">₩280,000</span>
+      </header>
+      <ul class="itin-places"><li>U.S. Capitol 외부</li><li>Library of Congress (선택)</li><li>White House 포토스팟</li></ul>
+      
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>식사</td><td class='price'>₩150,000</td></tr><tr><td>교통</td><td class='price'>₩60,000</td></tr><tr><td>여유 예산</td><td class='price'>₩70,000</td></tr></tbody>
+      </table>
+    </article></div>
+        </div>
+        <div class="east-panel " data-east-panel="bos">
+          <p class="muted" style="margin:0 0 14px;">프리덤 트레일 · 하버드 · 가족 걷기 코스</p>
+          <div class="itin-stack">
+    <article class="itin-day east-bos">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 1</span>
+        <h3>프리덤 트레일</h3>
+        <span class="itin-day-total">₩290,000</span>
+      </header>
+      <ul class="itin-places"><li>Boston Common</li><li>Freedom Trail 핵심 스팟</li><li>Quincy Market</li></ul>
+      
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>식사</td><td class='price'>₩160,000</td></tr><tr><td>교통</td><td class='price'>₩60,000</td></tr><tr><td>간식·기념품</td><td class='price'>₩70,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day east-bos">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 2</span>
+        <h3>캠브리지 · 하버드</h3>
+        <span class="itin-day-total">₩320,000</span>
+      </header>
+      <ul class="itin-places"><li>Harvard Yard</li><li>MIT 캠퍼스 포토</li><li>Charles River</li></ul>
+      
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>식사</td><td class='price'>₩150,000</td></tr><tr><td>교통</td><td class='price'>₩70,000</td></tr><tr><td>박물관(선택)</td><td class='price'>₩100,000</td></tr></tbody>
+      </table>
+    </article>
+    <article class="itin-day east-bos">
+      <header class="itin-day-head">
+        <span class="itin-day-num">Day 3</span>
+        <h3>항구 · 박물관</h3>
+        <span class="itin-day-total">₩440,000</span>
+      </header>
+      <ul class="itin-places"><li>New England Aquarium 또는 Museum of Science</li><li>Harborwalk</li><li>North End 이탈리안</li></ul>
+      
+      <table class="itin-spend">
+        <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
+        <tbody><tr><td>입장(4명)</td><td class='price'>₩200,000</td></tr><tr><td>식사</td><td class='price'>₩180,000</td></tr><tr><td>교통</td><td class='price'>₩60,000</td></tr></tbody>
+      </table>
+    </article></div>
+        </div>
+    
+    </div>
+
     <footer>
       <a href="https://www.skyscanner.co.kr/" target="_blank">Skyscanner</a> ·
       <a href="https://www.kayak.co.kr/" target="_blank">KAYAK</a> ·
@@ -5760,7 +6102,24 @@
       btn.addEventListener('click', () => showRoute(btn.dataset.route));
     });
 
-    const hashPanel = { '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging', '#cars': 'cars' }[location.hash];
+    function showEast(city) {
+      document.querySelectorAll('.east-tab').forEach(b => {
+        const on = b.dataset.east === city;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      document.querySelectorAll('.east-panel').forEach(p => {
+        p.classList.toggle('active', p.dataset.eastPanel === city);
+      });
+    }
+    document.querySelectorAll('.east-tab').forEach(btn => {
+      btn.addEventListener('click', () => showEast(btn.dataset.east));
+    });
+
+    const hashPanel = {
+      '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging', '#cars': 'cars',
+      '#chi-plan': 'chi-plan', '#east-plan': 'east-plan'
+    }[location.hash];
     if (hashPanel) document.querySelector(`[data-panel="${hashPanel}"]`).click();
 
     initBudget();

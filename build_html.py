@@ -7,6 +7,8 @@ import json
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
+import itinerary_plans
+
 ROOT = Path(__file__).resolve().parent
 REFRESH_HOURS = 3
 REFRESH_SECONDS = REFRESH_HOURS * 3600
@@ -759,6 +761,8 @@ def render_page(
     flights_html: str,
     lodging_html: str,
     cars_html: str,
+    chicago_plan_html: str,
+    east_plan_html: str,
     dashboard_html: str,
     trip_data: dict,
     now_kst: str,
@@ -770,7 +774,7 @@ def render_page(
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="refresh" content="{REFRESH_SECONDS}">
-  <title>서울→시카고 여행경비 | 항공권 · 숙박 · 대시보드</title>
+  <title>서울→시카고 여행계획 | 항공 · 숙박 · 렌트 · 일정</title>
   <style>
     :root {{
       --sky: #0770e3; --kayak: #ff690f; --google: #1a73e8;
@@ -930,6 +934,40 @@ def render_page(
       background: #eef2ff; color: #3730a3; border-radius: 999px;
       padding: 4px 9px; font-size: 0.72rem; font-weight: 700;
     }}
+    .itin-hero.chi-itin-hero {{
+      background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 55%, #0ea5e9 100%);
+    }}
+    .itin-hero.east-itin-hero {{
+      background: linear-gradient(135deg, #3b0764 0%, #6d28d9 50%, #a78bfa 100%);
+    }}
+    .itin-stack {{ display: grid; gap: 14px; }}
+    .itin-day {{
+      background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px;
+      box-shadow: 0 4px 14px rgba(24,33,50,.04);
+    }}
+    .itin-day-head {{
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 10px;
+    }}
+    .itin-day-num {{
+      background: #0ea5e9; color: #fff; font-size: 0.75rem; font-weight: 800;
+      border-radius: 999px; padding: 4px 10px;
+    }}
+    .east-nyc .itin-day-num {{ background: #4f46e5; }}
+    .east-dc .itin-day-num {{ background: #b45309; }}
+    .east-bos .itin-day-num {{ background: #047857; }}
+    .itin-day-head h3 {{ margin: 0; flex: 1; font-size: 1.1rem; }}
+    .itin-day-total {{ font-weight: 800; color: var(--budget); white-space: nowrap; }}
+    .itin-places {{ margin: 0 0 10px; padding-left: 18px; color: #334155; line-height: 1.5; }}
+    .itin-tip {{
+      margin: 0 0 10px; padding: 8px 12px; background: #f8fafc; border-radius: 10px;
+      color: var(--muted); font-size: 0.85rem;
+    }}
+    .itin-spend {{ width: 100%; border-collapse: collapse; font-size: 0.86rem; min-width: 0 !important; }}
+    .itin-spend th, .itin-spend td {{ padding: 8px 6px; border-bottom: 1px solid #eef2f7; text-align: left; }}
+    .itin-spend th {{ background: transparent; color: var(--muted); font-size: 0.75rem; }}
+    .east-panel {{ display: none; }}
+    .east-panel.active {{ display: block; }}
+    .east-switch {{ margin-bottom: 16px; }}
     .dashboard-hero {{ background: linear-gradient(135deg, #0d7a5f 0%, #0a5c48 100%); color: #fff; }}
     .dashboard-hero .muted {{ color: rgba(255,255,255,.78); }}
     .dash-hero-inner {{ display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; }}
@@ -1004,16 +1042,18 @@ def render_page(
       .cta-btn {{ padding: 6px 10px; }}
       .breakdown-wrap {{ grid-template-columns: 1fr; }}
       .total-price {{ font-size: 2rem; }}
-      .route-switch, .opt-grid, .car-grid {{ grid-template-columns: 1fr; }}
+      .route-switch, .opt-grid, .car-grid, .east-switch {{ grid-template-columns: 1fr; }}
       .route-hero {{ padding: 18px; }}
       .opt-price {{ font-size: 1.35rem; }}
+      .tab {{ padding: 10px 14px; font-size: 0.9rem; }}
+      .itin-day-head {{ align-items: flex-start; }}
     }}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <h1>서울 → 시카고 여행경비</h1>
+      <h1>서울 → 시카고 여행계획</h1>
       <p class="meta">
         성인 {ADULTS}명 · 유소아 {len(CHILD_AGES)}명 (만 {CHILD_AGES[0]}·{CHILD_AGES[1]}세) · 동기화: {now_kst} · {REFRESH_HOURS}시간마다 자동 갱신
       </p>
@@ -1022,6 +1062,8 @@ def render_page(
         <button class="tab" role="tab" aria-selected="false" data-panel="flights">✈️ 항공권</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="lodging">🏠 숙박</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="cars">🚗 렌트카</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="chi-plan">🗺️ 시카고 10일</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="east-plan">🗽 동부 3일</button>
       </nav>
     </header>
 
@@ -1043,6 +1085,16 @@ def render_page(
     <div id="cars" class="panel" role="tabpanel">
       <p class="meta">인수 {CAR_PICKUP} · 반납 10/8~10/13 · ORD(오헤어) · 차종·옵션 비교</p>
       {cars_html}
+    </div>
+
+    <div id="chi-plan" class="panel" role="tabpanel">
+      <p class="meta">시카고 현지 10일 동선 · 대략 지출(항공·숙박·렌트 제외)</p>
+      {chicago_plan_html}
+    </div>
+
+    <div id="east-plan" class="panel" role="tabpanel">
+      <p class="meta">뉴욕 · 워싱턴 · 보스턴 각 3일 코스 · 대략 지출(도시 간 이동비 별도)</p>
+      {east_plan_html}
     </div>
 
     <footer>
@@ -1355,7 +1407,24 @@ def render_page(
       btn.addEventListener('click', () => showRoute(btn.dataset.route));
     }});
 
-    const hashPanel = {{ '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging', '#cars': 'cars' }}[location.hash];
+    function showEast(city) {{
+      document.querySelectorAll('.east-tab').forEach(b => {{
+        const on = b.dataset.east === city;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      }});
+      document.querySelectorAll('.east-panel').forEach(p => {{
+        p.classList.toggle('active', p.dataset.eastPanel === city);
+      }});
+    }}
+    document.querySelectorAll('.east-tab').forEach(btn => {{
+      btn.addEventListener('click', () => showEast(btn.dataset.east));
+    }});
+
+    const hashPanel = {{
+      '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging', '#cars': 'cars',
+      '#chi-plan': 'chi-plan', '#east-plan': 'east-plan'
+    }}[location.hash];
     if (hashPanel) document.querySelector(`[data-panel="${{hashPanel}}"]`).click();
 
     initBudget();
@@ -1377,9 +1446,20 @@ def main() -> None:
     flights_html = render_flights(chi_days, nyc_days)
     lodging_html = render_lodging(airbnb_all, airbnb)
     cars_html = render_cars(car_days)
+    chicago_plan_html = itinerary_plans.render_chicago_plan()
+    east_plan_html = itinerary_plans.render_east_plan()
     combo_html = render_combo_analysis(trip_data.get("combos", []))
     dashboard_html = render_dashboard_shell(combo_html)
-    page = render_page(flights_html, lodging_html, cars_html, dashboard_html, trip_data, now_kst)
+    page = render_page(
+        flights_html,
+        lodging_html,
+        cars_html,
+        chicago_plan_html,
+        east_plan_html,
+        dashboard_html,
+        trip_data,
+        now_kst,
+    )
     HTML.write_text(page, encoding="utf-8")
     INDEX_HTML.write_text(page, encoding="utf-8")
     DOCS_INDEX.parent.mkdir(parents=True, exist_ok=True)
