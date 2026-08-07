@@ -1,5 +1,26 @@
 [
   {
+    "checkin": "2026-09-27",
+    "checkout_date": "2026-10-09",
+    "nights": 12,
+    "price": 3834742,
+    "price_text": "₩3,834,742",
+    "title": "Sleek Apt near U of Chicago!",
+    "location_text": "6115 South Langley Avenue, Chicago, IL 60637",
+    "distance_text": "시카고대 인근 (Woodlawn · Langley Ave)",
+    "distance_km": null,
+    "amenities_text": "주방 · 집 전체 · 예약완료",
+    "room_id": "booked-hmyaxc5we",
+    "seller_url": "https://www.airbnb.co.kr/trips/v1",
+    "host": "James",
+    "address": "6115 South Langley Avenue, 1R, Chicago, IL 60637",
+    "reservation_code": "HMYNAXC5WE",
+    "checkin_time": "오후 4:00",
+    "checkout_time": "오전 11:00",
+    "booked": true,
+    "synced_at": "2026-08-07T21:38:11+09:00"
+  },
+  {
     "checkin": "2026-09-26",
     "checkout_date": "2026-10-08",
     "nights": 12,

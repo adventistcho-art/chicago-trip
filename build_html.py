@@ -34,7 +34,9 @@ ADULTS = 2
 CHILD_AGES = [7, 8]
 OUTBOUND = "2026-09-24"
 CHECKIN = "2026-09-26"
-LODGING_NOTE = "9/24 오전 출발 · Airbnb 9/26부터"
+BOOKED_CHECKIN = "2026-09-27"
+BOOKED_CHECKOUT = "2026-10-09"
+LODGING_NOTE = "9/24 오전 출발 · 숙소 예약완료 9/27~10/9"
 GUESTS = ADULTS + len(CHILD_AGES)
 
 FLIGHT_KIND_META = {
@@ -263,13 +265,15 @@ def flight_pick_cell(source: str, ret: str, row: dict | None, cheapest: int | No
 
 def lodging_pick_cell(a: dict, is_best: bool) -> str:
     lid = lodging_id(a)
+    label = "예약" if a.get("booked") else ("★" if is_best else "선택")
+    checked = " checked" if a.get("booked") else ""
     return f"""
           <td>
             <label class="pick-label lodging-pick-label">
               <input type="radio" name="lodging-pick" class="lodging-pick" value="{lid}"
                 data-checkout="{a['checkout_date']}"
-                data-price="{a.get('price', 0)}" data-nights="{a.get('nights', 0)}">
-              <span>{'★' if is_best else '선택'}</span>
+                data-price="{a.get('price', 0)}" data-nights="{a.get('nights', 0)}"{checked}>
+              <span>{label}</span>
             </label>
           </td>"""
 
@@ -320,7 +324,11 @@ def build_trip_data(
     cars = flatten_cars(car_days or [])
 
     lodging = []
-    for a in sorted(airbnb_all, key=lambda x: (x.get("checkout_date", ""), x.get("price") or 10**12)):
+    booked_row_raw = next((a for a in airbnb_all if a.get("booked")), None)
+    for a in sorted(
+        airbnb_all,
+        key=lambda x: (0 if x.get("booked") else 1, x.get("checkout_date", ""), x.get("price") or 10**12),
+    ):
         lodging.append(
             {
                 "id": lodging_id(a),
@@ -332,6 +340,10 @@ def build_trip_data(
                 "title": a.get("title", ""),
                 "distance_text": a.get("distance_text", ""),
                 "seller_url": a.get("seller_url", ""),
+                "booked": bool(a.get("booked")),
+                "reservation_code": a.get("reservation_code", ""),
+                "host": a.get("host", ""),
+                "address": a.get("address", ""),
             }
         )
 
@@ -342,9 +354,26 @@ def build_trip_data(
         if cheapest_rows and row["id"] == lodging_id(cheapest_rows[0]):
             best_lodging = row
             break
+    booked_lodging = next((l for l in lodging if l.get("booked")), None)
+    if booked_lodging:
+        best_lodging = booked_lodging
     combos = analyze_combos(flights, airbnb)
     recommended = combos[0] if combos else None
-    if recommended:
+    if booked_lodging:
+        best_lodging_id = booked_lodging["id"]
+        best_flight_id = recommended["flight_id"] if recommended else (best_flight["id"] if best_flight else None)
+        if best_flight and booked_lodging["checkout_date"]:
+            matched_flight = next(
+                (
+                    f
+                    for f in flights
+                    if f["return_date"] == booked_lodging["checkout_date"] and f.get("kind") == "cheapest"
+                ),
+                None,
+            )
+            if matched_flight:
+                best_flight_id = matched_flight["id"]
+    elif recommended:
         best_flight_id = recommended["flight_id"]
         best_lodging_id = recommended.get("lodging_id") or recommended["lodging_checkout"]
     else:
@@ -372,8 +401,9 @@ def build_trip_data(
 
     return {
         "outbound": OUTBOUND,
-        "checkin": CHECKIN,
+        "checkin": (booked_row_raw or {}).get("checkin") or CHECKIN,
         "lodging_note": LODGING_NOTE,
+        "booked_lodging_id": booked_lodging["id"] if booked_lodging else None,
         "guests": GUESTS,
         "adults": ADULTS,
         "child_ages": CHILD_AGES,
@@ -846,13 +876,19 @@ def render_cars(car_days: list[dict]) -> str:
 
 
 def render_lodging(airbnb_all: list[dict], airbnb: dict[str, dict]) -> str:
-    merged = sorted(airbnb_all, key=lambda x: (x.get("checkout_date", ""), x.get("price") or 10**12))
+    booked = next((a for a in airbnb_all if a.get("booked")), None)
+    merged = sorted(
+        airbnb_all,
+        key=lambda x: (0 if x.get("booked") else 1, x.get("checkout_date", ""), x.get("price") or 10**12),
+    )
     cheapest_by_date = {co: row.get("price") for co, row in airbnb.items()}
     checkins = sorted({a.get("checkin") or CHECKIN for a in airbnb_all}) or [CHECKIN]
     checkouts = sorted({a["checkout_date"] for a in airbnb_all})
-    best = airbnb.get(checkouts[0] if checkouts else "") or (
+    best = booked or airbnb.get(checkouts[0] if checkouts else "") or (
         sorted(airbnb.values(), key=lambda x: x.get("price") or 10**12)[0] if airbnb else None
     )
+    start_sel = (booked.get("checkin") if booked else None) or checkins[0]
+    end_sel = (booked.get("checkout_date") if booked else None) or (checkouts[0] if checkouts else None)
 
     date_bar = render_date_filter(
         prefix="lodging",
@@ -862,41 +898,71 @@ def render_lodging(airbnb_all: list[dict], airbnb: dict[str, dict]) -> str:
         end_label="체크아웃",
         start_dates=checkins,
         end_dates=checkouts,
-        start_selected=checkins[0],
-        end_selected=checkouts[0] if checkouts else None,
+        start_selected=start_sel,
+        end_selected=end_sel,
         note="체크인·체크아웃을 고르면 해당 기간 숙소만 표시됩니다. (인원 4명 고정)",
     )
 
     hero = ""
     if best:
+        if booked and best is booked:
+            hero_title = "✅ 예약 완료 숙소"
+            hero_dates = (
+                f"체크인 {booked.get('checkin')} {booked.get('checkin_time','')} · "
+                f"체크아웃 {booked['checkout_date']} {booked.get('checkout_time','')} · "
+                f"{booked.get('nights','')}박"
+            )
+            hero_meta = (
+                f"호스트 {booked.get('host','')} · 예약코드 {booked.get('reservation_code','')} · "
+                f"{booked.get('address') or booked.get('location_text','')}"
+            )
+            hero_note = "여행경비 탭에 이 숙소가 기본 선택되어 있습니다."
+        else:
+            hero_title = "숙박 후보 (Airbnb 검색 · 주방·집 전체)"
+            hero_dates = (
+                f"체크인 {best.get('checkin') or CHECKIN} · 체크아웃 {best['checkout_date']} · "
+                f"{best.get('nights','')}박 · 해당일 최저"
+            )
+            hero_meta = f"{best.get('distance_text','')} · {best.get('amenities_text','')}"
+            hero_note = "아래 표 · ○ 선택으로 여행경비에 반영"
         hero = f"""
         <section class="hero card" id="lodging-hero">
-          <h2>숙박 후보 (Airbnb 검색 · 주방·집 전체)</h2>
+          <h2 id="lodging-hero-heading">{hero_title}</h2>
           <p class="hero-price" id="lodging-hero-price" style="color:var(--airbnb)">{best['price_text']}</p>
-          <p id="lodging-hero-dates">체크인 {best.get('checkin') or CHECKIN} · 체크아웃 {best['checkout_date']} · {best.get('nights','')}박 · 해당일 최저</p>
+          <p id="lodging-hero-dates">{hero_dates}</p>
           <p id="lodging-hero-title">{best.get('title','')}</p>
-          <p id="lodging-hero-meta">{best.get('distance_text','')} · {best.get('amenities_text','')}</p>
+          <p id="lodging-hero-meta">{hero_meta}</p>
           <span id="lodging-hero-cta">{BTN.format(url=best['seller_url'])}</span>
-          <p class="muted" style="margin-top:10px;">아래 표 · ○ 선택으로 여행경비에 반영</p>
+          <p class="muted" style="margin-top:10px;" id="lodging-hero-note">{hero_note}</p>
         </section>"""
 
     rows = []
     for a in merged:
         co = a["checkout_date"]
         ci = a.get("checkin") or CHECKIN
-        is_best = a.get("price") == cheapest_by_date.get(co)
-        row_cls = "best" if is_best else ""
+        is_booked = bool(a.get("booked"))
+        is_best = is_booked or a.get("price") == cheapest_by_date.get(co)
+        row_cls = "best booked-row" if is_booked else ("best" if is_best else "")
         lid = lodging_id(a)
+        title_extra = ""
+        if is_booked:
+            title_extra = (
+                f"<br><span class=\"pill booked-pill\">예약완료 · {a.get('reservation_code','')}</span>"
+                f"<br><span class=\"muted\">{a.get('address') or a.get('location_text','')}</span>"
+            )
+        else:
+            title_extra = f"<br><span class=\"muted\">{a.get('location_text','')}</span>"
         rows.append(f"""
         <tr class="{row_cls}" data-checkout="{co}" data-checkin="{ci}" data-lodging-id="{lid}"
             data-price="{a.get('price') or 0}" data-price-text="{a.get('price_text','')}"
             data-title="{a.get('title','')}" data-distance="{a.get('distance_text','')}"
             data-amenities="{a.get('amenities_text','')}" data-nights="{a.get('nights','')}"
-            data-url="{a.get('seller_url','#')}">
-          {lodging_pick_cell(a, is_best)}
-          <td>{co}<br><span class="muted">{a.get('nights','')}박</span></td>
-          <td class="price airbnb{price_cls(a.get('price'), cheapest_by_date.get(co) if is_best else None)}">{a['price_text']}</td>
-          <td>{a.get('title','-')}<br><span class="muted">{a.get('location_text','')}</span></td>
+            data-url="{a.get('seller_url','#')}" data-booked="{'1' if is_booked else '0'}">
+          {lodging_pick_cell(a, is_booked or is_best)}
+          <td>{co}<br><span class="muted">{a.get('nights','')}박</span>
+            {"<br><span class='muted'>체크인 " + ci + "</span>" if is_booked else ""}</td>
+          <td class="price airbnb{price_cls(a.get('price'), a.get('price') if is_booked else (cheapest_by_date.get(co) if is_best else None))}">{a['price_text']}</td>
+          <td>{a.get('title','-')}{title_extra}</td>
           <td><strong>{a.get('distance_text','-')}</strong></td>
           <td>{a.get('amenities_text','-')}</td>
           <td>{BTN.format(url=a['seller_url'])}</td>
@@ -1348,6 +1414,11 @@ def render_page(
     th.airbnb {{ color: var(--airbnb); border-top: 3px solid var(--airbnb); }}
     tr.best {{ background: var(--best); }}
     tr.picked-row {{ background: var(--picked) !important; }}
+    tr.booked-row {{ outline: 2px solid var(--airbnb); outline-offset: -2px; }}
+    .booked-pill {{
+      display: inline-block; margin-top: 4px; padding: 2px 8px; border-radius: 999px;
+      background: #ffe8ee; color: var(--airbnb); font-size: 0.75rem; font-weight: 700;
+    }}
     .price {{ font-weight: 700; }}
     .price.sky {{ color: var(--sky); }}
     .price.kayak {{ color: var(--kayak); }}
@@ -1450,7 +1521,7 @@ def render_page(
   <script id="trip-data" type="application/json">{trip_json}</script>
   <script>
     const TRIP = JSON.parse(document.getElementById('trip-data').textContent);
-    const STORE_KEY = 'chicago-trip-budget-v6';
+    const STORE_KEY = 'chicago-trip-budget-v7';
     const DATE_OPTS = TRIP.date_options || {{}};
 
     const fmt = n => '₩' + Math.round(n || 0).toLocaleString('ko-KR');
@@ -1478,16 +1549,23 @@ def render_page(
       return arr[0] || '';
     }}
 
+    function getBookedLodging() {{
+      return (TRIP.lodging || []).find(l => l.booked) || findLodging(TRIP.booked_lodging_id);
+    }}
+
     function getTripDates() {{
       const saved = loadState();
       const rec = TRIP.recommended?.return_date;
+      const booked = getBookedLodging();
+      const preferCheckout = booked?.checkout_date || saved.checkout || rec;
+      const preferReturn = booked?.checkout_date || saved.returnDate || rec || TRIP.outbound;
       return {{
         outbound: firstAvailable(DATE_OPTS.outbound, saved.outbound || TRIP.outbound),
-        returnDate: firstAvailable(DATE_OPTS.return, saved.returnDate || rec || TRIP.outbound),
-        checkin: firstAvailable(DATE_OPTS.checkin, saved.checkin || TRIP.checkin),
-        checkout: firstAvailable(DATE_OPTS.checkout, saved.checkout || rec),
+        returnDate: firstAvailable(DATE_OPTS.return, preferReturn),
+        checkin: firstAvailable(DATE_OPTS.checkin, booked?.checkin_date || saved.checkin || TRIP.checkin),
+        checkout: firstAvailable(DATE_OPTS.checkout, preferCheckout),
         pickup: firstAvailable(DATE_OPTS.pickup, saved.pickup || TRIP.car_pickup),
-        dropoff: firstAvailable(DATE_OPTS.dropoff, saved.dropoff || rec),
+        dropoff: firstAvailable(DATE_OPTS.dropoff, booked?.checkout_date || saved.dropoff || rec),
       }};
     }}
 
@@ -1530,16 +1608,27 @@ def render_page(
         return;
       }}
       hero.hidden = false;
-      const best = rows.reduce((a, b) => (Number(a.dataset.price) <= Number(b.dataset.price) ? a : b));
+      const bookedRow = rows.find(tr => tr.dataset.booked === '1');
+      const best = bookedRow || rows.reduce((a, b) => (Number(a.dataset.price) <= Number(b.dataset.price) ? a : b));
       const priceEl = document.getElementById('lodging-hero-price');
       const datesEl = document.getElementById('lodging-hero-dates');
       const titleEl = document.getElementById('lodging-hero-title');
       const metaEl = document.getElementById('lodging-hero-meta');
       const ctaEl = document.getElementById('lodging-hero-cta');
+      const headingEl = document.getElementById('lodging-hero-heading');
+      const noteEl = document.getElementById('lodging-hero-note');
       if (priceEl) priceEl.textContent = best.dataset.priceText || fmt(Number(best.dataset.price));
-      if (datesEl) datesEl.textContent = `체크인 ${{checkin}} · 체크아웃 ${{checkout}} · ${{best.dataset.nights || ''}}박 · 해당일 최저`;
+      if (datesEl) {{
+        datesEl.textContent = bookedRow
+          ? `체크인 ${{checkin}} · 체크아웃 ${{checkout}} · ${{best.dataset.nights || ''}}박 · 예약완료`
+          : `체크인 ${{checkin}} · 체크아웃 ${{checkout}} · ${{best.dataset.nights || ''}}박 · 해당일 최저`;
+      }}
       if (titleEl) titleEl.textContent = best.dataset.title || '';
       if (metaEl) metaEl.textContent = `${{best.dataset.distance || ''}} · ${{best.dataset.amenities || ''}}`;
+      if (headingEl) headingEl.textContent = bookedRow ? '✅ 예약 완료 숙소' : '숙박 후보 (Airbnb 검색 · 주방·집 전체)';
+      if (noteEl) noteEl.textContent = bookedRow
+        ? '여행경비 탭에 이 숙소가 기본 선택되어 있습니다.'
+        : '아래 표 · ○ 선택으로 여행경비에 반영';
       if (ctaEl) {{
         ctaEl.innerHTML = `<a class="cta-link" href="${{best.dataset.url || '#'}}" target="_blank" rel="noopener noreferrer"><button type="button" class="cta-btn">선택하기</button></a>`;
       }}
@@ -1744,9 +1833,10 @@ def render_page(
       const pickedCar = findCar(carId);
       return {{
         flightId,
-        lodgingCheckout: findLodging(saved.lodgingCheckout)
-          ? saved.lodgingCheckout
-          : (TRIP.best_lodging_id || TRIP.best_lodging_checkout),
+        lodgingCheckout: TRIP.booked_lodging_id
+          || (findLodging(saved.lodgingCheckout)
+            ? saved.lodgingCheckout
+            : (TRIP.best_lodging_id || TRIP.best_lodging_checkout)),
         carId,
         foodPerDay: saved.foodPerDay ?? d.food_per_day,
         car: saved.car ?? (pickedCar ? pickedCar.price : d.car_rental),
