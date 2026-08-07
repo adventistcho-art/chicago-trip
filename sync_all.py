@@ -258,8 +258,15 @@ def run_sync() -> int:
                 for ret in RETURN_DATES
             ]
 
-            log("[Airbnb]")
-            airbnb_rows = [scrape_airbnb(page, entry) for entry in airbnb_prev]
+            log("[Airbnb — 검색 최저가]")
+            from airbnb_search import CHECKOUT_DATES as AIRBNB_CHECKOUTS, find_cheapest
+
+            airbnb_rows = []
+            for checkout in AIRBNB_CHECKOUTS:
+                row = find_cheapest(page, CHECKIN, checkout)
+                if row:
+                    airbnb_rows.append(row)
+                    log(f"  {checkout}: {row['price_text']} · {row['title'][:40]}")
 
             context.close()
     except Exception as exc:

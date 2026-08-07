@@ -1,0 +1,68 @@
+[
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-08",
+    "price": 6408000,
+    "price_text": "₩6,408,000",
+    "duration_text": "16시간 21분 / 34시간 25분",
+    "stops_text": "1회 경유 / 1회 경유",
+    "carrier_text": "에어캐나다",
+    "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-08/2adults/children-7-8?sort=price_a",
+    "synced_at": "2026-07-25T12:49:00+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-09",
+    "price": 7555200,
+    "price_text": "₩7,555,200",
+    "duration_text": "21시간 20분 / 20시간 30분",
+    "stops_text": "1회 경유 / 1회 경유",
+    "carrier_text": "에바항공",
+    "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-09/2adults/children-7-8?sort=price_a",
+    "synced_at": "2026-07-25T12:49:00+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-10",
+    "price": 8220200,
+    "price_text": "₩8,220,200",
+    "duration_text": "21시간 20분 / 20시간 30분",
+    "stops_text": "1회 경유 / 1회 경유",
+    "carrier_text": "에바항공",
+    "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-10/2adults/children-7-8?sort=price_a",
+    "synced_at": "2026-07-25T12:49:00+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-11",
+    "price": 7490600,
+    "price_text": "₩7,490,600",
+    "duration_text": "22시간 29분 / 20시간 31분",
+    "stops_text": "1회 경유 / 1회 경유",
+    "carrier_text": "아시아나항공, 델타항공",
+    "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-11/2adults/children-7-8?sort=price_a",
+    "synced_at": "2026-07-25T12:49:00+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-12",
+    "price": 7555200,
+    "price_text": "₩7,555,200",
+    "duration_text": "21시간 20분 / 28시간 15분",
+    "stops_text": "1회 경유 / 1회 경유",
+    "carrier_text": "에바항공",
+    "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-12/2adults/children-7-8?sort=price_a",
+    "synced_at": "2026-07-25T12:49:00+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-13",
+    "price": 7490600,
+    "price_text": "₩7,490,600",
+    "duration_text": "22시간 29분 / 18시간 18분",
+    "stops_text": "1회 경유 / 1회 경유",
+    "carrier_text": "항공사 조합",
+    "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-13/2adults/children-7-8?sort=price_a",
+    "synced_at": "2026-07-25T12:49:00+09:00"
+  }
+]

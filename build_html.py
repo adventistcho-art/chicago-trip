@@ -23,7 +23,7 @@ ROUTE_NYC_FILE = ROOT / "route_nyc_in_chi_out.json"
 CAR_FILE = ROOT / "car_rental_data.json"
 CAR_COMPARE_FILE = ROOT / "car_compare_data.json"
 AIRBNB_LODGING = ROOT / "airbnb_lodging_data.json"
-CAR_PICKUP = "2026-09-23"
+CAR_PICKUP = "2026-09-24"
 CAR_SOURCE_META = {
     "discover": {"label": "DiscoverCars", "color": "#1f6feb", "css": "discover"},
     "rentalcars": {"label": "Rentalcars.com", "color": "#0d9488", "css": "rentalcars"},
@@ -32,9 +32,9 @@ CAR_SOURCE_META = {
 
 ADULTS = 2
 CHILD_AGES = [7, 8]
-OUTBOUND = "2026-09-23"
+OUTBOUND = "2026-09-24"
 CHECKIN = "2026-09-26"
-LODGING_NOTE = "9/23 도착 · Airbnb 9/26부터"
+LODGING_NOTE = "9/24 오전 출발 · Airbnb 9/26부터"
 GUESTS = ADULTS + len(CHILD_AGES)
 
 FLIGHT_KIND_META = {

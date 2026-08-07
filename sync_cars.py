@@ -15,7 +15,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parent
 OUT_FILE = ROOT / "car_rental_data.json"
 USER_DATA_DIR = ROOT / ".browser_profile_capture"
-PICKUP = "2026-09-23"
+PICKUP = "2026-09-24"
 DROPOFF_DATES = [
     "2026-10-08",
     "2026-10-09",

@@ -1,6 +1,6 @@
 [
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-08",
     "route": "nyc_in",
     "route_label": "뉴욕 인 · 시카고 아웃",
@@ -15,7 +15,7 @@
       "stops_text": "직항 / 1회 경유",
       "carrier_text": "아시아나항공, 아메리칸항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-08/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-08/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:06:15+09:00"
     },
     "shortest": {
@@ -29,13 +29,13 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "델타항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-08/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-08/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:06:22+09:00"
     },
     "cheap_under_17h": []
   },
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-09",
     "route": "nyc_in",
     "route_label": "뉴욕 인 · 시카고 아웃",
@@ -50,7 +50,7 @@
       "stops_text": "직항 / 1회 경유",
       "carrier_text": "아시아나항공, 유나이티드항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-09/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-09/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:06:30+09:00"
     },
     "shortest": {
@@ -64,13 +64,13 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "델타항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-09/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-09/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:06:36+09:00"
     },
     "cheap_under_17h": []
   },
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-10",
     "route": "nyc_in",
     "route_label": "뉴욕 인 · 시카고 아웃",
@@ -85,7 +85,7 @@
       "stops_text": "2회 경유 / 1회 경유",
       "carrier_text": "에어캐나다",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-10/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-10/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:06:47+09:00"
     },
     "shortest": {
@@ -99,13 +99,13 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "대한항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-10/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-10/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:06:53+09:00"
     },
     "cheap_under_17h": []
   },
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-11",
     "route": "nyc_in",
     "route_label": "뉴욕 인 · 시카고 아웃",
@@ -120,7 +120,7 @@
       "stops_text": "직항 / 1회 경유",
       "carrier_text": "아시아나항공, 아메리칸항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-11/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-11/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:06:57+09:00"
     },
     "shortest": {
@@ -134,13 +134,13 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "델타항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-11/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-11/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:07:03+09:00"
     },
     "cheap_under_17h": []
   },
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-12",
     "route": "nyc_in",
     "route_label": "뉴욕 인 · 시카고 아웃",
@@ -155,7 +155,7 @@
       "stops_text": "직항 / 1회 경유",
       "carrier_text": "아시아나항공, 아메리칸항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-12/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-12/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:07:11+09:00"
     },
     "shortest": {
@@ -169,13 +169,13 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "대한항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-12/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-12/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:07:27+09:00"
     },
     "cheap_under_17h": []
   },
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-13",
     "route": "nyc_in",
     "route_label": "뉴욕 인 · 시카고 아웃",
@@ -190,7 +190,7 @@
       "stops_text": "직항 / 1회 경유",
       "carrier_text": "아시아나항공, 유나이티드항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-13/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-13/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:07:34+09:00"
     },
     "shortest": {
@@ -204,7 +204,7 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "대한항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-23/ORD-SEL/2026-10-13/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-NYC/2026-09-24/ORD-SEL/2026-10-13/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:07:41+09:00"
     },
     "cheap_under_17h": []

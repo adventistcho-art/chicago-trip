@@ -1,0 +1,68 @@
+[
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-08",
+    "price": 6541800,
+    "price_text": "₩6,541,800",
+    "duration_text": "16시간 21분 / 34시간 25분",
+    "stops_text": "경유 1회 / 경유 1회",
+    "carrier_text": "에어캐나다, 유나이티드항공",
+    "seller_url": "https://www.google.com/travel/flights/search?q=Seoul%20to%20Chicago%20O%27Hare%202026-09-24%20return%202026-10-08%20adults%202%20children%202&hl=ko",
+    "synced_at": "2026-08-07T18:16:39+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-09",
+    "price": 6804400,
+    "price_text": "₩6,804,400",
+    "duration_text": "18시간 25분 / 19시간 20분",
+    "stops_text": "경유 1회 / 경유 1회",
+    "carrier_text": "아시아나항공, 유나이티드항공",
+    "seller_url": "https://www.google.com/travel/flights/search?q=Seoul%20to%20Chicago%20O%27Hare%202026-09-24%20return%202026-10-09%20adults%202%20children%202&hl=ko",
+    "synced_at": "2026-08-07T18:16:48+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-10",
+    "price": 6937800,
+    "price_text": "₩6,937,800",
+    "duration_text": "18시간 25분 / 19시간 20분",
+    "stops_text": "경유 1회 / 경유 1회",
+    "carrier_text": "아시아나항공, 유나이티드항공",
+    "seller_url": "https://www.google.com/travel/flights/search?q=Seoul%20to%20Chicago%20O%27Hare%202026-09-24%20return%202026-10-10%20adults%202%20children%202&hl=ko",
+    "synced_at": "2026-08-07T18:16:57+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-11",
+    "price": 6937800,
+    "price_text": "₩6,937,800",
+    "duration_text": "21시간 20분 / 20시간 30분",
+    "stops_text": "경유 1회 / 경유 1회",
+    "carrier_text": "에바항공",
+    "seller_url": "https://www.google.com/travel/flights/search?q=Seoul%20to%20Chicago%20O%27Hare%202026-09-24%20return%202026-10-11%20adults%202%20children%202&hl=ko",
+    "synced_at": "2026-08-07T18:17:05+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-12",
+    "price": 6937800,
+    "price_text": "₩6,937,800",
+    "duration_text": "16시간 21분 / 34시간 25분",
+    "stops_text": "경유 1회 / 경유 1회",
+    "carrier_text": "에어캐나다, 유나이티드항공",
+    "seller_url": "https://www.google.com/travel/flights/search?q=Seoul%20to%20Chicago%20O%27Hare%202026-09-24%20return%202026-10-12%20adults%202%20children%202&hl=ko",
+    "synced_at": "2026-08-07T18:17:14+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-13",
+    "price": 6541800,
+    "price_text": "₩6,541,800",
+    "duration_text": "18시간 25분",
+    "stops_text": "경유 1회",
+    "carrier_text": "아시아나항공, 유나이티드항공",
+    "seller_url": "https://www.google.com/travel/flights/search?q=Seoul%20to%20Chicago%20O%27Hare%202026-09-24%20return%202026-10-13%20adults%202%20children%202&hl=ko",
+    "synced_at": "2026-08-07T18:17:23+09:00"
+  }
+]

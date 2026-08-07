@@ -14,7 +14,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent
 USER_DATA_DIR = ROOT / ".browser_profile_capture"
-OUTBOUND = "2026-09-23"
+OUTBOUND = "2026-09-24"
 RETURN_DATES = [
     "2026-10-08",
     "2026-10-09",

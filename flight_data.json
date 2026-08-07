@@ -1,0 +1,74 @@
+[
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-11",
+    "price": 5823000,
+    "price_text": "₩5,823,000",
+    "duration_text": "경유 16시간 21분 (ICN→ORD) / 경유 34시간 25분 (ORD→ICN)",
+    "stops_text": "경유 / 경유",
+    "carrier_text": "에어캐나다·유나이티드 / 에어캐나다",
+    "seller_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261011/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "skyscanner_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261011/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "synced_at": "2026-07-25T12:17:00+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-08",
+    "price": 7156000,
+    "price_text": "₩7,156,000",
+    "duration_text": "경유 18시간 25분 (ICN→ORD) / 경유 19시간 20분 (ORD→ICN)",
+    "stops_text": "경유 / 경유",
+    "carrier_text": "아시아나·유나이티드 / 유나이티드·아시아나",
+    "seller_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261008/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "skyscanner_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261008/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "synced_at": "2026-07-25T12:17:00+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-09",
+    "price": 7555200,
+    "price_text": "₩7,555,200",
+    "duration_text": "경유 21시간 20분 (ICN→ORD) / 경유 20시간 30분 (ORD→ICN)",
+    "stops_text": "경유 / 경유",
+    "carrier_text": "에바항공 / 에바항공",
+    "seller_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261009/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "skyscanner_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261009/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "synced_at": "2026-07-25T12:17:00+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-13",
+    "price": 8178000,
+    "price_text": "₩8,178,000",
+    "duration_text": "직항 12시간 50분 (ICN→ORD) / 직항 14시간 40분 (ORD→ICN)",
+    "stops_text": "직항 / 직항",
+    "carrier_text": "대한항공 / 대한항공",
+    "seller_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261013/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "skyscanner_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261013/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "synced_at": "2026-07-25T12:17:00+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-12",
+    "price": 8338200,
+    "price_text": "₩8,338,200",
+    "duration_text": "직항 12시간 50분 (ICN→ORD) / 경유 17시간 21분 (ORD→ICN)",
+    "stops_text": "직항 / 경유",
+    "carrier_text": "대한항공 / 델타항공",
+    "seller_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261012/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "skyscanner_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261012/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "synced_at": "2026-07-25T12:17:00+09:00"
+  },
+  {
+    "outbound_date": "2026-09-24",
+    "return_date": "2026-10-10",
+    "price": 8220200,
+    "price_text": "₩8,220,200",
+    "duration_text": "경유 21시간 20분 (ICN→ORD) / 경유 20시간 30분 (ORD→ICN)",
+    "stops_text": "경유 / 경유",
+    "carrier_text": "에바항공 / 에바항공",
+    "seller_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261010/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "skyscanner_url": "https://www.skyscanner.co.kr/transport/flights/sela/ord/260924/261010/?adultsv2=2&childrenv2=7%7C8&cabinclass=economy&rtn=1",
+    "synced_at": "2026-07-25T12:17:00+09:00"
+  }
+]

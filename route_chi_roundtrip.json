@@ -1,6 +1,6 @@
 [
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-08",
     "route": "chi_round",
     "route_label": "시카고 인 · 시카고 아웃",
@@ -15,7 +15,7 @@
       "stops_text": "1회 경유 / 1회 경유",
       "carrier_text": "에바항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-08/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-08/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:05:06+09:00"
     },
     "shortest": {
@@ -29,13 +29,13 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "델타항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-08/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-08/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:05:13+09:00"
     },
     "cheap_under_17h": []
   },
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-09",
     "route": "chi_round",
     "route_label": "시카고 인 · 시카고 아웃",
@@ -50,7 +50,7 @@
       "stops_text": "1회 경유 / 1회 경유",
       "carrier_text": "에바항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-09/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-09/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:05:18+09:00"
     },
     "shortest": {
@@ -64,13 +64,13 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "대한항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-09/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-09/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:05:24+09:00"
     },
     "cheap_under_17h": []
   },
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-10",
     "route": "chi_round",
     "route_label": "시카고 인 · 시카고 아웃",
@@ -85,7 +85,7 @@
       "stops_text": "1회 경유 / 1회 경유",
       "carrier_text": "항공사 조합",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-10/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-10/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:05:30+09:00"
     },
     "shortest": {
@@ -99,13 +99,13 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "대한항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-10/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-10/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:05:35+09:00"
     },
     "cheap_under_17h": []
   },
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-11",
     "route": "chi_round",
     "route_label": "시카고 인 · 시카고 아웃",
@@ -120,7 +120,7 @@
       "stops_text": "1회 경유 / 1회 경유",
       "carrier_text": "에바항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-11/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-11/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:05:40+09:00"
     },
     "shortest": {
@@ -134,7 +134,7 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "델타항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-11/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-11/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:05:46+09:00"
     },
     "cheap_under_17h": [
@@ -149,7 +149,7 @@
         "stops_text": "1회 경유 / 직항",
         "carrier_text": "대한항공",
         "self_transfer": false,
-        "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-11/1adults?sort=price_a",
+        "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-11/1adults?sort=price_a",
         "synced_at": "2026-08-07T20:05:46+09:00"
       },
       {
@@ -163,7 +163,7 @@
         "stops_text": "1회 경유 / 직항",
         "carrier_text": "대한항공, 델타항공",
         "self_transfer": false,
-        "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-11/1adults?sort=price_a",
+        "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-11/1adults?sort=price_a",
         "synced_at": "2026-08-07T20:05:46+09:00"
       },
       {
@@ -177,7 +177,7 @@
         "stops_text": "1회 경유 / 직항",
         "carrier_text": "대한항공",
         "self_transfer": false,
-        "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-11/1adults?sort=price_a",
+        "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-11/1adults?sort=price_a",
         "synced_at": "2026-08-07T20:05:46+09:00"
       },
       {
@@ -191,7 +191,7 @@
         "stops_text": "1회 경유 / 직항",
         "carrier_text": "대한항공, 델타항공",
         "self_transfer": false,
-        "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-11/1adults?sort=price_a",
+        "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-11/1adults?sort=price_a",
         "synced_at": "2026-08-07T20:05:46+09:00"
       },
       {
@@ -205,13 +205,13 @@
         "stops_text": "1회 경유 / 직항",
         "carrier_text": "대한항공",
         "self_transfer": false,
-        "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-11/1adults?sort=price_a",
+        "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-11/1adults?sort=price_a",
         "synced_at": "2026-08-07T20:05:46+09:00"
       }
     ]
   },
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-12",
     "route": "chi_round",
     "route_label": "시카고 인 · 시카고 아웃",
@@ -226,7 +226,7 @@
       "stops_text": "1회 경유 / 1회 경유",
       "carrier_text": "에바항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-12/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-12/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:05:50+09:00"
     },
     "shortest": {
@@ -240,13 +240,13 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "대한항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-12/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-12/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:05:56+09:00"
     },
     "cheap_under_17h": []
   },
   {
-    "outbound_date": "2026-09-23",
+    "outbound_date": "2026-09-24",
     "return_date": "2026-10-13",
     "route": "chi_round",
     "route_label": "시카고 인 · 시카고 아웃",
@@ -261,7 +261,7 @@
       "stops_text": "1회 경유 / 1회 경유",
       "carrier_text": "항공사 조합",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-13/1adults?sort=price_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-13/1adults?sort=price_a",
       "synced_at": "2026-08-07T20:06:02+09:00"
     },
     "shortest": {
@@ -275,7 +275,7 @@
       "stops_text": "직항 / 직항",
       "carrier_text": "대한항공",
       "self_transfer": false,
-      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-23/2026-10-13/1adults?sort=duration_a",
+      "seller_url": "https://www.kayak.co.kr/flights/SEL-ORD/2026-09-24/2026-10-13/1adults?sort=duration_a",
       "synced_at": "2026-08-07T20:06:09+09:00"
     },
     "cheap_under_17h": []
