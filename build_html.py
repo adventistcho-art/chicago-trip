@@ -674,13 +674,14 @@ def render_booked_flight(booked: dict | None) -> str:
         layover = f"<p class='muted'>경유 {itin.get('layover','')}</p>" if itin.get("layover") else ""
         leg_html = f"<ul class='booked-flight-legs'>{''.join(parts)}</ul>{layover}"
     img = booked.get("image") or "assets/booked-flight.png"
+    img_src = f"{img}?v=2"
     return f"""
     <section class="hero card booked-flight-hero" id="booked-flight-hero">
       <div class="booked-flight-copy">
-        <p class="route-kicker">✅ 예약 완료 항공권</p>
+        <p class="route-kicker">✅ 예약 완료 항공권 · 여행경비 기본 선택</p>
         <h2>{opt['route_label']}</h2>
-        <p class="hero-price" style="color:var(--sky)">{opt['price_per_person_text']}</p>
-        <p class="opt-sub">1인 · 4명 합계 {opt['price_text']}</p>
+        <p class="hero-price" style="color:var(--sky)">{opt['price_text']}</p>
+        <p class="opt-sub">4명 합계 · 1인 {opt['price_per_person_text']}</p>
         <p><strong>출국</strong> {_fmt_date_ko(opt.get('outbound_date') or OUTBOUND)} ·
            <strong>귀국</strong> {_fmt_date_ko(ret)} · {opt.get('duration_text','')}</p>
         <p>{opt.get('carrier_text','')} · {opt.get('stops_text','')}</p>
@@ -696,8 +697,8 @@ def render_booked_flight(booked: dict | None) -> str:
         </div>
       </div>
       <figure class="booked-flight-shot">
-        <img src="{img}" alt="예약 항공권 스크린샷 · ORD→LAX→ICN 아시아나" loading="lazy">
-        <figcaption class="muted">귀국편 운임 선택 화면</figcaption>
+        <img src="{img_src}" alt="예약 항공권 스크린샷 · ORD→LAX→ICN 아시아나" loading="eager">
+        <figcaption class="muted">아시아나 귀국편 운임 선택 화면 (ORD→LAX→ICN)</figcaption>
       </figure>
     </section>"""
 
@@ -1149,8 +1150,9 @@ def render_combo_analysis(combos: list[dict]) -> str:
     </section>"""
 
 
-def render_dashboard_shell(combo_html: str) -> str:
+def render_dashboard_shell(combo_html: str, booked_flight_html: str = "") -> str:
     return f"""
+    {booked_flight_html}
     {combo_html}
     <section class="dashboard-hero card">
       <div class="dash-hero-inner">
@@ -1367,17 +1369,21 @@ def render_page(
     .opt-card.opt-cheap17 {{ border-top: 4px solid #0ea5e9; }}
     .opt-cheap17 .opt-badge {{ color: #0ea5e9; }}
     .booked-flight-hero {{
-      display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; align-items: start;
+      display: grid; grid-template-columns: 1fr 1.15fr; gap: 18px; align-items: start;
       border-top: 4px solid var(--sky);
+      margin-bottom: 16px;
+      background: linear-gradient(180deg, #eef6ff 0%, #fff 55%);
     }}
     .booked-flight-shot {{ margin: 0; }}
     .booked-flight-shot img {{
-      width: 100%; border-radius: 10px; border: 1px solid var(--border);
+      width: 100%; max-height: 520px; object-fit: contain; object-position: top;
+      border-radius: 10px; border: 1px solid var(--border);
       display: block; background: #fff;
     }}
     .booked-flight-legs {{ margin: 8px 0 0; padding-left: 1.1rem; line-height: 1.55; }}
     @media (max-width: 900px) {{
       .booked-flight-hero {{ grid-template-columns: 1fr; }}
+      .booked-flight-shot img {{ max-height: none; }}
     }}
     .opt-extra {{ margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border); }}
     .opt-extra-title {{ font-size: 0.88rem; font-weight: 700; margin: 0 0 10px; color: #0369a1; }}
@@ -1641,7 +1647,7 @@ def render_page(
   <script id="trip-data" type="application/json">{trip_json}</script>
   <script>
     const TRIP = JSON.parse(document.getElementById('trip-data').textContent);
-    const STORE_KEY = 'chicago-trip-budget-v8';
+    const STORE_KEY = 'chicago-trip-budget-v9';
     const DATE_OPTS = TRIP.date_options || {{}};
 
     const fmt = n => '₩' + Math.round(n || 0).toLocaleString('ko-KR');
@@ -2038,9 +2044,10 @@ def render_page(
 
       document.getElementById('total-budget').textContent = fmt(total);
       const flightPerPerson = flight?.price_per_person || (flightAmt ? Math.round(flightAmt / TRIP.guests) : 0);
-      document.getElementById('amt-flight').textContent = fmt(flightPerPerson);
+      const flightBooked = !!(flight && (flight.booked || flight.kind === 'booked'));
+      document.getElementById('amt-flight').textContent = flightBooked ? fmt(flightAmt) : fmt(flightPerPerson);
       document.getElementById('sub-flight').textContent = flight
-        ? `1인당 · 4명 합계 ${{fmt(flightAmt)}}`
+        ? (flightBooked ? `예약완료 · 1인 ${{fmt(flightPerPerson)}}` : `1인당 · 4명 합계 ${{fmt(flightAmt)}}`)
         : '1인당';
       document.getElementById('amt-lodging').textContent = fmt(lodgingAmt);
       document.getElementById('amt-food').textContent = fmt(foodAmt);
@@ -2049,7 +2056,7 @@ def render_page(
       document.getElementById('amt-misc').textContent = fmt(miscAmt);
 
       document.getElementById('detail-flight').innerHTML = flight
-        ? `${{flight.source_label}} · 귀국 ${{flight.return_date}} · 1인 ${{flight.price_per_person_text || fmt(flightPerPerson)}}<br><span class="muted">${{flight.duration_text || ''}} · ${{flight.carrier_text || ''}}</span> · <a href="#" data-goto="flights">변경</a>`
+        ? `${{flightBooked ? '✅ ' : ''}}${{flight.source_label}} · 귀국 ${{flight.return_date}} · 4명 ${{fmt(flightAmt)}}<br><span class="muted">${{flight.duration_text || ''}} · ${{flight.carrier_text || ''}}</span> · <a href="#" data-goto="flights">변경</a>`
         : '미선택 · <a href="#" data-goto="flights">항공권 탭에서 선택</a>';
 
       document.getElementById('detail-lodging').innerHTML = lodging
@@ -2265,7 +2272,8 @@ def main() -> None:
     chicago_plan_html = itinerary_plans.render_chicago_plan()
     east_plan_html = itinerary_plans.render_east_plan()
     combo_html = render_combo_analysis(trip_data.get("combos", []))
-    dashboard_html = render_dashboard_shell(combo_html)
+    booked_flight_html = render_booked_flight(booked_flight)
+    dashboard_html = render_dashboard_shell(combo_html, booked_flight_html)
     page = render_page(
         flights_html,
         lodging_html,
