@@ -16,6 +16,8 @@ DOCS_INDEX = ROOT / "docs" / "index.html"
 SKY_FILE = ROOT / "flight_data.json"
 KAYAK_FILE = ROOT / "kayak_flight_data.json"
 GOOGLE_FILE = ROOT / "google_flight_data.json"
+ROUTE_CHI_FILE = ROOT / "route_chi_roundtrip.json"
+ROUTE_NYC_FILE = ROOT / "route_nyc_in_chi_out.json"
 AIRBNB_LODGING = ROOT / "airbnb_lodging_data.json"
 
 ADULTS = 2
@@ -26,6 +28,20 @@ LODGING_NOTE = "9/23 도착 · Airbnb 9/26부터"
 GUESTS = ADULTS + len(CHILD_AGES)
 
 FLIGHT_LABELS = {"sky": "Skyscanner", "kayak": "KAYAK", "google": "Google"}
+ROUTE_META = {
+    "nyc_in": {
+        "key": "nyc_in",
+        "label": "뉴욕 인 · 시카고 아웃",
+        "blurb": "서울 → 뉴욕 입국 · 시카고 → 서울 귀국",
+        "chip": "NYC → ORD",
+    },
+    "chi_round": {
+        "key": "chi_round",
+        "label": "시카고 인 · 시카고 아웃",
+        "blurb": "서울 ↔ 시카고(ORD) 왕복",
+        "chip": "ORD 왕복",
+    },
+}
 
 # Dashboard default estimates (KRW, editable in browser)
 DEFAULT_FOOD_PER_DAY = 120_000
@@ -55,35 +71,65 @@ def flight_per_person_text(total: int | None) -> str:
     return fmt_won(flight_per_person(total))
 
 
-def best_flight_for_date(sky: dict, kayak: dict, google: dict, ret: str) -> dict | None:
-    best: dict | None = None
-    for source, data in (("sky", sky), ("kayak", kayak), ("google", google)):
-        row = data.get(ret)
-        if not row or row.get("price") is None:
-            continue
-        price = row["price"]
-        if best is None or price < best["price"]:
-            best = {
-                "id": f"{source}:{ret}",
-                "source": source,
-                "source_label": FLIGHT_LABELS[source],
-                "return_date": ret,
-                "price": price,
-                "price_text": row["price_text"],
-                "price_per_person": flight_per_person(price),
-                "price_per_person_text": flight_per_person_text(price),
-                "duration_text": row.get("duration_text", ""),
-                "carrier_text": row.get("carrier_text", ""),
-                "seller_url": row.get("seller_url", ""),
-            }
-    return best
+def load_route_rows(path: Path) -> list[dict]:
+    return load_list(path)
 
 
-def analyze_combos(sky: dict, kayak: dict, google: dict, airbnb: dict) -> list[dict]:
-    dates = sorted(set(sky) | set(kayak) | set(google) | set(airbnb))
+def flatten_route_flights(route_rows: list[dict]) -> list[dict]:
+    """Turn route JSON into selectable flight options for the dashboard."""
+    out: list[dict] = []
+    for day in route_rows:
+        ret = day["return_date"]
+        route = day.get("route", "")
+        route_label = day.get("route_label") or ROUTE_META.get(route, {}).get("label", route)
+        for kind in ("cheapest", "shortest"):
+            opt = day.get(kind)
+            if not opt or opt.get("price") is None:
+                continue
+            kind_label = "최저가" if kind == "cheapest" else "최단시간"
+            out.append(
+                {
+                    "id": f"{route}:{kind}:{ret}",
+                    "source": route,
+                    "source_label": f"{route_label} · {kind_label}",
+                    "route": route,
+                    "route_label": route_label,
+                    "kind": kind,
+                    "kind_label": kind_label,
+                    "return_date": ret,
+                    "price": opt["price"],
+                    "price_text": opt.get("price_text", fmt_won(opt["price"])),
+                    "price_per_person": opt.get("price_per_person") or flight_per_person(opt["price"]),
+                    "price_per_person_text": opt.get("price_per_person_text")
+                    or flight_per_person_text(opt["price"]),
+                    "duration_text": opt.get("duration_text", ""),
+                    "duration_minutes": opt.get("duration_minutes"),
+                    "stops_text": opt.get("stops_text", ""),
+                    "carrier_text": opt.get("carrier_text", ""),
+                    "self_transfer": opt.get("self_transfer", False),
+                    "seller_url": opt.get("seller_url", ""),
+                }
+            )
+    out.sort(key=lambda x: (x["price"], x.get("duration_minutes") or 10**9))
+    return out
+
+
+def best_flight_for_date(flights: list[dict], ret: str, kind: str = "cheapest") -> dict | None:
+    candidates = [f for f in flights if f["return_date"] == ret and f.get("kind") == kind]
+    if not candidates:
+        candidates = [f for f in flights if f["return_date"] == ret]
+    if not candidates:
+        return None
+    if kind == "shortest":
+        return min(candidates, key=lambda x: x.get("duration_minutes") or 10**9)
+    return min(candidates, key=lambda x: x["price"])
+
+
+def analyze_combos(flights: list[dict], airbnb: dict) -> list[dict]:
+    dates = sorted({f["return_date"] for f in flights} | set(airbnb))
     combos: list[dict] = []
     for ret in dates:
-        flight = best_flight_for_date(sky, kayak, google, ret)
+        flight = best_flight_for_date(flights, ret, "cheapest")
         lodging = airbnb.get(ret)
         if not flight or not lodging or lodging.get("price") is None:
             continue
@@ -95,6 +141,7 @@ def analyze_combos(sky: dict, kayak: dict, google: dict, airbnb: dict) -> list[d
                 "flight_price": flight["price"],
                 "flight_per_person_text": flight["price_per_person_text"],
                 "flight_carrier": flight.get("carrier_text", ""),
+                "lodging_id": lodging_id(lodging),
                 "lodging_checkout": lodging["checkout_date"],
                 "lodging_price": lodging["price"],
                 "lodging_price_text": lodging.get("price_text", fmt_won(lodging["price"])),
@@ -117,8 +164,21 @@ def load_flights(path: Path) -> dict[str, dict]:
     return {row["return_date"]: row for row in load_list(path)}
 
 
-def load_lodging(path: Path) -> dict[str, dict]:
-    return {row["checkout_date"]: row for row in load_list(path)}
+def lodging_id(row: dict) -> str:
+    return f"{row['checkout_date']}|{row.get('room_id', row.get('seller_url', ''))}"
+
+
+def load_lodging_list(path: Path) -> list[dict]:
+    return load_list(path)
+
+
+def load_lodging_cheapest(rows: list[dict]) -> dict[str, dict]:
+    out: dict[str, dict] = {}
+    for row in rows:
+        co = row["checkout_date"]
+        if co not in out or row.get("price", 10**12) < out[co].get("price", 10**12):
+            out[co] = row
+    return out
 
 
 def min_price(*prices: int | None) -> int | None:
@@ -157,45 +217,31 @@ def flight_pick_cell(source: str, ret: str, row: dict | None, cheapest: int | No
           <td>{BTN.format(url=row['seller_url'])}</td>"""
 
 
-def lodging_pick_cell(a: dict, cheapest: int | None) -> str:
-    checkout = a["checkout_date"]
+def lodging_pick_cell(a: dict, is_best: bool) -> str:
+    lid = lodging_id(a)
     return f"""
           <td>
             <label class="pick-label lodging-pick-label">
-              <input type="radio" name="lodging-pick" class="lodging-pick" value="{checkout}"
+              <input type="radio" name="lodging-pick" class="lodging-pick" value="{lid}"
+                data-checkout="{a['checkout_date']}"
                 data-price="{a.get('price', 0)}" data-nights="{a.get('nights', 0)}">
-              <span>{'★' if a.get('price') == cheapest else '선택'}</span>
+              <span>{'★' if is_best else '선택'}</span>
             </label>
           </td>"""
 
 
-def build_trip_data(sky: dict, kayak: dict, google: dict, airbnb: dict) -> dict:
-    flights = []
-    dates = sorted(set(sky) | set(kayak) | set(google))
-    for ret in dates:
-        for source, row in (("sky", sky.get(ret)), ("kayak", kayak.get(ret)), ("google", google.get(ret))):
-            if row and row.get("price") is not None:
-                flights.append(
-                    {
-                        "id": f"{source}:{ret}",
-                        "source": source,
-                        "source_label": FLIGHT_LABELS[source],
-                        "return_date": ret,
-                        "price": row["price"],
-                        "price_text": row["price_text"],
-                        "price_per_person": flight_per_person(row["price"]),
-                        "price_per_person_text": flight_per_person_text(row["price"]),
-                        "duration_text": row.get("duration_text", ""),
-                        "carrier_text": row.get("carrier_text", ""),
-                        "seller_url": row.get("seller_url", ""),
-                    }
-                )
-    flights.sort(key=lambda x: x["price"])
+def build_trip_data(
+    route_flights: list[dict],
+    airbnb_all: list[dict],
+    airbnb: dict[str, dict],
+) -> dict:
+    flights = list(route_flights)
 
     lodging = []
-    for a in sorted(airbnb.values(), key=lambda x: x.get("price") or 10**12):
+    for a in sorted(airbnb_all, key=lambda x: (x.get("checkout_date", ""), x.get("price") or 10**12)):
         lodging.append(
             {
+                "id": lodging_id(a),
                 "checkout_date": a["checkout_date"],
                 "nights": a.get("nights", 0),
                 "price": a.get("price"),
@@ -207,19 +253,24 @@ def build_trip_data(sky: dict, kayak: dict, google: dict, airbnb: dict) -> dict:
         )
 
     best_flight = flights[0] if flights else None
+    cheapest_rows = sorted(airbnb.values(), key=lambda x: x.get("price") or 10**12)
     best_lodging = lodging[0] if lodging else None
-    combos = analyze_combos(sky, kayak, google, airbnb)
+    for row in lodging:
+        if cheapest_rows and row["id"] == lodging_id(cheapest_rows[0]):
+            best_lodging = row
+            break
+    combos = analyze_combos(flights, airbnb)
     recommended = combos[0] if combos else None
     if recommended:
         best_flight_id = recommended["flight_id"]
-        best_lodging_checkout = recommended["lodging_checkout"]
+        best_lodging_id = recommended.get("lodging_id") or recommended["lodging_checkout"]
     else:
         best_flight_id = best_flight["id"] if best_flight else None
-        best_lodging_checkout = best_lodging["checkout_date"] if best_lodging else None
+        best_lodging_id = best_lodging["id"] if best_lodging else None
         if best_flight and best_lodging:
             matched = next((l for l in lodging if l["checkout_date"] == best_flight["return_date"]), None)
             if matched:
-                best_lodging_checkout = matched["checkout_date"]
+                best_lodging_id = matched["id"]
 
     return {
         "outbound": OUTBOUND,
@@ -237,115 +288,152 @@ def build_trip_data(sky: dict, kayak: dict, google: dict, airbnb: dict) -> dict:
         "combos": combos,
         "recommended": recommended,
         "best_flight_id": best_flight_id,
-        "best_lodging_checkout": best_lodging_checkout,
+        "best_lodging_id": best_lodging_id,
+        "best_lodging_checkout": best_lodging_id,
     }
 
 
-def render_flights(sky: dict, kayak: dict, google: dict) -> str:
-    dates = sorted(set(sky) | set(kayak) | set(google))
-    merged = []
-    for ret in dates:
-        s, k, g = sky.get(ret), kayak.get(ret), google.get(ret)
-        sp = s.get("price") if s else None
-        kp = k.get("price") if k else None
-        gp = g.get("price") if g else None
-        merged.append((ret, sp, kp, gp, winner_label({"sky": sp, "kayak": kp, "google": gp}, FLIGHT_LABELS), s, k, g))
+def _fmt_date_ko(iso: str) -> str:
+    _y, m, d = iso.split("-")
+    return f"{int(m)}월 {int(d)}일"
 
-    merged.sort(key=lambda x: min_price(x[1], x[2], x[3]) or 10**12)
 
-    candidates = []
-    for label, row in (("Skyscanner", merged[0][5]), ("KAYAK", merged[0][6]), ("Google", merged[0][7])):
-        if row:
-            candidates.append((label, row))
-    candidates.sort(key=lambda x: x[1]["price"])
-    overall = candidates[0] if candidates else ("", None)
+def _opt_card(flight_id: str, opt: dict | None, kind: str, route: str, ret: str) -> str:
+    if not opt:
+        return f"""
+        <article class="opt-card opt-{kind} is-empty">
+          <header class="opt-head"><span class="opt-badge">{'최저가' if kind == 'cheapest' else '최단시간'}</span></header>
+          <p class="muted">데이터 없음</p>
+        </article>"""
+    badge = "💰 최저가" if kind == "cheapest" else "⚡ 최단시간"
+    note = '<span class="pill warn">자가환승</span>' if opt.get("self_transfer") else ""
+    return f"""
+    <article class="opt-card opt-{kind}">
+      <header class="opt-head">
+        <span class="opt-badge">{badge}</span>
+        {note}
+      </header>
+      <p class="opt-price">{opt.get('price_per_person_text') or flight_per_person_text(opt.get('price'))}</p>
+      <p class="opt-sub">1인 · 4명 합계 {opt.get('price_text') or fmt_won(opt.get('price'))}</p>
+      <dl class="opt-meta">
+        <div><dt>비행</dt><dd>{opt.get('duration_text') or '-'}</dd></div>
+        <div><dt>경유</dt><dd>{opt.get('stops_text') or '-'}</dd></div>
+        <div><dt>항공사</dt><dd>{opt.get('carrier_text') or '-'}</dd></div>
+      </dl>
+      <div class="opt-actions">
+        <label class="pick-label">
+          <input type="radio" name="flight-pick" class="flight-pick" value="{flight_id}"
+            data-price="{opt['price']}" data-return="{ret}" data-source="{route}">
+          <span>경비에 담기</span>
+        </label>
+        {BTN.format(url=opt.get('seller_url', '#'))}
+      </div>
+    </article>"""
 
-    rows = []
-    for i, (ret, sp, kp, gp, winner, s, k, g) in enumerate(merged):
-        cheapest = min_price(sp, kp, gp)
-        rows.append(f"""
-        <tr class="{'best' if i == 0 else ''}" data-return="{ret}">
-          <td>{'★' if i == 0 else ''}</td>
-          <td><strong>{ret}</strong></td>
-          {flight_pick_cell('sky', ret, s, cheapest)}
-          {flight_pick_cell('kayak', ret, k, cheapest)}
-          {flight_pick_cell('google', ret, g, cheapest)}
-          <td><strong>{winner}</strong></td>
-        </tr>""")
 
-    hero = ""
-    if overall[1]:
-        src, o = overall
-        color = {"Skyscanner": "var(--sky)", "KAYAK": "var(--kayak)", "Google": "var(--google)"}.get(src, "var(--sky)")
-        hero = f"""
-        <section class="hero card">
-          <h2>전체 최저가 ({src})</h2>
-          <p class="hero-price" style="color:{color}">{flight_per_person_text(o['price'])}</p>
-          <p class="muted">1인당 · 4명 합계 {o['price_text']}</p>
-          <p>출발 {OUTBOUND} · 귀국 {o['return_date']}</p>
-          <p>{o.get('duration_text','')}</p>
-          <p>{o.get('carrier_text','')}</p>
-          {BTN.format(url=o['seller_url'])}
-          <p class="muted" style="margin-top:10px;">아래 가격 옆 라디오 버튼으로 여행경비에 담을 항공권을 선택하세요.</p>
-        </section>"""
+def _route_panel(route_key: str, days: list[dict], active: bool) -> str:
+    meta = ROUTE_META[route_key]
+    cheap_opts = [d["cheapest"] for d in days if d.get("cheapest")]
+    short_opts = [d["shortest"] for d in days if d.get("shortest")]
+    best_cheap = min(cheap_opts, key=lambda x: x["price"]) if cheap_opts else None
+    best_short = min(short_opts, key=lambda x: x.get("duration_minutes") or 10**9) if short_opts else None
+
+    hero_bits = []
+    if best_cheap:
+        hero_bits.append(
+            f'<div class="route-stat"><span class="muted">루트 최저가</span>'
+            f'<strong>{best_cheap["price_per_person_text"]}</strong>'
+            f'<span class="muted">{best_cheap.get("carrier_text","")}</span></div>'
+        )
+    if best_short:
+        hero_bits.append(
+            f'<div class="route-stat"><span class="muted">루트 최단</span>'
+            f'<strong>{best_short.get("duration_text","")}</strong>'
+            f'<span class="muted">{best_short.get("price_per_person_text","")}</span></div>'
+        )
+
+    day_cards = []
+    for day in days:
+        ret = day["return_date"]
+        cheap = day.get("cheapest")
+        short = day.get("shortest")
+        day_cards.append(f"""
+        <section class="date-card" data-return="{ret}">
+          <div class="date-card-head">
+            <div>
+              <p class="date-kicker">귀국일</p>
+              <h3>{_fmt_date_ko(ret)}</h3>
+              <p class="muted">출국 {_fmt_date_ko(OUTBOUND)}</p>
+            </div>
+            <span class="date-chip">{meta['chip']}</span>
+          </div>
+          <div class="opt-grid">
+            {_opt_card(f"{route_key}:cheapest:{ret}", cheap, "cheapest", route_key, ret)}
+            {_opt_card(f"{route_key}:shortest:{ret}", short, "shortest", route_key, ret)}
+          </div>
+        </section>""")
 
     return f"""
-    {hero}
-    <section class="card">
-      <div class="legend">
-        <span><i class="dot" style="background:var(--sky)"></i> Skyscanner</span>
-        <span><i class="dot" style="background:var(--kayak)"></i> KAYAK</span>
-        <span><i class="dot" style="background:var(--google)"></i> Google Flights</span>
-      </div>
-      <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th rowspan="2"></th><th rowspan="2">귀국일</th>
-            <th colspan="4" class="sky">Skyscanner</th>
-            <th colspan="4" class="kayak">KAYAK</th>
-            <th colspan="4" class="google">Google Flights</th>
-            <th rowspan="2">최저</th>
-          </tr>
-          <tr>
-            <th class="sky">1인당·선택</th><th class="sky">비행</th><th class="sky">항공사</th><th class="sky">예약</th>
-            <th class="kayak">1인당·선택</th><th class="kayak">비행</th><th class="kayak">항공사</th><th class="kayak">예약</th>
-            <th class="google">1인당·선택</th><th class="google">비행</th><th class="google">항공사</th><th class="google">예약</th>
-          </tr>
-        </thead>
-        <tbody>{''.join(rows)}</tbody>
-      </table>
-      </div>
-      <p class="muted" style="margin-top:12px;">※ 항공권 가격은 1인당(성인·어린이 동일 적용) · 4명 일행 합계는 여행경비 탭에 반영 · ○ 선택으로 담기</p>
-    </section>"""
+    <div class="route-panel {'active' if active else ''}" data-route-panel="{route_key}" role="tabpanel">
+      <section class="route-hero card">
+        <div class="route-hero-copy">
+          <p class="route-kicker">{meta['chip']}</p>
+          <h2>{meta['label']}</h2>
+          <p class="muted">{meta['blurb']} · KAYAK 1인 기준 · 일정별 최저가 / 최단시간</p>
+        </div>
+        <div class="route-stats">{''.join(hero_bits)}</div>
+      </section>
+      <div class="date-stack">{''.join(day_cards)}</div>
+    </div>"""
 
 
-def render_lodging(airbnb: dict[str, dict]) -> str:
-    merged = sorted(airbnb.values(), key=lambda x: x.get("price") or 10**12)
-    best = merged[0] if merged else None
+def render_flights(chi_days: list[dict], nyc_days: list[dict]) -> str:
+    return f"""
+    <div class="route-switch" role="tablist" aria-label="항공 루트">
+      <button type="button" class="route-tab active" role="tab" aria-selected="true" data-route="nyc_in">
+        <span class="route-tab-title">뉴욕 인 · 시카고 아웃</span>
+        <span class="route-tab-sub">SEL→NYC / ORD→SEL</span>
+      </button>
+      <button type="button" class="route-tab" role="tab" aria-selected="false" data-route="chi_round">
+        <span class="route-tab-title">시카고 인 · 시카고 아웃</span>
+        <span class="route-tab-sub">SEL↔ORD 왕복</span>
+      </button>
+    </div>
+    <p class="flight-hint muted">귀국일별로 <strong>최저가</strong>와 <strong>최단시간</strong>을 나란히 비교합니다. ○ 경비에 담기 → 여행경비 탭에 반영됩니다.</p>
+    {_route_panel("nyc_in", nyc_days, True)}
+    {_route_panel("chi_round", chi_days, False)}
+    """
+
+
+def render_lodging(airbnb_all: list[dict], airbnb: dict[str, dict]) -> str:
+    merged = sorted(airbnb_all, key=lambda x: (x.get("checkout_date", ""), x.get("price") or 10**12))
+    cheapest_by_date = {co: row.get("price") for co, row in airbnb.items()}
+    best = airbnb.get("2026-10-08") or (sorted(airbnb.values(), key=lambda x: x.get("price") or 10**12)[0] if airbnb else None)
 
     hero = ""
     if best:
         hero = f"""
         <section class="hero card">
-          <h2>숙박 최저가 (Airbnb)</h2>
+          <h2>숙박 후보 (Airbnb 검색 · 주방·집 전체)</h2>
           <p class="hero-price" style="color:var(--airbnb)">{best['price_text']}</p>
-          <p>체크인 {CHECKIN} · 체크아웃 {best['checkout_date']} · {best.get('nights','')}박</p>
+          <p>체크인 {CHECKIN} · 체크아웃 {best['checkout_date']} · {best.get('nights','')}박 · 해당일 최저</p>
           <p>{best.get('title','')}</p>
           <p>{best.get('distance_text','')} · {best.get('amenities_text','')}</p>
           {BTN.format(url=best['seller_url'])}
-          <p class="muted" style="margin-top:10px;">아래 ○ 선택으로 여행경비에 담을 숙소를 고르세요.</p>
+          <p class="muted" style="margin-top:10px;">아래 표에 체크아웃별 후보(최대 8곳) · ○ 선택으로 여행경비에 반영</p>
         </section>"""
 
     rows = []
-    cheapest = best.get("price") if best else None
     for i, a in enumerate(merged):
-        row_cls = "best" if i == 0 else ""
+        co = a["checkout_date"]
+        is_best = a.get("price") == cheapest_by_date.get(co)
+        row_cls = "best" if is_best else ""
+        lid = lodging_id(a)
         rows.append(f"""
-        <tr class="{row_cls}" data-checkout="{a['checkout_date']}">
-          {lodging_pick_cell(a, cheapest)}
-          <td>{a['checkout_date']}<br><span class="muted">{a.get('nights','')}박</span></td>
-          <td class="price airbnb{price_cls(a.get('price'), cheapest)}">{a['price_text']}</td>
+        <tr class="{row_cls}" data-checkout="{co}" data-lodging-id="{lid}">
+          {lodging_pick_cell(a, is_best)}
+          <td>{co}<br><span class="muted">{a.get('nights','')}박</span></td>
+          <td class="price airbnb{price_cls(a.get('price'), cheapest_by_date.get(co) if is_best else None)}">{a['price_text']}</td>
           <td>{a.get('title','-')}<br><span class="muted">{a.get('location_text','')}</span></td>
           <td><strong>{a.get('distance_text','-')}</strong></td>
           <td>{a.get('amenities_text','-')}</td>
@@ -375,8 +463,8 @@ def render_lodging(airbnb: dict[str, dict]) -> str:
       </table>
       </div>
       <p class="muted" style="margin-top:12px;">
-        ※ {LODGING_NOTE} · 체크인 {CHECKIN} · 시카고대 근처 · 주방 · 집 전체 · 4명<br>
-        ※ 귀국일=체크아웃 맞춤 · 아래 분석표에서 항공+숙박 최저 조합 확인
+        ※ {LODGING_NOTE} · 체크인 {CHECKIN} · 시카고대 인근 · 주방 · 집 전체 · 4명<br>
+        ※ 체크아웃(귀국일)별 주방 있는 집 전체 후보 · 3시간마다 갱신
       </p>
     </section>"""
 
@@ -397,7 +485,7 @@ def render_combo_analysis(combos: list[dict]) -> str:
           <td>{c['lodging_nights']}박<br><span class="muted">{c['lodging_title'][:28]}…</span></td>
           <td class="price airbnb">{c['lodging_price_text']}</td>
           <td class="price"><strong>{fmt_won(c['combined'])}</strong></td>
-          <td><button type="button" class="cta-btn combo-apply" data-flight="{c['flight_id']}" data-lodging="{c['lodging_checkout']}">적용</button></td>
+          <td><button type="button" class="cta-btn combo-apply" data-flight="{c['flight_id']}" data-lodging="{c.get('lodging_id', c['lodging_checkout'])}">적용</button></td>
         </tr>""")
 
     return f"""
@@ -420,7 +508,7 @@ def render_combo_analysis(combos: list[dict]) -> str:
         <tbody>{''.join(rows)}</tbody>
       </table>
       </div>
-      <p class="muted" style="margin-top:12px;">※ 각 귀국일별 Skyscanner/KAYAK/Google 중 최저 항공 + 해당일 Airbnb 숙박 합계입니다.</p>
+      <p class="muted" style="margin-top:12px;">※ 각 귀국일별 루트(뉴욕인·시카고아웃 / 시카고왕복) 최저가 항공 + 해당일 Airbnb 숙박 합계입니다.</p>
     </section>"""
 
 
@@ -512,26 +600,114 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
     :root {{
       --sky: #0770e3; --kayak: #ff690f; --google: #1a73e8;
       --airbnb: #ff385c; --budget: #0d7a5f;
-      --bg: #f1f2f8; --card: #fff; --text: #161616; --muted: #626971;
+      --bg: #eef1f6; --card: #fff; --text: #14171c; --muted: #5f6773;
       --best: #e8f4fd; --highlight: #fff8e1; --picked: #e7f7f0;
+      --nyc: #1f4b99; --chi: #c45c26; --cheap: #0f7a57; --fast: #2558c8;
+      --line: #e2e7ef;
     }}
     * {{ box-sizing: border-box; }}
-    body {{ margin: 0; font-family: "Segoe UI", "Noto Sans KR", sans-serif; background: var(--bg); color: var(--text); }}
-    .wrap {{ max-width: 1400px; margin: 0 auto; padding: 24px; }}
-    h1 {{ margin: 0 0 8px; font-size: 1.75rem; }}
+    body {{
+      margin: 0; font-family: "Segoe UI", "Noto Sans KR", sans-serif;
+      background:
+        radial-gradient(1200px 500px at 10% -10%, #d9e7ff 0%, transparent 55%),
+        radial-gradient(900px 420px at 90% 0%, #ffe4d4 0%, transparent 50%),
+        var(--bg);
+      color: var(--text);
+    }}
+    .wrap {{ max-width: 1180px; margin: 0 auto; padding: 24px; }}
+    h1 {{ margin: 0 0 8px; font-size: 1.75rem; letter-spacing: -0.02em; }}
     h3 {{ margin: 0 0 12px; font-size: 1.05rem; }}
     .meta {{ color: var(--muted); font-size: 0.95rem; margin-bottom: 16px; }}
     .tabs {{ display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }}
     .tab {{
-      border: none; background: #dde1e8; color: var(--text);
-      padding: 12px 24px; border-radius: 999px; font-size: 1rem; font-weight: 600; cursor: pointer;
+      border: none; background: rgba(255,255,255,.75); color: var(--text);
+      padding: 12px 22px; border-radius: 999px; font-size: 1rem; font-weight: 600; cursor: pointer;
+      box-shadow: 0 1px 2px rgba(20,25,35,.06);
     }}
-    .tab.active {{ background: #222; color: #fff; }}
+    .tab.active {{ background: #1b1f27; color: #fff; }}
     .panel {{ display: none; }}
     .panel.active {{ display: block; }}
-    .card {{ background: var(--card); border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.06); margin-bottom: 20px; }}
+    .card {{ background: var(--card); border-radius: 16px; padding: 20px; box-shadow: 0 8px 24px rgba(24,33,50,.06); margin-bottom: 20px; border: 1px solid rgba(255,255,255,.7); }}
     .hero {{ text-align: center; }}
     .hero-price {{ font-size: 2rem; font-weight: 700; margin: 8px 0; }}
+    .route-switch {{
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;
+    }}
+    .route-tab {{
+      text-align: left; border: 1px solid var(--line); background: rgba(255,255,255,.88);
+      border-radius: 16px; padding: 16px 18px; cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }}
+    .route-tab:hover {{ transform: translateY(-1px); box-shadow: 0 8px 20px rgba(24,33,50,.08); }}
+    .route-tab.active[data-route="nyc_in"] {{
+      border-color: rgba(31,75,153,.45); background: linear-gradient(135deg, # diversc8f 0%, #ffffff 70%);
+      box-shadow: 0 10px 24px rgba(31,75,153,.12);
+    }}
+    .route-tab.active[data-route="chi_round"] {{
+      border-color: rgba(196,92,38,.4); background: linear-gradient(135deg, #ffe8d8 0%, #ffffff 70%);
+      box-shadow: 0 10px 24px rgba(196,92,38,.12);
+    }}
+    .route-tab-title {{ display: block; font-size: 1.05rem; font-weight: 800; margin-bottom: 4px; }}
+    .route-tab-sub {{ display: block; color: var(--muted); font-size: 0.82rem; }}
+    .flight-hint {{ margin: 0 0 18px; }}
+    .route-panel {{ display: none; }}
+    .route-panel.active {{ display: block; }}
+    .route-hero {{
+      display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: stretch;
+      background: linear-gradient(135deg, #162033 0%, #243552 100%); color: #fff;
+    }}
+    .route-hero .muted {{ color: rgba(255,255,255,.72); }}
+    .route-kicker {{
+      margin: 0 0 6px; font-size: 0.78rem; letter-spacing: .08em; text-transform: uppercase; opacity: .8;
+    }}
+    .route-hero h2 {{ margin: 0 0 8px; font-size: 1.45rem; }}
+    .route-stats {{ display: flex; gap: 12px; flex-wrap: wrap; }}
+    .route-stat {{
+      min-width: 160px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px; padding: 14px 16px; display: grid; gap: 4px;
+    }}
+    .route-stat strong {{ font-size: 1.2rem; }}
+    .date-stack {{ display: grid; gap: 16px; }}
+    .date-card {{
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px;
+      box-shadow: 0 6px 18px rgba(24,33,50,.05);
+    }}
+    .date-card-head {{
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 14px;
+    }}
+    .date-kicker {{ margin: 0; font-size: 0.75rem; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }}
+    .date-card-head h3 {{ margin: 2px 0 4px; font-size: 1.35rem; letter-spacing: -0.02em; }}
+    .date-chip {{
+      background: #f3f5f9; color: #334155; border-radius: 999px; padding: 6px 12px;
+      font-size: 0.78rem; font-weight: 700; white-space: nowrap;
+    }}
+    .opt-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }}
+    .opt-card {{
+      border-radius: 14px; padding: 16px; border: 1px solid var(--line); background: #fbfcfe;
+      min-height: 100%;
+    }}
+    .opt-card.opt-cheapest {{ border-top: 4px solid var(--cheap); }}
+    .opt-card.opt-shortest {{ border-top: 4px solid var(--fast); }}
+    .opt-card.is-empty {{ opacity: .65; }}
+    .opt-head {{ display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 8px; }}
+    .opt-badge {{ font-size: 0.82rem; font-weight: 800; }}
+    .opt-cheapest .opt-badge {{ color: var(--cheap); }}
+    .opt-shortest .opt-badge {{ color: var(--fast); }}
+    .pill {{
+      display: inline-block; font-size: 0.72rem; font-weight: 700; border-radius: 999px;
+      padding: 3px 8px; background: #fff1d6; color: #9a6700;
+    }}
+    .opt-price {{ margin: 0; font-size: 1.55rem; font-weight: 800; letter-spacing: -0.02em; }}
+    .opt-sub {{ margin: 4px 0 12px; color: var(--muted); font-size: 0.8rem; }}
+    .opt-meta {{ margin: 0 0 14px; display: grid; gap: 8px; }}
+    .opt-meta div {{ display: grid; grid-template-columns: 52px 1fr; gap: 8px; font-size: 0.86rem; }}
+    .opt-meta dt {{ color: var(--muted); margin: 0; }}
+    .opt-meta dd {{ margin: 0; font-weight: 600; }}
+    .opt-actions {{ display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }}
+    .opt-actions .cta-btn {{ background: #1b1f27; }}
+    .date-card.is-picked, .date-card:has(.flight-pick:checked) {{
+      border-color: rgba(13,122,95,.35); box-shadow: 0 0 0 2px rgba(13,122,95,.12);
+    }}
     .dashboard-hero {{ background: linear-gradient(135deg, #0d7a5f 0%, #0a5c48 100%); color: #fff; }}
     .dashboard-hero .muted {{ color: rgba(255,255,255,.78); }}
     .dash-hero-inner {{ display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; }}
@@ -606,13 +782,16 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       .cta-btn {{ padding: 6px 10px; }}
       .breakdown-wrap {{ grid-template-columns: 1fr; }}
       .total-price {{ font-size: 2rem; }}
+      .route-switch, .opt-grid {{ grid-template-columns: 1fr; }}
+      .route-hero {{ padding: 18px; }}
+      .opt-price {{ font-size: 1.35rem; }}
     }}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <h1>서울 → 시카고(ORD) 여행경비</h1>
+      <h1>서울 → 시카고 여행경비</h1>
       <p class="meta">
         성인 {ADULTS}명 · 유소아 {len(CHILD_AGES)}명 (만 {CHILD_AGES[0]}·{CHILD_AGES[1]}세) · 동기화: {now_kst} · {REFRESH_HOURS}시간마다 자동 갱신
       </p>
@@ -629,7 +808,7 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
     </div>
 
     <div id="flights" class="panel" role="tabpanel">
-      <p class="meta">출발 {OUTBOUND} · 귀국 10/8~10/13 · {LODGING_NOTE}</p>
+      <p class="meta">출발 {OUTBOUND} · 귀국 10/8~10/13 · 루트별 최저가 / 최단시간 · {LODGING_NOTE}</p>
       {flights_html}
     </div>
 
@@ -649,7 +828,7 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
   <script id="trip-data" type="application/json">{trip_json}</script>
   <script>
     const TRIP = JSON.parse(document.getElementById('trip-data').textContent);
-    const STORE_KEY = 'chicago-trip-budget-v2';
+    const STORE_KEY = 'chicago-trip-budget-v3';
 
     const fmt = n => '₩' + Math.round(n || 0).toLocaleString('ko-KR');
     const pct = (part, total) => total ? Math.round(part / total * 100) : 0;
@@ -672,16 +851,26 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       return TRIP.flights.find(f => f.id === id) || null;
     }}
 
-    function findLodging(checkout) {{
-      return TRIP.lodging.find(l => l.checkout_date === checkout) || null;
+    function findLodging(idOrCheckout) {{
+      return TRIP.lodging.find(l => l.id === idOrCheckout)
+        || TRIP.lodging.find(l => l.checkout_date === idOrCheckout) || null;
+    }}
+
+    function cheapestLodgingForCheckout(checkout) {{
+      const rows = TRIP.lodging.filter(l => l.checkout_date === checkout);
+      if (!rows.length) return null;
+      return rows.reduce((a, b) => (a.price <= b.price ? a : b));
     }}
 
     function getState() {{
       const saved = loadState();
       const d = TRIP.defaults;
+      const flightId = findFlight(saved.flightId) ? saved.flightId : TRIP.best_flight_id;
       return {{
-        flightId: saved.flightId || TRIP.best_flight_id,
-        lodgingCheckout: saved.lodgingCheckout || TRIP.best_lodging_checkout,
+        flightId,
+        lodgingCheckout: findLodging(saved.lodgingCheckout)
+          ? saved.lodgingCheckout
+          : (TRIP.best_lodging_id || TRIP.best_lodging_checkout),
         foodPerDay: saved.foodPerDay ?? d.food_per_day,
         car: saved.car ?? d.car_rental,
         gift: saved.gift ?? d.gifts,
@@ -696,11 +885,15 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       document.querySelectorAll('.lodging-pick').forEach(el => {{
         el.checked = el.value === state.lodgingCheckout;
       }});
+      document.querySelectorAll('.date-card').forEach(card => {{
+        const checked = card.querySelector('.flight-pick:checked');
+        card.classList.toggle('is-picked', !!checked);
+      }});
       document.querySelectorAll('tr[data-return]').forEach(tr => {{
         tr.classList.toggle('picked-row', tr.dataset.return === (findFlight(state.flightId)?.return_date || ''));
       }});
-      document.querySelectorAll('tr[data-checkout]').forEach(tr => {{
-        tr.classList.toggle('picked-row', tr.dataset.checkout === state.lodgingCheckout);
+      document.querySelectorAll('tr[data-lodging-id]').forEach(tr => {{
+        tr.classList.toggle('picked-row', tr.dataset.lodgingId === state.lodgingCheckout);
       }});
     }}
 
@@ -741,7 +934,7 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       document.getElementById('amt-misc').textContent = fmt(miscAmt);
 
       document.getElementById('detail-flight').innerHTML = flight
-        ? `${{flight.source_label}} · 귀국 ${{flight.return_date}} · 1인 ${{flight.price_per_person_text || fmt(flightPerPerson)}}<br><span class="muted">${{flight.carrier_text}}</span> · <a href="#" data-goto="flights">변경</a>`
+        ? `${{flight.source_label}} · 귀국 ${{flight.return_date}} · 1인 ${{flight.price_per_person_text || fmt(flightPerPerson)}}<br><span class="muted">${{flight.duration_text || ''}} · ${{flight.carrier_text || ''}}</span> · <a href="#" data-goto="flights">변경</a>`
         : '미선택 · <a href="#" data-goto="flights">항공권 탭에서 선택</a>';
 
       document.getElementById('detail-lodging').innerHTML = lodging
@@ -814,8 +1007,8 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
           const lod = findLodging(s.lodgingCheckout);
           const fl = findFlight(s.flightId);
           if (fl && lod && lod.checkout_date !== fl.return_date) {{
-            const matched = findLodging(fl.return_date);
-            if (matched) s.lodgingCheckout = matched.checkout_date;
+            const matched = cheapestLodgingForCheckout(fl.return_date);
+            if (matched) s.lodgingCheckout = matched.id;
           }}
           saveState(s);
           renderDashboard();
@@ -846,6 +1039,19 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       }});
 
       renderDashboard();
+      const selected = findFlight(getState().flightId);
+      if (selected?.route) showRoute(selected.route);
+    }}
+
+    function showRoute(route) {{
+      document.querySelectorAll('.route-tab').forEach(b => {{
+        const on = b.dataset.route === route;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      }});
+      document.querySelectorAll('.route-panel').forEach(p => {{
+        p.classList.toggle('active', p.dataset.routePanel === route);
+      }});
     }}
 
     document.querySelectorAll('.tab').forEach(btn => {{
@@ -862,6 +1068,10 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
       }});
     }});
 
+    document.querySelectorAll('.route-tab').forEach(btn => {{
+      btn.addEventListener('click', () => showRoute(btn.dataset.route));
+    }});
+
     const hashPanel = {{ '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging' }}[location.hash];
     if (hashPanel) document.querySelector(`[data-panel="${{hashPanel}}"]`).click();
 
@@ -873,13 +1083,15 @@ def render_page(flights_html: str, lodging_html: str, dashboard_html: str, trip_
 
 def main() -> None:
     now_kst = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S KST")
-    sky = load_flights(SKY_FILE)
-    kayak = load_flights(KAYAK_FILE)
-    google = load_flights(GOOGLE_FILE)
-    airbnb = load_lodging(AIRBNB_LODGING)
-    trip_data = build_trip_data(sky, kayak, google, airbnb)
-    flights_html = render_flights(sky, kayak, google)
-    lodging_html = render_lodging(airbnb)
+    chi_days = load_route_rows(ROUTE_CHI_FILE)
+    nyc_days = load_route_rows(ROUTE_NYC_FILE)
+    route_flights = flatten_route_flights(nyc_days) + flatten_route_flights(chi_days)
+    route_flights.sort(key=lambda x: (x["price"], x.get("duration_minutes") or 10**9))
+    airbnb_all = load_lodging_list(AIRBNB_LODGING)
+    airbnb = load_lodging_cheapest(airbnb_all)
+    trip_data = build_trip_data(route_flights, airbnb_all, airbnb)
+    flights_html = render_flights(chi_days, nyc_days)
+    lodging_html = render_lodging(airbnb_all, airbnb)
     combo_html = render_combo_analysis(trip_data.get("combos", []))
     dashboard_html = render_dashboard_shell(combo_html)
     page = render_page(flights_html, lodging_html, dashboard_html, trip_data, now_kst)
@@ -890,6 +1102,7 @@ def main() -> None:
     print(f"Wrote {HTML}")
     print(f"Wrote {INDEX_HTML}")
     print(f"Wrote {DOCS_INDEX}")
+    print(f"Route flights: {len(route_flights)}")
 
 
 if __name__ == "__main__":
