@@ -293,6 +293,156 @@
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
         "cars": [
           {
+            "id": "car:kayak:2026-10-08:스탠다드:쉐보레 Cruze:594480",
+            "source": "kayak",
+            "model": "쉐보레 Cruze",
+            "category": "스탠다드",
+            "price": 594480,
+            "price_text": "₩594,480",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-08:이코노미:쉐보레 Spark:604170",
+            "source": "kayak",
+            "model": "쉐보레 Spark",
+            "category": "이코노미",
+            "price": 604170,
+            "price_text": "₩604,170",
+            "seats": 4,
+            "bags": 1,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-08:컴팩트 SUV:닛산 Juke:607650",
+            "source": "kayak",
+            "model": "닛산 Juke",
+            "category": "컴팩트 SUV",
+            "price": 607650,
+            "price_text": "₩607,650",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-08:컴팩트:포드 Focus:612510",
+            "source": "kayak",
+            "model": "포드 Focus",
+            "category": "컴팩트",
+            "price": 612510,
+            "price_text": "₩612,510",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-08:컴팩트:닛산 베르사 세단:612510",
+            "source": "kayak",
+            "model": "닛산 베르사 세단",
+            "category": "컴팩트",
+            "price": 612510,
+            "price_text": "₩612,510",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-08:중형:토요타 Corolla:620835",
+            "source": "kayak",
+            "model": "토요타 Corolla",
+            "category": "중형",
+            "price": 620835,
+            "price_text": "₩620,835",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-08:중형:기아 K4:620835",
+            "source": "kayak",
+            "model": "기아 K4",
+            "category": "중형",
+            "price": 620835,
+            "price_text": "₩620,835",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-08:풀사이즈:쉐보레 Malibu:631920",
+            "source": "kayak",
+            "model": "쉐보레 Malibu",
+            "category": "풀사이즈",
+            "price": 631920,
+            "price_text": "₩631,920",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
             "id": "car:kayak:2026-10-08:전기차:전기차 (업체 배정):1174395",
             "source": "kayak",
             "model": "전기차 (업체 배정)",
@@ -311,7 +461,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-08:전기차:기아 니로:1184970",
@@ -333,7 +483,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-08:전기차:기아 니로:1186740",
@@ -355,7 +505,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-08:전기차:전기차 (업체 배정):1224195",
@@ -376,7 +526,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-08:전기차:포드 Mustang Mach-E:1233165",
@@ -398,7 +548,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-08:전기차:테슬라 Model 3:1269615",
@@ -420,7 +570,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-08:전기차:테슬라 Model 3:1284195",
@@ -442,7 +592,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-08:전기차:포드 Mustang Mach-E:1287360",
@@ -464,7 +614,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-08:전기차:테슬라 Model 3:1326705",
@@ -485,7 +635,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-08:전기차:현대 제네시스 G80:1568535",
@@ -507,400 +657,31 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-08:스탠다드:쉐보레 Cruze:594480",
-            "source": "kayak",
-            "model": "쉐보레 Cruze",
-            "category": "스탠다드",
-            "price": 594480,
-            "price_text": "₩594,480",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-08:이코노미:쉐보레 Spark:604170",
-            "source": "kayak",
-            "model": "쉐보레 Spark",
-            "category": "이코노미",
-            "price": 604170,
-            "price_text": "₩604,170",
-            "seats": 4,
-            "bags": 1,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-08:컴팩트 SUV:닛산 Juke:607650",
-            "source": "kayak",
-            "model": "닛산 Juke",
-            "category": "컴팩트 SUV",
-            "price": 607650,
-            "price_text": "₩607,650",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-08:컴팩트:포드 Focus:612510",
-            "source": "kayak",
-            "model": "포드 Focus",
-            "category": "컴팩트",
-            "price": 612510,
-            "price_text": "₩612,510",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-08:컴팩트:닛산 베르사 세단:612510",
-            "source": "kayak",
-            "model": "닛산 베르사 세단",
-            "category": "컴팩트",
-            "price": 612510,
-            "price_text": "₩612,510",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-08:중형:토요타 Corolla:620835",
-            "source": "kayak",
-            "model": "토요타 Corolla",
-            "category": "중형",
-            "price": 620835,
-            "price_text": "₩620,835",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-08:중형:기아 K4:620835",
-            "source": "kayak",
-            "model": "기아 K4",
-            "category": "중형",
-            "price": 620835,
-            "price_text": "₩620,835",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-08:풀사이즈:쉐보레 Malibu:631920",
-            "source": "kayak",
-            "model": "쉐보레 Malibu",
-            "category": "풀사이즈",
-            "price": 631920,
-            "price_text": "₩631,920",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           }
         ],
         "cheapest": {
-          "id": "car:kayak:2026-10-08:전기차:전기차 (업체 배정):1174395",
+          "id": "car:kayak:2026-10-08:스탠다드:쉐보레 Cruze:594480",
           "source": "kayak",
-          "model": "전기차 (업체 배정)",
-          "category": "전기차",
-          "price": 1174395,
-          "price_text": "₩1,174,395",
+          "model": "쉐보레 Cruze",
+          "category": "스탠다드",
+          "price": 594480,
+          "price_text": "₩594,480",
           "seats": 5,
           "bags": 2,
           "doors": 4,
           "location": "ORD: 시카고 오헤어국제공항",
           "options": [
-            "Fully electric",
-            "무료 취소",
             "5인 이상"
           ],
           "supplier": "",
-          "electric": true,
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-          "synced_at": "2026-08-07T11:53:42+09:00"
+          "electric": false,
+          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
+          "synced_at": "2026-08-07T11:54:16+09:00"
         }
       }
     },
     "cars": [
-      {
-        "id": "car:kayak:2026-10-08:전기차:전기차 (업체 배정):1174395",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1174395,
-        "price_text": "₩1,174,395",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-08:전기차:기아 니로:1184970",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1184970,
-        "price_text": "₩1,184,970",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-08:전기차:기아 니로:1186740",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1186740,
-        "price_text": "₩1,186,740",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-08:전기차:전기차 (업체 배정):1224195",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1224195,
-        "price_text": "₩1,224,195",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-08:전기차:포드 Mustang Mach-E:1233165",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1233165,
-        "price_text": "₩1,233,165",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-08:전기차:테슬라 Model 3:1269615",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1269615,
-        "price_text": "₩1,269,615",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-08:전기차:테슬라 Model 3:1284195",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1284195,
-        "price_text": "₩1,284,195",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-08:전기차:포드 Mustang Mach-E:1287360",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1287360,
-        "price_text": "₩1,287,360",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-08:전기차:테슬라 Model 3:1326705",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1326705,
-        "price_text": "₩1,326,705",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD · KAYAK",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-08:전기차:현대 제네시스 G80:1568535",
-        "source": "kayak",
-        "model": "현대 제네시스 G80",
-        "category": "전기차",
-        "price": 1568535,
-        "price_text": "₩1,568,535",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
       {
         "id": "car:kayak:2026-10-08:스탠다드:쉐보레 Cruze:594480",
         "source": "kayak",
@@ -918,7 +699,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-08:이코노미:쉐보레 Spark:604170",
@@ -935,7 +716,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-08:컴팩트 SUV:닛산 Juke:607650",
@@ -954,7 +735,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-08:컴팩트:포드 Focus:612510",
@@ -973,7 +754,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-08:컴팩트:닛산 베르사 세단:612510",
@@ -992,7 +773,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-08:중형:토요타 Corolla:620835",
@@ -1011,7 +792,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-08:중형:기아 K4:620835",
@@ -1030,7 +811,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-08:풀사이즈:쉐보레 Malibu:631920",
@@ -1049,7 +830,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:discover:2026-10-08:이코노미:Toyota Yaris:926831",
@@ -1284,9 +1065,226 @@
         "supplier": "",
         "seller_url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/23&puTime=12:00&doDate=2026/10/08&doTime=12:00&currency=KRW",
         "synced_at": "2026-08-07T11:43:39+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-08:전기차:전기차 (업체 배정):1174395",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1174395,
+        "price_text": "₩1,174,395",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-08:전기차:기아 니로:1184970",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1184970,
+        "price_text": "₩1,184,970",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-08:전기차:기아 니로:1186740",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1186740,
+        "price_text": "₩1,186,740",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-08:전기차:전기차 (업체 배정):1224195",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1224195,
+        "price_text": "₩1,224,195",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-08:전기차:포드 Mustang Mach-E:1233165",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1233165,
+        "price_text": "₩1,233,165",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-08:전기차:테슬라 Model 3:1269615",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1269615,
+        "price_text": "₩1,269,615",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-08:전기차:테슬라 Model 3:1284195",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1284195,
+        "price_text": "₩1,284,195",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-08:전기차:포드 Mustang Mach-E:1287360",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1287360,
+        "price_text": "₩1,287,360",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-08:전기차:테슬라 Model 3:1326705",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1326705,
+        "price_text": "₩1,326,705",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · KAYAK",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-08:전기차:현대 제네시스 G80:1568535",
+        "source": "kayak",
+        "model": "현대 제네시스 G80",
+        "category": "전기차",
+        "price": 1568535,
+        "price_text": "₩1,568,535",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-08?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
       }
     ],
-    "synced_at": "2026-08-07T11:53:42+09:00"
+    "synced_at": "2026-08-07T11:54:16+09:00"
   },
   {
     "pickup_date": "2026-09-23",
@@ -1582,6 +1580,162 @@
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
         "cars": [
           {
+            "id": "car:kayak:2026-10-09:이코노미:토요타 야리스:866656",
+            "source": "kayak",
+            "model": "토요타 야리스",
+            "category": "이코노미",
+            "price": 866656,
+            "price_text": "₩866,656",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-09:이코노미:토요타 야리스:881104",
+            "source": "kayak",
+            "model": "토요타 야리스",
+            "category": "이코노미",
+            "price": 881104,
+            "price_text": "₩881,104",
+            "seats": 4,
+            "bags": 1,
+            "doors": 4,
+            "location": "ORD · KAYAK",
+            "options": [],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-09:컴팩트:닛산 베르사 세단:883264",
+            "source": "kayak",
+            "model": "닛산 베르사 세단",
+            "category": "컴팩트",
+            "price": 883264,
+            "price_text": "₩883,264",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-09:중형:혼다 Civic:919792",
+            "source": "kayak",
+            "model": "혼다 Civic",
+            "category": "중형",
+            "price": 919792,
+            "price_text": "₩919,792",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-09:컴팩트:닛산 베르사 세단:919792",
+            "source": "kayak",
+            "model": "닛산 베르사 세단",
+            "category": "컴팩트",
+            "price": 919792,
+            "price_text": "₩919,792",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-09:이코노미:쉐보레 Spark:919792",
+            "source": "kayak",
+            "model": "쉐보레 Spark",
+            "category": "이코노미",
+            "price": 919792,
+            "price_text": "₩919,792",
+            "seats": 4,
+            "bags": 1,
+            "doors": 2,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-09:스탠다드:쉐보레 Cruze:919792",
+            "source": "kayak",
+            "model": "쉐보레 Cruze",
+            "category": "스탠다드",
+            "price": 919792,
+            "price_text": "₩919,792",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-09:중형:토요타 Corolla:919984",
+            "source": "kayak",
+            "model": "토요타 Corolla",
+            "category": "중형",
+            "price": 919984,
+            "price_text": "₩919,984",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
             "id": "car:kayak:2026-10-09:전기차:전기차 (업체 배정):1252704",
             "source": "kayak",
             "model": "전기차 (업체 배정)",
@@ -1600,7 +1754,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-09:전기차:기아 니로:1263952",
@@ -1622,7 +1776,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-09:전기차:기아 니로:1265856",
@@ -1644,7 +1798,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-09:전기차:전기차 (업체 배정):1305808",
@@ -1665,7 +1819,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-09:전기차:포드 Mustang Mach-E:1315376",
@@ -1687,7 +1841,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-09:전기차:테슬라 Model 3:1354240",
@@ -1709,7 +1863,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-09:전기차:테슬라 Model 3:1369792",
@@ -1731,7 +1885,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-09:전기차:포드 Mustang Mach-E:1373200",
@@ -1753,7 +1907,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-09:전기차:테슬라 Model 3:1415104",
@@ -1774,7 +1928,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-09:전기차:현대 제네시스 G80:1673088",
@@ -1796,406 +1950,32 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-09:이코노미:토요타 야리스:866656",
-            "source": "kayak",
-            "model": "토요타 야리스",
-            "category": "이코노미",
-            "price": 866656,
-            "price_text": "₩866,656",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-09:이코노미:토요타 야리스:881104",
-            "source": "kayak",
-            "model": "토요타 야리스",
-            "category": "이코노미",
-            "price": 881104,
-            "price_text": "₩881,104",
-            "seats": 4,
-            "bags": 1,
-            "doors": 4,
-            "location": "ORD · KAYAK",
-            "options": [],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-09:컴팩트:닛산 베르사 세단:883264",
-            "source": "kayak",
-            "model": "닛산 베르사 세단",
-            "category": "컴팩트",
-            "price": 883264,
-            "price_text": "₩883,264",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-09:중형:혼다 Civic:919792",
-            "source": "kayak",
-            "model": "혼다 Civic",
-            "category": "중형",
-            "price": 919792,
-            "price_text": "₩919,792",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-09:컴팩트:닛산 베르사 세단:919792",
-            "source": "kayak",
-            "model": "닛산 베르사 세단",
-            "category": "컴팩트",
-            "price": 919792,
-            "price_text": "₩919,792",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-09:이코노미:쉐보레 Spark:919792",
-            "source": "kayak",
-            "model": "쉐보레 Spark",
-            "category": "이코노미",
-            "price": 919792,
-            "price_text": "₩919,792",
-            "seats": 4,
-            "bags": 1,
-            "doors": 2,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-09:스탠다드:쉐보레 Cruze:919792",
-            "source": "kayak",
-            "model": "쉐보레 Cruze",
-            "category": "스탠다드",
-            "price": 919792,
-            "price_text": "₩919,792",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-09:중형:토요타 Corolla:919984",
-            "source": "kayak",
-            "model": "토요타 Corolla",
-            "category": "중형",
-            "price": 919984,
-            "price_text": "₩919,984",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           }
         ],
         "cheapest": {
-          "id": "car:kayak:2026-10-09:전기차:전기차 (업체 배정):1252704",
+          "id": "car:kayak:2026-10-09:이코노미:토요타 야리스:866656",
           "source": "kayak",
-          "model": "전기차 (업체 배정)",
-          "category": "전기차",
-          "price": 1252704,
-          "price_text": "₩1,252,704",
+          "model": "토요타 야리스",
+          "category": "이코노미",
+          "price": 866656,
+          "price_text": "₩866,656",
           "seats": 5,
           "bags": 2,
           "doors": 4,
           "location": "ORD: 시카고 오헤어국제공항",
           "options": [
-            "Fully electric",
             "무료 취소",
             "5인 이상"
           ],
           "supplier": "",
-          "electric": true,
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-          "synced_at": "2026-08-07T11:53:42+09:00"
+          "electric": false,
+          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
+          "synced_at": "2026-08-07T11:54:16+09:00"
         }
       }
     },
     "cars": [
-      {
-        "id": "car:kayak:2026-10-09:전기차:전기차 (업체 배정):1252704",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1252704,
-        "price_text": "₩1,252,704",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-09:전기차:기아 니로:1263952",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1263952,
-        "price_text": "₩1,263,952",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-09:전기차:기아 니로:1265856",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1265856,
-        "price_text": "₩1,265,856",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-09:전기차:전기차 (업체 배정):1305808",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1305808,
-        "price_text": "₩1,305,808",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-09:전기차:포드 Mustang Mach-E:1315376",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1315376,
-        "price_text": "₩1,315,376",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-09:전기차:테슬라 Model 3:1354240",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1354240,
-        "price_text": "₩1,354,240",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-09:전기차:테슬라 Model 3:1369792",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1369792,
-        "price_text": "₩1,369,792",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-09:전기차:포드 Mustang Mach-E:1373200",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1373200,
-        "price_text": "₩1,373,200",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-09:전기차:테슬라 Model 3:1415104",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1415104,
-        "price_text": "₩1,415,104",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD · KAYAK",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-09:전기차:현대 제네시스 G80:1673088",
-        "source": "kayak",
-        "model": "현대 제네시스 G80",
-        "category": "전기차",
-        "price": 1673088,
-        "price_text": "₩1,673,088",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
       {
         "id": "car:kayak:2026-10-09:이코노미:토요타 야리스:866656",
         "source": "kayak",
@@ -2214,7 +1994,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-09:이코노미:토요타 야리스:881104",
@@ -2231,7 +2011,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-09:컴팩트:닛산 베르사 세단:883264",
@@ -2251,7 +2031,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-09:중형:혼다 Civic:919792",
@@ -2271,7 +2051,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-09:컴팩트:닛산 베르사 세단:919792",
@@ -2291,7 +2071,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-09:이코노미:쉐보레 Spark:919792",
@@ -2310,7 +2090,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-09:스탠다드:쉐보레 Cruze:919792",
@@ -2330,7 +2110,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-09:중형:토요타 Corolla:919984",
@@ -2350,7 +2130,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:discover:2026-10-09:이코노미:Toyota Yaris:988243",
@@ -2585,9 +2365,226 @@
         "supplier": "",
         "seller_url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/23&puTime=12:00&doDate=2026/10/09&doTime=12:00&currency=KRW",
         "synced_at": "2026-08-07T11:44:00+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-09:전기차:전기차 (업체 배정):1252704",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1252704,
+        "price_text": "₩1,252,704",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-09:전기차:기아 니로:1263952",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1263952,
+        "price_text": "₩1,263,952",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-09:전기차:기아 니로:1265856",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1265856,
+        "price_text": "₩1,265,856",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-09:전기차:전기차 (업체 배정):1305808",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1305808,
+        "price_text": "₩1,305,808",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-09:전기차:포드 Mustang Mach-E:1315376",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1315376,
+        "price_text": "₩1,315,376",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-09:전기차:테슬라 Model 3:1354240",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1354240,
+        "price_text": "₩1,354,240",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-09:전기차:테슬라 Model 3:1369792",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1369792,
+        "price_text": "₩1,369,792",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-09:전기차:포드 Mustang Mach-E:1373200",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1373200,
+        "price_text": "₩1,373,200",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-09:전기차:테슬라 Model 3:1415104",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1415104,
+        "price_text": "₩1,415,104",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · KAYAK",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-09:전기차:현대 제네시스 G80:1673088",
+        "source": "kayak",
+        "model": "현대 제네시스 G80",
+        "category": "전기차",
+        "price": 1673088,
+        "price_text": "₩1,673,088",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-09?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
       }
     ],
-    "synced_at": "2026-08-07T11:53:42+09:00"
+    "synced_at": "2026-08-07T11:54:16+09:00"
   },
   {
     "pickup_date": "2026-09-23",
@@ -2883,6 +2880,162 @@
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
         "cars": [
           {
+            "id": "car:kayak:2026-10-10:이코노미:토요타 야리스:920516",
+            "source": "kayak",
+            "model": "토요타 야리스",
+            "category": "이코노미",
+            "price": 920516,
+            "price_text": "₩920,516",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:이코노미:토요타 야리스:935901",
+            "source": "kayak",
+            "model": "토요타 야리스",
+            "category": "이코노미",
+            "price": 935901,
+            "price_text": "₩935,901",
+            "seats": 4,
+            "bags": 1,
+            "doors": 4,
+            "location": "ORD · KAYAK",
+            "options": [],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:컴팩트:닛산 베르사 세단:938060",
+            "source": "kayak",
+            "model": "닛산 베르사 세단",
+            "category": "컴팩트",
+            "price": 938060,
+            "price_text": "₩938,060",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:중형:혼다 Civic:976191",
+            "source": "kayak",
+            "model": "혼다 Civic",
+            "category": "중형",
+            "price": 976191,
+            "price_text": "₩976,191",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:컴팩트:닛산 베르사 세단:976191",
+            "source": "kayak",
+            "model": "닛산 베르사 세단",
+            "category": "컴팩트",
+            "price": 976191,
+            "price_text": "₩976,191",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:이코노미:쉐보레 Spark:976191",
+            "source": "kayak",
+            "model": "쉐보레 Spark",
+            "category": "이코노미",
+            "price": 976191,
+            "price_text": "₩976,191",
+            "seats": 4,
+            "bags": 1,
+            "doors": 2,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:스탠다드:쉐보레 Cruze:976191",
+            "source": "kayak",
+            "model": "쉐보레 Cruze",
+            "category": "스탠다드",
+            "price": 976191,
+            "price_text": "₩976,191",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:중형:토요타 Corolla:977143",
+            "source": "kayak",
+            "model": "토요타 Corolla",
+            "category": "중형",
+            "price": 977143,
+            "price_text": "₩977,143",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
             "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1330998",
             "source": "kayak",
             "model": "전기차 (업체 배정)",
@@ -2901,7 +3054,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-10:전기차:기아 니로:1342966",
@@ -2923,7 +3076,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-10:전기차:기아 니로:1344972",
@@ -2945,7 +3098,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1387404",
@@ -2966,7 +3119,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-10:전기차:포드 Mustang Mach-E:1397570",
@@ -2988,7 +3141,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-10:전기차:테슬라 Model 3:1438880",
@@ -3010,7 +3163,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-10:전기차:테슬라 Model 3:1455404",
@@ -3032,7 +3185,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-10:전기차:포드 Mustang Mach-E:1459008",
@@ -3054,7 +3207,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-10:전기차:테슬라 Model 3:1503599",
@@ -3075,7 +3228,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-10:전기차:현대 제네시스 G80:1777656",
@@ -3097,406 +3250,32 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-10:이코노미:토요타 야리스:920516",
-            "source": "kayak",
-            "model": "토요타 야리스",
-            "category": "이코노미",
-            "price": 920516,
-            "price_text": "₩920,516",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-10:이코노미:토요타 야리스:935901",
-            "source": "kayak",
-            "model": "토요타 야리스",
-            "category": "이코노미",
-            "price": 935901,
-            "price_text": "₩935,901",
-            "seats": 4,
-            "bags": 1,
-            "doors": 4,
-            "location": "ORD · KAYAK",
-            "options": [],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-10:컴팩트:닛산 베르사 세단:938060",
-            "source": "kayak",
-            "model": "닛산 베르사 세단",
-            "category": "컴팩트",
-            "price": 938060,
-            "price_text": "₩938,060",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-10:중형:혼다 Civic:976191",
-            "source": "kayak",
-            "model": "혼다 Civic",
-            "category": "중형",
-            "price": 976191,
-            "price_text": "₩976,191",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-10:컴팩트:닛산 베르사 세단:976191",
-            "source": "kayak",
-            "model": "닛산 베르사 세단",
-            "category": "컴팩트",
-            "price": 976191,
-            "price_text": "₩976,191",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-10:이코노미:쉐보레 Spark:976191",
-            "source": "kayak",
-            "model": "쉐보레 Spark",
-            "category": "이코노미",
-            "price": 976191,
-            "price_text": "₩976,191",
-            "seats": 4,
-            "bags": 1,
-            "doors": 2,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-10:스탠다드:쉐보레 Cruze:976191",
-            "source": "kayak",
-            "model": "쉐보레 Cruze",
-            "category": "스탠다드",
-            "price": 976191,
-            "price_text": "₩976,191",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-10:중형:토요타 Corolla:977143",
-            "source": "kayak",
-            "model": "토요타 Corolla",
-            "category": "중형",
-            "price": 977143,
-            "price_text": "₩977,143",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           }
         ],
         "cheapest": {
-          "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1330998",
+          "id": "car:kayak:2026-10-10:이코노미:토요타 야리스:920516",
           "source": "kayak",
-          "model": "전기차 (업체 배정)",
-          "category": "전기차",
-          "price": 1330998,
-          "price_text": "₩1,330,998",
+          "model": "토요타 야리스",
+          "category": "이코노미",
+          "price": 920516,
+          "price_text": "₩920,516",
           "seats": 5,
           "bags": 2,
           "doors": 4,
           "location": "ORD: 시카고 오헤어국제공항",
           "options": [
-            "Fully electric",
             "무료 취소",
             "5인 이상"
           ],
           "supplier": "",
-          "electric": true,
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-          "synced_at": "2026-08-07T11:53:42+09:00"
+          "electric": false,
+          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
+          "synced_at": "2026-08-07T11:54:16+09:00"
         }
       }
     },
     "cars": [
-      {
-        "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1330998",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1330998,
-        "price_text": "₩1,330,998",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-10:전기차:기아 니로:1342966",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1342966,
-        "price_text": "₩1,342,966",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-10:전기차:기아 니로:1344972",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1344972,
-        "price_text": "₩1,344,972",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1387404",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1387404,
-        "price_text": "₩1,387,404",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-10:전기차:포드 Mustang Mach-E:1397570",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1397570,
-        "price_text": "₩1,397,570",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-10:전기차:테슬라 Model 3:1438880",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1438880,
-        "price_text": "₩1,438,880",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-10:전기차:테슬라 Model 3:1455404",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1455404,
-        "price_text": "₩1,455,404",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-10:전기차:포드 Mustang Mach-E:1459008",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1459008,
-        "price_text": "₩1,459,008",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-10:전기차:테슬라 Model 3:1503599",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1503599,
-        "price_text": "₩1,503,599",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD · KAYAK",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-10:전기차:현대 제네시스 G80:1777656",
-        "source": "kayak",
-        "model": "현대 제네시스 G80",
-        "category": "전기차",
-        "price": 1777656,
-        "price_text": "₩1,777,656",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
       {
         "id": "car:kayak:2026-10-10:이코노미:토요타 야리스:920516",
         "source": "kayak",
@@ -3515,7 +3294,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-10:이코노미:토요타 야리스:935901",
@@ -3532,7 +3311,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-10:컴팩트:닛산 베르사 세단:938060",
@@ -3552,7 +3331,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-10:중형:혼다 Civic:976191",
@@ -3572,7 +3351,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-10:컴팩트:닛산 베르사 세단:976191",
@@ -3592,7 +3371,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-10:이코노미:쉐보레 Spark:976191",
@@ -3611,7 +3390,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-10:스탠다드:쉐보레 Cruze:976191",
@@ -3631,7 +3410,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-10:중형:토요타 Corolla:977143",
@@ -3651,7 +3430,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:discover:2026-10-10:이코노미:Toyota Yaris:1049639",
@@ -3886,9 +3665,226 @@
         "supplier": "",
         "seller_url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/23&puTime=12:00&doDate=2026/10/10&doTime=12:00&currency=KRW",
         "synced_at": "2026-08-07T11:44:20+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1330998",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1330998,
+        "price_text": "₩1,330,998",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:기아 니로:1342966",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1342966,
+        "price_text": "₩1,342,966",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:기아 니로:1344972",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1344972,
+        "price_text": "₩1,344,972",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1387404",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1387404,
+        "price_text": "₩1,387,404",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:포드 Mustang Mach-E:1397570",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1397570,
+        "price_text": "₩1,397,570",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:테슬라 Model 3:1438880",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1438880,
+        "price_text": "₩1,438,880",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:테슬라 Model 3:1455404",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1455404,
+        "price_text": "₩1,455,404",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:포드 Mustang Mach-E:1459008",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1459008,
+        "price_text": "₩1,459,008",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:테슬라 Model 3:1503599",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1503599,
+        "price_text": "₩1,503,599",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · KAYAK",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:현대 제네시스 G80:1777656",
+        "source": "kayak",
+        "model": "현대 제네시스 G80",
+        "category": "전기차",
+        "price": 1777656,
+        "price_text": "₩1,777,656",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
       }
     ],
-    "synced_at": "2026-08-07T11:53:42+09:00"
+    "synced_at": "2026-08-07T11:54:16+09:00"
   },
   {
     "pickup_date": "2026-09-23",
@@ -4184,6 +4180,162 @@
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
         "cars": [
           {
+            "id": "car:kayak:2026-10-11:이코노미:토요타 야리스:974358",
+            "source": "kayak",
+            "model": "토요타 야리스",
+            "category": "이코노미",
+            "price": 974358,
+            "price_text": "₩974,358",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-11:이코노미:토요타 야리스:990594",
+            "source": "kayak",
+            "model": "토요타 야리스",
+            "category": "이코노미",
+            "price": 990594,
+            "price_text": "₩990,594",
+            "seats": 4,
+            "bags": 1,
+            "doors": 4,
+            "location": "ORD · KAYAK",
+            "options": [],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-11:컴팩트:닛산 베르사 세단:992916",
+            "source": "kayak",
+            "model": "닛산 베르사 세단",
+            "category": "컴팩트",
+            "price": 992916,
+            "price_text": "₩992,916",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-11:중형:혼다 Civic:1032588",
+            "source": "kayak",
+            "model": "혼다 Civic",
+            "category": "중형",
+            "price": 1032588,
+            "price_text": "₩1,032,588",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-11:컴팩트:포드 Focus:1032588",
+            "source": "kayak",
+            "model": "포드 Focus",
+            "category": "컴팩트",
+            "price": 1032588,
+            "price_text": "₩1,032,588",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-11:이코노미:쉐보레 Spark:1032588",
+            "source": "kayak",
+            "model": "쉐보레 Spark",
+            "category": "이코노미",
+            "price": 1032588,
+            "price_text": "₩1,032,588",
+            "seats": 4,
+            "bags": 1,
+            "doors": 2,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-11:스탠다드:쉐보레 Cruze:1032588",
+            "source": "kayak",
+            "model": "쉐보레 Cruze",
+            "category": "스탠다드",
+            "price": 1032588,
+            "price_text": "₩1,032,588",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-11:중형:토요타 Corolla:1034316",
+            "source": "kayak",
+            "model": "토요타 Corolla",
+            "category": "중형",
+            "price": 1034316,
+            "price_text": "₩1,034,316",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
             "id": "car:kayak:2026-10-11:전기차:전기차 (업체 배정):1409292",
             "source": "kayak",
             "model": "전기차 (업체 배정)",
@@ -4202,7 +4354,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-11:전기차:기아 니로:1421964",
@@ -4224,7 +4376,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-11:전기차:기아 니로:1424070",
@@ -4246,7 +4398,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-11:전기차:전기차 (업체 배정):1468998",
@@ -4267,7 +4419,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-11:전기차:포드 Mustang Mach-E:1479798",
@@ -4289,7 +4441,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-11:전기차:테슬라 Model 3:1523502",
@@ -4311,7 +4463,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-11:전기차:테슬라 Model 3:1541034",
@@ -4333,7 +4485,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-11:전기차:포드 Mustang Mach-E:1544832",
@@ -4355,7 +4507,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-11:전기차:테슬라 Model 3:1591992",
@@ -4376,7 +4528,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-11:전기차:현대 제네시스 G80:1882224",
@@ -4398,406 +4550,32 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-11:이코노미:토요타 야리스:974358",
-            "source": "kayak",
-            "model": "토요타 야리스",
-            "category": "이코노미",
-            "price": 974358,
-            "price_text": "₩974,358",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-11:이코노미:토요타 야리스:990594",
-            "source": "kayak",
-            "model": "토요타 야리스",
-            "category": "이코노미",
-            "price": 990594,
-            "price_text": "₩990,594",
-            "seats": 4,
-            "bags": 1,
-            "doors": 4,
-            "location": "ORD · KAYAK",
-            "options": [],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-11:컴팩트:닛산 베르사 세단:992916",
-            "source": "kayak",
-            "model": "닛산 베르사 세단",
-            "category": "컴팩트",
-            "price": 992916,
-            "price_text": "₩992,916",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-11:중형:혼다 Civic:1032588",
-            "source": "kayak",
-            "model": "혼다 Civic",
-            "category": "중형",
-            "price": 1032588,
-            "price_text": "₩1,032,588",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-11:컴팩트:포드 Focus:1032588",
-            "source": "kayak",
-            "model": "포드 Focus",
-            "category": "컴팩트",
-            "price": 1032588,
-            "price_text": "₩1,032,588",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-11:이코노미:쉐보레 Spark:1032588",
-            "source": "kayak",
-            "model": "쉐보레 Spark",
-            "category": "이코노미",
-            "price": 1032588,
-            "price_text": "₩1,032,588",
-            "seats": 4,
-            "bags": 1,
-            "doors": 2,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-11:스탠다드:쉐보레 Cruze:1032588",
-            "source": "kayak",
-            "model": "쉐보레 Cruze",
-            "category": "스탠다드",
-            "price": 1032588,
-            "price_text": "₩1,032,588",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-11:중형:토요타 Corolla:1034316",
-            "source": "kayak",
-            "model": "토요타 Corolla",
-            "category": "중형",
-            "price": 1034316,
-            "price_text": "₩1,034,316",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           }
         ],
         "cheapest": {
-          "id": "car:kayak:2026-10-11:전기차:전기차 (업체 배정):1409292",
+          "id": "car:kayak:2026-10-11:이코노미:토요타 야리스:974358",
           "source": "kayak",
-          "model": "전기차 (업체 배정)",
-          "category": "전기차",
-          "price": 1409292,
-          "price_text": "₩1,409,292",
+          "model": "토요타 야리스",
+          "category": "이코노미",
+          "price": 974358,
+          "price_text": "₩974,358",
           "seats": 5,
           "bags": 2,
           "doors": 4,
           "location": "ORD: 시카고 오헤어국제공항",
           "options": [
-            "Fully electric",
             "무료 취소",
             "5인 이상"
           ],
           "supplier": "",
-          "electric": true,
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-          "synced_at": "2026-08-07T11:53:42+09:00"
+          "electric": false,
+          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
+          "synced_at": "2026-08-07T11:54:16+09:00"
         }
       }
     },
     "cars": [
-      {
-        "id": "car:kayak:2026-10-11:전기차:전기차 (업체 배정):1409292",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1409292,
-        "price_text": "₩1,409,292",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-11:전기차:기아 니로:1421964",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1421964,
-        "price_text": "₩1,421,964",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-11:전기차:기아 니로:1424070",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1424070,
-        "price_text": "₩1,424,070",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-11:전기차:전기차 (업체 배정):1468998",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1468998,
-        "price_text": "₩1,468,998",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-11:전기차:포드 Mustang Mach-E:1479798",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1479798,
-        "price_text": "₩1,479,798",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-11:전기차:테슬라 Model 3:1523502",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1523502,
-        "price_text": "₩1,523,502",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-11:전기차:테슬라 Model 3:1541034",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1541034,
-        "price_text": "₩1,541,034",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-11:전기차:포드 Mustang Mach-E:1544832",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1544832,
-        "price_text": "₩1,544,832",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-11:전기차:테슬라 Model 3:1591992",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1591992,
-        "price_text": "₩1,591,992",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD · KAYAK",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-11:전기차:현대 제네시스 G80:1882224",
-        "source": "kayak",
-        "model": "현대 제네시스 G80",
-        "category": "전기차",
-        "price": 1882224,
-        "price_text": "₩1,882,224",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
       {
         "id": "car:kayak:2026-10-11:이코노미:토요타 야리스:974358",
         "source": "kayak",
@@ -4816,7 +4594,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-11:이코노미:토요타 야리스:990594",
@@ -4833,7 +4611,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-11:컴팩트:닛산 베르사 세단:992916",
@@ -4853,7 +4631,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-11:중형:혼다 Civic:1032588",
@@ -4873,7 +4651,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-11:컴팩트:포드 Focus:1032588",
@@ -4893,7 +4671,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-11:이코노미:쉐보레 Spark:1032588",
@@ -4912,7 +4690,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-11:스탠다드:쉐보레 Cruze:1032588",
@@ -4932,7 +4710,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-11:중형:토요타 Corolla:1034316",
@@ -4952,7 +4730,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:discover:2026-10-11:이코노미:Toyota Yaris:1111067",
@@ -5187,9 +4965,226 @@
         "supplier": "",
         "seller_url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/23&puTime=12:00&doDate=2026/10/11&doTime=12:00&currency=KRW",
         "synced_at": "2026-08-07T11:44:39+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-11:전기차:전기차 (업체 배정):1409292",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1409292,
+        "price_text": "₩1,409,292",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-11:전기차:기아 니로:1421964",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1421964,
+        "price_text": "₩1,421,964",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-11:전기차:기아 니로:1424070",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1424070,
+        "price_text": "₩1,424,070",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-11:전기차:전기차 (업체 배정):1468998",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1468998,
+        "price_text": "₩1,468,998",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-11:전기차:포드 Mustang Mach-E:1479798",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1479798,
+        "price_text": "₩1,479,798",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-11:전기차:테슬라 Model 3:1523502",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1523502,
+        "price_text": "₩1,523,502",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-11:전기차:테슬라 Model 3:1541034",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1541034,
+        "price_text": "₩1,541,034",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-11:전기차:포드 Mustang Mach-E:1544832",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1544832,
+        "price_text": "₩1,544,832",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-11:전기차:테슬라 Model 3:1591992",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1591992,
+        "price_text": "₩1,591,992",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · KAYAK",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-11:전기차:현대 제네시스 G80:1882224",
+        "source": "kayak",
+        "model": "현대 제네시스 G80",
+        "category": "전기차",
+        "price": 1882224,
+        "price_text": "₩1,882,224",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-11?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
       }
     ],
-    "synced_at": "2026-08-07T11:53:42+09:00"
+    "synced_at": "2026-08-07T11:54:16+09:00"
   },
   {
     "pickup_date": "2026-09-23",
@@ -5485,6 +5480,162 @@
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
         "cars": [
           {
+            "id": "car:kayak:2026-10-12:이코노미:토요타 야리스:1028185",
+            "source": "kayak",
+            "model": "토요타 야리스",
+            "category": "이코노미",
+            "price": 1028185,
+            "price_text": "₩1,028,185",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-12:이코노미:토요타 야리스:1045304",
+            "source": "kayak",
+            "model": "토요타 야리스",
+            "category": "이코노미",
+            "price": 1045304,
+            "price_text": "₩1,045,304",
+            "seats": 4,
+            "bags": 1,
+            "doors": 4,
+            "location": "ORD · KAYAK",
+            "options": [],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-12:컴팩트:닛산 베르사 세단:1047793",
+            "source": "kayak",
+            "model": "닛산 베르사 세단",
+            "category": "컴팩트",
+            "price": 1047793,
+            "price_text": "₩1,047,793",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-12:중형:혼다 Civic:1088966",
+            "source": "kayak",
+            "model": "혼다 Civic",
+            "category": "중형",
+            "price": 1088966,
+            "price_text": "₩1,088,966",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-12:컴팩트:닛산 베르사 세단:1088966",
+            "source": "kayak",
+            "model": "닛산 베르사 세단",
+            "category": "컴팩트",
+            "price": 1088966,
+            "price_text": "₩1,088,966",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-12:이코노미:쉐보레 Spark:1088966",
+            "source": "kayak",
+            "model": "쉐보레 Spark",
+            "category": "이코노미",
+            "price": 1088966,
+            "price_text": "₩1,088,966",
+            "seats": 4,
+            "bags": 1,
+            "doors": 2,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-12:스탠다드:쉐보레 Cruze:1088966",
+            "source": "kayak",
+            "model": "쉐보레 Cruze",
+            "category": "스탠다드",
+            "price": 1088966,
+            "price_text": "₩1,088,966",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-12:중형:토요타 Corolla:1091569",
+            "source": "kayak",
+            "model": "토요타 Corolla",
+            "category": "중형",
+            "price": 1091569,
+            "price_text": "₩1,091,569",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
             "id": "car:kayak:2026-10-12:전기차:전기차 (업체 배정):1487605",
             "source": "kayak",
             "model": "전기차 (업체 배정)",
@@ -5503,7 +5654,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-12:전기차:기아 니로:1500943",
@@ -5525,7 +5676,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-12:전기차:기아 니로:1503185",
@@ -5547,7 +5698,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-12:전기차:전기차 (업체 배정):1550609",
@@ -5568,7 +5719,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-12:전기차:포드 Mustang Mach-E:1562009",
@@ -5590,7 +5741,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-12:전기차:테슬라 Model 3:1608141",
@@ -5612,7 +5763,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-12:전기차:테슬라 Model 3:1626628",
@@ -5634,7 +5785,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-12:전기차:포드 Mustang Mach-E:1630675",
@@ -5656,7 +5807,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-12:전기차:테슬라 Model 3:1680493",
@@ -5677,7 +5828,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-12:전기차:현대 제네시스 G80:1986773",
@@ -5699,406 +5850,32 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-12:이코노미:토요타 야리스:1028185",
-            "source": "kayak",
-            "model": "토요타 야리스",
-            "category": "이코노미",
-            "price": 1028185,
-            "price_text": "₩1,028,185",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-12:이코노미:토요타 야리스:1045304",
-            "source": "kayak",
-            "model": "토요타 야리스",
-            "category": "이코노미",
-            "price": 1045304,
-            "price_text": "₩1,045,304",
-            "seats": 4,
-            "bags": 1,
-            "doors": 4,
-            "location": "ORD · KAYAK",
-            "options": [],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-12:컴팩트:닛산 베르사 세단:1047793",
-            "source": "kayak",
-            "model": "닛산 베르사 세단",
-            "category": "컴팩트",
-            "price": 1047793,
-            "price_text": "₩1,047,793",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-12:중형:혼다 Civic:1088966",
-            "source": "kayak",
-            "model": "혼다 Civic",
-            "category": "중형",
-            "price": 1088966,
-            "price_text": "₩1,088,966",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-12:컴팩트:닛산 베르사 세단:1088966",
-            "source": "kayak",
-            "model": "닛산 베르사 세단",
-            "category": "컴팩트",
-            "price": 1088966,
-            "price_text": "₩1,088,966",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-12:이코노미:쉐보레 Spark:1088966",
-            "source": "kayak",
-            "model": "쉐보레 Spark",
-            "category": "이코노미",
-            "price": 1088966,
-            "price_text": "₩1,088,966",
-            "seats": 4,
-            "bags": 1,
-            "doors": 2,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-12:스탠다드:쉐보레 Cruze:1088966",
-            "source": "kayak",
-            "model": "쉐보레 Cruze",
-            "category": "스탠다드",
-            "price": 1088966,
-            "price_text": "₩1,088,966",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-12:중형:토요타 Corolla:1091569",
-            "source": "kayak",
-            "model": "토요타 Corolla",
-            "category": "중형",
-            "price": 1091569,
-            "price_text": "₩1,091,569",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           }
         ],
         "cheapest": {
-          "id": "car:kayak:2026-10-12:전기차:전기차 (업체 배정):1487605",
+          "id": "car:kayak:2026-10-12:이코노미:토요타 야리스:1028185",
           "source": "kayak",
-          "model": "전기차 (업체 배정)",
-          "category": "전기차",
-          "price": 1487605,
-          "price_text": "₩1,487,605",
+          "model": "토요타 야리스",
+          "category": "이코노미",
+          "price": 1028185,
+          "price_text": "₩1,028,185",
           "seats": 5,
           "bags": 2,
           "doors": 4,
           "location": "ORD: 시카고 오헤어국제공항",
           "options": [
-            "Fully electric",
             "무료 취소",
             "5인 이상"
           ],
           "supplier": "",
-          "electric": true,
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-          "synced_at": "2026-08-07T11:53:42+09:00"
+          "electric": false,
+          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
+          "synced_at": "2026-08-07T11:54:16+09:00"
         }
       }
     },
     "cars": [
-      {
-        "id": "car:kayak:2026-10-12:전기차:전기차 (업체 배정):1487605",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1487605,
-        "price_text": "₩1,487,605",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-12:전기차:기아 니로:1500943",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1500943,
-        "price_text": "₩1,500,943",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-12:전기차:기아 니로:1503185",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1503185,
-        "price_text": "₩1,503,185",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-12:전기차:전기차 (업체 배정):1550609",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1550609,
-        "price_text": "₩1,550,609",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-12:전기차:포드 Mustang Mach-E:1562009",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1562009,
-        "price_text": "₩1,562,009",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-12:전기차:테슬라 Model 3:1608141",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1608141,
-        "price_text": "₩1,608,141",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-12:전기차:테슬라 Model 3:1626628",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1626628,
-        "price_text": "₩1,626,628",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-12:전기차:포드 Mustang Mach-E:1630675",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1630675,
-        "price_text": "₩1,630,675",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-12:전기차:테슬라 Model 3:1680493",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1680493,
-        "price_text": "₩1,680,493",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD · KAYAK",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-12:전기차:현대 제네시스 G80:1986773",
-        "source": "kayak",
-        "model": "현대 제네시스 G80",
-        "category": "전기차",
-        "price": 1986773,
-        "price_text": "₩1,986,773",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
       {
         "id": "car:kayak:2026-10-12:이코노미:토요타 야리스:1028185",
         "source": "kayak",
@@ -6117,7 +5894,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-12:이코노미:토요타 야리스:1045304",
@@ -6134,7 +5911,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-12:컴팩트:닛산 베르사 세단:1047793",
@@ -6154,7 +5931,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-12:중형:혼다 Civic:1088966",
@@ -6174,7 +5951,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-12:컴팩트:닛산 베르사 세단:1088966",
@@ -6194,7 +5971,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-12:이코노미:쉐보레 Spark:1088966",
@@ -6213,7 +5990,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-12:스탠다드:쉐보레 Cruze:1088966",
@@ -6233,7 +6010,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-12:중형:토요타 Corolla:1091569",
@@ -6253,7 +6030,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:discover:2026-10-12:이코노미:Toyota Yaris:1172479",
@@ -6488,9 +6265,226 @@
         "supplier": "",
         "seller_url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/23&puTime=12:00&doDate=2026/10/12&doTime=12:00&currency=KRW",
         "synced_at": "2026-08-07T11:45:00+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-12:전기차:전기차 (업체 배정):1487605",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1487605,
+        "price_text": "₩1,487,605",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-12:전기차:기아 니로:1500943",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1500943,
+        "price_text": "₩1,500,943",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-12:전기차:기아 니로:1503185",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1503185,
+        "price_text": "₩1,503,185",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-12:전기차:전기차 (업체 배정):1550609",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1550609,
+        "price_text": "₩1,550,609",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-12:전기차:포드 Mustang Mach-E:1562009",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1562009,
+        "price_text": "₩1,562,009",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-12:전기차:테슬라 Model 3:1608141",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1608141,
+        "price_text": "₩1,608,141",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-12:전기차:테슬라 Model 3:1626628",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1626628,
+        "price_text": "₩1,626,628",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-12:전기차:포드 Mustang Mach-E:1630675",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1630675,
+        "price_text": "₩1,630,675",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-12:전기차:테슬라 Model 3:1680493",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1680493,
+        "price_text": "₩1,680,493",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · KAYAK",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-12:전기차:현대 제네시스 G80:1986773",
+        "source": "kayak",
+        "model": "현대 제네시스 G80",
+        "category": "전기차",
+        "price": 1986773,
+        "price_text": "₩1,986,773",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-12?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
       }
     ],
-    "synced_at": "2026-08-07T11:53:42+09:00"
+    "synced_at": "2026-08-07T11:54:16+09:00"
   },
   {
     "pickup_date": "2026-09-23",
@@ -6786,6 +6780,162 @@
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
         "cars": [
           {
+            "id": "car:kayak:2026-10-13:이코노미:토요타 야리스:1082020",
+            "source": "kayak",
+            "model": "토요타 야리스",
+            "category": "이코노미",
+            "price": 1082020,
+            "price_text": "₩1,082,020",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-13:이코노미:토요타 야리스:1100100",
+            "source": "kayak",
+            "model": "토요타 야리스",
+            "category": "이코노미",
+            "price": 1100100,
+            "price_text": "₩1,100,100",
+            "seats": 4,
+            "bags": 1,
+            "doors": 4,
+            "location": "ORD · KAYAK",
+            "options": [],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-13:컴팩트:닛산 베르사 세단:1102660",
+            "source": "kayak",
+            "model": "닛산 베르사 세단",
+            "category": "컴팩트",
+            "price": 1102660,
+            "price_text": "₩1,102,660",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-13:중형:혼다 Civic:1145360",
+            "source": "kayak",
+            "model": "혼다 Civic",
+            "category": "중형",
+            "price": 1145360,
+            "price_text": "₩1,145,360",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-13:컴팩트:닛산 베르사 세단:1145360",
+            "source": "kayak",
+            "model": "닛산 베르사 세단",
+            "category": "컴팩트",
+            "price": 1145360,
+            "price_text": "₩1,145,360",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-13:이코노미:쉐보레 Spark:1145360",
+            "source": "kayak",
+            "model": "쉐보레 Spark",
+            "category": "이코노미",
+            "price": 1145360,
+            "price_text": "₩1,145,360",
+            "seats": 4,
+            "bags": 1,
+            "doors": 2,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-13:스탠다드:쉐보레 Cruze:1145360",
+            "source": "kayak",
+            "model": "쉐보레 Cruze",
+            "category": "스탠다드",
+            "price": 1145360,
+            "price_text": "₩1,145,360",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-13:중형:토요타 Corolla:1148640",
+            "source": "kayak",
+            "model": "토요타 Corolla",
+            "category": "중형",
+            "price": 1148640,
+            "price_text": "₩1,148,640",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD: 시카고 오헤어국제공항",
+            "options": [
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+            "synced_at": "2026-08-07T11:54:16+09:00"
+          },
+          {
             "id": "car:kayak:2026-10-13:전기차:전기차 (업체 배정):1565800",
             "source": "kayak",
             "model": "전기차 (업체 배정)",
@@ -6804,7 +6954,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-13:전기차:기아 니로:1579940",
@@ -6826,7 +6976,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-13:전기차:기아 니로:1582300",
@@ -6848,7 +6998,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-13:전기차:전기차 (업체 배정):1632200",
@@ -6869,7 +7019,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-13:전기차:포드 Mustang Mach-E:1644220",
@@ -6891,7 +7041,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-13:전기차:테슬라 Model 3:1692780",
@@ -6913,7 +7063,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-13:전기차:테슬라 Model 3:1712240",
@@ -6935,7 +7085,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-13:전기차:포드 Mustang Mach-E:1716480",
@@ -6957,7 +7107,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-13:전기차:테슬라 Model 3:1768900",
@@ -6978,7 +7128,7 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           },
           {
             "id": "car:kayak:2026-10-13:전기차:현대 제네시스 G80:2091360",
@@ -7000,406 +7150,32 @@
             "supplier": "",
             "electric": true,
             "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-13:이코노미:토요타 야리스:1082020",
-            "source": "kayak",
-            "model": "토요타 야리스",
-            "category": "이코노미",
-            "price": 1082020,
-            "price_text": "₩1,082,020",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-13:이코노미:토요타 야리스:1100100",
-            "source": "kayak",
-            "model": "토요타 야리스",
-            "category": "이코노미",
-            "price": 1100100,
-            "price_text": "₩1,100,100",
-            "seats": 4,
-            "bags": 1,
-            "doors": 4,
-            "location": "ORD · KAYAK",
-            "options": [],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-13:컴팩트:닛산 베르사 세단:1102660",
-            "source": "kayak",
-            "model": "닛산 베르사 세단",
-            "category": "컴팩트",
-            "price": 1102660,
-            "price_text": "₩1,102,660",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-13:중형:혼다 Civic:1145360",
-            "source": "kayak",
-            "model": "혼다 Civic",
-            "category": "중형",
-            "price": 1145360,
-            "price_text": "₩1,145,360",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-13:컴팩트:닛산 베르사 세단:1145360",
-            "source": "kayak",
-            "model": "닛산 베르사 세단",
-            "category": "컴팩트",
-            "price": 1145360,
-            "price_text": "₩1,145,360",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-13:이코노미:쉐보레 Spark:1145360",
-            "source": "kayak",
-            "model": "쉐보레 Spark",
-            "category": "이코노미",
-            "price": 1145360,
-            "price_text": "₩1,145,360",
-            "seats": 4,
-            "bags": 1,
-            "doors": 2,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-13:스탠다드:쉐보레 Cruze:1145360",
-            "source": "kayak",
-            "model": "쉐보레 Cruze",
-            "category": "스탠다드",
-            "price": 1145360,
-            "price_text": "₩1,145,360",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
-          },
-          {
-            "id": "car:kayak:2026-10-13:중형:토요타 Corolla:1148640",
-            "source": "kayak",
-            "model": "토요타 Corolla",
-            "category": "중형",
-            "price": 1148640,
-            "price_text": "₩1,148,640",
-            "seats": 5,
-            "bags": 3,
-            "doors": 4,
-            "location": "ORD: 시카고 오헤어국제공항",
-            "options": [
-              "무료 취소",
-              "5인 이상"
-            ],
-            "supplier": "",
-            "electric": false,
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-            "synced_at": "2026-08-07T11:53:42+09:00"
+            "synced_at": "2026-08-07T11:54:16+09:00"
           }
         ],
         "cheapest": {
-          "id": "car:kayak:2026-10-13:전기차:전기차 (업체 배정):1565800",
+          "id": "car:kayak:2026-10-13:이코노미:토요타 야리스:1082020",
           "source": "kayak",
-          "model": "전기차 (업체 배정)",
-          "category": "전기차",
-          "price": 1565800,
-          "price_text": "₩1,565,800",
+          "model": "토요타 야리스",
+          "category": "이코노미",
+          "price": 1082020,
+          "price_text": "₩1,082,020",
           "seats": 5,
           "bags": 2,
           "doors": 4,
           "location": "ORD: 시카고 오헤어국제공항",
           "options": [
-            "Fully electric",
             "무료 취소",
             "5인 이상"
           ],
           "supplier": "",
-          "electric": true,
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-          "synced_at": "2026-08-07T11:53:42+09:00"
+          "electric": false,
+          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
+          "synced_at": "2026-08-07T11:54:16+09:00"
         }
       }
     },
     "cars": [
-      {
-        "id": "car:kayak:2026-10-13:전기차:전기차 (업체 배정):1565800",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1565800,
-        "price_text": "₩1,565,800",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-13:전기차:기아 니로:1579940",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1579940,
-        "price_text": "₩1,579,940",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-13:전기차:기아 니로:1582300",
-        "source": "kayak",
-        "model": "기아 니로",
-        "category": "전기차",
-        "price": 1582300,
-        "price_text": "₩1,582,300",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 컴팩트",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-13:전기차:전기차 (업체 배정):1632200",
-        "source": "kayak",
-        "model": "전기차 (업체 배정)",
-        "category": "전기차",
-        "price": 1632200,
-        "price_text": "₩1,632,200",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-13:전기차:포드 Mustang Mach-E:1644220",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1644220,
-        "price_text": "₩1,644,220",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-13:전기차:테슬라 Model 3:1692780",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1692780,
-        "price_text": "₩1,692,780",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-13:전기차:테슬라 Model 3:1712240",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1712240,
-        "price_text": "₩1,712,240",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-13:전기차:포드 Mustang Mach-E:1716480",
-        "source": "kayak",
-        "model": "포드 Mustang Mach-E",
-        "category": "전기차",
-        "price": 1716480,
-        "price_text": "₩1,716,480",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 스탠다드",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-13:전기차:테슬라 Model 3:1768900",
-        "source": "kayak",
-        "model": "테슬라 Model 3",
-        "category": "전기차",
-        "price": 1768900,
-        "price_text": "₩1,768,900",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD · KAYAK",
-        "options": [
-          "Fully electric",
-          "차급 중형",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
-      {
-        "id": "car:kayak:2026-10-13:전기차:현대 제네시스 G80:2091360",
-        "source": "kayak",
-        "model": "현대 제네시스 G80",
-        "category": "전기차",
-        "price": 2091360,
-        "price_text": "₩2,091,360",
-        "seats": 5,
-        "bags": 2,
-        "doors": 4,
-        "location": "ORD: 시카고 오헤어국제공항",
-        "options": [
-          "Fully electric",
-          "차급 럭셔리",
-          "무료 취소",
-          "5인 이상"
-        ],
-        "supplier": "",
-        "electric": true,
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
-        "synced_at": "2026-08-07T11:53:42+09:00"
-      },
       {
         "id": "car:kayak:2026-10-13:이코노미:토요타 야리스:1082020",
         "source": "kayak",
@@ -7418,7 +7194,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-13:이코노미:토요타 야리스:1100100",
@@ -7435,7 +7211,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-13:컴팩트:닛산 베르사 세단:1102660",
@@ -7455,7 +7231,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-13:중형:혼다 Civic:1145360",
@@ -7475,7 +7251,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-13:컴팩트:닛산 베르사 세단:1145360",
@@ -7495,7 +7271,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-13:이코노미:쉐보레 Spark:1145360",
@@ -7514,7 +7290,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-13:스탠다드:쉐보레 Cruze:1145360",
@@ -7534,7 +7310,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:kayak:2026-10-13:중형:토요타 Corolla:1148640",
@@ -7554,7 +7330,7 @@
         "supplier": "",
         "electric": false,
         "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a",
-        "synced_at": "2026-08-07T11:53:42+09:00"
+        "synced_at": "2026-08-07T11:54:16+09:00"
       },
       {
         "id": "car:discover:2026-10-13:이코노미:Toyota Yaris:1233875",
@@ -7789,8 +7565,225 @@
         "supplier": "",
         "seller_url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/23&puTime=12:00&doDate=2026/10/13&doTime=12:00&currency=KRW",
         "synced_at": "2026-08-07T11:45:21+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-13:전기차:전기차 (업체 배정):1565800",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1565800,
+        "price_text": "₩1,565,800",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-13:전기차:기아 니로:1579940",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1579940,
+        "price_text": "₩1,579,940",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-13:전기차:기아 니로:1582300",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1582300,
+        "price_text": "₩1,582,300",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 컴팩트",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-13:전기차:전기차 (업체 배정):1632200",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1632200,
+        "price_text": "₩1,632,200",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-13:전기차:포드 Mustang Mach-E:1644220",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1644220,
+        "price_text": "₩1,644,220",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-13:전기차:테슬라 Model 3:1692780",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1692780,
+        "price_text": "₩1,692,780",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-13:전기차:테슬라 Model 3:1712240",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1712240,
+        "price_text": "₩1,712,240",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-13:전기차:포드 Mustang Mach-E:1716480",
+        "source": "kayak",
+        "model": "포드 Mustang Mach-E",
+        "category": "전기차",
+        "price": 1716480,
+        "price_text": "₩1,716,480",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 스탠다드",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-13:전기차:테슬라 Model 3:1768900",
+        "source": "kayak",
+        "model": "테슬라 Model 3",
+        "category": "전기차",
+        "price": 1768900,
+        "price_text": "₩1,768,900",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · KAYAK",
+        "options": [
+          "Fully electric",
+          "차급 중형",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-13:전기차:현대 제네시스 G80:2091360",
+        "source": "kayak",
+        "model": "현대 제네시스 G80",
+        "category": "전기차",
+        "price": 2091360,
+        "price_text": "₩2,091,360",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD: 시카고 오헤어국제공항",
+        "options": [
+          "Fully electric",
+          "차급 럭셔리",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-23/2026-10-13?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-07T11:54:16+09:00"
       }
     ],
-    "synced_at": "2026-08-07T11:53:42+09:00"
+    "synced_at": "2026-08-07T11:54:16+09:00"
   }
 ]
