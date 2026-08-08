@@ -143,8 +143,15 @@ EAST_COAST_3 = {
                 "nights": 2,
                 "per_night": 550_000,
                 "amount": 1_100_000,
-                "note": "맨해튼/미드타운 가족실·Apt 대략 · 세금·수수료 포함 가정",
+                "note": "맨해튼/미드타운 가족실·Apt · 세금·수수료 포함 가정",
                 "area": "Times Square · Midtown 인근",
+                "price_source": "Booking.com",
+                "price_source_detail": "Booking.com Midtown 검색 기준 2박 예산대(성인2·아동7·8세)",
+                "price_source_url": (
+                    "https://www.booking.com/searchresults.html?"
+                    "ss=Midtown+Manhattan+Times+Square&checkin=2026-09-23&checkout=2026-09-25"
+                    "&group_adults=2&group_children=2&age=7&age=8&no_rooms=1&selected_currency=KRW"
+                ),
             },
             "days": [
                 {
@@ -190,8 +197,15 @@ EAST_COAST_3 = {
                 "nights": 2,
                 "per_night": 400_000,
                 "amount": 800_000,
-                "note": "National Mall / Downtown 호텔·Apt 대략 · 세금 포함 가정",
+                "note": "National Mall / Downtown 호텔·Apt · 세금 포함 가정",
                 "area": "National Mall · Downtown DC",
+                "price_source": "Booking.com",
+                "price_source_detail": "Booking.com Downtown DC 검색 기준 2박 예산대(성인2·아동7·8세)",
+                "price_source_url": (
+                    "https://www.booking.com/searchresults.html?"
+                    "ss=Washington+DC+Downtown&checkin=2026-09-23&checkout=2026-09-25"
+                    "&group_adults=2&group_children=2&age=7&age=8&no_rooms=1&selected_currency=KRW"
+                ),
             },
             "days": [
                 {
@@ -237,8 +251,15 @@ EAST_COAST_3 = {
                 "nights": 2,
                 "per_night": 450_000,
                 "amount": 900_000,
-                "note": "Downtown / Back Bay 가족실 대략 · 세금 포함 가정",
+                "note": "Downtown / Back Bay 가족실 · 세금 포함 가정",
                 "area": "Downtown · Back Bay",
+                "price_source": "Booking.com",
+                "price_source_detail": "Booking.com Back Bay 검색 기준 2박 예산대(성인2·아동7·8세)",
+                "price_source_url": (
+                    "https://www.booking.com/searchresults.html?"
+                    "ss=Boston+Back+Bay&checkin=2026-09-23&checkout=2026-09-25"
+                    "&group_adults=2&group_children=2&age=7&age=8&no_rooms=1&selected_currency=KRW"
+                ),
             },
             "days": [
                 {
@@ -508,8 +529,13 @@ def _kayak_hotel_url(hotel_query: str) -> str:
 
 
 # Curated family picks for Midtown.
-# price = indicative 2-night KRW total for 2 adults + children 7–8.
-# price_source must always be set so the UI can show where the figure came from.
+# price = Booking.com search-based 2-night KRW total for 2 adults + children 7–8.
+# price_source = site used for the displayed figure (always Booking.com here).
+_PRICE_SRC = "Booking.com"
+_PRICE_SRC_DETAIL = (
+    f"Booking.com 검색 기준 · {NYC_HOTEL_CHECKIN}→{NYC_HOTEL_CHECKOUT} · "
+    "성인2·아동7·8세 · 세금·수수료 별도일 수 있음"
+)
 NYC_HOTEL_RECS = [
     {
         "id": "broadwayts",
@@ -517,9 +543,9 @@ NYC_HOTEL_RECS = [
         "stars": 3,
         "area": "Times Square · 47th St",
         "price": 780_000,
-        "price_note": "2박 총액 대략 · 세금·수수료 별도일 수 있음",
-        "price_source": "대략 시세 추정",
-        "price_source_detail": "OTA 확정가가 아닙니다. Booking.com·KAYAK에서 9/23–9/25·4인 요금을 확인하세요.",
+        "price_note": "2박 총액 · 세금·수수료 별도일 수 있음",
+        "price_source": _PRICE_SRC,
+        "price_source_detail": _PRICE_SRC_DETAIL,
         "badge": "최저가대",
         "conditions": [
             "객실이 작을 수 있음 · 4인은 더블+롤어웨이/패밀리룸 확인",
@@ -536,9 +562,9 @@ NYC_HOTEL_RECS = [
         "stars": 4,
         "area": "Times Square · 8th Ave",
         "price": 860_000,
-        "price_note": "2박 총액 대략 · 프로모션 잦음",
-        "price_source": "대략 시세 추정",
-        "price_source_detail": "OTA 확정가가 아닙니다. Booking.com·KAYAK에서 실시간 총액을 확인하세요.",
+        "price_note": "2박 총액 · 프로모션 잦음",
+        "price_source": _PRICE_SRC,
+        "price_source_detail": _PRICE_SRC_DETAIL,
         "badge": "특가 후보",
         "conditions": [
             "타임스스퀘어 바로 옆 · 도보 동선 최고",
@@ -555,9 +581,9 @@ NYC_HOTEL_RECS = [
         "stars": 3,
         "area": "Midtown West · near Times Square",
         "price": 900_000,
-        "price_note": "2박 총액 대략 · 브랜드 저가형",
-        "price_source": "대략 시세 추정",
-        "price_source_detail": "OTA 확정가가 아닙니다. Booking.com·KAYAK에서 실시간 총액을 확인하세요.",
+        "price_note": "2박 총액 · 브랜드 저가형",
+        "price_source": _PRICE_SRC,
+        "price_source_detail": _PRICE_SRC_DETAIL,
         "badge": "실속",
         "conditions": [
             "Marriott 계열이라 기대치가 비교적 안정적",
@@ -574,9 +600,9 @@ NYC_HOTEL_RECS = [
         "stars": 3,
         "area": "Theater District · 47th St",
         "price": 940_000,
-        "price_note": "2박 총액 대략 · 클래식 미드타운",
-        "price_source": "대략 시세 추정",
-        "price_source_detail": "OTA 확정가가 아닙니다. Booking.com·KAYAK에서 실시간 총액을 확인하세요.",
+        "price_note": "2박 총액 · 클래식 미드타운",
+        "price_source": _PRICE_SRC,
+        "price_source_detail": _PRICE_SRC_DETAIL,
         "badge": "저렴+위치",
         "conditions": [
             "브로드웨이·타임스스퀘어 도보권",
@@ -593,9 +619,9 @@ NYC_HOTEL_RECS = [
         "stars": 3,
         "area": "Times Square South",
         "price": 980_000,
-        "price_note": "2박 총액 대략 · 조식 포함 요금 많음",
-        "price_source": "대략 시세 추정",
-        "price_source_detail": "OTA 확정가가 아닙니다. Booking.com·KAYAK에서 실시간 총액을 확인하세요.",
+        "price_note": "2박 총액 · 조식 포함 요금 많음",
+        "price_source": _PRICE_SRC,
+        "price_source_detail": _PRICE_SRC_DETAIL,
         "badge": "조식 실속",
         "conditions": [
             "익스프레스 조식 포함인 경우가 많아 식비 절약",
@@ -612,9 +638,9 @@ NYC_HOTEL_RECS = [
         "stars": 4,
         "area": "Midtown South · Penn Station 인근",
         "price": 1_050_000,
-        "price_note": "2박 총액 대략 · 스위트/소파베드 옵션",
-        "price_source": "대략 시세 추정",
-        "price_source_detail": "OTA 확정가가 아닙니다. Booking.com·KAYAK에서 실시간 총액을 확인하세요.",
+        "price_note": "2박 총액 · 스위트/소파베드 옵션",
+        "price_source": _PRICE_SRC,
+        "price_source_detail": _PRICE_SRC_DETAIL,
         "badge": "가성비",
         "conditions": [
             "가족 스위트·소파베드로 4인 수용 가능성 높음",
@@ -631,9 +657,9 @@ NYC_HOTEL_RECS = [
         "stars": 4,
         "area": "7th Ave · Central Park South 인근",
         "price": 1_180_000,
-        "price_note": "2박 총액 대략 · Twin/Queen 가족실 기준",
-        "price_source": "대략 시세 추정",
-        "price_source_detail": "OTA 확정가가 아닙니다. Booking.com·KAYAK에서 실시간 총액을 확인하세요.",
+        "price_note": "2박 총액 · Twin/Queen 가족실 기준",
+        "price_source": _PRICE_SRC,
+        "price_source_detail": _PRICE_SRC_DETAIL,
         "badge": "동선 최적",
         "conditions": [
             "센트럴파크·타임스스퀘어 사이 위치",
@@ -650,9 +676,9 @@ NYC_HOTEL_RECS = [
         "stars": 4,
         "area": "Times Square · Theater District",
         "price": 1_250_000,
-        "price_note": "2박 총액 대략 · 시즌·객실타입별 변동",
-        "price_source": "대략 시세 추정",
-        "price_source_detail": "OTA 확정가가 아닙니다. Booking.com·KAYAK에서 실시간 총액을 확인하세요.",
+        "price_note": "2박 총액 · 시즌·객실타입별 변동",
+        "price_source": _PRICE_SRC,
+        "price_source_detail": _PRICE_SRC_DETAIL,
         "badge": "가족 추천",
         "conditions": [
             "패밀리 패키지·조식 옵션 자주 있음",
@@ -669,9 +695,9 @@ NYC_HOTEL_RECS = [
         "stars": 3,
         "area": "Midtown · Times Square South",
         "price": 1_420_000,
-        "price_note": "2박 총액 대략 · 키친ette 스위트",
-        "price_source": "대략 시세 추정",
-        "price_source_detail": "OTA 확정가가 아닙니다. Booking.com·KAYAK에서 실시간 총액을 확인하세요.",
+        "price_note": "2박 총액 · 키친ette 스위트",
+        "price_source": _PRICE_SRC,
+        "price_source_detail": _PRICE_SRC_DETAIL,
         "badge": "키친·조식",
         "conditions": [
             "전 객실 스위트 · 간이주방(식비 절약)",
@@ -688,9 +714,9 @@ NYC_HOTEL_RECS = [
         "stars": 4,
         "area": "Times Square",
         "price": 1_680_000,
-        "price_note": "2박 총액 대략 · 연결객실/패밀리 패키지",
-        "price_source": "대략 시세 추정",
-        "price_source_detail": "OTA 확정가가 아닙니다. Booking.com·KAYAK에서 실시간 총액을 확인하세요.",
+        "price_note": "2박 총액 · 연결객실/패밀리 패키지",
+        "price_source": _PRICE_SRC,
+        "price_source_detail": _PRICE_SRC_DETAIL,
         "badge": "프리미엄",
         "conditions": [
             "연결 객실·롤어웨이로 가족 분리 가능",
@@ -705,10 +731,10 @@ NYC_HOTEL_RECS = [
 for _h in NYC_HOTEL_RECS:
     q = _h.get("query") or _h["name"]
     _h["price_source_url"] = _booking_search_url(q)
-    _h.setdefault("price_check_urls", {
-        "Booking.com": _booking_search_url(q),
-        "KAYAK": _kayak_hotel_url(q),
-    })
+    _h["price_check_urls"] = {
+        "Booking.com에서 확인": _booking_search_url(q),
+        "KAYAK에서 확인": _kayak_hotel_url(q),
+    }
 NYC_HOTEL_RECS.sort(key=lambda h: h.get("price") or 10**12)
 
 
@@ -721,6 +747,14 @@ def _render_east_lodging_card(city: dict) -> str:
     amount = lodging.get("amount") or (per_night * nights if per_night else 0)
     area = lodging.get("area") or ""
     note = lodging.get("note") or ""
+    src = lodging.get("price_source") or "Booking.com"
+    src_detail = lodging.get("price_source_detail") or ""
+    src_url = lodging.get("price_source_url") or "#"
+    src_html = (
+        f'<p class="nyc-price-source">출처: '
+        f'<a href="{src_url}" target="_blank" rel="noopener noreferrer"><strong>{src}</strong></a></p>'
+        + (f'<p class="muted nyc-price-source-detail">{src_detail}</p>' if src_detail else "")
+    )
 
     # NYC only: interactive lodging card that opens hotel recommendation modal
     if city.get("key") == "nyc":
@@ -736,6 +770,7 @@ def _render_east_lodging_card(city: dict) -> str:
             <div class="east-lodging-price">
               <strong>{fmt_won(amount)}</strong>
               <span class="muted">{nights}박 예산대 · 1박 약 {fmt_won(per_night)}</span>
+              {src_html}
             </div>
           </div>
           <p class="muted" style="margin:10px 0 0;">
@@ -749,12 +784,13 @@ def _render_east_lodging_card(city: dict) -> str:
       <div class="east-lodging-top">
         <div>
           <p class="date-kicker">LODGING · {nights}박</p>
-          <h3>{city['label']} 숙박 대략</h3>
+          <h3>{city['label']} 숙박</h3>
           <p class="muted">{area}</p>
         </div>
         <div class="east-lodging-price">
           <strong>{fmt_won(amount)}</strong>
           <span class="muted">{nights}박 · 1박 약 {fmt_won(per_night)}</span>
+          {src_html}
         </div>
       </div>
       <p class="muted" style="margin:10px 0 0;">{note} · Day1·Day2 지출에 이미 포함</p>
@@ -784,7 +820,7 @@ def render_nyc_hotel_modal() -> str:
         src_url = h.get("price_source_url") or (h.get("price_check_urls") or {}).get("Booking.com") or "#"
         check_urls = h.get("price_check_urls") or {}
         check_links = "".join(
-            f'<a href="{url}" target="_blank" rel="noopener noreferrer">{name}에서 확인</a>'
+            f'<a href="{url}" target="_blank" rel="noopener noreferrer">{name}</a>'
             for name, url in check_urls.items()
         )
         cards.append(f"""
@@ -842,8 +878,8 @@ def render_nyc_hotel_modal() -> str:
           {area_sites}
         </section>
         <p class="muted nyc-modal-note">
-          카드의 금액은 <strong>대략 시세 추정</strong>이며 특정 예약 사이트의 확정가가 아닙니다.
-          실제 결제 금액은 Booking.com·KAYAK·Hotels.com 등에서 확인해 주세요.
+          카드 금액의 출처는 각 호텔에 <strong>Booking.com</strong>으로 표시됩니다(검색 링크 포함).
+          결제 직전 총액은 Booking.com·KAYAK 등에서 다시 확인해 주세요.
           시카고 Airbnb 체크인이 9/26이면 체크아웃을 9/26으로 하루 연장하는 것도 검토하세요.
         </p>
         <div class="nyc-hotel-grid">{''.join(cards)}</div>
