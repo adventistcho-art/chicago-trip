@@ -1171,6 +1171,85 @@ def render_combo_analysis(combos: list[dict]) -> str:
     </section>"""
 
 
+def render_food_tab() -> str:
+    return f"""
+    <section class="route-hero card food-itin-hero">
+      <div class="route-hero-copy">
+        <p class="route-kicker">FOOD BUDGET</p>
+        <h2>식비</h2>
+        <p class="muted">가족 4명 기준 · 1일 식비 × 숙박 일수 또는 총액 직접 입력</p>
+      </div>
+      <div class="route-stats">
+        <div class="route-stat">
+          <span class="muted">식비 합계</span>
+          <strong id="food-tab-total">₩0</strong>
+          <span class="muted" id="food-tab-sub">여행경비에 반영</span>
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <h3>식비 입력</h3>
+      <div class="cost-form-grid">
+        <label class="date-field">
+          <span class="field-label">1일 식비 (4명)</span>
+          <input id="food-per-day" type="number" min="0" step="10000" class="cost-input" value="{DEFAULT_FOOD_PER_DAY}">
+        </label>
+        <label class="date-field">
+          <span class="field-label">적용 일수</span>
+          <input id="food-days" type="number" min="0" step="1" class="cost-input" value="0">
+          <span class="muted" id="food-days-hint">숙박 박수에 맞춰 자동 제안 · 수정 가능</span>
+        </label>
+        <label class="date-field">
+          <span class="field-label">식비 총액 (직접 수정)</span>
+          <input id="food-total" type="number" min="0" step="10000" class="cost-input" value="0">
+        </label>
+      </div>
+      <p class="muted" style="margin-top:12px;" id="food-calc">0일 × ₩0 = ₩0</p>
+      <p class="muted">※ 동부·시카고 일정 대략치에도 식사가 일부 들어 있습니다. 중복을 피하려면 여기 금액을 조정하세요.</p>
+    </section>"""
+
+
+def render_misc_tab() -> str:
+    return f"""
+    <section class="route-hero card misc-itin-hero">
+      <div class="route-hero-copy">
+        <p class="route-kicker">TRIP EXTRAS</p>
+        <h2>여행비</h2>
+        <p class="muted">기념품·선물·현지 교통 추가·예비비 등 기타 여비</p>
+      </div>
+      <div class="route-stats">
+        <div class="route-stat">
+          <span class="muted">여행비 합계</span>
+          <strong id="misc-tab-total">₩0</strong>
+          <span class="muted">여행경비에 반영</span>
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <h3>항목별 입력</h3>
+      <div class="cost-form-grid">
+        <label class="date-field">
+          <span class="field-label">선물·기념품</span>
+          <input id="misc-gifts" type="number" min="0" step="10000" class="cost-input" value="{DEFAULT_GIFTS}">
+        </label>
+        <label class="date-field">
+          <span class="field-label">현지 교통 추가</span>
+          <input id="misc-transit" type="number" min="0" step="10000" class="cost-input" value="0">
+        </label>
+        <label class="date-field">
+          <span class="field-label">예비비·잡비</span>
+          <input id="misc-buffer" type="number" min="0" step="10000" class="cost-input" value="{DEFAULT_MISC}">
+        </label>
+        <label class="date-field">
+          <span class="field-label">여행비 총액 (직접 수정)</span>
+          <input id="cost-misc" type="number" min="0" step="10000" class="cost-input" value="0">
+        </label>
+      </div>
+      <p class="muted" style="margin-top:12px;" id="misc-calc">항목 합계가 총액에 반영됩니다. 총액을 직접 고치면 그 값이 우선합니다.</p>
+      <input id="cost-gift" type="hidden" value="0">
+    </section>"""
+
+
 def render_dashboard_shell(combo_html: str, booked_flight_html: str = "") -> str:
     return f"""
     {booked_flight_html}
@@ -1225,26 +1304,17 @@ def render_dashboard_shell(combo_html: str, booked_flight_html: str = "") -> str
         <p class="dash-sub">10일 현지 활동비</p>
         <p class="dash-detail" id="detail-chicago">항공·숙박·렌트 제외 · <a href="#" data-goto="chi-plan">시카고 10일 보기</a></p>
       </article>
-      <article class="dash-card is-pending" data-kind="food">
-        <div class="dash-card-head">
-          <span>🍽️</span><h3>식비</h3>
-          <span class="pending-badge">추가 예정</span>
-        </div>
+      <article class="dash-card" data-kind="food">
+        <div class="dash-card-head"><span>🍽️</span><h3>식비</h3></div>
         <p class="dash-amount" id="amt-food">₩0</p>
-        <p class="dash-sub" id="food-calc">별도 식비 항목 · 준비 중</p>
-        <p class="dash-detail muted">동부·시카고 일정 대략치에 식사 일부가 이미 포함되어 있습니다.</p>
-        <input id="food-per-day" type="hidden" value="0">
+        <p class="dash-sub" id="food-calc">식비 탭</p>
+        <p class="dash-detail" id="detail-food">미입력 · <a href="#" data-goto="food-plan">식비 탭에서 입력</a></p>
       </article>
-      <article class="dash-card is-pending" data-kind="misc">
-        <div class="dash-card-head">
-          <span>🎫</span><h3>기타 여비</h3>
-          <span class="pending-badge">추가 예정</span>
-        </div>
+      <article class="dash-card" data-kind="misc">
+        <div class="dash-card-head"><span>🎫</span><h3>여행비</h3></div>
         <p class="dash-amount" id="amt-misc">₩0</p>
-        <p class="dash-sub">잡비·예비비 등</p>
-        <p class="dash-detail muted">추후 입력란을 열 예정입니다.</p>
-        <input id="cost-misc" type="hidden" value="0">
-        <input id="cost-gift" type="hidden" value="0">
+        <p class="dash-sub">기타 여비</p>
+        <p class="dash-detail" id="detail-misc">미입력 · <a href="#" data-goto="misc-plan">여행비 탭에서 입력</a></p>
       </article>
     </div>
 
@@ -1260,7 +1330,7 @@ def render_dashboard_shell(combo_html: str, booked_flight_html: str = "") -> str
         <div class="bar-chart" id="bar-chart"></div>
       </div>
       <p class="muted" style="margin-top:12px;">
-        ※ 비행기·숙박·렌트카는 각 탭 선택값, 동부·시카고는 일정 탭 대략 지출입니다. 식비·기타 여비는 추가 예정입니다.
+        ※ 비행기·숙박·렌트카는 각 탭 선택값, 동부·시카고는 일정 대략 지출, 식비·여행비는 해당 탭 입력값입니다.
       </p>
     </section>"""
 
@@ -1271,6 +1341,8 @@ def render_page(
     cars_html: str,
     chicago_plan_html: str,
     east_plan_html: str,
+    food_plan_html: str,
+    misc_plan_html: str,
     dashboard_html: str,
     trip_data: dict,
     now_kst: str,
@@ -1527,6 +1599,23 @@ def render_page(
     .east-panel {{ display: none; }}
     .east-panel.active {{ display: block; }}
     .east-switch {{ margin-bottom: 16px; }}
+    .east-lodging-card {{
+      margin-bottom: 14px; padding: 16px 18px;
+      background: linear-gradient(135deg, #fff7ed 0%, #fff 55%);
+      border: 1px solid #fed7aa;
+    }}
+    .east-lodging-top {{
+      display: flex; justify-content: space-between; gap: 16px; align-items: flex-start;
+    }}
+    .east-lodging-top h3 {{ margin: 4px 0; font-size: 1.15rem; }}
+    .east-lodging-price {{ text-align: right; }}
+    .east-lodging-price strong {{ display: block; font-size: 1.45rem; color: #c2410c; }}
+    .east-budget-strip {{
+      display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 0 0 16px;
+      padding: 12px 14px; border-radius: 12px; background: #f8fafc;
+      font-size: 0.9rem; border: 1px solid var(--line);
+    }}
+    .east-budget-strip strong {{ color: var(--budget); }}
     .dashboard-hero {{ background: linear-gradient(135deg, #0d7a5f 0%, #0a5c48 100%); color: #fff; }}
     .dashboard-hero .muted {{ color: rgba(255,255,255,.78); }}
     .dash-hero-inner {{ display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; }}
@@ -1555,14 +1644,14 @@ def render_page(
     .dash-card[data-kind="chicago"] {{ border-top-color: var(--chi); }}
     .dash-card[data-kind="food"] {{ border-top-color: #f59e0b; }}
     .dash-card[data-kind="misc"] {{ border-top-color: #64748b; }}
-    .dash-card.is-pending {{ background: #f8fafc; }}
-    .pending-badge {{
-      margin-left: auto; font-size: 0.68rem; font-weight: 800; letter-spacing: .02em;
-      background: #fff7ed; color: #c2410c; border: 1px solid #fdba74;
-      border-radius: 999px; padding: 3px 8px; white-space: nowrap;
-    }}
     .dash-card-head {{ display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }}
     .dash-card-head h3 {{ margin: 0; font-size: 1rem; }}
+    .food-itin-hero {{ background: linear-gradient(135deg, #92400e 0%, #f59e0b 100%); }}
+    .misc-itin-hero {{ background: linear-gradient(135deg, #334155 0%, #64748b 100%); }}
+    .cost-form-grid {{
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;
+    }}
+    .cost-form-grid .muted {{ display: block; margin-top: 6px; }}
     .dash-amount {{ font-size: 1.35rem; font-weight: 800; margin: 8px 0 4px; color: var(--budget); }}
     .dash-detail, .dash-sub {{ font-size: 0.82rem; color: var(--muted); margin: 0; line-height: 1.45; }}
     .dash-detail a {{ color: var(--sky); }}
@@ -1660,11 +1749,13 @@ def render_page(
         <button class="tab" role="tab" aria-selected="false" data-panel="cars">🚗 렌트카</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="chi-plan">🗺️ 시카고 10일</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="east-plan">🗽 동부 3일</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="food-plan">🍽️ 식비</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="misc-plan">🎫 여행비</button>
       </nav>
     </header>
 
     <div id="dashboard" class="panel active" role="tabpanel">
-      <p class="meta">비행기 · 숙박 · 렌트카 · 동부 3일 · 시카고 여행경비 합계 (식비·기타 여비는 추가 예정)</p>
+      <p class="meta">비행기 · 숙박 · 렌트카 · 동부 3일 · 시카고 · 식비 · 여행비 합계</p>
       {dashboard_html}
     </div>
 
@@ -1693,6 +1784,16 @@ def render_page(
       {east_plan_html}
     </div>
 
+    <div id="food-plan" class="panel" role="tabpanel">
+      <p class="meta">가족 4명 식비 · 1일 금액 × 일수 또는 총액 입력 · 여행경비에 자동 반영</p>
+      {food_plan_html}
+    </div>
+
+    <div id="misc-plan" class="panel" role="tabpanel">
+      <p class="meta">선물·현지교통·예비비 등 기타 여행비 · 여행경비에 자동 반영</p>
+      {misc_plan_html}
+    </div>
+
     <footer>
       <a href="https://www.skyscanner.co.kr/" target="_blank">Skyscanner</a> ·
       <a href="https://www.kayak.co.kr/" target="_blank">KAYAK</a> ·
@@ -1704,7 +1805,7 @@ def render_page(
   <script id="trip-data" type="application/json">{trip_json}</script>
   <script>
     const TRIP = JSON.parse(document.getElementById('trip-data').textContent);
-    const STORE_KEY = 'chicago-trip-budget-v9';
+    const STORE_KEY = 'chicago-trip-budget-v10';
     const DATE_OPTS = TRIP.date_options || {{}};
 
     const fmt = n => '₩' + Math.round(n || 0).toLocaleString('ko-KR');
@@ -2030,9 +2131,14 @@ def render_page(
             : (TRIP.best_lodging_id || TRIP.best_lodging_checkout)),
         carId,
         foodPerDay: saved.foodPerDay ?? d.food_per_day,
+        foodDays: saved.foodDays ?? null,
+        foodTotal: saved.foodTotal ?? null,
         car: saved.car ?? (pickedCar ? pickedCar.price : d.car_rental),
-        gift: saved.gift ?? d.gifts,
-        misc: saved.misc ?? d.misc,
+        gift: saved.gift ?? 0,
+        misc: saved.misc ?? null,
+        miscGifts: saved.miscGifts ?? d.gifts,
+        miscTransit: saved.miscTransit ?? 0,
+        miscBuffer: saved.miscBuffer ?? d.misc,
         outbound: dates.outbound,
         returnDate: dates.returnDate,
         checkin: dates.checkin,
@@ -2075,16 +2181,126 @@ def render_page(
       }});
     }}
 
+    function miscPartsFromDom() {{
+      return {{
+        gifts: Number(document.getElementById('misc-gifts')?.value) || 0,
+        transit: Number(document.getElementById('misc-transit')?.value) || 0,
+        buffer: Number(document.getElementById('misc-buffer')?.value) || 0,
+      }};
+    }}
+
+    function syncFoodFields(state, nights, {{ fromTotal = false }} = {{}}) {{
+      const perDayEl = document.getElementById('food-per-day');
+      const daysEl = document.getElementById('food-days');
+      const totalEl = document.getElementById('food-total');
+      if (!perDayEl || !daysEl || !totalEl) return state.foodTotal ?? 0;
+
+      let perDay = Number(perDayEl.value);
+      if (!Number.isFinite(perDay)) perDay = state.foodPerDay || 0;
+      let days = Number(daysEl.value);
+      if (!Number.isFinite(days) || days < 0) {{
+        days = state.foodDays ?? nights ?? 0;
+        daysEl.value = days;
+      }}
+
+      let total;
+      if (fromTotal) {{
+        total = Number(totalEl.value) || 0;
+        if (days > 0) {{
+          perDay = Math.round(total / days);
+          perDayEl.value = perDay;
+        }}
+      }} else {{
+        total = perDay * days;
+        totalEl.value = total;
+      }}
+
+      state.foodPerDay = perDay;
+      state.foodDays = days;
+      state.foodTotal = total;
+      const calc = document.getElementById('food-calc');
+      if (calc) calc.textContent = `${{days}}일 × ${{fmt(perDay)}} = ${{fmt(total)}}`;
+      const tabTotal = document.getElementById('food-tab-total');
+      if (tabTotal) tabTotal.textContent = fmt(total);
+      const tabSub = document.getElementById('food-tab-sub');
+      if (tabSub) tabSub.textContent = nights ? `숙박 ${{nights}}박 기준 제안 가능` : '여행경비에 반영';
+      const daysHint = document.getElementById('food-days-hint');
+      if (daysHint) daysHint.textContent = nights
+        ? `숙박 ${{nights}}박에 맞춰 자동 제안 · 수정 가능`
+        : '일수를 직접 입력하세요';
+      return total;
+    }}
+
+    function syncMiscFields(state, {{ fromTotal = false }} = {{}}) {{
+      const totalEl = document.getElementById('cost-misc');
+      if (!totalEl) return state.misc || 0;
+      const parts = miscPartsFromDom();
+      let total;
+      if (fromTotal) {{
+        total = Number(totalEl.value) || 0;
+      }} else {{
+        total = parts.gifts + parts.transit + parts.buffer;
+        totalEl.value = total;
+      }}
+      state.miscGifts = parts.gifts;
+      state.miscTransit = parts.transit;
+      state.miscBuffer = parts.buffer;
+      state.misc = total;
+      state.gift = 0;
+      const calc = document.getElementById('misc-calc');
+      if (calc) {{
+        calc.textContent = fromTotal
+          ? `총액 직접 입력 ${{fmt(total)}} (항목 합 ${{fmt(parts.gifts + parts.transit + parts.buffer)}})`
+          : `선물 ${{fmt(parts.gifts)}} + 교통 ${{fmt(parts.transit)}} + 예비 ${{fmt(parts.buffer)}} = ${{fmt(total)}}`;
+      }}
+      const tabTotal = document.getElementById('misc-tab-total');
+      if (tabTotal) tabTotal.textContent = fmt(total);
+      return total;
+    }}
+
     function readInputs() {{
       const state = getState();
-      const foodEl = document.getElementById('food-per-day');
+      const lodging = findLodging(state.lodgingCheckout);
+      const nights = lodging?.nights || 0;
       const carEl = document.getElementById('cost-car');
-      const giftEl = document.getElementById('cost-gift');
-      const miscEl = document.getElementById('cost-misc');
-      if (foodEl) state.foodPerDay = Number(foodEl.value) || 0;
       if (carEl) state.car = Number(carEl.value) || 0;
-      if (giftEl) state.gift = Number(giftEl.value) || 0;
-      if (miscEl) state.misc = Number(miscEl.value) || 0;
+
+      const daysEl = document.getElementById('food-days');
+      if (daysEl && daysEl.dataset.autofill === '1' && nights) {{
+        daysEl.value = nights;
+      }}
+
+      const perDayEl = document.getElementById('food-per-day');
+      const totalEl = document.getElementById('food-total');
+      if (perDayEl && daysEl && totalEl) {{
+        state.foodPerDay = Number(perDayEl.value) || 0;
+        state.foodDays = Number(daysEl.value) || 0;
+        state.foodTotal = Number(totalEl.value);
+        if (!Number.isFinite(state.foodTotal)) {{
+          state.foodTotal = state.foodPerDay * state.foodDays;
+          totalEl.value = state.foodTotal;
+        }}
+        const calc = document.getElementById('food-calc');
+        if (calc) calc.textContent = `${{state.foodDays}}일 × ${{fmt(state.foodPerDay)}} = ${{fmt(state.foodTotal)}}`;
+        const tabTotal = document.getElementById('food-tab-total');
+        if (tabTotal) tabTotal.textContent = fmt(state.foodTotal);
+      }}
+
+      const parts = miscPartsFromDom();
+      state.miscGifts = parts.gifts;
+      state.miscTransit = parts.transit;
+      state.miscBuffer = parts.buffer;
+      const miscEl = document.getElementById('cost-misc');
+      if (miscEl) {{
+        state.misc = Number(miscEl.value);
+        if (!Number.isFinite(state.misc)) {{
+          state.misc = parts.gifts + parts.transit + parts.buffer;
+          miscEl.value = state.misc;
+        }}
+      }}
+      const miscTab = document.getElementById('misc-tab-total');
+      if (miscTab) miscTab.textContent = fmt(state.misc || 0);
+
       saveState(state);
       return state;
     }}
@@ -2101,10 +2317,9 @@ def render_page(
       const carAmt = state.car;
       const eastAmt = PLAN.east?.total || 0;
       const chicagoAmt = PLAN.chicago?.total || 0;
-      // 식비·기타 여비는 추가 예정 → 합계에 아직 넣지 않음
-      const foodAmt = 0;
-      const miscAmt = 0;
-      const total = flightAmt + lodgingAmt + carAmt + eastAmt + chicagoAmt;
+      const foodAmt = state.foodTotal ?? ((state.foodPerDay || 0) * (state.foodDays || 0));
+      const miscAmt = state.misc || 0;
+      const total = flightAmt + lodgingAmt + carAmt + eastAmt + chicagoAmt + foodAmt + miscAmt;
 
       document.getElementById('total-budget').textContent = fmt(total);
       const flightPerPerson = flight?.price_per_person || (flightAmt ? Math.round(flightAmt / TRIP.guests) : 0);
@@ -2145,7 +2360,19 @@ def render_page(
         : '미선택 · <a href="#" data-goto="cars">렌트카 탭에서 선택</a>';
 
       const foodCalc = document.getElementById('food-calc');
-      if (foodCalc) foodCalc.textContent = '별도 식비 항목 · 추가 예정';
+      if (foodCalc) foodCalc.textContent = `${{state.foodDays || 0}}일 × ${{fmt(state.foodPerDay || 0)}} = ${{fmt(foodAmt)}}`;
+      const detailFood = document.getElementById('detail-food');
+      if (detailFood) {{
+        detailFood.innerHTML = foodAmt
+          ? `${{state.foodDays || 0}}일 · 1일 ${{fmt(state.foodPerDay || 0)}} · <a href="#" data-goto="food-plan">변경</a>`
+          : '미입력 · <a href="#" data-goto="food-plan">식비 탭에서 입력</a>';
+      }}
+      const detailMisc = document.getElementById('detail-misc');
+      if (detailMisc) {{
+        detailMisc.innerHTML = miscAmt
+          ? `선물·교통·예비비 등 · <a href="#" data-goto="misc-plan">변경</a>`
+          : '미입력 · <a href="#" data-goto="misc-plan">여행비 탭에서 입력</a>';
+      }}
 
       const schedule = flight && lodging
         ? `${{TRIP.outbound}} 도착 · 숙박 ${{TRIP.checkin}}~${{lodging.checkout_date}}`
@@ -2157,30 +2384,28 @@ def render_page(
       document.getElementById('trip-summary').textContent = mismatch
         ? '⚠️ 항공 귀국일과 숙박 체크아웃이 다릅니다. 일정을 맞추면 더 정확합니다.'
         : (total
-          ? `비행기 ${{fmt(flightAmt)}} + 숙박 ${{fmt(lodgingAmt)}} + 렌트 ${{fmt(carAmt)}} + 동부 ${{fmt(eastAmt)}} + 시카고 ${{fmt(chicagoAmt)}}`
+          ? `비행기 ${{fmt(flightAmt)}} + 숙박 ${{fmt(lodgingAmt)}} + 렌트 ${{fmt(carAmt)}} + 동부 ${{fmt(eastAmt)}} + 시카고 ${{fmt(chicagoAmt)}} + 식비 ${{fmt(foodAmt)}} + 여행비 ${{fmt(miscAmt)}}`
           : '항공권·숙박·렌트카를 선택하면 합계가 계산됩니다.');
 
       const summaryItems = [
-        ['비행기', flightAmt, 'flight', false],
-        ['숙박', lodgingAmt, 'lodging', false],
-        ['렌트카', carAmt, 'car', false],
-        ['동부 3일', eastAmt, 'east', false],
-        ['시카고', chicagoAmt, 'chicago', false],
-        ['식비', foodAmt, 'food', true],
-        ['기타 여비', miscAmt, 'misc', true],
+        ['비행기', flightAmt, 'flight'],
+        ['숙박', lodgingAmt, 'lodging'],
+        ['렌트카', carAmt, 'car'],
+        ['동부 3일', eastAmt, 'east'],
+        ['시카고', chicagoAmt, 'chicago'],
+        ['식비', foodAmt, 'food'],
+        ['여행비', miscAmt, 'misc'],
       ];
       const catSummary = document.getElementById('dash-cat-summary');
       if (catSummary) {{
-        catSummary.innerHTML = summaryItems.map(([label, amt, key, pending]) => `
-          <div class="dash-cat-pill ${{pending ? 'is-pending' : ''}}" style="border-color:${{COLORS[key]}}55">
-            <span class="cat-label">${{label}}${{pending ? ' · 예정' : ''}}</span>
-            <span class="cat-amt">${{pending ? '추가 예정' : fmt(amt)}}</span>
+        catSummary.innerHTML = summaryItems.map(([label, amt, key]) => `
+          <div class="dash-cat-pill" style="border-color:${{COLORS[key]}}55">
+            <span class="cat-label">${{label}}</span>
+            <span class="cat-amt">${{fmt(amt)}}</span>
           </div>`).join('');
       }}
 
-      const items = summaryItems
-        .filter(([, amt, , pending]) => !pending && amt > 0)
-        .map(([label, amt, key]) => [label, amt, key]);
+      const items = summaryItems.filter(([, amt]) => amt > 0);
 
       document.getElementById('breakdown-body').innerHTML = items.map(([label, amt, key]) => `
         <tr>
@@ -2213,14 +2438,33 @@ def render_page(
 
     function initBudget() {{
       const state = getState();
+      const lodging = findLodging(state.lodgingCheckout);
+      const nights = lodging?.nights || 0;
       const foodEl = document.getElementById('food-per-day');
+      const foodDaysEl = document.getElementById('food-days');
+      const foodTotalEl = document.getElementById('food-total');
       const carEl = document.getElementById('cost-car');
-      const giftEl = document.getElementById('cost-gift');
+      const miscGiftsEl = document.getElementById('misc-gifts');
+      const miscTransitEl = document.getElementById('misc-transit');
+      const miscBufferEl = document.getElementById('misc-buffer');
       const miscEl = document.getElementById('cost-misc');
-      if (foodEl) foodEl.value = 0;
+      if (foodEl) foodEl.value = state.foodPerDay ?? TRIP.defaults.food_per_day;
+      if (foodDaysEl) {{
+        const days = state.foodDays ?? nights ?? 0;
+        foodDaysEl.value = days;
+        if (state.foodDays == null && nights) foodDaysEl.dataset.autofill = '1';
+      }}
+      if (foodTotalEl) {{
+        foodTotalEl.value = state.foodTotal ?? ((state.foodPerDay || 0) * (state.foodDays ?? nights ?? 0));
+      }}
       if (carEl) carEl.value = state.car;
-      if (giftEl) giftEl.value = 0;
-      if (miscEl) miscEl.value = 0;
+      if (miscGiftsEl) miscGiftsEl.value = state.miscGifts ?? TRIP.defaults.gifts;
+      if (miscTransitEl) miscTransitEl.value = state.miscTransit ?? 0;
+      if (miscBufferEl) miscBufferEl.value = state.miscBuffer ?? TRIP.defaults.misc;
+      if (miscEl) {{
+        const partsSum = (state.miscGifts ?? TRIP.defaults.gifts) + (state.miscTransit ?? 0) + (state.miscBuffer ?? TRIP.defaults.misc);
+        miscEl.value = state.misc ?? partsSum;
+      }}
 
       bindDateFilters();
 
@@ -2267,9 +2511,51 @@ def render_page(
         btn.addEventListener('click', () => onEndDateChange(btn.dataset.carDate));
       }});
 
-      ['food-per-day', 'cost-car', 'cost-gift', 'cost-misc'].forEach(id => {{
+      const carElInput = document.getElementById('cost-car');
+      if (carElInput) carElInput.addEventListener('input', renderDashboard);
+
+      const foodPerDay = document.getElementById('food-per-day');
+      const foodDays = document.getElementById('food-days');
+      const foodTotal = document.getElementById('food-total');
+      if (foodPerDay) foodPerDay.addEventListener('input', () => {{
+        const s = getState();
+        const nights = findLodging(s.lodgingCheckout)?.nights || 0;
+        syncFoodFields(s, nights, {{ fromTotal: false }});
+        saveState(s);
+        renderDashboard();
+      }});
+      if (foodDays) foodDays.addEventListener('input', () => {{
+        foodDays.dataset.autofill = '0';
+        const s = getState();
+        const nights = findLodging(s.lodgingCheckout)?.nights || 0;
+        syncFoodFields(s, nights, {{ fromTotal: false }});
+        saveState(s);
+        renderDashboard();
+      }});
+      if (foodTotal) foodTotal.addEventListener('input', () => {{
+        const s = getState();
+        const nights = findLodging(s.lodgingCheckout)?.nights || 0;
+        syncFoodFields(s, nights, {{ fromTotal: true }});
+        saveState(s);
+        renderDashboard();
+      }});
+
+      ['misc-gifts', 'misc-transit', 'misc-buffer'].forEach(id => {{
         const el = document.getElementById(id);
-        if (el) el.addEventListener('input', renderDashboard);
+        if (!el) return;
+        el.addEventListener('input', () => {{
+          const s = getState();
+          syncMiscFields(s, {{ fromTotal: false }});
+          saveState(s);
+          renderDashboard();
+        }});
+      }});
+      const miscTotal = document.getElementById('cost-misc');
+      if (miscTotal) miscTotal.addEventListener('input', () => {{
+        const s = getState();
+        syncMiscFields(s, {{ fromTotal: true }});
+        saveState(s);
+        renderDashboard();
       }});
 
       document.querySelectorAll('.combo-apply').forEach(btn => {{
@@ -2342,7 +2628,8 @@ def render_page(
 
     const hashPanel = {{
       '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging', '#cars': 'cars',
-      '#chi-plan': 'chi-plan', '#east-plan': 'east-plan'
+      '#chi-plan': 'chi-plan', '#east-plan': 'east-plan',
+      '#food-plan': 'food-plan', '#misc-plan': 'misc-plan'
     }}[location.hash];
     if (hashPanel) document.querySelector(`[data-panel="${{hashPanel}}"]`).click();
 
@@ -2368,6 +2655,8 @@ def main() -> None:
     cars_html = render_cars(car_days)
     chicago_plan_html = itinerary_plans.render_chicago_plan()
     east_plan_html = itinerary_plans.render_east_plan()
+    food_plan_html = render_food_tab()
+    misc_plan_html = render_misc_tab()
     combo_html = render_combo_analysis(trip_data.get("combos", []))
     booked_flight_html = render_booked_flight(
         booked_flight, interactive=False, dom_id="booked-flight-dash"
@@ -2379,6 +2668,8 @@ def main() -> None:
         cars_html,
         chicago_plan_html,
         east_plan_html,
+        food_plan_html,
+        misc_plan_html,
         dashboard_html,
         trip_data,
         now_kst,

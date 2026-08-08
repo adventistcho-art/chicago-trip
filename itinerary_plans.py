@@ -130,19 +130,27 @@ CHICAGO_10 = {
 
 EAST_COAST_3 = {
     "title": "동부 3일 여행계획",
-    "subtitle": "뉴욕 인 루트/별도 일정용 · 도시별 3일 코스 · 대략 지출 포함",
+    "subtitle": "뉴욕 인 루트/별도 일정용 · 도시별 3일 코스 · 숙박(2박) 포함 대략 지출",
     "cities": [
         {
             "key": "nyc",
             "label": "뉴욕",
             "chip": "NYC 3일",
             "blurb": "맨해튼 핵심 · 아이와 걷기 좋은 코스",
+            "lodging": {
+                "nights": 2,
+                "per_night": 550_000,
+                "amount": 1_100_000,
+                "note": "맨해튼/미드타운 가족실·Apt 대략 · 세금·수수료 포함 가정",
+                "area": "Times Square · Midtown 인근",
+            },
             "days": [
                 {
                     "day": 1,
                     "title": "미드타운 · 센트럴파크",
                     "places": ["Times Square", "Rockefeller Center", "Central Park · Zoo"],
                     "spend": [
+                        {"item": "숙박 1박 (체크인)", "amount": 550_000},
                         {"item": "교통(MetroCard/우버)", "amount": 80000},
                         {"item": "식사", "amount": 180000},
                         {"item": "동물원·잡비", "amount": 120000},
@@ -153,6 +161,7 @@ EAST_COAST_3 = {
                     "title": "박물관 · 5번가",
                     "places": ["American Museum of Natural History 또는 MoMA", "5th Avenue", "Empire State (선택)"],
                     "spend": [
+                        {"item": "숙박 1박", "amount": 550_000},
                         {"item": "박물관(4명)", "amount": 220000},
                         {"item": "식사", "amount": 180000},
                         {"item": "전망대(선택)", "amount": 200000},
@@ -175,12 +184,20 @@ EAST_COAST_3 = {
             "label": "워싱턴",
             "chip": "DC 3일",
             "blurb": "내셔널몰 박물관이 대부분 무료 · 예산 친화",
+            "lodging": {
+                "nights": 2,
+                "per_night": 400_000,
+                "amount": 800_000,
+                "note": "National Mall / Downtown 호텔·Apt 대략 · 세금 포함 가정",
+                "area": "National Mall · Downtown DC",
+            },
             "days": [
                 {
                     "day": 1,
                     "title": "내셔널몰 입문",
                     "places": ["National Mall", "Lincoln Memorial", "Washington Monument 주변"],
                     "spend": [
+                        {"item": "숙박 1박 (체크인)", "amount": 400_000},
                         {"item": "교통", "amount": 70000},
                         {"item": "식사", "amount": 150000},
                         {"item": "간식·물", "amount": 40000},
@@ -191,6 +208,7 @@ EAST_COAST_3 = {
                     "title": "스미스소니언 데이",
                     "places": ["Air and Space Museum", "Natural History Museum", "National Gallery (선택)"],
                     "spend": [
+                        {"item": "숙박 1박", "amount": 400_000},
                         {"item": "식사", "amount": 160000},
                         {"item": "교통", "amount": 60000},
                         {"item": "기념품", "amount": 80000},
@@ -213,12 +231,20 @@ EAST_COAST_3 = {
             "label": "보스턴",
             "chip": "BOS 3일",
             "blurb": "프리덤 트레일 · 하버드 · 가족 걷기 코스",
+            "lodging": {
+                "nights": 2,
+                "per_night": 450_000,
+                "amount": 900_000,
+                "note": "Downtown / Back Bay 가족실 대략 · 세금 포함 가정",
+                "area": "Downtown · Back Bay",
+            },
             "days": [
                 {
                     "day": 1,
                     "title": "프리덤 트레일",
                     "places": ["Boston Common", "Freedom Trail 핵심 스팟", "Quincy Market"],
                     "spend": [
+                        {"item": "숙박 1박 (체크인)", "amount": 450_000},
                         {"item": "식사", "amount": 160000},
                         {"item": "교통", "amount": 60000},
                         {"item": "간식·기념품", "amount": 70000},
@@ -229,6 +255,7 @@ EAST_COAST_3 = {
                     "title": "캠브리지 · 하버드",
                     "places": ["Harvard Yard", "MIT 캠퍼스 포토", "Charles River"],
                     "spend": [
+                        {"item": "숙박 1박", "amount": 450_000},
                         {"item": "식사", "amount": 150000},
                         {"item": "교통", "amount": 70000},
                         {"item": "박물관(선택)", "amount": 100000},
@@ -247,7 +274,7 @@ EAST_COAST_3 = {
             ],
         },
     ],
-    "budget_note": "동부 3일은 시카고와 별도 일정/연결 일정으로 쓰세요. NYC 입국 후 시카고로 이동하는 루트와 잘 맞습니다. 도시 간 이동(기차·항공) 비용은 별도입니다.",
+    "budget_note": "동부 3일은 숙박 2박 대략치를 Day1·Day2에 포함합니다(가족 4명). 시카고 숙박 탭 금액과는 별도입니다. 도시 간 이동(기차·항공) 비용은 별도입니다.",
 }
 
 
@@ -259,17 +286,47 @@ def _plan_total(days: list[dict]) -> int:
     return sum(_day_spend_total(d) for d in days)
 
 
+def _city_lodging_total(city: dict) -> int:
+    lodging = city.get("lodging") or {}
+    if lodging.get("amount") is not None:
+        return int(lodging["amount"])
+    # Fallback: sum spend rows that look like lodging (already in day totals if present)
+    return 0
+
+
+def _city_activity_total(city: dict) -> int:
+    """Day spends minus lodging line items (for breakdown display)."""
+    lodging_amt = 0
+    for day in city.get("days") or []:
+        for s in day.get("spend") or []:
+            if "숙박" in (s.get("item") or ""):
+                lodging_amt += int(s.get("amount") or 0)
+    return _plan_total(city.get("days") or []) - lodging_amt
+
+
+def _city_total(city: dict) -> int:
+    # Lodging is already embedded in day spends; use day total as source of truth.
+    return _plan_total(city.get("days") or [])
+
+
 def plan_budget_summary() -> dict:
     """Totals for dashboard: Chicago 10-day + default East city (NYC)."""
     chicago_total = _plan_total(CHICAGO_10["days"])
     east_cities = {}
     for city in EAST_COAST_3["cities"]:
+        total = _city_total(city)
+        lodging = city.get("lodging") or {}
         east_cities[city["key"]] = {
             "key": city["key"],
             "label": city["label"],
             "chip": city["chip"],
-            "total": _plan_total(city["days"]),
-            "total_text": fmt_won(_plan_total(city["days"])),
+            "total": total,
+            "total_text": fmt_won(total),
+            "lodging": lodging.get("amount") or _city_lodging_total(city),
+            "lodging_text": fmt_won(lodging.get("amount") or _city_lodging_total(city)),
+            "lodging_nights": lodging.get("nights", 2),
+            "activity": _city_activity_total(city),
+            "activity_text": fmt_won(_city_activity_total(city)),
         }
     nyc = east_cities.get("nyc") or next(iter(east_cities.values()), None)
     return {
@@ -287,7 +344,7 @@ def plan_budget_summary() -> dict:
             "city_label": (nyc or {}).get("label", "뉴욕"),
             "total": (nyc or {}).get("total", 0),
             "total_text": (nyc or {}).get("total_text", "₩0"),
-            "note": "뉴욕 3일 코스 대략 · 도시 변경은 동부 탭",
+            "note": "뉴욕 3일+숙박 2박 포함 · 도시 변경은 동부 탭",
             "cities": east_cities,
         },
     }
@@ -342,13 +399,42 @@ def render_chicago_plan() -> str:
     """
 
 
+def _render_east_lodging_card(city: dict) -> str:
+    lodging = city.get("lodging") or {}
+    if not lodging:
+        return ""
+    nights = lodging.get("nights", 2)
+    per_night = lodging.get("per_night")
+    amount = lodging.get("amount") or (per_night * nights if per_night else 0)
+    area = lodging.get("area") or ""
+    note = lodging.get("note") or ""
+    return f"""
+    <section class="card east-lodging-card">
+      <div class="east-lodging-top">
+        <div>
+          <p class="date-kicker">LODGING · {nights}박</p>
+          <h3>{city['label']} 숙박 대략</h3>
+          <p class="muted">{area}</p>
+        </div>
+        <div class="east-lodging-price">
+          <strong>{fmt_won(amount)}</strong>
+          <span class="muted">{nights}박 · 1박 약 {fmt_won(per_night)}</span>
+        </div>
+      </div>
+      <p class="muted" style="margin:10px 0 0;">{note} · Day1·Day2 지출에 이미 포함</p>
+    </section>"""
+
+
 def render_east_plan() -> str:
     plan = EAST_COAST_3
     tabs = []
     panels = []
     for i, city in enumerate(plan["cities"]):
         active = "active" if i == 0 else ""
-        city_total = _plan_total(city["days"])
+        city_total = _city_total(city)
+        lodging = city.get("lodging") or {}
+        lodge_amt = lodging.get("amount") or 0
+        activity = _city_activity_total(city)
         tabs.append(
             f'<button type="button" class="east-tab {active}" data-east="{city["key"]}" role="tab" '
             f'aria-selected="{"true" if i == 0 else "false"}">'
@@ -359,6 +445,12 @@ def render_east_plan() -> str:
         panels.append(f"""
         <div class="east-panel {active}" data-east-panel="{city['key']}">
           <p class="muted" style="margin:0 0 14px;">{city['blurb']}</p>
+          {_render_east_lodging_card(city)}
+          <div class="east-budget-strip">
+            <span>숙박 {fmt_won(lodge_amt)}</span>
+            <span>활동·식사 {fmt_won(activity)}</span>
+            <span><strong>합계 {fmt_won(city_total)}</strong></span>
+          </div>
           <div class="itin-stack">{days_html}</div>
         </div>""")
 
@@ -373,7 +465,7 @@ def render_east_plan() -> str:
         <div class="route-stat">
           <span class="muted">도시 선택</span>
           <strong>NYC · DC · BOS</strong>
-          <span class="muted">각 3일 코스</span>
+          <span class="muted">각 3일 · 숙박 2박 포함</span>
         </div>
       </div>
     </section>
