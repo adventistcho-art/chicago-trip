@@ -399,6 +399,111 @@ def render_chicago_plan() -> str:
     """
 
 
+# NYC-in route: arrive 9/23 → Chicago Airbnb 9/26. East 3-day plan budgets 2 nights.
+NYC_HOTEL_CHECKIN = "2026-09-23"
+NYC_HOTEL_CHECKOUT = "2026-09-25"
+NYC_HOTEL_NIGHTS = 2
+NYC_HOTEL_AREA = {
+    "name": "미드타운 웨스트 · Times Square / Theater District",
+    "why": "Day1 센트럴파크·타임스스퀘어, Day2 5번가·박물관과 도보·지하철로 가깝고, Day3 다운타운은 지하철 1번·A/C/E로 이동이 쉽습니다. 가족 4명(초등)에게 동선이 가장 짧습니다.",
+    "alt": "조용하면 Midtown East(Grand Central), 박물관 위주면 Upper West Side도 후보.",
+}
+NYC_HOTEL_SEARCH = (
+    "https://www.kayak.co.kr/hotels/New-York,NY,USA-p9282/"
+    f"{NYC_HOTEL_CHECKIN}/{NYC_HOTEL_CHECKOUT}/2adults/children-7-8?sort=rank_a"
+)
+
+# Curated family picks for Midtown; prices are approximate KRW totals for 2 nights
+# (2 adults + children 7–8), taxes/fees often extra — verify on booking site.
+NYC_HOTEL_RECS = [
+    {
+        "id": "msocial",
+        "name": "M Social Hotel New York Times Square",
+        "stars": 4,
+        "area": "Times Square · Theater District",
+        "price": 1_250_000,
+        "price_note": "2박 대략 · 시즌·객실타입별 변동",
+        "badge": "가족 추천",
+        "conditions": [
+            "패밀리 패키지·조식 옵션 자주 있음",
+            "어린이 동반 시 조식 할인/무료 프로모션 확인",
+            "무료 취소 가능 요금제 선택 권장",
+            "타임스스퀘어 도보권 · 소음 대비 고층/안쪽 객실",
+        ],
+        "why": "브로드웨이·록펠러와 가깝고 가족 패키지가 잘 나와 Day1 동선에 최적.",
+        "url": "https://www.kayak.co.kr/hotels/New-York,NY,USA-c35805/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a&fs=hotels=M+Social",
+    },
+    {
+        "id": "parkcentral",
+        "name": "Park Central Hotel New York",
+        "stars": 4,
+        "area": "7th Ave · Central Park South 인근",
+        "price": 1_180_000,
+        "price_note": "2박 대략 · Twin/Queen 가족실 기준",
+        "badge": "동선 최적",
+        "conditions": [
+            "센트럴파크·타임스스퀘어 사이 위치",
+            "더블/트윈 가족 배치 가능 객실 확인",
+            "조식 미포함 요금 많음 · 주변 딜리 활용",
+            "무료 Wi-Fi · 짐 보관 가능 여부 예약 시 확인",
+        ],
+        "why": "파크·미드타운 중간이라 Day1·Day2를 걷기 좋게 소화하기 좋습니다.",
+        "url": "https://www.kayak.co.kr/hotels/New-York,NY,USA-c35805/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a",
+    },
+    {
+        "id": "newyorker",
+        "name": "The New Yorker, A Wyndham Hotel",
+        "stars": 4,
+        "area": "Midtown South · Penn Station 인근",
+        "price": 1_050_000,
+        "price_note": "2박 대략 · 스위트/소파베드 옵션",
+        "badge": "가성비",
+        "conditions": [
+            "가족 스위트·소파베드로 4인 수용 가능성 높음",
+            "Penn Station·지하철 접근 좋음 (Day3 다운타운/이동)",
+            "리조트 피(일비) 별도인 경우 많음 · 총액 확인",
+            "무료 취소 마감일 요금제별 상이",
+        ],
+        "why": "공간이 넓고 교통 허브 근처라 짐·이동이 많은 가족에게 실용적.",
+        "url": "https://www.kayak.co.kr/hotels/New-York,NY,USA-c35805/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a",
+    },
+    {
+        "id": "homewood",
+        "name": "Homewood Suites Midtown Manhattan / Times Square-South",
+        "stars": 3,
+        "area": "Midtown · Times Square South",
+        "price": 1_420_000,
+        "price_note": "2박 대략 · 키친ette 스위트",
+        "badge": "키친·조식",
+        "conditions": [
+            "전 객실 스위트 · 간이주방(식비 절약)",
+            "핫 브렉퍼스트 포함인 경우가 많음",
+            "세탁실·장기 체류형 편의",
+            "4인 기준 소파베드 포함 객실 선택",
+        ],
+        "why": "아이 둘과 조식·간단 식사를 호텔에서 해결하기 좋아 실속형.",
+        "url": "https://www.hilton.com/en/hotels/nycmshh-homewood-suites-new-york-midtown-manhattan-times-square-south/",
+    },
+    {
+        "id": "westin",
+        "name": "The Westin New York at Times Square",
+        "stars": 4,
+        "area": "Times Square",
+        "price": 1_680_000,
+        "price_note": "2박 대략 · 연결객실/패밀리 패키지",
+        "badge": "프리미엄",
+        "conditions": [
+            "연결 객실·롤어웨이로 가족 분리 가능",
+            "Westin Family 프로그램(키즈 가이드 등)",
+            "2번째 객실 할인 패키지 시즌별 확인",
+            "총액에 세금·리조트피 포함 여부 꼭 확인",
+        ],
+        "why": "공간·브랜드 안정성을 우선할 때. 예산 여유 있으면 1순위 후보.",
+        "url": "https://www.marriott.com/en-us/hotels/nycsw-the-westin-new-york-at-times-square/overview/",
+    },
+]
+
+
 def _render_east_lodging_card(city: dict) -> str:
     lodging = city.get("lodging") or {}
     if not lodging:
@@ -408,6 +513,29 @@ def _render_east_lodging_card(city: dict) -> str:
     amount = lodging.get("amount") or (per_night * nights if per_night else 0)
     area = lodging.get("area") or ""
     note = lodging.get("note") or ""
+
+    # NYC only: interactive lodging card that opens hotel recommendation modal
+    if city.get("key") == "nyc":
+        return f"""
+        <button type="button" class="card east-lodging-card east-lodging-card-nyc" id="nyc-lodging-open"
+          aria-haspopup="dialog" aria-controls="nyc-hotel-modal">
+          <div class="east-lodging-top">
+            <div>
+              <p class="date-kicker">LODGING · {nights}박 · 클릭해서 호텔 추천</p>
+              <h3>뉴욕 숙박 추천 보기</h3>
+              <p class="muted">{NYC_HOTEL_AREA['name']}</p>
+            </div>
+            <div class="east-lodging-price">
+              <strong>{fmt_won(amount)}</strong>
+              <span class="muted">{nights}박 예산대 · 1박 약 {fmt_won(per_night)}</span>
+            </div>
+          </div>
+          <p class="muted" style="margin:10px 0 0;">
+            {NYC_HOTEL_CHECKIN} 체크인 → {NYC_HOTEL_CHECKOUT} 체크아웃 · 추천 지역 호텔 {len(NYC_HOTEL_RECS)}곳
+            <span class="east-lodging-cta">금액·조건 비교 →</span>
+          </p>
+        </button>"""
+
     return f"""
     <section class="card east-lodging-card">
       <div class="east-lodging-top">
@@ -423,6 +551,70 @@ def _render_east_lodging_card(city: dict) -> str:
       </div>
       <p class="muted" style="margin:10px 0 0;">{note} · Day1·Day2 지출에 이미 포함</p>
     </section>"""
+
+
+def render_nyc_hotel_modal() -> str:
+    cards = []
+    for h in NYC_HOTEL_RECS:
+        conds = "".join(f"<li>{c}</li>" for c in h.get("conditions") or [])
+        stars = "★" * int(h.get("stars") or 0)
+        cards.append(f"""
+        <article class="nyc-hotel-card">
+          <header class="nyc-hotel-head">
+            <div>
+              <span class="nyc-hotel-badge">{h.get('badge', '추천')}</span>
+              <h3>{h['name']}</h3>
+              <p class="muted">{stars} · {h.get('area', '')}</p>
+            </div>
+            <div class="nyc-hotel-price">
+              <strong>{fmt_won(h.get('price'))}</strong>
+              <span class="muted">{h.get('price_note', '')}</span>
+            </div>
+          </header>
+          <p class="nyc-hotel-why">{h.get('why', '')}</p>
+          <ul class="nyc-hotel-conds">{conds}</ul>
+          <div class="nyc-hotel-actions">
+            <a class="cta-link" href="{h.get('url', NYC_HOTEL_SEARCH)}" target="_blank" rel="noopener noreferrer">
+              <button type="button" class="cta-btn">예약·요금 확인</button>
+            </a>
+          </div>
+        </article>""")
+
+    return f"""
+    <div id="nyc-hotel-modal" class="nyc-modal" hidden role="dialog" aria-modal="true"
+      aria-labelledby="nyc-hotel-modal-title">
+      <div class="nyc-modal-backdrop" data-nyc-close></div>
+      <div class="nyc-modal-panel">
+        <header class="nyc-modal-head">
+          <div>
+            <p class="date-kicker">NYC LODGING PICKS</p>
+            <h2 id="nyc-hotel-modal-title">뉴욕 숙박 추천</h2>
+            <p class="muted">
+              {NYC_HOTEL_CHECKIN} → {NYC_HOTEL_CHECKOUT} · {NYC_HOTEL_NIGHTS}박 ·
+              성인 2 · 아동 2(만 7·8세) · 추천 지역: {NYC_HOTEL_AREA['name']}
+            </p>
+          </div>
+          <button type="button" class="nyc-modal-close" data-nyc-close aria-label="닫기">×</button>
+        </header>
+        <div class="nyc-modal-why card">
+          <strong>왜 이 지역?</strong>
+          <p class="muted" style="margin:6px 0 0;">{NYC_HOTEL_AREA['why']}</p>
+          <p class="muted" style="margin:8px 0 0;">{NYC_HOTEL_AREA['alt']}</p>
+        </div>
+        <p class="muted nyc-modal-note">
+          금액은 2박 총액 대략치(KRW)입니다. 세금·리조트피·환불에 따라 달라지니 예약 전 총액을 확인하세요.
+          시카고 Airbnb 체크인이 9/26이면 체크아웃을 9/26으로 하루 연장하는 것도 검토하세요.
+        </p>
+        <div class="nyc-hotel-grid">{''.join(cards)}</div>
+        <footer class="nyc-modal-foot">
+          <a class="cta-link" href="{NYC_HOTEL_SEARCH}" target="_blank" rel="noopener noreferrer">
+            <button type="button" class="cta-btn">KAYAK에서 Midtown 전체 검색</button>
+          </a>
+          <button type="button" class="nyc-modal-secondary" data-nyc-close>닫기</button>
+        </footer>
+      </div>
+    </div>
+    """
 
 
 def render_east_plan() -> str:
@@ -472,4 +664,5 @@ def render_east_plan() -> str:
     <p class="flight-hint muted">{plan['budget_note']}</p>
     <div class="route-switch east-switch" role="tablist">{''.join(tabs)}</div>
     {''.join(panels)}
+    {render_nyc_hotel_modal()}
     """

@@ -254,6 +254,22 @@
       background: linear-gradient(135deg, #fff7ed 0%, #fff 55%);
       border: 1px solid #fed7aa;
     }
+    button.east-lodging-card {
+      display: block; width: 100%; text-align: left; cursor: pointer;
+      font: inherit; color: inherit;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    button.east-lodging-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(194, 65, 12, .12);
+      border-color: #fb923c;
+    }
+    .east-lodging-card-nyc {
+      background: linear-gradient(135deg, #ffedd5 0%, #fff7ed 40%, #fff 100%);
+    }
+    .east-lodging-cta {
+      display: inline-block; margin-left: 8px; color: #c2410c; font-weight: 700;
+    }
     .east-lodging-top {
       display: flex; justify-content: space-between; gap: 16px; align-items: flex-start;
     }
@@ -266,6 +282,65 @@
       font-size: 0.9rem; border: 1px solid var(--line);
     }
     .east-budget-strip strong { color: var(--budget); }
+    .nyc-modal {
+      position: fixed; inset: 0; z-index: 80; display: flex; align-items: flex-start;
+      justify-content: center; padding: 4vh 16px 24px; overflow-y: auto;
+    }
+    .nyc-modal[hidden] { display: none !important; }
+    .nyc-modal-backdrop {
+      position: fixed; inset: 0; background: rgba(15, 23, 42, .55); backdrop-filter: blur(2px);
+    }
+    .nyc-modal-panel {
+      position: relative; z-index: 1; width: min(920px, 100%);
+      background: #fff; border-radius: 20px; padding: 22px 22px 18px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, .28); margin-bottom: 24px;
+    }
+    .nyc-modal-head {
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .nyc-modal-head h2 { margin: 4px 0 6px; font-size: 1.45rem; }
+    .nyc-modal-close {
+      border: none; background: #f1f5f9; width: 40px; height: 40px; border-radius: 999px;
+      font-size: 1.4rem; line-height: 1; cursor: pointer; color: #334155; flex-shrink: 0;
+    }
+    .nyc-modal-why { margin-bottom: 12px; padding: 14px 16px; background: #fff7ed; border: 1px solid #fed7aa; }
+    .nyc-modal-note { margin: 0 0 14px; font-size: 0.85rem; }
+    .nyc-hotel-grid { display: grid; gap: 12px; }
+    .nyc-hotel-card {
+      border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; background: #fafbfc;
+    }
+    .nyc-hotel-head {
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+    }
+    .nyc-hotel-head h3 { margin: 6px 0 2px; font-size: 1.05rem; }
+    .nyc-hotel-badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 800; letter-spacing: .03em;
+      padding: 3px 8px; border-radius: 999px; background: #ffedd5; color: #9a3412;
+    }
+    .nyc-hotel-price { text-align: right; white-space: nowrap; }
+    .nyc-hotel-price strong { display: block; font-size: 1.25rem; color: #c2410c; }
+    .nyc-hotel-why { margin: 10px 0 8px; font-size: 0.92rem; }
+    .nyc-hotel-conds {
+      margin: 0 0 12px; padding-left: 18px; color: var(--muted); font-size: 0.86rem;
+    }
+    .nyc-hotel-conds li { margin-bottom: 3px; }
+    .nyc-hotel-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nyc-modal-foot {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end;
+      margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
+    }
+    .nyc-modal-secondary {
+      border: 1px solid var(--line); background: #fff; border-radius: 999px;
+      padding: 8px 16px; font-weight: 600; cursor: pointer;
+    }
+    body.nyc-modal-open { overflow: hidden; }
+    @media (max-width: 700px) {
+      .nyc-hotel-head { flex-direction: column; }
+      .nyc-hotel-price { text-align: left; }
+      .east-lodging-top { flex-direction: column; }
+      .east-lodging-price { text-align: left; }
+    }
     .dashboard-hero { background: linear-gradient(135deg, #0d7a5f 0%, #0a5c48 100%); color: #fff; }
     .dashboard-hero .muted { color: rgba(255,255,255,.78); }
     .dash-hero-inner { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
@@ -390,7 +465,7 @@
     <header>
       <h1>서울 → 시카고 여행계획</h1>
       <p class="meta">
-        성인 2명 · 유소아 2명 (만 7·8세) · 동기화: 2026-08-08 11:59:57 KST · 3시간마다 자동 갱신
+        성인 2명 · 유소아 2명 (만 7·8세) · 동기화: 2026-08-08 12:05:41 KST · 3시간마다 자동 갱신
       </p>
       <nav class="tabs" role="tablist">
         <button class="tab active" role="tab" aria-selected="true" data-panel="dashboard">💰 여행경비</button>
@@ -4411,20 +4486,24 @@
         <div class="east-panel active" data-east-panel="nyc">
           <p class="muted" style="margin:0 0 14px;">맨해튼 핵심 · 아이와 걷기 좋은 코스</p>
           
-    <section class="card east-lodging-card">
-      <div class="east-lodging-top">
-        <div>
-          <p class="date-kicker">LODGING · 2박</p>
-          <h3>뉴욕 숙박 대략</h3>
-          <p class="muted">Times Square · Midtown 인근</p>
-        </div>
-        <div class="east-lodging-price">
-          <strong>₩1,100,000</strong>
-          <span class="muted">2박 · 1박 약 ₩550,000</span>
-        </div>
-      </div>
-      <p class="muted" style="margin:10px 0 0;">맨해튼/미드타운 가족실·Apt 대략 · 세금·수수료 포함 가정 · Day1·Day2 지출에 이미 포함</p>
-    </section>
+        <button type="button" class="card east-lodging-card east-lodging-card-nyc" id="nyc-lodging-open"
+          aria-haspopup="dialog" aria-controls="nyc-hotel-modal">
+          <div class="east-lodging-top">
+            <div>
+              <p class="date-kicker">LODGING · 2박 · 클릭해서 호텔 추천</p>
+              <h3>뉴욕 숙박 추천 보기</h3>
+              <p class="muted">미드타운 웨스트 · Times Square / Theater District</p>
+            </div>
+            <div class="east-lodging-price">
+              <strong>₩1,100,000</strong>
+              <span class="muted">2박 예산대 · 1박 약 ₩550,000</span>
+            </div>
+          </div>
+          <p class="muted" style="margin:10px 0 0;">
+            2026-09-23 체크인 → 2026-09-25 체크아웃 · 추천 지역 호텔 5곳
+            <span class="east-lodging-cta">금액·조건 비교 →</span>
+          </p>
+        </button>
           <div class="east-budget-strip">
             <span>숙박 ₩1,100,000</span>
             <span>활동·식사 ₩1,450,000</span>
@@ -4597,6 +4676,141 @@
       </table>
     </article></div>
         </div>
+    
+    <div id="nyc-hotel-modal" class="nyc-modal" hidden role="dialog" aria-modal="true"
+      aria-labelledby="nyc-hotel-modal-title">
+      <div class="nyc-modal-backdrop" data-nyc-close></div>
+      <div class="nyc-modal-panel">
+        <header class="nyc-modal-head">
+          <div>
+            <p class="date-kicker">NYC LODGING PICKS</p>
+            <h2 id="nyc-hotel-modal-title">뉴욕 숙박 추천</h2>
+            <p class="muted">
+              2026-09-23 → 2026-09-25 · 2박 ·
+              성인 2 · 아동 2(만 7·8세) · 추천 지역: 미드타운 웨스트 · Times Square / Theater District
+            </p>
+          </div>
+          <button type="button" class="nyc-modal-close" data-nyc-close aria-label="닫기">×</button>
+        </header>
+        <div class="nyc-modal-why card">
+          <strong>왜 이 지역?</strong>
+          <p class="muted" style="margin:6px 0 0;">Day1 센트럴파크·타임스스퀘어, Day2 5번가·박물관과 도보·지하철로 가깝고, Day3 다운타운은 지하철 1번·A/C/E로 이동이 쉽습니다. 가족 4명(초등)에게 동선이 가장 짧습니다.</p>
+          <p class="muted" style="margin:8px 0 0;">조용하면 Midtown East(Grand Central), 박물관 위주면 Upper West Side도 후보.</p>
+        </div>
+        <p class="muted nyc-modal-note">
+          금액은 2박 총액 대략치(KRW)입니다. 세금·리조트피·환불에 따라 달라지니 예약 전 총액을 확인하세요.
+          시카고 Airbnb 체크인이 9/26이면 체크아웃을 9/26으로 하루 연장하는 것도 검토하세요.
+        </p>
+        <div class="nyc-hotel-grid">
+        <article class="nyc-hotel-card">
+          <header class="nyc-hotel-head">
+            <div>
+              <span class="nyc-hotel-badge">가족 추천</span>
+              <h3>M Social Hotel New York Times Square</h3>
+              <p class="muted">★★★★ · Times Square · Theater District</p>
+            </div>
+            <div class="nyc-hotel-price">
+              <strong>₩1,250,000</strong>
+              <span class="muted">2박 대략 · 시즌·객실타입별 변동</span>
+            </div>
+          </header>
+          <p class="nyc-hotel-why">브로드웨이·록펠러와 가깝고 가족 패키지가 잘 나와 Day1 동선에 최적.</p>
+          <ul class="nyc-hotel-conds"><li>패밀리 패키지·조식 옵션 자주 있음</li><li>어린이 동반 시 조식 할인/무료 프로모션 확인</li><li>무료 취소 가능 요금제 선택 권장</li><li>타임스스퀘어 도보권 · 소음 대비 고층/안쪽 객실</li></ul>
+          <div class="nyc-hotel-actions">
+            <a class="cta-link" href="https://www.kayak.co.kr/hotels/New-York,NY,USA-c35805/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a&fs=hotels=M+Social" target="_blank" rel="noopener noreferrer">
+              <button type="button" class="cta-btn">예약·요금 확인</button>
+            </a>
+          </div>
+        </article>
+        <article class="nyc-hotel-card">
+          <header class="nyc-hotel-head">
+            <div>
+              <span class="nyc-hotel-badge">동선 최적</span>
+              <h3>Park Central Hotel New York</h3>
+              <p class="muted">★★★★ · 7th Ave · Central Park South 인근</p>
+            </div>
+            <div class="nyc-hotel-price">
+              <strong>₩1,180,000</strong>
+              <span class="muted">2박 대략 · Twin/Queen 가족실 기준</span>
+            </div>
+          </header>
+          <p class="nyc-hotel-why">파크·미드타운 중간이라 Day1·Day2를 걷기 좋게 소화하기 좋습니다.</p>
+          <ul class="nyc-hotel-conds"><li>센트럴파크·타임스스퀘어 사이 위치</li><li>더블/트윈 가족 배치 가능 객실 확인</li><li>조식 미포함 요금 많음 · 주변 딜리 활용</li><li>무료 Wi-Fi · 짐 보관 가능 여부 예약 시 확인</li></ul>
+          <div class="nyc-hotel-actions">
+            <a class="cta-link" href="https://www.kayak.co.kr/hotels/New-York,NY,USA-c35805/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer">
+              <button type="button" class="cta-btn">예약·요금 확인</button>
+            </a>
+          </div>
+        </article>
+        <article class="nyc-hotel-card">
+          <header class="nyc-hotel-head">
+            <div>
+              <span class="nyc-hotel-badge">가성비</span>
+              <h3>The New Yorker, A Wyndham Hotel</h3>
+              <p class="muted">★★★★ · Midtown South · Penn Station 인근</p>
+            </div>
+            <div class="nyc-hotel-price">
+              <strong>₩1,050,000</strong>
+              <span class="muted">2박 대략 · 스위트/소파베드 옵션</span>
+            </div>
+          </header>
+          <p class="nyc-hotel-why">공간이 넓고 교통 허브 근처라 짐·이동이 많은 가족에게 실용적.</p>
+          <ul class="nyc-hotel-conds"><li>가족 스위트·소파베드로 4인 수용 가능성 높음</li><li>Penn Station·지하철 접근 좋음 (Day3 다운타운/이동)</li><li>리조트 피(일비) 별도인 경우 많음 · 총액 확인</li><li>무료 취소 마감일 요금제별 상이</li></ul>
+          <div class="nyc-hotel-actions">
+            <a class="cta-link" href="https://www.kayak.co.kr/hotels/New-York,NY,USA-c35805/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer">
+              <button type="button" class="cta-btn">예약·요금 확인</button>
+            </a>
+          </div>
+        </article>
+        <article class="nyc-hotel-card">
+          <header class="nyc-hotel-head">
+            <div>
+              <span class="nyc-hotel-badge">키친·조식</span>
+              <h3>Homewood Suites Midtown Manhattan / Times Square-South</h3>
+              <p class="muted">★★★ · Midtown · Times Square South</p>
+            </div>
+            <div class="nyc-hotel-price">
+              <strong>₩1,420,000</strong>
+              <span class="muted">2박 대략 · 키친ette 스위트</span>
+            </div>
+          </header>
+          <p class="nyc-hotel-why">아이 둘과 조식·간단 식사를 호텔에서 해결하기 좋아 실속형.</p>
+          <ul class="nyc-hotel-conds"><li>전 객실 스위트 · 간이주방(식비 절약)</li><li>핫 브렉퍼스트 포함인 경우가 많음</li><li>세탁실·장기 체류형 편의</li><li>4인 기준 소파베드 포함 객실 선택</li></ul>
+          <div class="nyc-hotel-actions">
+            <a class="cta-link" href="https://www.hilton.com/en/hotels/nycmshh-homewood-suites-new-york-midtown-manhattan-times-square-south/" target="_blank" rel="noopener noreferrer">
+              <button type="button" class="cta-btn">예약·요금 확인</button>
+            </a>
+          </div>
+        </article>
+        <article class="nyc-hotel-card">
+          <header class="nyc-hotel-head">
+            <div>
+              <span class="nyc-hotel-badge">프리미엄</span>
+              <h3>The Westin New York at Times Square</h3>
+              <p class="muted">★★★★ · Times Square</p>
+            </div>
+            <div class="nyc-hotel-price">
+              <strong>₩1,680,000</strong>
+              <span class="muted">2박 대략 · 연결객실/패밀리 패키지</span>
+            </div>
+          </header>
+          <p class="nyc-hotel-why">공간·브랜드 안정성을 우선할 때. 예산 여유 있으면 1순위 후보.</p>
+          <ul class="nyc-hotel-conds"><li>연결 객실·롤어웨이로 가족 분리 가능</li><li>Westin Family 프로그램(키즈 가이드 등)</li><li>2번째 객실 할인 패키지 시즌별 확인</li><li>총액에 세금·리조트피 포함 여부 꼭 확인</li></ul>
+          <div class="nyc-hotel-actions">
+            <a class="cta-link" href="https://www.marriott.com/en-us/hotels/nycsw-the-westin-new-york-at-times-square/overview/" target="_blank" rel="noopener noreferrer">
+              <button type="button" class="cta-btn">예약·요금 확인</button>
+            </a>
+          </div>
+        </article></div>
+        <footer class="nyc-modal-foot">
+          <a class="cta-link" href="https://www.kayak.co.kr/hotels/New-York,NY,USA-p9282/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer">
+            <button type="button" class="cta-btn">KAYAK에서 Midtown 전체 검색</button>
+          </a>
+          <button type="button" class="nyc-modal-secondary" data-nyc-close>닫기</button>
+        </footer>
+      </div>
+    </div>
+    
     
     </div>
 
@@ -5511,6 +5725,33 @@
     }
     document.querySelectorAll('.east-tab').forEach(btn => {
       btn.addEventListener('click', () => showEast(btn.dataset.east));
+    });
+
+    function openNycHotelModal() {
+      const modal = document.getElementById('nyc-hotel-modal');
+      if (!modal) return;
+      modal.hidden = false;
+      document.body.classList.add('nyc-modal-open');
+      const closeBtn = modal.querySelector('.nyc-modal-close');
+      if (closeBtn) closeBtn.focus();
+    }
+    function closeNycHotelModal() {
+      const modal = document.getElementById('nyc-hotel-modal');
+      if (!modal) return;
+      modal.hidden = true;
+      document.body.classList.remove('nyc-modal-open');
+      const openBtn = document.getElementById('nyc-lodging-open');
+      if (openBtn) openBtn.focus();
+    }
+    const nycLodgingOpen = document.getElementById('nyc-lodging-open');
+    if (nycLodgingOpen) {
+      nycLodgingOpen.addEventListener('click', openNycHotelModal);
+    }
+    document.querySelectorAll('[data-nyc-close]').forEach(el => {
+      el.addEventListener('click', closeNycHotelModal);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeNycHotelModal();
     });
 
     const hashPanel = {

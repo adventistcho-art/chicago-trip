@@ -1604,6 +1604,22 @@ def render_page(
       background: linear-gradient(135deg, #fff7ed 0%, #fff 55%);
       border: 1px solid #fed7aa;
     }}
+    button.east-lodging-card {{
+      display: block; width: 100%; text-align: left; cursor: pointer;
+      font: inherit; color: inherit;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }}
+    button.east-lodging-card:hover {{
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(194, 65, 12, .12);
+      border-color: #fb923c;
+    }}
+    .east-lodging-card-nyc {{
+      background: linear-gradient(135deg, #ffedd5 0%, #fff7ed 40%, #fff 100%);
+    }}
+    .east-lodging-cta {{
+      display: inline-block; margin-left: 8px; color: #c2410c; font-weight: 700;
+    }}
     .east-lodging-top {{
       display: flex; justify-content: space-between; gap: 16px; align-items: flex-start;
     }}
@@ -1616,6 +1632,65 @@ def render_page(
       font-size: 0.9rem; border: 1px solid var(--line);
     }}
     .east-budget-strip strong {{ color: var(--budget); }}
+    .nyc-modal {{
+      position: fixed; inset: 0; z-index: 80; display: flex; align-items: flex-start;
+      justify-content: center; padding: 4vh 16px 24px; overflow-y: auto;
+    }}
+    .nyc-modal[hidden] {{ display: none !important; }}
+    .nyc-modal-backdrop {{
+      position: fixed; inset: 0; background: rgba(15, 23, 42, .55); backdrop-filter: blur(2px);
+    }}
+    .nyc-modal-panel {{
+      position: relative; z-index: 1; width: min(920px, 100%);
+      background: #fff; border-radius: 20px; padding: 22px 22px 18px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, .28); margin-bottom: 24px;
+    }}
+    .nyc-modal-head {{
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+      margin-bottom: 14px;
+    }}
+    .nyc-modal-head h2 {{ margin: 4px 0 6px; font-size: 1.45rem; }}
+    .nyc-modal-close {{
+      border: none; background: #f1f5f9; width: 40px; height: 40px; border-radius: 999px;
+      font-size: 1.4rem; line-height: 1; cursor: pointer; color: #334155; flex-shrink: 0;
+    }}
+    .nyc-modal-why {{ margin-bottom: 12px; padding: 14px 16px; background: #fff7ed; border: 1px solid #fed7aa; }}
+    .nyc-modal-note {{ margin: 0 0 14px; font-size: 0.85rem; }}
+    .nyc-hotel-grid {{ display: grid; gap: 12px; }}
+    .nyc-hotel-card {{
+      border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; background: #fafbfc;
+    }}
+    .nyc-hotel-head {{
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+    }}
+    .nyc-hotel-head h3 {{ margin: 6px 0 2px; font-size: 1.05rem; }}
+    .nyc-hotel-badge {{
+      display: inline-block; font-size: 0.72rem; font-weight: 800; letter-spacing: .03em;
+      padding: 3px 8px; border-radius: 999px; background: #ffedd5; color: #9a3412;
+    }}
+    .nyc-hotel-price {{ text-align: right; white-space: nowrap; }}
+    .nyc-hotel-price strong {{ display: block; font-size: 1.25rem; color: #c2410c; }}
+    .nyc-hotel-why {{ margin: 10px 0 8px; font-size: 0.92rem; }}
+    .nyc-hotel-conds {{
+      margin: 0 0 12px; padding-left: 18px; color: var(--muted); font-size: 0.86rem;
+    }}
+    .nyc-hotel-conds li {{ margin-bottom: 3px; }}
+    .nyc-hotel-actions {{ display: flex; gap: 8px; flex-wrap: wrap; }}
+    .nyc-modal-foot {{
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end;
+      margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
+    }}
+    .nyc-modal-secondary {{
+      border: 1px solid var(--line); background: #fff; border-radius: 999px;
+      padding: 8px 16px; font-weight: 600; cursor: pointer;
+    }}
+    body.nyc-modal-open {{ overflow: hidden; }}
+    @media (max-width: 700px) {{
+      .nyc-hotel-head {{ flex-direction: column; }}
+      .nyc-hotel-price {{ text-align: left; }}
+      .east-lodging-top {{ flex-direction: column; }}
+      .east-lodging-price {{ text-align: left; }}
+    }}
     .dashboard-hero {{ background: linear-gradient(135deg, #0d7a5f 0%, #0a5c48 100%); color: #fff; }}
     .dashboard-hero .muted {{ color: rgba(255,255,255,.78); }}
     .dash-hero-inner {{ display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; }}
@@ -2624,6 +2699,33 @@ def render_page(
     }}
     document.querySelectorAll('.east-tab').forEach(btn => {{
       btn.addEventListener('click', () => showEast(btn.dataset.east));
+    }});
+
+    function openNycHotelModal() {{
+      const modal = document.getElementById('nyc-hotel-modal');
+      if (!modal) return;
+      modal.hidden = false;
+      document.body.classList.add('nyc-modal-open');
+      const closeBtn = modal.querySelector('.nyc-modal-close');
+      if (closeBtn) closeBtn.focus();
+    }}
+    function closeNycHotelModal() {{
+      const modal = document.getElementById('nyc-hotel-modal');
+      if (!modal) return;
+      modal.hidden = true;
+      document.body.classList.remove('nyc-modal-open');
+      const openBtn = document.getElementById('nyc-lodging-open');
+      if (openBtn) openBtn.focus();
+    }}
+    const nycLodgingOpen = document.getElementById('nyc-lodging-open');
+    if (nycLodgingOpen) {{
+      nycLodgingOpen.addEventListener('click', openNycHotelModal);
+    }}
+    document.querySelectorAll('[data-nyc-close]').forEach(el => {{
+      el.addEventListener('click', closeNycHotelModal);
+    }});
+    document.addEventListener('keydown', e => {{
+      if (e.key === 'Escape') closeNycHotelModal();
     }});
 
     const hashPanel = {{
