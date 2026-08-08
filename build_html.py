@@ -494,6 +494,7 @@ def build_trip_data(
         "best_lodging_id": best_lodging_id,
         "best_lodging_checkout": best_lodging_id,
         "best_car_id": best_car_id,
+        "plan_budgets": itinerary_plans.plan_budget_summary(),
     }
 
 
@@ -1177,7 +1178,7 @@ def render_dashboard_shell(combo_html: str, booked_flight_html: str = "") -> str
           <p class="dash-kicker">Total Trip Budget</p>
           <h2>총 여행경비</h2>
           <p id="total-budget" class="total-price">₩0</p>
-          <p id="trip-summary" class="muted">항공권과 숙박을 선택하면 합계가 계산됩니다.</p>
+          <p id="trip-summary" class="muted">탭별 선택·일정 경비 합계입니다.</p>
         </div>
         <div class="dash-meta-box">
           <div><span class="muted">일정</span><strong id="dash-schedule">-</strong></div>
@@ -1185,45 +1186,62 @@ def render_dashboard_shell(combo_html: str, booked_flight_html: str = "") -> str
           <div><span class="muted">숙박</span><strong id="dash-nights">-</strong></div>
         </div>
       </div>
+      <div class="dash-cat-summary" id="dash-cat-summary" aria-label="항목별 경비 요약"></div>
     </section>
 
-    <div class="dash-grid">
+    <div class="dash-grid dash-grid-tabs">
       <article class="dash-card" data-kind="flight">
-        <div class="dash-card-head"><span>✈️</span><h3>항공권</h3></div>
+        <div class="dash-card-head"><span>✈️</span><h3>비행기</h3></div>
         <p class="dash-amount" id="amt-flight">₩0</p>
-        <p class="dash-sub" id="sub-flight">1인당</p>
+        <p class="dash-sub" id="sub-flight">항공권 탭</p>
         <p class="dash-detail" id="detail-flight">미선택 · <a href="#" data-goto="flights">항공권 탭에서 선택</a></p>
       </article>
       <article class="dash-card" data-kind="lodging">
         <div class="dash-card-head"><span>🏠</span><h3>숙박</h3></div>
         <p class="dash-amount" id="amt-lodging">₩0</p>
+        <p class="dash-sub">숙박 탭</p>
         <p class="dash-detail" id="detail-lodging">미선택 · <a href="#" data-goto="lodging">숙박 탭에서 선택</a></p>
       </article>
-      <article class="dash-card" data-kind="food">
-        <div class="dash-card-head"><span>🍽️</span><h3>식비</h3></div>
-        <label class="field-label" for="food-per-day">1일 식비 (4명)</label>
-        <input id="food-per-day" type="number" min="0" step="10000" class="cost-input">
-        <p class="dash-sub" id="food-calc">0박 × ₩0 = ₩0</p>
-        <p class="dash-amount" id="amt-food">₩0</p>
-      </article>
       <article class="dash-card" data-kind="car">
-        <div class="dash-card-head"><span>🚗</span><h3>자동차 렌트</h3></div>
+        <div class="dash-card-head"><span>🚗</span><h3>렌트카</h3></div>
         <p class="dash-amount" id="amt-car">₩0</p>
+        <p class="dash-sub">렌트카 탭</p>
         <p class="dash-detail" id="detail-car">미선택 · <a href="#" data-goto="cars">렌트카 탭에서 선택</a></p>
         <label class="field-label" for="cost-car">직접 수정 (총액)</label>
         <input id="cost-car" type="number" min="0" step="10000" class="cost-input">
       </article>
-      <article class="dash-card" data-kind="gift">
-        <div class="dash-card-head"><span>🎁</span><h3>선물비</h3></div>
-        <label class="field-label" for="cost-gift">선물 예산</label>
-        <input id="cost-gift" type="number" min="0" step="10000" class="cost-input">
-        <p class="dash-amount" id="amt-gift">₩0</p>
+      <article class="dash-card" data-kind="east">
+        <div class="dash-card-head"><span>🗽</span><h3>동부 3일</h3></div>
+        <p class="dash-amount" id="amt-east">₩0</p>
+        <p class="dash-sub" id="sub-east">뉴욕 3일 대략</p>
+        <p class="dash-detail" id="detail-east">동부 탭 일정 기준 · <a href="#" data-goto="east-plan">동부 3일 보기</a></p>
       </article>
-      <article class="dash-card" data-kind="misc">
-        <div class="dash-card-head"><span>🎫</span><h3>기타 여행비</h3></div>
-        <label class="field-label" for="cost-misc">관광·교통·기타</label>
-        <input id="cost-misc" type="number" min="0" step="10000" class="cost-input">
+      <article class="dash-card" data-kind="chicago">
+        <div class="dash-card-head"><span>🗺️</span><h3>시카고 여행경비</h3></div>
+        <p class="dash-amount" id="amt-chicago">₩0</p>
+        <p class="dash-sub">10일 현지 활동비</p>
+        <p class="dash-detail" id="detail-chicago">항공·숙박·렌트 제외 · <a href="#" data-goto="chi-plan">시카고 10일 보기</a></p>
+      </article>
+      <article class="dash-card is-pending" data-kind="food">
+        <div class="dash-card-head">
+          <span>🍽️</span><h3>식비</h3>
+          <span class="pending-badge">추가 예정</span>
+        </div>
+        <p class="dash-amount" id="amt-food">₩0</p>
+        <p class="dash-sub" id="food-calc">별도 식비 항목 · 준비 중</p>
+        <p class="dash-detail muted">동부·시카고 일정 대략치에 식사 일부가 이미 포함되어 있습니다.</p>
+        <input id="food-per-day" type="hidden" value="0">
+      </article>
+      <article class="dash-card is-pending" data-kind="misc">
+        <div class="dash-card-head">
+          <span>🎫</span><h3>기타 여비</h3>
+          <span class="pending-badge">추가 예정</span>
+        </div>
         <p class="dash-amount" id="amt-misc">₩0</p>
+        <p class="dash-sub">잡비·예비비 등</p>
+        <p class="dash-detail muted">추후 입력란을 열 예정입니다.</p>
+        <input id="cost-misc" type="hidden" value="0">
+        <input id="cost-gift" type="hidden" value="0">
       </article>
     </div>
 
@@ -1239,7 +1257,7 @@ def render_dashboard_shell(combo_html: str, booked_flight_html: str = "") -> str
         <div class="bar-chart" id="bar-chart"></div>
       </div>
       <p class="muted" style="margin-top:12px;">
-        ※ 항공권·숙박·렌트카는 각 탭에서 선택한 값이 자동 반영됩니다. 식비·렌트 금액·선물·기타는 직접 수정 가능하며 브라우저에 저장됩니다.
+        ※ 비행기·숙박·렌트카는 각 탭 선택값, 동부·시카고는 일정 탭 대략 지출입니다. 식비·기타 여비는 추가 예정입니다.
       </p>
     </section>"""
 
@@ -1513,14 +1531,33 @@ def render_page(
     .total-price {{ font-size: 2.6rem; font-weight: 800; margin: 8px 0 12px; line-height: 1.1; }}
     .dash-meta-box {{ display: grid; gap: 10px; min-width: 180px; background: rgba(255,255,255,.12); padding: 16px; border-radius: 10px; }}
     .dash-meta-box .muted {{ display: block; font-size: 0.75rem; margin-bottom: 2px; }}
+    .dash-cat-summary {{
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.18);
+    }}
+    .dash-cat-pill {{
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.14);
+      border-radius: 12px; padding: 10px 12px; display: grid; gap: 2px;
+    }}
+    .dash-cat-pill .cat-label {{ font-size: 0.75rem; color: rgba(255,255,255,.72); }}
+    .dash-cat-pill .cat-amt {{ font-size: 0.98rem; font-weight: 800; color: #fff; }}
+    .dash-cat-pill.is-pending {{ opacity: .55; }}
     .dash-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }}
-    .dash-card {{ background: var(--card); border-radius: 12px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,.06); border-top: 4px solid #ddd; }}
+    .dash-grid-tabs {{ grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }}
+    .dash-card {{ background: var(--card); border-radius: 12px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,.06); border-top: 4px solid #ddd; position: relative; }}
     .dash-card[data-kind="flight"] {{ border-top-color: var(--sky); }}
     .dash-card[data-kind="lodging"] {{ border-top-color: var(--airbnb); }}
-    .dash-card[data-kind="food"] {{ border-top-color: #f59e0b; }}
     .dash-card[data-kind="car"] {{ border-top-color: #6366f1; }}
-    .dash-card[data-kind="gift"] {{ border-top-color: #ec4899; }}
+    .dash-card[data-kind="east"] {{ border-top-color: #4f46e5; }}
+    .dash-card[data-kind="chicago"] {{ border-top-color: var(--chi); }}
+    .dash-card[data-kind="food"] {{ border-top-color: #f59e0b; }}
     .dash-card[data-kind="misc"] {{ border-top-color: #64748b; }}
+    .dash-card.is-pending {{ background: #f8fafc; }}
+    .pending-badge {{
+      margin-left: auto; font-size: 0.68rem; font-weight: 800; letter-spacing: .02em;
+      background: #fff7ed; color: #c2410c; border: 1px solid #fdba74;
+      border-radius: 999px; padding: 3px 8px; white-space: nowrap;
+    }}
     .dash-card-head {{ display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }}
     .dash-card-head h3 {{ margin: 0; font-size: 1rem; }}
     .dash-amount {{ font-size: 1.35rem; font-weight: 800; margin: 8px 0 4px; color: var(--budget); }}
@@ -1624,7 +1661,7 @@ def render_page(
     </header>
 
     <div id="dashboard" class="panel active" role="tabpanel">
-      <p class="meta">선택한 항공권·숙박·렌트카 + 식비·선물·기타 = 총 여행경비</p>
+      <p class="meta">비행기 · 숙박 · 렌트카 · 동부 3일 · 시카고 여행경비 합계 (식비·기타 여비는 추가 예정)</p>
       {dashboard_html}
     </div>
 
@@ -1671,9 +1708,10 @@ def render_page(
     const pct = (part, total) => total ? Math.round(part / total * 100) : 0;
 
     const COLORS = {{
-      flight: '#0770e3', lodging: '#ff385c', food: '#f59e0b',
-      car: '#6366f1', gift: '#ec4899', misc: '#64748b'
+      flight: '#0770e3', lodging: '#ff385c', car: '#6366f1',
+      east: '#4f46e5', chicago: '#c45c26', food: '#f59e0b', misc: '#64748b'
     }};
+    const PLAN = TRIP.plan_budgets || {{}};
 
     function loadState() {{
       try {{ return JSON.parse(localStorage.getItem(STORE_KEY) || '{{}}'); }}
@@ -2036,10 +2074,14 @@ def render_page(
 
     function readInputs() {{
       const state = getState();
-      state.foodPerDay = Number(document.getElementById('food-per-day').value) || 0;
-      state.car = Number(document.getElementById('cost-car').value) || 0;
-      state.gift = Number(document.getElementById('cost-gift').value) || 0;
-      state.misc = Number(document.getElementById('cost-misc').value) || 0;
+      const foodEl = document.getElementById('food-per-day');
+      const carEl = document.getElementById('cost-car');
+      const giftEl = document.getElementById('cost-gift');
+      const miscEl = document.getElementById('cost-misc');
+      if (foodEl) state.foodPerDay = Number(foodEl.value) || 0;
+      if (carEl) state.car = Number(carEl.value) || 0;
+      if (giftEl) state.gift = Number(giftEl.value) || 0;
+      if (miscEl) state.misc = Number(miscEl.value) || 0;
       saveState(state);
       return state;
     }}
@@ -2053,24 +2095,38 @@ def render_page(
 
       const flightAmt = flight?.price || 0;
       const lodgingAmt = lodging?.price || 0;
-      const foodAmt = state.foodPerDay * nights;
       const carAmt = state.car;
-      const giftAmt = state.gift;
-      const miscAmt = state.misc;
-      const total = flightAmt + lodgingAmt + foodAmt + carAmt + giftAmt + miscAmt;
+      const eastAmt = PLAN.east?.total || 0;
+      const chicagoAmt = PLAN.chicago?.total || 0;
+      // 식비·기타 여비는 추가 예정 → 합계에 아직 넣지 않음
+      const foodAmt = 0;
+      const miscAmt = 0;
+      const total = flightAmt + lodgingAmt + carAmt + eastAmt + chicagoAmt;
 
       document.getElementById('total-budget').textContent = fmt(total);
       const flightPerPerson = flight?.price_per_person || (flightAmt ? Math.round(flightAmt / TRIP.guests) : 0);
       const flightBooked = !!(flight && (flight.booked || flight.kind === 'booked'));
-      document.getElementById('amt-flight').textContent = flightBooked ? fmt(flightAmt) : fmt(flightPerPerson);
+      document.getElementById('amt-flight').textContent = fmt(flightAmt);
       document.getElementById('sub-flight').textContent = flight
-        ? (flightBooked ? `예약완료 · 1인 ${{fmt(flightPerPerson)}}` : `1인당 · 4명 합계 ${{fmt(flightAmt)}}`)
-        : '1인당';
+        ? (flightBooked ? `예약완료 · 1인 ${{fmt(flightPerPerson)}}` : `4명 합계 · 1인 ${{fmt(flightPerPerson)}}`)
+        : '항공권 탭';
       document.getElementById('amt-lodging').textContent = fmt(lodgingAmt);
-      document.getElementById('amt-food').textContent = fmt(foodAmt);
       document.getElementById('amt-car').textContent = fmt(carAmt);
-      document.getElementById('amt-gift').textContent = fmt(giftAmt);
+      document.getElementById('amt-east').textContent = fmt(eastAmt);
+      document.getElementById('amt-chicago').textContent = fmt(chicagoAmt);
+      document.getElementById('amt-food').textContent = fmt(foodAmt);
       document.getElementById('amt-misc').textContent = fmt(miscAmt);
+
+      const subEast = document.getElementById('sub-east');
+      if (subEast) subEast.textContent = PLAN.east?.chip || '동부 3일 대략';
+      const detailEast = document.getElementById('detail-east');
+      if (detailEast) {{
+        detailEast.innerHTML = `${{PLAN.east?.note || '동부 탭 일정 기준'}} · <a href="#" data-goto="east-plan">동부 3일 보기</a>`;
+      }}
+      const detailChi = document.getElementById('detail-chicago');
+      if (detailChi) {{
+        detailChi.innerHTML = `${{PLAN.chicago?.note || '항공·숙박·렌트 제외'}} · <a href="#" data-goto="chi-plan">시카고 10일 보기</a>`;
+      }}
 
       document.getElementById('detail-flight').innerHTML = flight
         ? `${{flightBooked ? '✅ ' : ''}}${{flight.source_label}} · 귀국 ${{flight.return_date}} · 4명 ${{fmt(flightAmt)}}<br><span class="muted">${{flight.duration_text || ''}} · ${{flight.carrier_text || ''}}</span> · <a href="#" data-goto="flights">변경</a>`
@@ -2085,7 +2141,8 @@ def render_page(
         ? `${{car.source_label || ''}} · ${{car.category}} · ${{car.model}} · ${{fmt(carAmt)}}<br><span class="muted">${{car.pickup_date}}~${{car.dropoff_date}} · ${{carOpts}}</span> · <a href="#" data-goto="cars">변경</a>`
         : '미선택 · <a href="#" data-goto="cars">렌트카 탭에서 선택</a>';
 
-      document.getElementById('food-calc').textContent = `${{nights}}박 × ${{fmt(state.foodPerDay)}}/일 = ${{fmt(foodAmt)}}`;
+      const foodCalc = document.getElementById('food-calc');
+      if (foodCalc) foodCalc.textContent = '별도 식비 항목 · 추가 예정';
 
       const schedule = flight && lodging
         ? `${{TRIP.outbound}} 도착 · 숙박 ${{TRIP.checkin}}~${{lodging.checkout_date}}`
@@ -2096,16 +2153,31 @@ def render_page(
       const mismatch = flight && lodging && flight.return_date !== lodging.checkout_date;
       document.getElementById('trip-summary').textContent = mismatch
         ? '⚠️ 항공 귀국일과 숙박 체크아웃이 다릅니다. 일정을 맞추면 더 정확합니다.'
-        : (total ? `항공 4명 ${{fmt(flightAmt)}} + 숙박 ${{fmt(lodgingAmt)}} + 식비·렌트·선물·기타 ${{fmt(total - flightAmt - lodgingAmt)}}` : '항공권과 숙박을 선택하세요.');
+        : (total
+          ? `비행기 ${{fmt(flightAmt)}} + 숙박 ${{fmt(lodgingAmt)}} + 렌트 ${{fmt(carAmt)}} + 동부 ${{fmt(eastAmt)}} + 시카고 ${{fmt(chicagoAmt)}}`
+          : '항공권·숙박·렌트카를 선택하면 합계가 계산됩니다.');
 
-      const items = [
-        ['항공권 (4명)', flightAmt, 'flight'],
-        ['숙박', lodgingAmt, 'lodging'],
-        ['식비', foodAmt, 'food'],
-        ['자동차 렌트', carAmt, 'car'],
-        ['선물비', giftAmt, 'gift'],
-        ['기타 여행비', miscAmt, 'misc'],
-      ].filter(([, amt]) => amt > 0);
+      const summaryItems = [
+        ['비행기', flightAmt, 'flight', false],
+        ['숙박', lodgingAmt, 'lodging', false],
+        ['렌트카', carAmt, 'car', false],
+        ['동부 3일', eastAmt, 'east', false],
+        ['시카고', chicagoAmt, 'chicago', false],
+        ['식비', foodAmt, 'food', true],
+        ['기타 여비', miscAmt, 'misc', true],
+      ];
+      const catSummary = document.getElementById('dash-cat-summary');
+      if (catSummary) {{
+        catSummary.innerHTML = summaryItems.map(([label, amt, key, pending]) => `
+          <div class="dash-cat-pill ${{pending ? 'is-pending' : ''}}" style="border-color:${{COLORS[key]}}55">
+            <span class="cat-label">${{label}}${{pending ? ' · 예정' : ''}}</span>
+            <span class="cat-amt">${{pending ? '추가 예정' : fmt(amt)}}</span>
+          </div>`).join('');
+      }}
+
+      const items = summaryItems
+        .filter(([, amt, , pending]) => !pending && amt > 0)
+        .map(([label, amt, key]) => [label, amt, key]);
 
       document.getElementById('breakdown-body').innerHTML = items.map(([label, amt, key]) => `
         <tr>
@@ -2138,10 +2210,14 @@ def render_page(
 
     function initBudget() {{
       const state = getState();
-      document.getElementById('food-per-day').value = state.foodPerDay;
-      document.getElementById('cost-car').value = state.car;
-      document.getElementById('cost-gift').value = state.gift;
-      document.getElementById('cost-misc').value = state.misc;
+      const foodEl = document.getElementById('food-per-day');
+      const carEl = document.getElementById('cost-car');
+      const giftEl = document.getElementById('cost-gift');
+      const miscEl = document.getElementById('cost-misc');
+      if (foodEl) foodEl.value = 0;
+      if (carEl) carEl.value = state.car;
+      if (giftEl) giftEl.value = 0;
+      if (miscEl) miscEl.value = 0;
 
       bindDateFilters();
 
@@ -2189,7 +2265,8 @@ def render_page(
       }});
 
       ['food-per-day', 'cost-car', 'cost-gift', 'cost-misc'].forEach(id => {{
-        document.getElementById(id).addEventListener('input', renderDashboard);
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', renderDashboard);
       }});
 
       document.querySelectorAll('.combo-apply').forEach(btn => {{

@@ -259,6 +259,40 @@ def _plan_total(days: list[dict]) -> int:
     return sum(_day_spend_total(d) for d in days)
 
 
+def plan_budget_summary() -> dict:
+    """Totals for dashboard: Chicago 10-day + default East city (NYC)."""
+    chicago_total = _plan_total(CHICAGO_10["days"])
+    east_cities = {}
+    for city in EAST_COAST_3["cities"]:
+        east_cities[city["key"]] = {
+            "key": city["key"],
+            "label": city["label"],
+            "chip": city["chip"],
+            "total": _plan_total(city["days"]),
+            "total_text": fmt_won(_plan_total(city["days"])),
+        }
+    nyc = east_cities.get("nyc") or next(iter(east_cities.values()), None)
+    return {
+        "chicago": {
+            "label": "시카고 여행경비",
+            "chip": "10일 현지",
+            "total": chicago_total,
+            "total_text": fmt_won(chicago_total),
+            "note": "항공·숙박·렌트 제외 · 현지 활동비 대략",
+        },
+        "east": {
+            "label": "동부 3일",
+            "chip": (nyc or {}).get("chip", "NYC 3일"),
+            "city_key": (nyc or {}).get("key", "nyc"),
+            "city_label": (nyc or {}).get("label", "뉴욕"),
+            "total": (nyc or {}).get("total", 0),
+            "total_text": (nyc or {}).get("total_text", "₩0"),
+            "note": "뉴욕 3일 코스 대략 · 도시 변경은 동부 탭",
+            "cities": east_cities,
+        },
+    }
+
+
 def _render_day_card(day: dict, accent: str = "") -> str:
     places = "".join(f"<li>{p}</li>" for p in day.get("places") or [])
     spend_rows = "".join(
