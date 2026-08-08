@@ -1668,8 +1668,22 @@ def render_page(
       display: inline-block; font-size: 0.72rem; font-weight: 800; letter-spacing: .03em;
       padding: 3px 8px; border-radius: 999px; background: #ffedd5; color: #9a3412;
     }}
-    .nyc-hotel-price {{ text-align: right; white-space: nowrap; }}
-    .nyc-hotel-price strong {{ display: block; font-size: 1.25rem; color: #c2410c; }}
+    .nyc-hotel-price {{ text-align: right; max-width: 280px; }}
+    .nyc-hotel-price > strong {{ display: block; font-size: 1.25rem; color: #c2410c; }}
+    .nyc-price-source {{
+      margin: 6px 0 0; font-size: 0.8rem; color: #9a3412; font-weight: 700;
+    }}
+    .nyc-price-source a {{ color: #9a3412; }}
+    .nyc-price-source-detail {{
+      margin: 4px 0 0; font-size: 0.75rem; line-height: 1.35; white-space: normal;
+    }}
+    .nyc-price-check {{
+      margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end;
+    }}
+    .nyc-price-check a {{
+      font-size: 0.72rem; font-weight: 700; color: #1d4ed8; text-decoration: none;
+      border: 1px solid #bfdbfe; background: #eff6ff; border-radius: 999px; padding: 3px 8px;
+    }}
     .nyc-hotel-why {{ margin: 10px 0 8px; font-size: 0.92rem; }}
     .nyc-hotel-conds {{
       margin: 0 0 12px; padding-left: 18px; color: var(--muted); font-size: 0.86rem;
