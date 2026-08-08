@@ -326,6 +326,47 @@
     }
     .nyc-hotel-conds li { margin-bottom: 3px; }
     .nyc-hotel-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nyc-sites-bar {
+      margin-bottom: 14px; padding: 14px 16px;
+      background: linear-gradient(135deg, #eef6ff 0%, #fff 60%);
+      border: 1px solid #bfdbfe;
+    }
+    .nyc-sites-bar-copy { margin-bottom: 10px; }
+    .nyc-book-caption {
+      margin: 0 0 8px; font-size: 0.8rem; font-weight: 700; color: #475569;
+    }
+    .nyc-book-row {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .nyc-book-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none; border-radius: 999px; padding: 8px 12px;
+      border: 1px solid var(--line); background: #fff; color: var(--text);
+      font-size: 0.84rem; font-weight: 700;
+      box-shadow: 0 1px 2px rgba(15,23,42,.04);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .nyc-book-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(15,23,42,.1);
+    }
+    .nyc-book-btn.compact { padding: 6px 10px; font-size: 0.78rem; }
+    .nyc-book-go {
+      font-size: 0.72rem; font-weight: 800; padding: 2px 7px; border-radius: 999px;
+      background: #0f172a; color: #fff;
+    }
+    .nyc-book-btn.kayak { border-color: #ffd0b5; background: #fff7f2; }
+    .nyc-book-btn.kayak .nyc-book-label { color: #ff690f; }
+    .nyc-book-btn.booking { border-color: #b6d4fe; background: #f0f7ff; }
+    .nyc-book-btn.booking .nyc-book-label { color: #003580; }
+    .nyc-book-btn.hotels { border-color: #fbcfe8; background: #fdf2f8; }
+    .nyc-book-btn.hotels .nyc-book-label { color: #d41b74; }
+    .nyc-book-btn.expedia { border-color: #fde68a; background: #fffbeb; }
+    .nyc-book-btn.expedia .nyc-book-label { color: #b45309; }
+    .nyc-book-btn.agoda { border-color: #fecaca; background: #fef2f2; }
+    .nyc-book-btn.agoda .nyc-book-label { color: #dc2626; }
+    .nyc-book-btn.google { border-color: #bbf7d0; background: #f0fdf4; }
+    .nyc-book-btn.google .nyc-book-label { color: #1a73e8; }
     .nyc-modal-foot {
       display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end;
       margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
@@ -465,7 +506,7 @@
     <header>
       <h1>서울 → 시카고 여행계획</h1>
       <p class="meta">
-        성인 2명 · 유소아 2명 (만 7·8세) · 동기화: 2026-08-08 12:05:41 KST · 3시간마다 자동 갱신
+        성인 2명 · 유소아 2명 (만 7·8세) · 동기화: 2026-08-08 12:08:38 KST · 3시간마다 자동 갱신
       </p>
       <nav class="tabs" role="tablist">
         <button class="tab active" role="tab" aria-selected="true" data-panel="dashboard">💰 여행경비</button>
@@ -4697,8 +4738,15 @@
           <p class="muted" style="margin:6px 0 0;">Day1 센트럴파크·타임스스퀘어, Day2 5번가·박물관과 도보·지하철로 가깝고, Day3 다운타운은 지하철 1번·A/C/E로 이동이 쉽습니다. 가족 4명(초등)에게 동선이 가장 짧습니다.</p>
           <p class="muted" style="margin:8px 0 0;">조용하면 Midtown East(Grand Central), 박물관 위주면 Upper West Side도 후보.</p>
         </div>
+        <section class="nyc-sites-bar card">
+          <div class="nyc-sites-bar-copy">
+            <strong>주요 사이트에서 Midtown 검색·예약</strong>
+            <p class="muted" style="margin:4px 0 0;">날짜·인원(성인2·아동7·8세)이 들어간 링크로 바로 이동합니다.</p>
+          </div>
+          <div class="nyc-book-row"><a class="nyc-book-btn kayak" href="https://www.kayak.co.kr/hotels/New-York,NY,USA-p9282/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">KAYAK</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn booking" href="https://www.booking.com/searchresults.html?ss=Midtown+Manhattan+Times+Square&checkin=2026-09-23&checkout=2026-09-25&group_adults=2&group_children=2&age=7&age=8&no_rooms=1&selected_currency=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Booking.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn hotels" href="https://kr.hotels.com/Hotel-Search?destination=Midtown+Manhattan%2C+New+York&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7%2C8&rooms=1" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Hotels.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn expedia" href="https://www.expedia.co.kr/Hotel-Search?destination=Midtown+Manhattan%2C+New+York&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7,8&rooms=1" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Expedia</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn agoda" href="https://www.agoda.com/search?city=318&checkIn=2026-09-23&checkOut=2026-09-25&rooms=1&adults=2&children=2&childages=7,8&textToSearch=Midtown+Manhattan+Times+Square" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Agoda</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn google" href="https://www.google.com/travel/hotels?q=Midtown+Manhattan+Times+Square&checkin=2026-09-23&checkout=2026-09-25&adults=2&children=7%2C8&hl=ko&curr=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Google 호텔</span><span class="nyc-book-go">예약</span></a></div>
+        </section>
         <p class="muted nyc-modal-note">
-          금액은 2박 총액 대략치(KRW)입니다. 세금·리조트피·환불에 따라 달라지니 예약 전 총액을 확인하세요.
+          금액은 2박 총액 대략치(KRW)입니다. 사이트마다 세금·리조트피가 다를 수 있으니 예약 전 총액을 확인하세요.
           시카고 Airbnb 체크인이 9/26이면 체크아웃을 9/26으로 하루 연장하는 것도 검토하세요.
         </p>
         <div class="nyc-hotel-grid">
@@ -4716,11 +4764,8 @@
           </header>
           <p class="nyc-hotel-why">브로드웨이·록펠러와 가깝고 가족 패키지가 잘 나와 Day1 동선에 최적.</p>
           <ul class="nyc-hotel-conds"><li>패밀리 패키지·조식 옵션 자주 있음</li><li>어린이 동반 시 조식 할인/무료 프로모션 확인</li><li>무료 취소 가능 요금제 선택 권장</li><li>타임스스퀘어 도보권 · 소음 대비 고층/안쪽 객실</li></ul>
-          <div class="nyc-hotel-actions">
-            <a class="cta-link" href="https://www.kayak.co.kr/hotels/New-York,NY,USA-c35805/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a&fs=hotels=M+Social" target="_blank" rel="noopener noreferrer">
-              <button type="button" class="cta-btn">예약·요금 확인</button>
-            </a>
-          </div>
+          <p class="nyc-book-caption">이 호텔 · 사이트별 검색·예약</p>
+          <div class="nyc-book-row"><a class="nyc-book-btn compact kayak" href="https://www.kayak.co.kr/hotels/M+Social+Hotel+New+York+Times+Square/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">KAYAK</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact booking" href="https://www.booking.com/searchresults.html?ss=M+Social+Hotel+New+York+Times+Square&checkin=2026-09-23&checkout=2026-09-25&group_adults=2&group_children=2&age=7&age=8&no_rooms=1&selected_currency=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Booking.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact hotels" href="https://kr.hotels.com/Hotel-Search?destination=Midtown+Manhattan%2C+New+York&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7%2C8&rooms=1&keyword=M+Social+Hotel+New+York+Times+Square" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Hotels.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact expedia" href="https://www.expedia.co.kr/Hotel-Search?destination=M+Social+Hotel+New+York+Times+Square&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7,8&rooms=1" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Expedia</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact agoda" href="https://www.agoda.com/search?city=318&checkIn=2026-09-23&checkOut=2026-09-25&rooms=1&adults=2&children=2&childages=7,8&textToSearch=M+Social+Hotel+New+York+Times+Square" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Agoda</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact google" href="https://www.google.com/travel/hotels?q=M+Social+Hotel+New+York+Times+Square&checkin=2026-09-23&checkout=2026-09-25&adults=2&children=7%2C8&hl=ko&curr=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Google 호텔</span><span class="nyc-book-go">예약</span></a></div>
         </article>
         <article class="nyc-hotel-card">
           <header class="nyc-hotel-head">
@@ -4736,11 +4781,8 @@
           </header>
           <p class="nyc-hotel-why">파크·미드타운 중간이라 Day1·Day2를 걷기 좋게 소화하기 좋습니다.</p>
           <ul class="nyc-hotel-conds"><li>센트럴파크·타임스스퀘어 사이 위치</li><li>더블/트윈 가족 배치 가능 객실 확인</li><li>조식 미포함 요금 많음 · 주변 딜리 활용</li><li>무료 Wi-Fi · 짐 보관 가능 여부 예약 시 확인</li></ul>
-          <div class="nyc-hotel-actions">
-            <a class="cta-link" href="https://www.kayak.co.kr/hotels/New-York,NY,USA-c35805/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer">
-              <button type="button" class="cta-btn">예약·요금 확인</button>
-            </a>
-          </div>
+          <p class="nyc-book-caption">이 호텔 · 사이트별 검색·예약</p>
+          <div class="nyc-book-row"><a class="nyc-book-btn compact kayak" href="https://www.kayak.co.kr/hotels/Park+Central+Hotel+New+York/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">KAYAK</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact booking" href="https://www.booking.com/searchresults.html?ss=Park+Central+Hotel+New+York&checkin=2026-09-23&checkout=2026-09-25&group_adults=2&group_children=2&age=7&age=8&no_rooms=1&selected_currency=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Booking.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact hotels" href="https://kr.hotels.com/Hotel-Search?destination=Midtown+Manhattan%2C+New+York&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7%2C8&rooms=1&keyword=Park+Central+Hotel+New+York" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Hotels.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact expedia" href="https://www.expedia.co.kr/Hotel-Search?destination=Park+Central+Hotel+New+York&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7,8&rooms=1" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Expedia</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact agoda" href="https://www.agoda.com/search?city=318&checkIn=2026-09-23&checkOut=2026-09-25&rooms=1&adults=2&children=2&childages=7,8&textToSearch=Park+Central+Hotel+New+York" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Agoda</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact google" href="https://www.google.com/travel/hotels?q=Park+Central+Hotel+New+York&checkin=2026-09-23&checkout=2026-09-25&adults=2&children=7%2C8&hl=ko&curr=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Google 호텔</span><span class="nyc-book-go">예약</span></a></div>
         </article>
         <article class="nyc-hotel-card">
           <header class="nyc-hotel-head">
@@ -4756,11 +4798,8 @@
           </header>
           <p class="nyc-hotel-why">공간이 넓고 교통 허브 근처라 짐·이동이 많은 가족에게 실용적.</p>
           <ul class="nyc-hotel-conds"><li>가족 스위트·소파베드로 4인 수용 가능성 높음</li><li>Penn Station·지하철 접근 좋음 (Day3 다운타운/이동)</li><li>리조트 피(일비) 별도인 경우 많음 · 총액 확인</li><li>무료 취소 마감일 요금제별 상이</li></ul>
-          <div class="nyc-hotel-actions">
-            <a class="cta-link" href="https://www.kayak.co.kr/hotels/New-York,NY,USA-c35805/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer">
-              <button type="button" class="cta-btn">예약·요금 확인</button>
-            </a>
-          </div>
+          <p class="nyc-book-caption">이 호텔 · 사이트별 검색·예약</p>
+          <div class="nyc-book-row"><a class="nyc-book-btn compact kayak" href="https://www.kayak.co.kr/hotels/The+New+Yorker+A+Wyndham+Hotel/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">KAYAK</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact booking" href="https://www.booking.com/searchresults.html?ss=The+New+Yorker+A+Wyndham+Hotel&checkin=2026-09-23&checkout=2026-09-25&group_adults=2&group_children=2&age=7&age=8&no_rooms=1&selected_currency=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Booking.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact hotels" href="https://kr.hotels.com/Hotel-Search?destination=Midtown+Manhattan%2C+New+York&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7%2C8&rooms=1&keyword=The+New+Yorker+A+Wyndham+Hotel" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Hotels.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact expedia" href="https://www.expedia.co.kr/Hotel-Search?destination=The+New+Yorker+A+Wyndham+Hotel&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7,8&rooms=1" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Expedia</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact agoda" href="https://www.agoda.com/search?city=318&checkIn=2026-09-23&checkOut=2026-09-25&rooms=1&adults=2&children=2&childages=7,8&textToSearch=The+New+Yorker+A+Wyndham+Hotel" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Agoda</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact google" href="https://www.google.com/travel/hotels?q=The+New+Yorker+A+Wyndham+Hotel&checkin=2026-09-23&checkout=2026-09-25&adults=2&children=7%2C8&hl=ko&curr=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Google 호텔</span><span class="nyc-book-go">예약</span></a></div>
         </article>
         <article class="nyc-hotel-card">
           <header class="nyc-hotel-head">
@@ -4776,11 +4815,8 @@
           </header>
           <p class="nyc-hotel-why">아이 둘과 조식·간단 식사를 호텔에서 해결하기 좋아 실속형.</p>
           <ul class="nyc-hotel-conds"><li>전 객실 스위트 · 간이주방(식비 절약)</li><li>핫 브렉퍼스트 포함인 경우가 많음</li><li>세탁실·장기 체류형 편의</li><li>4인 기준 소파베드 포함 객실 선택</li></ul>
-          <div class="nyc-hotel-actions">
-            <a class="cta-link" href="https://www.hilton.com/en/hotels/nycmshh-homewood-suites-new-york-midtown-manhattan-times-square-south/" target="_blank" rel="noopener noreferrer">
-              <button type="button" class="cta-btn">예약·요금 확인</button>
-            </a>
-          </div>
+          <p class="nyc-book-caption">이 호텔 · 사이트별 검색·예약</p>
+          <div class="nyc-book-row"><a class="nyc-book-btn compact kayak" href="https://www.kayak.co.kr/hotels/Homewood+Suites+Midtown+Manhattan+Times+Square+South/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">KAYAK</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact booking" href="https://www.booking.com/searchresults.html?ss=Homewood+Suites+Midtown+Manhattan+Times+Square+South&checkin=2026-09-23&checkout=2026-09-25&group_adults=2&group_children=2&age=7&age=8&no_rooms=1&selected_currency=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Booking.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact hotels" href="https://kr.hotels.com/Hotel-Search?destination=Midtown+Manhattan%2C+New+York&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7%2C8&rooms=1&keyword=Homewood+Suites+Midtown+Manhattan+Times+Square+South" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Hotels.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact expedia" href="https://www.expedia.co.kr/Hotel-Search?destination=Homewood+Suites+Midtown+Manhattan+Times+Square+South&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7,8&rooms=1" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Expedia</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact agoda" href="https://www.agoda.com/search?city=318&checkIn=2026-09-23&checkOut=2026-09-25&rooms=1&adults=2&children=2&childages=7,8&textToSearch=Homewood+Suites+Midtown+Manhattan+Times+Square+South" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Agoda</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact google" href="https://www.google.com/travel/hotels?q=Homewood+Suites+Midtown+Manhattan+Times+Square+South&checkin=2026-09-23&checkout=2026-09-25&adults=2&children=7%2C8&hl=ko&curr=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Google 호텔</span><span class="nyc-book-go">예약</span></a></div>
         </article>
         <article class="nyc-hotel-card">
           <header class="nyc-hotel-head">
@@ -4796,16 +4832,10 @@
           </header>
           <p class="nyc-hotel-why">공간·브랜드 안정성을 우선할 때. 예산 여유 있으면 1순위 후보.</p>
           <ul class="nyc-hotel-conds"><li>연결 객실·롤어웨이로 가족 분리 가능</li><li>Westin Family 프로그램(키즈 가이드 등)</li><li>2번째 객실 할인 패키지 시즌별 확인</li><li>총액에 세금·리조트피 포함 여부 꼭 확인</li></ul>
-          <div class="nyc-hotel-actions">
-            <a class="cta-link" href="https://www.marriott.com/en-us/hotels/nycsw-the-westin-new-york-at-times-square/overview/" target="_blank" rel="noopener noreferrer">
-              <button type="button" class="cta-btn">예약·요금 확인</button>
-            </a>
-          </div>
+          <p class="nyc-book-caption">이 호텔 · 사이트별 검색·예약</p>
+          <div class="nyc-book-row"><a class="nyc-book-btn compact kayak" href="https://www.kayak.co.kr/hotels/The+Westin+New+York+at+Times+Square/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">KAYAK</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact booking" href="https://www.booking.com/searchresults.html?ss=The+Westin+New+York+at+Times+Square&checkin=2026-09-23&checkout=2026-09-25&group_adults=2&group_children=2&age=7&age=8&no_rooms=1&selected_currency=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Booking.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact hotels" href="https://kr.hotels.com/Hotel-Search?destination=Midtown+Manhattan%2C+New+York&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7%2C8&rooms=1&keyword=The+Westin+New+York+at+Times+Square" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Hotels.com</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact expedia" href="https://www.expedia.co.kr/Hotel-Search?destination=The+Westin+New+York+at+Times+Square&startDate=2026-09-23&endDate=2026-09-25&adults=2&children=7,8&rooms=1" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Expedia</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact agoda" href="https://www.agoda.com/search?city=318&checkIn=2026-09-23&checkOut=2026-09-25&rooms=1&adults=2&children=2&childages=7,8&textToSearch=The+Westin+New+York+at+Times+Square" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Agoda</span><span class="nyc-book-go">예약</span></a><a class="nyc-book-btn compact google" href="https://www.google.com/travel/hotels?q=The+Westin+New+York+at+Times+Square&checkin=2026-09-23&checkout=2026-09-25&adults=2&children=7%2C8&hl=ko&curr=KRW" target="_blank" rel="noopener noreferrer"><span class="nyc-book-label">Google 호텔</span><span class="nyc-book-go">예약</span></a></div>
         </article></div>
         <footer class="nyc-modal-foot">
-          <a class="cta-link" href="https://www.kayak.co.kr/hotels/New-York,NY,USA-p9282/2026-09-23/2026-09-25/2adults/children-7-8?sort=rank_a" target="_blank" rel="noopener noreferrer">
-            <button type="button" class="cta-btn">KAYAK에서 Midtown 전체 검색</button>
-          </a>
           <button type="button" class="nyc-modal-secondary" data-nyc-close>닫기</button>
         </footer>
       </div>

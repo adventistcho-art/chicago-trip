@@ -1676,6 +1676,47 @@ def render_page(
     }}
     .nyc-hotel-conds li {{ margin-bottom: 3px; }}
     .nyc-hotel-actions {{ display: flex; gap: 8px; flex-wrap: wrap; }}
+    .nyc-sites-bar {{
+      margin-bottom: 14px; padding: 14px 16px;
+      background: linear-gradient(135deg, #eef6ff 0%, #fff 60%);
+      border: 1px solid #bfdbfe;
+    }}
+    .nyc-sites-bar-copy {{ margin-bottom: 10px; }}
+    .nyc-book-caption {{
+      margin: 0 0 8px; font-size: 0.8rem; font-weight: 700; color: #475569;
+    }}
+    .nyc-book-row {{
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }}
+    .nyc-book-btn {{
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none; border-radius: 999px; padding: 8px 12px;
+      border: 1px solid var(--line); background: #fff; color: var(--text);
+      font-size: 0.84rem; font-weight: 700;
+      box-shadow: 0 1px 2px rgba(15,23,42,.04);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }}
+    .nyc-book-btn:hover {{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(15,23,42,.1);
+    }}
+    .nyc-book-btn.compact {{ padding: 6px 10px; font-size: 0.78rem; }}
+    .nyc-book-go {{
+      font-size: 0.72rem; font-weight: 800; padding: 2px 7px; border-radius: 999px;
+      background: #0f172a; color: #fff;
+    }}
+    .nyc-book-btn.kayak {{ border-color: #ffd0b5; background: #fff7f2; }}
+    .nyc-book-btn.kayak .nyc-book-label {{ color: #ff690f; }}
+    .nyc-book-btn.booking {{ border-color: #b6d4fe; background: #f0f7ff; }}
+    .nyc-book-btn.booking .nyc-book-label {{ color: #003580; }}
+    .nyc-book-btn.hotels {{ border-color: #fbcfe8; background: #fdf2f8; }}
+    .nyc-book-btn.hotels .nyc-book-label {{ color: #d41b74; }}
+    .nyc-book-btn.expedia {{ border-color: #fde68a; background: #fffbeb; }}
+    .nyc-book-btn.expedia .nyc-book-label {{ color: #b45309; }}
+    .nyc-book-btn.agoda {{ border-color: #fecaca; background: #fef2f2; }}
+    .nyc-book-btn.agoda .nyc-book-label {{ color: #dc2626; }}
+    .nyc-book-btn.google {{ border-color: #bbf7d0; background: #f0fdf4; }}
+    .nyc-book-btn.google .nyc-book-label {{ color: #1a73e8; }}
     .nyc-modal-foot {{
       display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end;
       margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
