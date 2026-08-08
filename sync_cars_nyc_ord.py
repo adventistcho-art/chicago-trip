@@ -35,6 +35,42 @@ PICKUP_AIRPORTS = [
 DROPOFF_CODE = "ORD"
 TOP_GAS = 20
 TOP_EV = 15
+TOP_MINIVAN = 25
+
+
+def is_minivan(c: dict) -> bool:
+    cat = (c.get("category") or "").lower()
+    model = (c.get("model") or "")
+    blob = f"{cat} {model} {' '.join(c.get('options') or [])}"
+    if re.search(r"미니밴|minivan|\b밴\b|\bvan\b|people\s*carrier", blob, re.I):
+        # avoid matching '밴' inside unrelated words; category '밴'/'미니밴' is enough
+        if re.search(r"미니밴|minivan|people", blob, re.I) or cat in ("밴", "미니밴", "van"):
+            return True
+    return bool(
+        re.search(
+            r"Pacifica|Odyssey|Sienna|Carnival|Caravan|Voyager|Sedona|Town\s*&?\s*Country|"
+            r"퍼시피카|오디세이|시엔나|카니발|캐러밴|세도나",
+            model,
+            re.I,
+        )
+    )
+
+
+def keep_gas_ev_and_vans(cars: list[dict]) -> list[dict]:
+    """Keep cheapest gas/EV plus all minivan/van offers (vans are often above top-N cutoff)."""
+    cars = sorted(cars, key=lambda c: c["price"])
+    evs = [c for c in cars if is_ev(c)][:TOP_EV]
+    gas = [c for c in cars if not is_ev(c) and not is_minivan(c)][:TOP_GAS]
+    vans = [c for c in cars if is_minivan(c) and not is_ev(c)][:TOP_MINIVAN]
+    out, seen = [], set()
+    for c in evs + gas + vans:
+        key = (c.get("source"), c["model"], c["category"], c["price"], c.get("pickup_code"))
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(c)
+    out.sort(key=lambda c: c["price"])
+    return out
 
 # DiscoverCars: USA / New York / JFK & Chicago ORD (best-effort IDs; API may still work via search page)
 DC_US = "5003"
@@ -94,18 +130,8 @@ def is_ev(c: dict) -> bool:
 
 
 def keep_gas_and_ev(cars: list[dict]) -> list[dict]:
-    cars = sorted(cars, key=lambda c: c["price"])
-    evs = [c for c in cars if is_ev(c)][:TOP_EV]
-    gas = [c for c in cars if not is_ev(c)][:TOP_GAS]
-    out, seen = [], set()
-    for c in evs + gas:
-        key = (c.get("source"), c["model"], c["category"], c["price"], c.get("pickup_code"))
-        if key in seen:
-            continue
-        seen.add(key)
-        out.append(c)
-    out.sort(key=lambda c: c["price"])
-    return out
+    # Backward-compatible name: also retain minivans that would otherwise be truncated.
+    return keep_gas_ev_and_vans(cars)
 
 
 def offer(
@@ -147,18 +173,27 @@ def offer(
     }
 
 
-def kayak_url(pickup: str, electric: bool = False) -> str:
+def kayak_url(pickup: str, electric: bool = False, van: bool = False) -> str:
     # one-way with times
     base = (
         f"https://www.kayak.co.kr/cars/{pickup}-a{PICKUP_HHMM}/{DROPOFF_CODE}-a{DROPOFF_HHMM}/"
         f"{PICKUP_DATE}/{DROPOFF_DATE}?sort=price_a"
     )
-    return base + "&fs=ecoclass=Electric" if electric else base
+    if electric:
+        return base + "&fs=ecoclass=Electric"
+    if van:
+        # Best-effort; UI filter is more reliable. Kept for deep links.
+        return base + "&fs=cars=van"
+    return base
 
 
-def kayak_url_simple(pickup: str, electric: bool = False) -> str:
+def kayak_url_simple(pickup: str, electric: bool = False, van: bool = False) -> str:
     base = f"https://www.kayak.co.kr/cars/{pickup}/{DROPOFF_CODE}/{PICKUP_DATE}/{DROPOFF_DATE}?sort=price_a"
-    return base + "&fs=ecoclass=Electric" if electric else base
+    if electric:
+        return base + "&fs=ecoclass=Electric"
+    if van:
+        return base + "&fs=cars=van"
+    return base
 
 
 def parse_kayak_category(text: str) -> str:
@@ -181,7 +216,7 @@ def extract_kayak(page, pickup: str, electric: bool) -> list[dict]:
         if (lines.some(l => /최대\\s*\\d+%\\s*할인|지금 바로 예약/.test(l)) && lines.length < 8) continue;
         const isEv = isElectric || /Fully electric|전기차|Electric/i.test(b);
         let modelIdx = lines.findIndex(l =>
-          /토요타|닛산|혼다|포드|쉐보레|지프|기아|현대|크라이슬러|닷지|폭스바겐|BMW|벤츠|아우디|테슬라|미쓰비시|스바루|마쓰다|링컨|캐딜락|볼보|폴스타|리비안|야리스|베르사|스파크|크루즈|포커스|컴패스|코롤라|시빅|알티마|니로|아이오닉|볼트|리프|Mach-E|Model\\s*[Y3SX]|시로코|캠리|어코드|소나타|엘란트라|말리부|이쿼녹스|투싼|스포티지|싼타페|파일럿|오디세이|캐러밴|퍼시피카/i.test(l)
+          /토요타|닛산|혼다|포드|쉐보레|지프|기아|현대|크라이슬러|닷지|폭스바겐|BMW|벤츠|아우디|테슬라|미쓰비시|스바루|마쓰다|링컨|캐딜락|볼보|폴스타|리비안|야리스|베르사|스파크|크루즈|포커스|컴패스|코롤라|시빅|알티마|니로|아이오닉|볼트|리프|Mach-E|Model\\s*[Y3SX]|시로코|캠리|어코드|소나타|엘란트라|말리부|이쿼녹스|투싼|스포티지|싼타페|파일럿|오디세이|캐러밴|퍼시피카|Pacifica|Odyssey|Sienna|Carnival|Caravan|Voyager|Sedona|시엔나|카니발|세도나|Town/i.test(l)
         );
         if (modelIdx < 0) {
           if (isEv && /Fully electric/i.test(b)) {
@@ -257,9 +292,49 @@ def extract_kayak(page, pickup: str, electric: bool) -> list[dict]:
     return keep_gas_and_ev(cars)
 
 
-def scrape_kayak(page, pickup: str, electric: bool) -> list[dict]:
-    urls = [kayak_url(pickup, electric), kayak_url_simple(pickup, electric)]
-    label = "EV" if electric else "ALL"
+def kayak_load_more(page, times: int = 10) -> None:
+    for _ in range(times):
+        clicked = page.evaluate(
+            """() => {
+          const b = [...document.querySelectorAll('button')].find(el =>
+            /검색 결과 더 보기|Show more results|더 보기|Load more/i.test((el.innerText || '').trim())
+          );
+          if (b && /검색 결과 더 보기|Show more results/i.test((b.innerText || '').trim())) {
+            b.click(); return true;
+          }
+          return false;
+        }"""
+        )
+        page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+        page.wait_for_timeout(1200)
+        if not clicked:
+            break
+
+
+def kayak_try_van_filter(page) -> str | None:
+    return page.evaluate(
+        """() => {
+      const typeBtn = [...document.querySelectorAll('button')].find(el =>
+        /^(차종|Car type)$/i.test((el.innerText || '').trim())
+      );
+      if (typeBtn) typeBtn.click();
+      // sync wait via busy loop is avoided; caller sleeps
+      const nodes = [...document.querySelectorAll('button,label,div,span,li')];
+      for (const el of nodes) {
+        const t = (el.innerText || '').trim().replace(/\\s+/g, ' ');
+        if (/^밴\\s*[\\d,]+원부터$/.test(t) || /^Van\\b/i.test(t) && /from|원/i.test(t)) {
+          el.click();
+          return t;
+        }
+      }
+      return null;
+    }"""
+    )
+
+
+def scrape_kayak(page, pickup: str, electric: bool, van_pass: bool = False) -> list[dict]:
+    urls = [kayak_url(pickup, electric=electric, van=van_pass), kayak_url_simple(pickup, electric=electric, van=van_pass)]
+    label = "EV" if electric else ("VAN" if van_pass else "ALL")
     for url in urls:
         print(f"\n=== KAYAK [{label}] {pickup}→ORD {PICKUP_DATE}→{DROPOFF_DATE} ===")
         print(url)
@@ -270,9 +345,14 @@ def scrape_kayak(page, pickup: str, electric: bool) -> list[dict]:
             continue
         page.wait_for_timeout(3000)
         dismiss(page)
+        if van_pass and not electric:
+            clicked = kayak_try_van_filter(page)
+            print(f"  van filter click: {clicked}")
+            page.wait_for_timeout(2000)
         for y in (800, 1600, 2800, 4000):
             page.evaluate(f"window.scrollTo(0, {y})")
-            page.wait_for_timeout(900)
+            page.wait_for_timeout(700)
+        kayak_load_more(page, 8 if van_pass else 4)
         deadline = time.time() + 60
         cars: list[dict] = []
         while time.time() < deadline:
@@ -284,6 +364,8 @@ def scrape_kayak(page, pickup: str, electric: bool) -> list[dict]:
                 if cars:
                     break
             time.sleep(0.8)
+        if van_pass:
+            cars = [c for c in cars if is_minivan(c)]
         print(f"  found {len(cars)}")
         for c in cars[:5]:
             print(f"  - {c['price_text']} | {c['category']} | {c['model']} | {c['location'][:40]}")
@@ -485,10 +567,11 @@ def main() -> int:
         page = ctx.pages[0] if ctx.pages else ctx.new_page()
 
         for code, _name in PICKUP_AIRPORTS:
-            # KAYAK all + EV
+            # KAYAK all + EV + dedicated van pass (minivans often sit below top cheap cars)
             k_all = scrape_kayak(page, code, electric=False)
             k_ev = scrape_kayak(page, code, electric=True)
-            kayak_merge = keep_gas_and_ev(merge_sources(k_all, k_ev))
+            k_van = scrape_kayak(page, code, electric=False, van_pass=True)
+            kayak_merge = keep_gas_and_ev(merge_sources(k_all, k_ev, k_van))
             by_source["kayak"].extend(kayak_merge)
             kayak_days_cars.extend(kayak_merge)
 
@@ -508,6 +591,22 @@ def main() -> int:
     all_cars = merge_sources(by_source["discover"], by_source["rentalcars"], by_source["kayak"])
     # Prefer family-friendly (5+ seats) near top listing for display note
     family = [c for c in all_cars if (c.get("seats") or 0) >= 5]
+    minivans = [c for c in all_cars if is_minivan(c)]
+    # Enrich listed Pacifica-class deals with or-similar note (US rentals rarely guarantee exact model)
+    for c in minivans:
+        opts = list(c.get("options") or [])
+        note = "또는 동급 미니밴(인수 시 Odyssey/Sienna/Carnival 등 대체 가능)"
+        if note not in opts:
+            opts.append(note)
+        c["options"] = opts
+
+    minivan_models = sorted({c["model"] for c in minivans})
+    minivan_note = (
+        f"미니밴 정밀조회(KAYAK KR/COM · EWR/JFK/LGA · 결과 더보기 · 차종=밴): "
+        f"편도 NYC→ORD 구간에서는 {', '.join(minivan_models) if minivan_models else '미니밴 없음'}만 노출. "
+        "JFK/LGA는 미니밴 재고 없음(EWR·NYC만). "
+        "같은 기간 EWR 왕복에는 Sienna/Odyssey가 보이지만, ORD 편도 드롭에는 Pacifica(또는 동급)만 잡힘."
+    )
 
     def cheapest(src: str):
         cars = by_source.get(src) or []
@@ -521,6 +620,8 @@ def main() -> int:
         "pickup_time": PICKUP_TIME,
         "dropoff_time": DROPOFF_TIME,
         "route_note": "편도 · 뉴욕 인수 → 시카고 오헤어(ORD) 반납 · 귀국편 10/10 06:00 전 반납 권장",
+        "minivan_note": minivan_note,
+        "minivans": minivans,
         "nights": nights(PICKUP_DATE, DROPOFF_DATE),
         "sources": {
             "discover": {

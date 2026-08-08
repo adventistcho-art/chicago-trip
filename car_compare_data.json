@@ -796,7 +796,9 @@
             "doors": 4,
             "location": "EWR: 뉴어크 리버티 국제공항",
             "options": [
-              "5인 이상"
+              "5인 이상",
+              "또는 동급 미니밴(인수 시 Odyssey/Sienna/Carnival 등 대체 가능)",
+              "7인승"
             ],
             "supplier": "",
             "electric": false,
@@ -817,7 +819,9 @@
             "doors": 4,
             "location": "EWR: 뉴어크 리버티 국제공항",
             "options": [
-              "5인 이상"
+              "5인 이상",
+              "또는 동급 미니밴(인수 시 Odyssey/Sienna/Carnival 등 대체 가능)",
+              "7인승"
             ],
             "supplier": "",
             "electric": false,
@@ -1568,7 +1572,9 @@
         "doors": 4,
         "location": "EWR: 뉴어크 리버티 국제공항",
         "options": [
-          "5인 이상"
+          "5인 이상",
+          "또는 동급 미니밴(인수 시 Odyssey/Sienna/Carnival 등 대체 가능)",
+          "7인승"
         ],
         "supplier": "",
         "electric": false,
@@ -1589,7 +1595,9 @@
         "doors": 4,
         "location": "EWR: 뉴어크 리버티 국제공항",
         "options": [
-          "5인 이상"
+          "5인 이상",
+          "또는 동급 미니밴(인수 시 Odyssey/Sienna/Carnival 등 대체 가능)",
+          "7인승"
         ],
         "supplier": "",
         "electric": false,
@@ -3009,7 +3017,9 @@
         "doors": 4,
         "location": "EWR: 뉴어크 리버티 국제공항",
         "options": [
-          "5인 이상"
+          "5인 이상",
+          "또는 동급 미니밴(인수 시 Odyssey/Sienna/Carnival 등 대체 가능)",
+          "7인승"
         ],
         "supplier": "",
         "electric": false,
@@ -3030,7 +3040,9 @@
         "doors": 4,
         "location": "EWR: 뉴어크 리버티 국제공항",
         "options": [
-          "5인 이상"
+          "5인 이상",
+          "또는 동급 미니밴(인수 시 Odyssey/Sienna/Carnival 등 대체 가능)",
+          "7인승"
         ],
         "supplier": "",
         "electric": false,
@@ -3209,6 +3221,55 @@
         "synced_at": "2026-08-07T22:31:26+09:00"
       }
     ],
-    "synced_at": "2026-08-07T22:31:37+09:00"
+    "synced_at": "2026-08-08T09:12:12+09:00",
+    "minivan_note": "미니밴 정밀조회(KAYAK KR/COM · EWR/JFK/LGA · 결과 더보기 32건 · 차종=밴): 편도 NYC→ORD에서는 크라이슬러 Pacifica(또는 동급 미니밴)만 노출. JFK/LGA는 미니밴 재고 없음(EWR·NYC만). 같은 기간 EWR 왕복에는 Sienna/Odyssey가 보이지만, ORD 편도 드롭에는 Pacifica(또는 동급)만 잡힘.",
+    "minivans": [
+      {
+        "id": "car:kayak:EWR-ORD:2026-10-10:미니밴:크라이슬러 Pacifica:1079728",
+        "source": "kayak",
+        "model": "크라이슬러 Pacifica",
+        "category": "미니밴",
+        "price": 1079728,
+        "price_text": "₩1,079,728",
+        "seats": 7,
+        "bags": 4,
+        "doors": 4,
+        "location": "EWR: 뉴어크 리버티 국제공항",
+        "options": [
+          "5인 이상",
+          "또는 동급 미니밴(인수 시 Odyssey/Sienna/Carnival 등 대체 가능)",
+          "7인승"
+        ],
+        "supplier": "",
+        "electric": false,
+        "pickup_code": "EWR",
+        "dropoff_code": "ORD",
+        "seller_url": "https://www.kayak.co.kr/cars/EWR-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T22:30:34+09:00"
+      },
+      {
+        "id": "car:kayak:NYC-ORD:2026-10-10:미니밴:크라이슬러 Pacifica:1079728",
+        "source": "kayak",
+        "model": "크라이슬러 Pacifica",
+        "category": "미니밴",
+        "price": 1079728,
+        "price_text": "₩1,079,728",
+        "seats": 7,
+        "bags": 4,
+        "doors": 4,
+        "location": "EWR: 뉴어크 리버티 국제공항",
+        "options": [
+          "5인 이상",
+          "또는 동급 미니밴(인수 시 Odyssey/Sienna/Carnival 등 대체 가능)",
+          "7인승"
+        ],
+        "supplier": "",
+        "electric": false,
+        "pickup_code": "NYC",
+        "dropoff_code": "ORD",
+        "seller_url": "https://www.kayak.co.kr/cars/NYC-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-07T22:31:26+09:00"
+      }
+    ]
   }
 ]

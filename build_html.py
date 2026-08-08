@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import html
 import json
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
@@ -818,6 +819,7 @@ def render_cars(car_days: list[dict]) -> str:
                 if src.get("cheapest"):
                     all_cars.append(src["cheapest"])
     cheapest = min((c for c in all_cars if c.get("price")), key=lambda x: x["price"], default=None)
+    minivan_note = next((day.get("minivan_note") for day in car_days if day.get("minivan_note")), "")
 
     source_keys = ["discover", "rentalcars", "kayak"]
 
@@ -963,6 +965,7 @@ def render_cars(car_days: list[dict]) -> str:
         <section class="card" id="car-compare-card">
           <div class="legend">{legend}</div>
           <p class="muted" style="margin:0 0 12px;" id="car-compare-hint">편도 뉴욕(JFK/LGA/EWR)→시카고 ORD · 사이트별 최저가 · ○ 선택 → 여행경비 반영 · 전기차·미니밴 포함 · 귀국편 10/10 06:00이면 반납 시각을 앞당기세요.</p>
+          {f'<p class="muted" style="margin:0 0 12px;padding:10px 12px;border-left:3px solid var(--accent,#2a6);background:rgba(0,0,0,.03);" id="car-minivan-note">{html.escape(minivan_note)}</p>' if minivan_note else ''}
           <div class="table-wrap">
           <table class="car-compare-table">
             <thead>
