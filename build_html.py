@@ -9,6 +9,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 import itinerary_plans
+import travel_tips
 
 ROOT = Path(__file__).resolve().parent
 REFRESH_HOURS = 3
@@ -27,7 +28,7 @@ CAR_FILE = ROOT / "car_rental_data.json"
 CAR_COMPARE_FILE = ROOT / "car_compare_data.json"
 AIRBNB_LODGING = ROOT / "airbnb_lodging_data.json"
 CAR_PICKUP = "2026-09-27"
-CAR_DROPOFF_DEFAULT = "2026-10-10"
+CAR_DROPOFF_DEFAULT = "2026-10-09"
 CAR_PICKUP_TIME = "14:00"
 CAR_ROUTE_NOTE = "시카고 ORD 공항 인수·반납 · 뉴욕은 대중교통·우버"
 CAR_SOURCE_META = {
@@ -698,26 +699,60 @@ def _route_panel(route_key: str, days: list[dict], active: bool) -> str:
     </div>"""
 
 
+def _render_booked_leg_block(title: str, block: dict) -> str:
+    if not block:
+        return ""
+    legs = block.get("legs") or []
+    if not legs:
+        return ""
+    parts = []
+    for leg in legs:
+        op = f" · 운항 {leg['operated_by']}" if leg.get("operated_by") else ""
+        dur = f" · {leg['duration']}" if leg.get("duration") else ""
+        stops = f" · {leg['stops']}" if leg.get("stops") else ""
+        parts.append(
+            f"<li><strong>{leg.get('from')}→{leg.get('to')}</strong> "
+            f"{leg.get('depart')}–{leg.get('arrive')} · {leg.get('flight','')}{op}{dur}{stops}</li>"
+        )
+    layover = (
+        f"<p class='muted'>{html.escape(block['layover'])}</p>" if block.get("layover") else ""
+    )
+    summary = block.get("summary") or ""
+    date_line = ""
+    if block.get("date"):
+        arrive = block.get("arrive_date") or ""
+        if arrive and arrive != block["date"]:
+            date_line = (
+                f"<p class='muted'>{_fmt_date_ko(block['date'])} 출발 · "
+                f"{_fmt_date_ko(arrive)} 도착 · {html.escape(summary)}</p>"
+            )
+        else:
+            date_line = (
+                f"<p class='muted'>{_fmt_date_ko(block['date'])} · {html.escape(summary)}</p>"
+            )
+    return f"""
+      <div class="booked-itin-block">
+        <p class="date-kicker">{title}</p>
+        {date_line}
+        <ul class="booked-flight-legs">{''.join(parts)}</ul>
+        {layover}
+      </div>"""
+
+
 def render_booked_flight(booked: dict | None, *, interactive: bool = True, dom_id: str = "booked-flight-hero") -> str:
     if not booked:
         return ""
     opt = booked_flight_option(booked)
     ret = opt["return_date"]
-    itin = (booked.get("itinerary") or {}).get("return") or {}
-    legs = itin.get("legs") or []
-    leg_html = ""
-    if legs:
-        parts = []
-        for leg in legs:
-            parts.append(
-                f"<li><strong>{leg.get('from')}→{leg.get('to')}</strong> "
-                f"{leg.get('depart')}–{leg.get('arrive')} · {leg.get('flight','')}"
-                f"{(' · ' + leg['operated_by']) if leg.get('operated_by') else ''}</li>"
-            )
-        layover = f"<p class='muted'>경유 {itin.get('layover','')}</p>" if itin.get("layover") else ""
-        leg_html = f"<ul class='booked-flight-legs'>{''.join(parts)}</ul>{layover}"
+    ret_arrive = booked.get("return_arrive_date") or ret
+    itin = booked.get("itinerary") or {}
+    leg_html = (
+        _render_booked_leg_block("출국 · ICN → JFK", itin.get("outbound") or {})
+        + _render_booked_leg_block("귀국 · ORD → LAX → ICN", itin.get("return") or {})
+    )
     img = booked.get("image") or "assets/booked-flight.png"
-    img_src = f"{img}?v=3"
+    img_src = f"{img}?v=4"
+    seller = booked.get("seller_url") or opt.get("seller_url") or "#"
     if interactive:
         actions = f"""
         <div class="opt-actions" style="margin-top:12px;">
@@ -726,14 +761,17 @@ def render_booked_flight(booked: dict | None, *, interactive: bool = True, dom_i
               data-price="{opt['price']}" data-return="{ret}" data-source="{opt['route']}" checked>
             <span>예약 · 경비에 담김</span>
           </label>
-          {BTN.format(url=opt.get('seller_url', '#'))}
+          {BTN.format(url=seller)}
         </div>"""
     else:
         actions = f"""
         <div class="opt-actions" style="margin-top:12px;">
           <button type="button" class="cta-btn" data-goto="flights">항공권 탭에서 보기</button>
-          {BTN.format(url=opt.get('seller_url', '#'))}
+          {BTN.format(url=seller)}
         </div>"""
+    ret_text = _fmt_date_ko(ret)
+    if ret_arrive != ret:
+        ret_text = f"{_fmt_date_ko(ret)} 출발 → {_fmt_date_ko(ret_arrive)} 인천 도착"
     return f"""
     <section class="hero card booked-flight-hero" id="{dom_id}">
       <div class="booked-flight-copy">
@@ -742,15 +780,15 @@ def render_booked_flight(booked: dict | None, *, interactive: bool = True, dom_i
         <p class="hero-price" style="color:var(--sky)">{opt['price_text']}</p>
         <p class="opt-sub">4명 합계 · 1인 {opt['price_per_person_text']}</p>
         <p><strong>출국</strong> {_fmt_date_ko(opt.get('outbound_date') or OUTBOUND)} ·
-           <strong>귀국</strong> {_fmt_date_ko(ret)} · {opt.get('duration_text','')}</p>
-        <p>{opt.get('carrier_text','')} · {opt.get('stops_text','')}</p>
+           <strong>귀국</strong> {ret_text}</p>
+        <p>{opt.get('carrier_text','')} · {opt.get('stops_text','')} · {opt.get('duration_text','')}</p>
         <p class="muted">{booked.get('fare_note','')}</p>
         {leg_html}
         {actions}
       </div>
       <figure class="booked-flight-shot">
-        <img src="{img_src}" alt="예약 항공권 스크린샷 · ORD→LAX→ICN 아시아나" loading="eager">
-        <figcaption class="muted">아시아나 귀국편 운임 선택 화면 (ORD→LAX→ICN)</figcaption>
+        <img src="{img_src}" alt="예약 항공권 · ICN-JFK / ORD-LAX-ICN 아시아나" loading="eager">
+        <figcaption class="muted">출국 OZ222 · 귀국 OZ6275(UA)+OZ201 (현지시간)</figcaption>
       </figure>
     </section>"""
 
@@ -1486,6 +1524,7 @@ def render_page(
     east_plan_html: str,
     food_plan_html: str,
     misc_plan_html: str,
+    tips_html: str,
     dashboard_html: str,
     trip_data: dict,
     now_kst: str,
@@ -2010,6 +2049,7 @@ def render_page(
       .tab {{ padding: 10px 14px; font-size: 0.9rem; }}
       .itin-day-head {{ align-items: flex-start; }}
     }}
+    {travel_tips.tips_styles()}
   </style>
 </head>
 <body>
@@ -2028,6 +2068,7 @@ def render_page(
         <button class="tab" role="tab" aria-selected="false" data-panel="east-plan">🗽 동부 3일</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="food-plan">🍽️ 식비</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="misc-plan">🎫 여행비</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="tips-plan">💳 결제·할인</button>
       </nav>
     </header>
 
@@ -2069,6 +2110,11 @@ def render_page(
     <div id="misc-plan" class="panel" role="tabpanel">
       <p class="meta">선물·현지교통·예비비 등 기타 여행비 · 여행경비에 자동 반영</p>
       {misc_plan_html}
+    </div>
+
+    <div id="tips-plan" class="panel" role="tabpanel">
+      <p class="meta">트래블로그 · 트래블월렛(트래블페이) · 신용카드 · 뉴욕·시카고 사전예약·할인 팁</p>
+      {tips_html}
     </div>
 
     <footer>
@@ -3029,6 +3075,7 @@ def main() -> None:
     east_plan_html = itinerary_plans.render_east_plan()
     food_plan_html = render_food_tab()
     misc_plan_html = render_misc_tab()
+    tips_html = travel_tips.render_tips_tab()
     combo_html = render_combo_analysis(trip_data.get("combos", []))
     booked_flight_html = render_booked_flight(
         booked_flight, interactive=False, dom_id="booked-flight-dash"
@@ -3042,6 +3089,7 @@ def main() -> None:
         east_plan_html,
         food_plan_html,
         misc_plan_html,
+        tips_html,
         dashboard_html,
         trip_data,
         now_kst,

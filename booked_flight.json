@@ -1,49 +1,76 @@
 {
-  "id": "nyc_in:booked:2026-10-10",
+  "id": "nyc_in:booked:2026-10-09",
   "booked": true,
   "route": "nyc_in",
   "route_label": "뉴욕 인 · 시카고 아웃",
   "kind": "booked",
   "kind_label": "예약완료",
   "outbound_date": "2026-09-24",
-  "return_date": "2026-10-10",
+  "return_date": "2026-10-09",
+  "return_arrive_date": "2026-10-10",
   "price_per_person": 1440000,
   "price_per_person_text": "₩1,440,000",
   "price": 5760000,
   "price_text": "₩5,760,000",
-  "duration_text": "출국 아시아나 / 귀국 19시간 20분",
-  "duration_minutes": 1160,
-  "stops_text": "경유 / 1회 경유 (LAX)",
+  "duration_text": "출국 14시간 30분 / 귀국 19시간 20분",
+  "duration_minutes": 2060,
+  "stops_text": "직항 / 1회 경유 (LAX)",
   "carrier_text": "아시아나항공",
   "self_transfer": false,
   "image": "assets/booked-flight.png",
   "itinerary": {
+    "outbound": {
+      "summary": "ICN → JFK · 직항 14시간 30분",
+      "date": "2026-09-24",
+      "arrive_date": "2026-09-24",
+      "legs": [
+        {
+          "from": "ICN",
+          "to": "JFK",
+          "from_name": "인천 국제",
+          "to_name": "뉴욕 JFK",
+          "depart": "08:30",
+          "arrive": "10:00",
+          "flight": "OZ222",
+          "airline": "아시아나항공",
+          "duration": "14시간 30분",
+          "stops": "직항"
+        }
+      ]
+    },
     "return": {
-      "summary": "ORD → LAX → ICN · 19시간 20분",
-      "date": "2026-10-10",
+      "summary": "ORD → LAX → ICN · 19시간 20분 · 1회 경유",
+      "date": "2026-10-09",
+      "arrive_date": "2026-10-10",
       "legs": [
         {
           "from": "ORD",
           "to": "LAX",
+          "from_name": "시카고 오헤어",
+          "to_name": "로스앤젤레스",
           "depart": "06:00",
           "arrive": "08:27",
           "flight": "OZ6275",
-          "operated_by": "United Airlines",
-          "aircraft": "Boeing 737MAX9"
+          "airline": "아시아나항공",
+          "operated_by": "유나이티드항공",
+          "duration": "4시간 27분"
         },
         {
           "from": "LAX",
           "to": "ICN",
+          "from_name": "로스앤젤레스",
+          "to_name": "인천 국제",
           "depart": "10:10",
           "arrive": "15:20+1",
           "flight": "OZ201",
-          "aircraft": "Airbus A380-800"
+          "airline": "아시아나항공",
+          "duration": "13시간 10분"
         }
       ],
-      "layover": "LAX 1시간 43분 · T7→TB"
+      "layover": "LAX 공항 내 연결 1시간 43분"
     }
   },
-  "fare_note": "일반석 · 기내수하물 1 · 위탁 23kg×2 · 4석 남음",
+  "fare_note": "현지시간 기준 · 출국 OZ222 직항 · 귀국 OZ6275(UA 운항)+OZ201 · 위탁·좌석 조건은 예약 확인서 기준",
   "seller_url": "https://flyasiana.com/",
-  "synced_at": "2026-08-07T21:38:00+09:00"
+  "synced_at": "2026-08-09T12:41:00+09:00"
 }
