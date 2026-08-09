@@ -1672,6 +1672,8 @@ def render_page(
       border-radius: 10px; border: 1px solid var(--border);
       display: block; background: #fff;
     }}
+    .booked-itin-block {{ margin-top: 12px; }}
+    .booked-itin-block + .booked-itin-block {{ margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }}
     .booked-flight-legs {{ margin: 8px 0 0; padding-left: 1.1rem; line-height: 1.55; }}
     @media (max-width: 900px) {{
       .booked-flight-hero {{ grid-template-columns: 1fr; }}
