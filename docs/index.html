@@ -523,10 +523,14 @@
     .tips-hero .route-stat strong { font-size: 1.25rem; }
     .tips-section h3 { margin: 0 0 10px; }
     .tips-section h4 { margin: 0 0 6px; font-size: 1.02rem; }
+    .tips-section-head {
+      display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+      gap: 8px; margin-bottom: 4px;
+    }
+    .tips-section-head h3 { margin: 0; }
+    .tips-goto { font-size: 0.88rem; font-weight: 700; color: var(--budget, #0d7a5f); text-decoration: none; }
     .tips-checklist { margin: 0; padding-left: 1.2rem; line-height: 1.55; }
     .tips-checklist li { margin: 0 0 10px; }
-    .tips-bullets { margin: 8px 0 0; padding-left: 1.2rem; line-height: 1.55; }
-    .tips-bullets li { margin: 0 0 10px; }
     .tips-footnote { margin: 14px 0 0; }
     .tips-compare {
       display: grid;
@@ -558,6 +562,7 @@
       font-size: 0.9rem;
       padding-top: 8px;
       border-top: 1px dashed rgba(0,0,0,.1);
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
     }
     .tips-grid {
       display: grid;
@@ -565,10 +570,139 @@
       gap: 14px 18px;
       margin-top: 8px;
     }
-    .tips-grid p { margin: 0; font-size: 0.92rem; line-height: 1.45; color: var(--muted, #5b6470); }
-    .tips-grid h4 { color: var(--ink, #1a1f24); }
+    .tips-grid p { margin: 0; font-size: 0.92rem; line-height: 1.45; color: var(--muted, #5f6773); }
+    .tips-grid h4 { color: var(--text, #14171c); }
+    .tips-more {
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .tips-more.solid {
+      margin: 0;
+      padding: 8px 14px;
+      font-size: 0.84rem;
+      background: #0d7a5f;
+      border-color: #0d7a5f;
+      color: #fff;
+    }
+    .tips-quick-actions {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 16px;
+    }
+    .tips-day-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .tips-day-grid.chi {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tips-day {
+      border: 1px solid var(--line, #e2e7ef);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fafbfc;
+    }
+    .tips-day-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #075985;
+    }
+    .tips-day-head h4 { margin: 6px 0 4px; font-size: 1rem; }
+    .tips-day-blurb { margin: 0 0 8px; font-size: 0.86rem; }
+    .tips-day-links {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+    .tips-day-links li { margin-bottom: 8px; }
+    .tips-day-prep {
+      margin: 10px 0 0;
+      font-size: 0.84rem;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(0,0,0,.1);
+      color: #334155;
+    }
+    .tips-ext {
+      color: #1d4ed8;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(29,78,216,.25);
+    }
+    .tips-ext:hover { border-bottom-color: #1d4ed8; }
+    .tips-inline-links {
+      display: flex; flex-wrap: wrap; gap: 10px 14px;
+      align-items: center;
+      margin: 8px 0 0;
+    }
+    .tips-modal {
+      position: fixed; inset: 0; z-index: 90;
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 4vh 16px 24px; overflow-y: auto;
+    }
+    .tips-modal[hidden] { display: none !important; }
+    .tips-modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(15, 23, 42, .55);
+      backdrop-filter: blur(2px);
+    }
+    .tips-modal-panel {
+      position: relative; z-index: 1;
+      width: min(720px, 100%);
+      background: #fff;
+      border-radius: 20px;
+      padding: 22px 22px 16px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, .28);
+      margin-bottom: 24px;
+    }
+    .tips-modal-head {
+      display: flex; justify-content: space-between; gap: 12px;
+      align-items: flex-start; margin-bottom: 10px;
+    }
+    .tips-modal-head h2 { margin: 0; font-size: 1.3rem; }
+    .tips-modal-close {
+      border: none; background: #f1f5f9; width: 40px; height: 40px;
+      border-radius: 999px; font-size: 1.4rem; line-height: 1;
+      cursor: pointer; color: #334155; flex-shrink: 0;
+    }
+    .tips-modal-body { font-size: 0.95rem; line-height: 1.55; color: #1e293b; }
+    .tips-modal-body h4 { margin: 16px 0 6px; font-size: 1.02rem; }
+    .tips-modal-body ul { margin: 0 0 8px; padding-left: 1.2rem; }
+    .tips-modal-body li { margin-bottom: 6px; }
+    .tips-modal-body p { margin: 0 0 10px; }
+    .tips-modal-links {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-top: 14px !important;
+    }
+    .tips-modal-foot {
+      display: flex; justify-content: flex-end;
+      margin-top: 16px; padding-top: 12px;
+      border-top: 1px solid var(--line, #e2e7ef);
+    }
+    .tips-modal-secondary {
+      border: 1px solid var(--line, #e2e7ef);
+      background: #fff; border-radius: 999px;
+      padding: 8px 16px; font-weight: 600; cursor: pointer;
+    }
+    body.tips-modal-open { overflow: hidden; }
     @media (max-width: 900px) {
-      .tips-compare, .tips-grid { grid-template-columns: 1fr; }
+      .tips-compare, .tips-grid, .tips-day-grid, .tips-day-grid.chi {
+        grid-template-columns: 1fr;
+      }
     }
     
   </style>
@@ -578,7 +712,7 @@
     <header>
       <h1>서울 → 시카고 여행계획</h1>
       <p class="meta">
-        성인 2명 · 유소아 2명 (만 7·8세) · 동기화: 2026-08-09 12:43:30 KST · 3시간마다 자동 갱신
+        성인 2명 · 유소아 2명 (만 7·8세) · 동기화: 2026-08-09 13:00:15 KST · 3시간마다 자동 갱신
       </p>
       <nav class="tabs" role="tablist">
         <button class="tab active" role="tab" aria-selected="true" data-panel="dashboard">💰 여행경비</button>
@@ -5234,7 +5368,7 @@
       <div class="route-hero-copy">
         <p class="route-kicker">PAY · SAVE · PREP</p>
         <h2>결제·할인 팁</h2>
-        <p class="muted">트래블로그 · 트래블월렛(트래블페이) · 신용카드 · 뉴욕·시카고 사전예약·할인</p>
+        <p class="muted">요약은 카드로, 자세한 설명은 ‘자세히’ 모달 · 일정별 공식 사이트 바로가기</p>
       </div>
       <div class="route-stats">
         <div class="route-stat">
@@ -5248,130 +5382,464 @@
     <section class="card tips-section">
       <h3>출국 전 체크리스트</h3>
       <ol class="tips-checklist">
-        <li><strong>실물 카드 발급·활성화</strong> — 트래블월렛/트래블로그 앱 설치 → 카드 수령(배송 또는 GS25 등) → 앱에서 등록·ON</li>
-        <li><strong>USD 미리 충전</strong> — 출국 2~3일 전 계좌 연동·충전 테스트(오픈뱅킹 연동 직후 12~24시간 제한 가능)</li>
-        <li><strong>해외원화결제(DCC) 차단</strong> — 가져갈 <em>모든</em> 신용카드·체크카드에 각각 신청(카드 1장당 1회)</li>
-        <li><strong>해외결제·ATM 한도</strong> — 카드사 앱에서 해외사용 허용·일일한도 상향</li>
-        <li><strong>비상 카드 1장</strong> — 주력(트래블월렛/로그) + 신용카드 백업, 가능하면 VISA·Mastercard 브랜드를 나눠 둠</li>
-        <li><strong>패스·입장권 선예약</strong> — CityPASS/Go City, Shedd·Skydeck·건축 크루즈, NYC 페리·박물관 타임슬롯</li>
+        <li><strong>실물 카드 발급·활성화</strong> — 월렛/로그 앱 → 수령 → 앱에서 등록 ON
+          <button type="button" class="tips-more" data-tips-open="tip-wallet">월렛 자세히</button>
+          <button type="button" class="tips-more" data-tips-open="tip-travelog">로그 자세히</button>
+        </li>
+        <li><strong>USD 미리 충전</strong> — 출국 2~3일 전 계좌 연동·충전 테스트(연동 직후 제한 가능)</li>
+        <li><strong>해외원화결제(DCC) 차단</strong> — 가져갈 카드마다 각각 신청
+          <button type="button" class="tips-more" data-tips-open="tip-dcc">DCC 자세히</button>
+        </li>
+        <li><strong>해외결제·ATM 한도</strong> — 카드사 앱에서 해외사용 허용·한도 상향
+          <button type="button" class="tips-more" data-tips-open="tip-credit">신용 자세히</button>
+        </li>
+        <li><strong>패스·입장권</strong> — CityPASS/Go City, Shedd·Skydeck·크루즈, NYC 페리
+          <button type="button" class="tips-more" data-tips-open="tip-pass">패스 비교</button>
+        </li>
       </ol>
       <p class="muted tips-footnote">※ 수수료·한도·우대율은 수시로 바뀝니다. 출국 전 각 앱·카드사 공지로 최종 확인하세요.</p>
     </section>
 
     <section class="card tips-section">
-      <h3>결제수단 한눈에</h3>
-      <p class="muted" style="margin-top:0;">미국은 카드 결제 비중이 매우 높습니다. <strong>USD 충전형 선불</strong>을 주력으로, 신용카드는 호텔 보증·비상용으로 쓰는 조합이 안전합니다.</p>
+      <h3>결제수단 요약</h3>
+      <p class="muted" style="margin-top:0;">미국은 카드 비중이 높습니다. <strong>USD 선불 주력 + 신용 보증</strong> 조합을 권합니다. 칸이 좁아 요약만 두고, 상세는 모달로 엽니다.</p>
       <div class="tips-compare">
         <article class="tips-compare-item">
           <h4>트래블월렛 <span class="tips-tag">트래블페이</span></h4>
-          <p class="muted">트래블페이가 운영하는 VISA 선불카드. 앱에 원화를 넣고 USD로 환전·충전.</p>
+          <p class="muted">VISA 선불 · USD 충전 · 미국 일상결제 주력.</p>
           <ul>
-            <li>USD·JPY·EUR 등 주요 통화 환전 수수료 우대(상시 0% 구간)</li>
-            <li>미국 가맹점·컨택리스(탭) 결제에 강함 · NYC 지하철 OMNY 탭 가능 후기 다수</li>
-            <li>잔액 부족 시 <strong>결제 거절</strong> → 앱에서 미리 넉넉히 충전</li>
-            <li>ATM 무료 출금은 월 한도 있음(초과 시 수수료) · 현금은 소액만</li>
-            <li>편의점 즉시발급 또는 배송 · 반드시 앱에서 실물카드 활성화</li>
+            <li>탭 결제·가맹점 커버리지 강점</li>
+            <li>잔액 부족 시 거절 → 미리 충전</li>
+            <li>ATM 무료는 월 한도 있음</li>
           </ul>
-          <p class="tips-reco">이 일정 추천: <strong>주력 결제 카드</strong> (식당·교통·입장권·쇼핑)</p>
+          <p class="tips-reco">추천: <strong>주력</strong>
+            <button type="button" class="tips-more" data-tips-open="tip-wallet">자세히</button>
+          </p>
         </article>
         <article class="tips-compare-item">
           <h4>트래블로그 <span class="tips-tag">하나카드</span></h4>
-          <p class="muted">하나카드 해외특화 체크/선불형. Mastercard·UnionPay·VISA 선택 발급.</p>
+          <p class="muted">브랜드 선택형 · 자동환전·ATM 백업.</p>
           <ul>
-            <li>지원 통화 폭이 넓고(다수 통화 우대), 잔액 부족 시 <strong>자동 환전 결제</strong>에 유리</li>
-            <li>제휴 ATM 출금 한도가 상대적으로 넉넉한 편 → 현금이 필요할 때 백업</li>
-            <li>귀국 후 외화→원화 재환전 시 수수료(예: 1%대) 확인 · 쓸 만큼만 충전</li>
-            <li>브랜드를 트래블월렛(VISA)과 다르게 가져가면 가맹점 거절 리스크↓</li>
+            <li>월렛과 브랜드를 다르게</li>
+            <li>현금 인출·거절 대비</li>
+            <li>재환전 수수료 확인</li>
           </ul>
-          <p class="tips-reco">이 일정 추천: <strong>보조·ATM·비상</strong> (주력과 브랜드 분리)</p>
+          <p class="tips-reco">추천: <strong>보조</strong>
+            <button type="button" class="tips-more" data-tips-open="tip-travelog">자세히</button>
+          </p>
         </article>
         <article class="tips-compare-item">
           <h4>신용카드</h4>
-          <p class="muted">호텔·렌트카 보증, 항공·온라인 예약, 고액 결제 백업.</p>
+          <p class="muted">호텔·렌트 보증 · 비상·온라인.</p>
           <ul>
-            <li>해외이용수수료(보통 1~1.5%+브랜드 수수료) 있는 카드가 많음 → 일상결제는 선불 USD가 유리한 경우 많음</li>
-            <li>렌트카·호텔은 <strong>신용 보증</strong>을 요구하는 경우가 많아 신용카드 1장은 필수에 가깝음</li>
-            <li>출국 전: 해외사용 ON · DCC 차단 · 한도 확인 · 분실신고 방법 메모</li>
-            <li>결제 화면에서 반드시 <strong>USD(현지통화)</strong> 선택 · KRW/원화결제 거절</li>
-            <li>팁(팁 문화): 식당은 보통 영수증에 팁 칸 · 15~20% 수준을 카드에 합산하는 경우 많음</li>
+            <li>편도 렌트·숙소 보증에 필요</li>
+            <li>DCC 차단·해외사용 ON</li>
+            <li>팁 15~20% 카드 합산 흔함</li>
           </ul>
-          <p class="tips-reco">이 일정 추천: <strong>보증·비상·온라인</strong> (평소 결제는 트래블월렛)</p>
+          <p class="tips-reco">추천: <strong>보증 1장</strong>
+            <button type="button" class="tips-more" data-tips-open="tip-credit">자세히</button>
+          </p>
         </article>
+      </div>
+      <div class="tips-quick-actions">
+        <button type="button" class="tips-more solid" data-tips-open="tip-dcc">DCC(원화결제) 피하기</button>
+        <button type="button" class="tips-more solid" data-tips-open="tip-omny">NYC OMNY · CHI CTA</button>
+        <button type="button" class="tips-more solid" data-tips-open="tip-pass">시카고 패스 비교</button>
       </div>
     </section>
 
     <section class="card tips-section">
-      <h3>미국 결제 실전 팁</h3>
+      <h3>미국 결제 실전 (짧게)</h3>
       <div class="tips-grid">
         <div>
-          <h4>DCC 피하기</h4>
-          <p>POS·ATM에서 “원화로 결제할까요?” → <strong>No / USD / Local currency</strong>. 원화 선택 시 3~5%대 불리한 환율이 붙는 경우가 많습니다.</p>
+          <h4>통화 선택</h4>
+          <p>POS·ATM에서 <strong>USD</strong>만. KRW 제안은 거절.
+            <button type="button" class="tips-more" data-tips-open="tip-dcc">왜?</button>
+          </p>
         </div>
         <div>
-          <h4>칩·탭·사인</h4>
-          <p>대부분 칩 삽입 또는 컨택리스 탭. 사인/ZIP 요청 시 ZIP은 숙소 우편번호 또는 카드사 안내 따름. 현금만 받는 곳은 드묾.</p>
+          <h4>칩·탭</h4>
+          <p>대부분 칩/탭. ZIP 요청 시 숙소 우편번호 또는 카드사 안내.</p>
         </div>
         <div>
           <h4>ATM</h4>
-          <p>공항·관광지 사설 ATM은 수수료가 큰 편. 시중은행(Chase, Bank of America, Citi 등) ATM 우선. 출금은 소액·필요할 때만.</p>
+          <p>은행 ATM 우선. 공항·관광지 사설기 수수료 주의. 현금은 소액.</p>
         </div>
         <div>
           <h4>세금·팁</h4>
-          <p>표시가에 세일즈택스 미포함인 경우가 많음. 식당·우버 앱·배달은 팁 별도. 박물관·패스트푸드는 팁 부담이 적습니다.</p>
+          <p>표시가+세일즈택스. 식당·우버는 팁 별도(대략 15~20%).</p>
         </div>
         <div>
-          <h4>가족·아이</h4>
-          <p>아동(7·8세) 입장료·패스 연령 구간을 미리 확인. 일부 박물관은 Chicago 주민 할인/무료 요일이 있으나 여행객은 해당 없을 수 있음.</p>
+          <h4>아동 요금</h4>
+          <p>7·8세는 패스/티켓 아동 구간 확인. 주민 무료일은 여행객 제외인 경우 많음.</p>
         </div>
         <div>
-          <h4>분실 대비</h4>
-          <p>카드·여권·숙소 주소를 사진으로 백업. 앱에서 카드 OFF. 숙소·렌트 계약서 이메일 보관.</p>
+          <h4>분실</h4>
+          <p>앱에서 카드 OFF. 여권·숙소·렌트 서류 사진 백업.</p>
         </div>
       </div>
     </section>
 
     <section class="card tips-section">
-      <h3>뉴욕 3일 — 할인·미리 할 일</h3>
-      <p class="muted" style="margin-top:0;">동부 일정: 미드타운·센트럴파크 · AMNH/MoMA · 자유의 여신 페리 · 브루클린 브릿지</p>
-      <ul class="tips-bullets">
-        <li><strong>교통: OMNY</strong> — 지하철·버스는 카드/폰 탭 결제(별도 MetroCard 불필요인 경우가 많음). 주간 상한(주 단위 fare capping) 정책 확인 후 같은 카드로 탭하면 유리할 수 있음.</li>
-        <li><strong>Statue of Liberty / Ferry</strong> — 공식 페리·크루즈는 주말·오후 슬롯이 빨리 찹니다. 출국 전 날짜·시간 예약.</li>
-        <li><strong>AMNH · MoMA · Empire State</strong> — 공식 사이트/앱 타임드 엔트리. 당일 현장은 대기·매진 리스크.</li>
-        <li><strong>Central Park Zoo</strong> — 온라인 티켓이 줄·가격에 유리한 편. 날씨 좋은 날로.</li>
-        <li><strong>9/11 Memorial</strong> — 야외 메모리얼은 무료. 뮤지엄 입장은 별도·예약 권장.</li>
-        <li><strong>CityPASS / Go City NYC</strong> — 전망대+박물관을 몰아서 볼 때만 손익 계산. 3일이면 개별 예약이 더 싼 경우도 많음.</li>
-        <li><strong>세금환급(Tax Free)</strong> — 일부 매장·절차 조건이 까다롭고 수수료가 있어, 소액 기념품은 기대하지 않는 편이 낫습니다.</li>
-        <li><strong>뉴욕→시카고 국내선</strong> — 기내 반입·위탁 규정, TSA PreCheck 없으면 공항 여유 있게.</li>
-      </ul>
+      <div class="tips-section-head">
+        <h3>뉴욕 3일 — 일정별 사이트</h3>
+        <a href="#" data-goto="east-plan" class="tips-goto">동부 일정 탭 →</a>
+      </div>
+      <p class="muted" style="margin-top:0;">각 Day에서 예약·안내로 바로 갈 수 있는 공식 링크입니다. (새 탭)</p>
+      <div class="tips-day-grid">
+        
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">NYC Day 1</span>
+        <h4>미드타운 · 센트럴파크</h4>
+      </div>
+      <p class="muted tips-day-blurb">타임스퀘어 → 록펠러 → 센트럴파크·동물원. 걷거나 지하철 1~2정거장.</p>
+      <ul class="tips-day-links"><li><strong>Times Square</strong><br><a class="tips-ext" href="https://www.timessquarenyc.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 안내·이벤트</span></li><li><strong>Rockefeller Center / Top of the Rock</strong><br><a class="tips-ext" href="https://www.rockefellercenter.com/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 전망대 예약</span></li><li><strong>Central Park</strong><br><a class="tips-ext" href="https://www.centralparknyc.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 지도·동선</span></li><li><strong>Central Park Zoo</strong><br><a class="tips-ext" href="https://centralparkzoo.com/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 온라인 티켓</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> 동물원·록펠러 전망대는 날짜·시간 예약. OMNY용 카드/폰 탭 준비.</p>
+    </article>
+    
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">NYC Day 2</span>
+        <h4>박물관 · 5번가</h4>
+      </div>
+      <p class="muted tips-day-blurb">자연사박물관 또는 MoMA + 5번가 산책 · Empire State는 선택.</p>
+      <ul class="tips-day-links"><li><strong>AMNH (자연사박물관)</strong><br><a class="tips-ext" href="https://www.amnh.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 타임드 엔트리</span></li><li><strong>MoMA</strong><br><a class="tips-ext" href="https://www.moma.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 티켓·시간</span></li><li><strong>Empire State Building</strong><br><a class="tips-ext" href="https://www.esbnyc.com/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 전망대 예약</span></li><li><strong>NYC CityPASS (손익 비교용)</strong><br><a class="tips-ext" href="https://www.citypass.com/new-york" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 3일이면 개별이 쌀 수도</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> 박물관·전망대는 공식 사이트에서 슬롯 구매. 당일 현장은 대기·매진 리스크.</p>
+    </article>
+    
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">NYC Day 3</span>
+        <h4>다운타운 · 자유의 여신</h4>
+      </div>
+      <p class="muted tips-day-blurb">페리·월스트리트·9/11 · 브루클린 브릿지 산책.</p>
+      <ul class="tips-day-links"><li><strong>Statue of Liberty (NPS)</strong><br><a class="tips-ext" href="https://www.nps.gov/stli/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 입장 정보</span></li><li><strong>Statue City Cruises (공식 페리)</strong><br><a class="tips-ext" href="https://www.statuecitycruises.com/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 선예약 필수에 가까움</span></li><li><strong>9/11 Memorial &amp; Museum</strong><br><a class="tips-ext" href="https://www.911memorial.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 야외 메모리얼 무료·뮤지엄 예약</span></li><li><strong>Brooklyn Bridge</strong><br><a class="tips-ext" href="https://www.nyc.gov/html/dot/html/infrastructure/brooklyn-bridge.shtml" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 도보 동선</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> 페리·크라운 예약은 주말·오후가 빨리 참. 출국 전 날짜 확정.</p>
+    </article>
+    
+      </div>
     </section>
 
     <section class="card tips-section">
-      <h3>시카고 10일 — 할인·미리 할 일</h3>
-      <p class="muted" style="margin-top:0;">일정: Art Institute · Shedd/Field · MSI · Lincoln Park Zoo(무료) · Architecture Cruise · Skydeck/360 · 근교</p>
-      <ul class="tips-bullets">
-        <li><strong>Chicago CityPASS / Go City</strong> — Shedd·Skydeck·건축 크루즈·MSI·Art Institute를 묶으면 개별 합보다 저렴한 경우가 많음. 구매 직후 앱에서 <em>타임슬롯 예약</em>(Shedd·Skydeck 필수에 가까움).</li>
-        <li><strong>Architecture River Cruise</strong> — 주말·오전 인기. CityPASS 포함 여부와 별도로 시간 선점.</li>
-        <li><strong>Lincoln Park Zoo</strong> — 입장 무료(기부 선택). 예산 절약 데이로 활용.</li>
-        <li><strong>Art Institute</strong> — 아동 요금·온라인 티켓 확인. CityPASS 시 패스 입장 동선 따름.</li>
-        <li><strong>Museum Campus (Shedd·Field·Adler)</strong> — 주차비 높음. 렌트카면 주차 앱/요금 미리 보거나 CTA·우버 병행.</li>
-        <li><strong>Willis Tower Skydeck / 360 CHICAGO</strong> — 일몰·주말 슬롯 선예약. 둘 다 할 필요는 없음(하나만 선택 추천).</li>
-        <li><strong>CTA Ventra</strong> — 단기면 카드 탭·Ventra 앱. 렌트카 위주면 시내만 필요할 때 이용.</li>
-        <li><strong>렌트카 편도 NYC→ORD</strong> — 보증은 신용카드, 일일 결제는 트래블월렛 가능 여부 업체마다 다름. 연료·톨·주차 영수증 보관.</li>
-        <li><strong>귀국편 ORD 06:00대</strong> — 전날 밤 숙소 근처 정리, 렌트 반납 시각을 비행 전에 맞춰 여유 확보.</li>
-      </ul>
+      <div class="tips-section-head">
+        <h3>시카고 10일 — 일정별 사이트</h3>
+        <a href="#" data-goto="chi-plan" class="tips-goto">시카고 일정 탭 →</a>
+      </div>
+      <p class="muted" style="margin-top:0;">패스가 필요한 날(2·3·4·6·7)은 링크에서 티켓·타임슬롯을 먼저 잡으세요.</p>
+      <p class="tips-inline-links">
+        <a class="tips-ext" href="https://www.citypass.com/chicago" target="_blank" rel="noopener noreferrer">CityPASS Chicago ↗</a>
+        <a class="tips-ext" href="https://gocity.com/en/chicago" target="_blank" rel="noopener noreferrer">Go City Chicago ↗</a>
+        <a class="tips-ext" href="https://www.choosechicago.com/" target="_blank" rel="noopener noreferrer">Choose Chicago ↗</a>
+        <button type="button" class="tips-more" data-tips-open="tip-pass">패스 비교 모달</button>
+      </p>
+      <div class="tips-day-grid chi">
+        
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">CHI Day 1</span>
+        <h4>도착 · 렌트 · 밀레니엄파크</h4>
+      </div>
+      <p class="muted tips-day-blurb">ORD 렌트 픽업 → 숙소 체크인 → Cloud Gate.</p>
+      <ul class="tips-day-links"><li><strong>O&#x27;Hare (ORD)</strong><br><a class="tips-ext" href="https://www.flychicago.com/ohare/home/pages/default.aspx" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 터미널·교통</span></li><li><strong>Millennium Park / Cloud Gate</strong><br><a class="tips-ext" href="https://www.chicago.gov/city/en/depts/dca/supp_info/millennium_park.html" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 무료 공원</span></li><li><strong>Chicago CityPASS</strong><br><a class="tips-ext" href="https://www.citypass.com/chicago" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 패스 구매·비교</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> 렌트 보증용 신용카드·보험 확인. 시차 적응 위주.</p>
+    </article>
+    
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">CHI Day 2</span>
+        <h4>미술관 · 강변</h4>
+      </div>
+      <p class="muted tips-day-blurb">Art Institute + Riverwalk + Navy Pier 야경.</p>
+      <ul class="tips-day-links"><li><strong>Art Institute of Chicago</strong><br><a class="tips-ext" href="https://www.artic.edu/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 티켓·아동요금</span></li><li><strong>Chicago Riverwalk</strong><br><a class="tips-ext" href="https://www.chicago.gov/city/en/depts/dcd/supp_info/chicago_riverwalk.html" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 산책</span></li><li><strong>Navy Pier</strong><br><a class="tips-ext" href="https://navypier.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 야경·패밀리</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> 미술관 온라인 티켓. CityPASS 사용 시 패스 입장 절차 확인.</p>
+    </article>
+    
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">CHI Day 3</span>
+        <h4>박물관 캠퍼스</h4>
+      </div>
+      <p class="muted tips-day-blurb">Shedd · Field 또는 Adler · Grant Park.</p>
+      <ul class="tips-day-links"><li><strong>Shedd Aquarium</strong><br><a class="tips-ext" href="https://www.sheddaquarium.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 타임슬롯 필수에 가까움</span></li><li><strong>Field Museum</strong><br><a class="tips-ext" href="https://www.fieldmuseum.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 티켓</span></li><li><strong>Adler Planetarium</strong><br><a class="tips-ext" href="https://www.adlerplanetarium.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 선택</span></li><li><strong>Go City Chicago</strong><br><a class="tips-ext" href="https://gocity.com/en/chicago" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 패스 대안</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> Shedd는 패스 구매 직후 예약. 주차비 높음 → CTA/우버 검토.</p>
+    </article>
+    
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">CHI Day 4</span>
+        <h4>하이드파크 · MSI</h4>
+      </div>
+      <p class="muted tips-day-blurb">숙소 근처 MSI · UChicago 캠퍼스 · Promontory Point.</p>
+      <ul class="tips-day-links"><li><strong>Museum of Science and Industry</strong><br><a class="tips-ext" href="https://www.msichicago.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 가족·체험</span></li><li><strong>University of Chicago</strong><br><a class="tips-ext" href="https://www.uchicago.edu/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 캠퍼스 산책</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> MSI 온라인 티켓/패스. 아이들 체력 고려해 여유 일정.</p>
+    </article>
+    
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">CHI Day 5</span>
+        <h4>링컨파크 · 동물원</h4>
+      </div>
+      <p class="muted tips-day-blurb">입장 무료 동물원으로 예산 절약 데이.</p>
+      <ul class="tips-day-links"><li><strong>Lincoln Park Zoo</strong><br><a class="tips-ext" href="https://www.lpzoo.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 무료 입장(기부 선택)</span></li><li><strong>Lincoln Park Conservatory</strong><br><a class="tips-ext" href="https://www.chicago.gov/city/en/depts/dca/supp_info/lincoln_park_conservatory.html" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 온실</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> 예약 부담 적음. 피크닉·아이스크림 예산만.</p>
+    </article>
+    
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">CHI Day 6</span>
+        <h4>건축 크루즈 · 루프</h4>
+      </div>
+      <p class="muted tips-day-blurb">강 크루즈 + 워킹 · Skydeck는 선택.</p>
+      <ul class="tips-day-links"><li><strong>Shoreline Sightseeing (Architecture Cruise)</strong><br><a class="tips-ext" href="https://www.shorelinesightseeing.com/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 시간 선점</span></li><li><strong>Chicago Architecture Center</strong><br><a class="tips-ext" href="https://www.architecture.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 투어·크루즈 정보</span></li><li><strong>Skydeck Chicago (Willis Tower)</strong><br><a class="tips-ext" href="https://theskydeck.com/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 타임슬롯</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> 주말·오전 크루즈·스카이덱 먼저 예약. 전망대는 Skydeck vs 360 중 하나만.</p>
+    </article>
+    
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">CHI Day 7</span>
+        <h4>매그니피션트 마일</h4>
+      </div>
+      <p class="muted tips-day-blurb">360 CHICAGO · 쇼핑 · 키즈 스토어.</p>
+      <ul class="tips-day-links"><li><strong>360 CHICAGO</strong><br><a class="tips-ext" href="https://www.360chicago.com/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 전망대 예약</span></li><li><strong>Magnificent Mile</strong><br><a class="tips-ext" href="https://www.themagnificentmile.com/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 쇼핑 안내</span></li><li><strong>American Girl Chicago</strong><br><a class="tips-ext" href="https://www.americangirl.com/stores/chicago" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 예약·웨이팅</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> 전망대 중복 피하기. 쇼핑 예산 상한 정하기.</p>
+    </article>
+    
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">CHI Day 8</span>
+        <h4>근교 데이트립</h4>
+      </div>
+      <p class="muted tips-day-blurb">Oak Park(라이트) 또는 아울렛·공원.</p>
+      <ul class="tips-day-links"><li><strong>Frank Lloyd Wright Trust (Oak Park)</strong><br><a class="tips-ext" href="https://flwright.org/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 투어 예약</span></li><li><strong>Chicago Premium Outlets</strong><br><a class="tips-ext" href="https://www.premiumoutlets.com/outlet/chicago" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 선택</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> 렌트카 유류·톨·주차 확인. 투어는 온라인 예약.</p>
+    </article>
+    
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">CHI Day 9</span>
+        <h4>여유 · 재방문</h4>
+      </div>
+      <p class="muted tips-day-blurb">좋아하는 곳 재방문 · 딥디시 · 짐 정리.</p>
+      <ul class="tips-day-links"><li><strong>Choose Chicago (공식 관광)</strong><br><a class="tips-ext" href="https://www.choosechicago.com/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 이벤트·팁</span></li><li><strong>Giordano&#x27;s / 딥디시 참고</strong><br><a class="tips-ext" href="https://giordanos.com/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 웨이팅·테이크아웃</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> 귀국 전날 여유. 세탁·짐·렌트 반납 시각 점검.</p>
+    </article>
+    
+    <article class="tips-day">
+      <div class="tips-day-head">
+        <span class="tips-day-badge">CHI Day 10</span>
+        <h4>출국 · ORD</h4>
+      </div>
+      <p class="muted tips-day-blurb">체크아웃 → 렌트 반납 → 출국.</p>
+      <ul class="tips-day-links"><li><strong>O&#x27;Hare Airport</strong><br><a class="tips-ext" href="https://www.flychicago.com/ohare/home/pages/default.aspx" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 보안·터미널</span></li><li><strong>TSA 대기시간</strong><br><a class="tips-ext" href="https://www.tsa.gov/" target="_blank" rel="noopener noreferrer">공식/예약 ↗</a> <span class="muted">· 여유 있게</span></li></ul>
+      <p class="tips-day-prep"><strong>미리</strong> 귀국편이 이르면 전날 밤 정리. 공항 3시간 전 목표.</p>
+    </article>
+    
+      </div>
     </section>
 
     <section class="card tips-section">
-      <h3>이 여행에 맞는 추천 조합</h3>
+      <h3>이 여행 추천 조합</h3>
       <ol class="tips-checklist">
-        <li><strong>주력:</strong> 트래블월렛(USD 충전) — 식당·교통 탭·티켓·쇼핑</li>
-        <li><strong>보조:</strong> 트래블로그(다른 브랜드) — ATM·결제 거절 시 백업</li>
-        <li><strong>신용 1장:</strong> 호텔·렌트 보증, 항공 부가서비스, 비상</li>
-        <li><strong>현금:</strong> 소액만(팁·가판대·비상). 미국 대도시는 카드로 대부분 해결</li>
-        <li><strong>패스:</strong> 시카고는 CityPASS vs 개별 입장 손익을 일정 탭 동선 기준으로 비교 후 구매 → 바로 예약</li>
+        <li><strong>주력:</strong> 트래블월렛(USD) — 식당·교통 탭·티켓·쇼핑</li>
+        <li><strong>보조:</strong> 트래블로그(다른 브랜드) — ATM·결제 거절 시</li>
+        <li><strong>신용 1장:</strong> 호텔·렌트 보증, 항공 부가, 비상</li>
+        <li><strong>현금:</strong> 소액만. 대도시는 카드로 대부분 해결</li>
+        <li><strong>패스:</strong> 시카고 명소 5곳+면 CityPASS/Go City 손익 비교 → 구매 즉시 슬롯 예약</li>
       </ol>
-      <p class="muted tips-footnote">관련 일정은 <a href="#" data-goto="east-plan">동부 3일</a> · <a href="#" data-goto="chi-plan">시카고 10일</a> · <a href="#" data-goto="cars">렌트카</a> 탭을 함께 보세요.</p>
+      <p class="muted tips-footnote">
+        <a href="#" data-goto="east-plan">동부 3일</a> ·
+        <a href="#" data-goto="chi-plan">시카고 10일</a> ·
+        <a href="#" data-goto="cars">렌트카</a> ·
+        <a href="#" data-goto="misc-plan">여행비</a>
+      </p>
     </section>
+
+    
+    <div class="tips-modal" id="tip-wallet" hidden>
+      <div class="tips-modal-backdrop" data-tips-close></div>
+      <div class="tips-modal-panel" role="dialog" aria-modal="true" aria-labelledby="tip-wallet-title">
+        <div class="tips-modal-head">
+          <h2 id="tip-wallet-title">트래블월렛 (트래블페이) 상세</h2>
+          <button type="button" class="tips-modal-close" data-tips-close aria-label="닫기">×</button>
+        </div>
+        <div class="tips-modal-body">
+          <p>트래블페이가 운영하는 <strong>VISA 선불카드</strong>입니다. 앱에 원화를 넣고 <strong>USD로 환전·충전</strong>한 뒤, 미국 가맹점에서 현지통화(USD)로 결제합니다.</p>
+          <h4>이 일정에서 쓰기 좋은 이유</h4>
+          <ul>
+            <li>뉴욕·시카고는 카드(특히 VISA) 가맹점이 매우 넓음</li>
+            <li>지하철 OMNY·버스·편의점·식당에서 컨택리스(탭) 결제 후기가 많음</li>
+            <li>주요 통화(USD 등) 환전 수수료 우대 구간이 있어 일상 결제에 유리한 경우가 많음</li>
+          </ul>
+          <h4>꼭 알아둘 점</h4>
+          <ul>
+            <li><strong>잔액 부족 = 결제 거절</strong>. 자동 충전이 없거나 제한적일 수 있으니 출국 전·여행 중 앱에서 여유 있게 충전</li>
+            <li>계좌 연동 직후 12~24시간은 오픈뱅킹 제한이 걸릴 수 있음 → <strong>출국 2~3일 전</strong> 연동·충전 테스트</li>
+            <li>실물 카드는 배송 또는 편의점 수령 후 앱에서 <strong>등록(활성화) ON</strong>해야 ATM·결제가 됨</li>
+            <li>ATM 무료 출금은 <strong>월 한도</strong>가 있는 편(초과 시 수수료). 미국은 현금 비중이 낮아 소액만 인출</li>
+            <li>귀국 후 남은 USD는 앱에서 원화로 되돌릴 때 환율 스프레드가 있을 수 있음 → 쓸 만큼만 충전</li>
+          </ul>
+          <h4>신청·관리</h4>
+          <p>앱스토어/플레이스토어에서 “트래블월렛” 검색 → 본인인증 → 카드 신청. 공식 안내·수수료는 앱 공지가 최신입니다.</p>
+          <p class="tips-modal-links"><a class="tips-ext" href="https://www.google.com/search?q=%ED%8A%B8%EB%9E%98%EB%B8%94%EC%9B%94%EB%A0%9B+%EC%B9%B4%EB%93%9C+%EC%8B%A0%EC%B2%AD" target="_blank" rel="noopener noreferrer">트래블월렛 안내(검색) ↗</a></p>
+        </div>
+        <div class="tips-modal-foot">
+          <button type="button" class="tips-modal-secondary" data-tips-close>닫기</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tips-modal" id="tip-travelog" hidden>
+      <div class="tips-modal-backdrop" data-tips-close></div>
+      <div class="tips-modal-panel" role="dialog" aria-modal="true" aria-labelledby="tip-travelog-title">
+        <div class="tips-modal-head">
+          <h2 id="tip-travelog-title">트래블로그 (하나카드) 상세</h2>
+          <button type="button" class="tips-modal-close" data-tips-close aria-label="닫기">×</button>
+        </div>
+        <div class="tips-modal-body">
+          <p>하나카드의 해외특화 카드로, <strong>Mastercard / UnionPay / VISA</strong> 중 선택 발급하는 경우가 많습니다. 지원 통화가 넓고, 잔액이 부족할 때 <strong>자동 환전 결제</strong>에 유리한 편입니다.</p>
+          <h4>이 일정에서의 역할</h4>
+          <ul>
+            <li>주력(트래블월렛·VISA)이 거절될 때 <strong>다른 브랜드 백업</strong></li>
+            <li>현금이 필요할 때 ATM 출금 한도가 상대적으로 넉넉한 편</li>
+            <li>미국만 다니면 월렛이 주력이고, 로그는 “안 되는 순간”용으로 충분</li>
+          </ul>
+          <h4>주의</h4>
+          <ul>
+            <li>귀국 후 외화→원화 재환전 시 <strong>수수료(예: 1%대)</strong>가 붙는 구조가 흔함 → 과충전 피하기</li>
+            <li>제휴 ATM이 아닌 사설 ATM은 기기 수수료가 따로 붙을 수 있음</li>
+            <li>발급·우대율·한도는 상품/이벤트에 따라 달라지니 하나카드·트래블로그 앱에서 확인</li>
+          </ul>
+          <p class="tips-modal-links"><a class="tips-ext" href="https://www.google.com/search?q=%ED%8A%B8%EB%9E%98%EB%B8%94%EB%A1%9C%EA%B7%B8+%ED%95%98%EB%82%98%EC%B9%B4%EB%93%9C" target="_blank" rel="noopener noreferrer">트래블로그 안내(검색) ↗</a></p>
+        </div>
+        <div class="tips-modal-foot">
+          <button type="button" class="tips-modal-secondary" data-tips-close>닫기</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tips-modal" id="tip-credit" hidden>
+      <div class="tips-modal-backdrop" data-tips-close></div>
+      <div class="tips-modal-panel" role="dialog" aria-modal="true" aria-labelledby="tip-credit-title">
+        <div class="tips-modal-head">
+          <h2 id="tip-credit-title">신용카드 · 미국 여행에서 꼭 필요한 이유</h2>
+          <button type="button" class="tips-modal-close" data-tips-close aria-label="닫기">×</button>
+        </div>
+        <div class="tips-modal-body">
+          <p>일상 식비·교통은 선불 USD가 유리한 경우가 많지만, <strong>호텔·렌트카는 신용 보증</strong>을 요구하는 업체가 많습니다. 이 일정(에어비앤비 + 편도 렌트 NYC→ORD)에서도 신용카드 1장은 사실상 필수입니다.</p>
+          <h4>출국 전 설정</h4>
+          <ul>
+            <li>카드사 앱에서 <strong>해외사용 허용</strong> · 일한도/1회한도 확인</li>
+            <li><strong>해외원화결제(DCC) 차단</strong> — 가져갈 카드마다 각각 신청</li>
+            <li>분실 시 앱·고객센터 번호 메모 / 가족 공유</li>
+          </ul>
+          <h4>현장에서</h4>
+          <ul>
+            <li>결제 단말에서 <strong>USD / Local currency</strong> 선택 (원화·KRW 거절)</li>
+            <li>식당은 영수증에 tip 칸 → 보통 15~20%를 카드에 합산</li>
+            <li>렌트카 카운터는 보증 한도가 잡혀 있을 수 있음 → 한도 여유 확보</li>
+            <li>해외이용수수료(카드사+브랜드)가 붙는 상품이 많음 → 고액·일상은 월렛 우선 검토</li>
+          </ul>
+        </div>
+        <div class="tips-modal-foot">
+          <button type="button" class="tips-modal-secondary" data-tips-close>닫기</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tips-modal" id="tip-dcc" hidden>
+      <div class="tips-modal-backdrop" data-tips-close></div>
+      <div class="tips-modal-panel" role="dialog" aria-modal="true" aria-labelledby="tip-dcc-title">
+        <div class="tips-modal-head">
+          <h2 id="tip-dcc-title">DCC(해외 원화결제) 피하기</h2>
+          <button type="button" class="tips-modal-close" data-tips-close aria-label="닫기">×</button>
+        </div>
+        <div class="tips-modal-body">
+          <p>해외 가게·ATM이 “한국 원화로 결제할까요?”라고 물을 때 <strong>Yes/KRW</strong>를 고르면, 불리한 환율+수수료(대략 3~5%대)가 붙는 <strong>DCC</strong>가 적용되는 경우가 많습니다.</p>
+          <h4>올바른 선택</h4>
+          <ul>
+            <li>화면/영수증: <strong>USD</strong>, <strong>Local currency</strong>, <strong>without conversion</strong></li>
+            <li>거절할 말: Korean Won, KRW, Convert to KRW</li>
+          </ul>
+          <h4>예방</h4>
+          <ul>
+            <li>국내 카드사 앱 → “해외원화결제 차단 / DCC 차단” 등록 (카드 <em>한 장마다</em>)</li>
+            <li>차단해 두면 원화 청구 시도 자체가 거절되어 실수를 막음</li>
+            <li>선불(월렛/로그)도 잔액 부족으로 원화 계좌를 끌어쓰는 순간엔 주의</li>
+          </ul>
+        </div>
+        <div class="tips-modal-foot">
+          <button type="button" class="tips-modal-secondary" data-tips-close>닫기</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tips-modal" id="tip-pass" hidden>
+      <div class="tips-modal-backdrop" data-tips-close></div>
+      <div class="tips-modal-panel" role="dialog" aria-modal="true" aria-labelledby="tip-pass-title">
+        <div class="tips-modal-head">
+          <h2 id="tip-pass-title">시카고 CityPASS vs Go City</h2>
+          <button type="button" class="tips-modal-close" data-tips-close aria-label="닫기">×</button>
+        </div>
+        <div class="tips-modal-body">
+          <p>가족 4명(성인2·아동7·8세)이 Shedd·Skydeck·크루즈·MSI·Art Institute를 여러 곳 보면 <strong>패스가 개별 합보다 저렴</strong>한 경우가 많습니다. 반대로 2~3곳만 보면 개별 티켓이 나을 수 있습니다.</p>
+          <h4>CityPASS (시카고)</h4>
+          <ul>
+            <li>핵심 명소 묶음(예: Shedd·Skydeck 포함 + 선택 명소) · 유효기간 수일</li>
+            <li>구매 후 <strong>My CityPASS 앱</strong>에서 타임슬롯 예약 — Shedd·Skydeck는 사실상 필수</li>
+          </ul>
+          <h4>Go City</h4>
+          <ul>
+            <li>Explorer(몇 곳 선택) / All-Inclusive(일수제) 등 형태가 다름</li>
+            <li>크루즈·전망대 등 폭넓은 목록 · 앱에서 사전 예약 필요한 곳 많음</li>
+          </ul>
+          <h4>이 일정 팁</h4>
+          <ul>
+            <li>10일 중 박물관·전망대를 몰아서 볼 날(2·3·4·6·7일)을 먼저 정한 뒤 패스 손익 계산</li>
+            <li>패스 사자마자 Skydeck·Shedd·크루즈 슬롯부터 잡기</li>
+            <li>Lincoln Park Zoo는 무료라 패스와 무관 — 예산 절약 데이로 활용</li>
+          </ul>
+          <p class="tips-modal-links">
+            <a class="tips-ext" href="https://www.citypass.com/chicago" target="_blank" rel="noopener noreferrer">Chicago CityPASS ↗</a>
+            <a class="tips-ext" href="https://gocity.com/en/chicago" target="_blank" rel="noopener noreferrer">Go City Chicago ↗</a>
+          </p>
+        </div>
+        <div class="tips-modal-foot">
+          <button type="button" class="tips-modal-secondary" data-tips-close>닫기</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tips-modal" id="tip-omny" hidden>
+      <div class="tips-modal-backdrop" data-tips-close></div>
+      <div class="tips-modal-panel" role="dialog" aria-modal="true" aria-labelledby="tip-omny-title">
+        <div class="tips-modal-head">
+          <h2 id="tip-omny-title">뉴욕 교통 OMNY · 시카고 CTA</h2>
+          <button type="button" class="tips-modal-close" data-tips-close aria-label="닫기">×</button>
+        </div>
+        <div class="tips-modal-body">
+          <h4>뉴욕 — OMNY</h4>
+          <ul>
+            <li>지하철·버스 개찰구에 <strong>카드/스마트폰 탭</strong> (별도 MetroCard가 필수는 아닌 경우가 많음)</li>
+            <li>같은 결제수단으로 탭하면 주간 요금 상한(fare capping) 혜택이 적용될 수 있음 — 공식 OMNY 안내 확인</li>
+            <li>트래블월렛·모바일 월렛 탭 가능 여부를 출국 전 후기로 한 번 더 확인</li>
+          </ul>
+          <h4>시카고 — CTA / Ventra</h4>
+          <ul>
+            <li>렌트카 위주면 시내 구간만 CTA·우버 병행</li>
+            <li>Ventra 앱 또는 컨택리스 탭 · 공항↔시내는 상황에 따라 우버/렌트가 편할 수 있음</li>
+          </ul>
+          <p class="tips-modal-links">
+            <a class="tips-ext" href="https://omny.info/" target="_blank" rel="noopener noreferrer">OMNY 공식 ↗</a>
+            <a class="tips-ext" href="https://www.transitchicago.com/" target="_blank" rel="noopener noreferrer">CTA / Ventra ↗</a>
+          </p>
+        </div>
+        <div class="tips-modal-foot">
+          <button type="button" class="tips-modal-secondary" data-tips-close>닫기</button>
+        </div>
+      </div>
+    </div>
+    
     
     </div>
 
@@ -6297,10 +6765,37 @@
       if (e.key === 'Escape') closeNycHotelModal();
     });
 
+    
+    (function() {
+      function openTipsModal(id) {
+        const modal = document.getElementById(id);
+        if (!modal) return;
+        document.querySelectorAll('.tips-modal').forEach(m => { m.hidden = true; });
+        modal.hidden = false;
+        document.body.classList.add('tips-modal-open');
+        const closeBtn = modal.querySelector('.tips-modal-close');
+        if (closeBtn) closeBtn.focus();
+      }
+      function closeTipsModal() {
+        document.querySelectorAll('.tips-modal').forEach(m => { m.hidden = true; });
+        document.body.classList.remove('tips-modal-open');
+      }
+      document.querySelectorAll('[data-tips-open]').forEach(btn => {
+        btn.addEventListener('click', () => openTipsModal(btn.getAttribute('data-tips-open')));
+      });
+      document.querySelectorAll('[data-tips-close]').forEach(el => {
+        el.addEventListener('click', closeTipsModal);
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeTipsModal();
+      });
+    })();
+    
+
     const hashPanel = {
       '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging', '#cars': 'cars',
       '#chi-plan': 'chi-plan', '#east-plan': 'east-plan',
-      '#food-plan': 'food-plan', '#misc-plan': 'misc-plan'
+      '#food-plan': 'food-plan', '#misc-plan': 'misc-plan', '#tips-plan': 'tips-plan'
     }[location.hash];
     if (hashPanel) document.querySelector(`[data-panel="${hashPanel}"]`).click();
 

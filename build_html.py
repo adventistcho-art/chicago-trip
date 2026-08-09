@@ -3041,10 +3041,12 @@ def render_page(
       if (e.key === 'Escape') closeNycHotelModal();
     }});
 
+    {travel_tips.tips_scripts()}
+
     const hashPanel = {{
       '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging', '#cars': 'cars',
       '#chi-plan': 'chi-plan', '#east-plan': 'east-plan',
-      '#food-plan': 'food-plan', '#misc-plan': 'misc-plan'
+      '#food-plan': 'food-plan', '#misc-plan': 'misc-plan', '#tips-plan': 'tips-plan'
     }}[location.hash];
     if (hashPanel) document.querySelector(`[data-panel="${{hashPanel}}"]`).click();
 
