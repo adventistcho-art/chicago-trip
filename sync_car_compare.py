@@ -15,7 +15,7 @@ OUT_FILE = ROOT / "car_compare_data.json"
 KAYAK_FILE = ROOT / "car_rental_data.json"
 USER_DATA_DIR = ROOT / ".browser_profile_capture"
 
-PICKUP = "2026-09-24"
+PICKUP = "2026-09-27"
 DROPOFF_DATES = [
     "2026-10-08",
     "2026-10-09",

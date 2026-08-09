@@ -18,11 +18,11 @@ CHICAGO_10 = {
     "days": [
         {
             "day": 1,
-            "title": "도착 · 시내 첫인상",
-            "places": ["ORD 도착 · 숙소 체크인", "Millennium Park · Cloud Gate", "Michigan Avenue 산책"],
-            "tips": "시차 적응 위주 · 가볍게 걷기",
+            "title": "도착 · 렌트 픽업 · 시내 첫인상",
+            "places": ["ORD 도착 · 렌트카 픽업(9/27)", "숙소 체크인", "Millennium Park · Cloud Gate"],
+            "tips": "공항에서 렌트 인수 후 숙소 이동 · 시차 적응 위주",
             "spend": [
-                {"item": "시내 교통/우버", "amount": 80000},
+                {"item": "시내 교통/주차", "amount": 60000},
                 {"item": "식사", "amount": 120000},
                 {"item": "간식·기타", "amount": 40000},
             ],
@@ -97,7 +97,7 @@ CHICAGO_10 = {
             "day": 8,
             "title": "근교 데이트립",
             "places": ["Oak Park (Frank Lloyd Wright) 또는", "Suburban outlet / 지역 공원", "저녁은 숙소 근처"],
-            "tips": "렌트카 있으면 여유 · 대중교통도 가능",
+            "tips": "ORD 렌트카로 근교 이동 · 주차비 확인",
             "spend": [
                 {"item": "유류/주차 또는 교통", "amount": 100000},
                 {"item": "입장·액티비티", "amount": 120000},
@@ -138,7 +138,7 @@ EAST_COAST_3 = {
             "key": "nyc",
             "label": "뉴욕",
             "chip": "NYC 3일",
-            "blurb": "맨해튼 핵심 · 아이와 걷기 좋은 코스",
+            "blurb": "맨해튼 핵심 · 교통은 지하철(MetroCard)+우버만 · 렌트카 없음 · 시카고 이동은 국내선",
             "lodging": {
                 "nights": 2,
                 "per_night": 550_000,
@@ -297,7 +297,7 @@ EAST_COAST_3 = {
             ],
         },
     ],
-    "budget_note": "동부 3일은 숙박 2박 대략치를 Day1·Day2에 포함합니다(가족 4명). 시카고 숙박 탭 금액과는 별도입니다. 도시 간 이동(기차·항공) 비용은 별도입니다.",
+    "budget_note": "동부 3일은 숙박 2박 대략치를 Day1·Day2에 포함합니다(가족 4명). 뉴욕 교통은 대중교통·우버만 반영합니다. 뉴욕→시카고 국내선·ORD 렌트카는 항공권·렌트카 탭에서 따로 선택하세요.",
 }
 
 
@@ -929,9 +929,9 @@ def render_east_plan() -> str:
       </div>
       <div class="route-stats">
         <div class="route-stat">
-          <span class="muted">도시 선택</span>
-          <strong>NYC · DC · BOS</strong>
-          <span class="muted">각 3일 · 숙박 2박 포함</span>
+          <span class="muted">NYC 교통</span>
+          <strong>지하철 + 우버</strong>
+          <span class="muted">렌트 없음 · CHI는 국내선</span>
         </div>
       </div>
     </section>

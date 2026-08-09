@@ -21,13 +21,15 @@ KAYAK_FILE = ROOT / "kayak_flight_data.json"
 GOOGLE_FILE = ROOT / "google_flight_data.json"
 ROUTE_CHI_FILE = ROOT / "route_chi_roundtrip.json"
 ROUTE_NYC_FILE = ROOT / "route_nyc_in_chi_out.json"
+ROUTE_NYC_CHI_FILE = ROOT / "route_nyc_to_chi.json"
 BOOKED_FLIGHT_FILE = ROOT / "booked_flight.json"
 CAR_FILE = ROOT / "car_rental_data.json"
 CAR_COMPARE_FILE = ROOT / "car_compare_data.json"
 AIRBNB_LODGING = ROOT / "airbnb_lodging_data.json"
-CAR_PICKUP = "2026-09-24"
+CAR_PICKUP = "2026-09-27"
 CAR_DROPOFF_DEFAULT = "2026-10-10"
-CAR_ROUTE_NOTE = "뉴욕(JFK/LGA/EWR) 인수 → 시카고 ORD 반납 · 편도"
+CAR_PICKUP_TIME = "14:00"
+CAR_ROUTE_NOTE = "시카고 ORD 공항 인수·반납 · 뉴욕은 대중교통·우버"
 CAR_SOURCE_META = {
     "discover": {"label": "DiscoverCars", "color": "#1f6feb", "css": "discover"},
     "rentalcars": {"label": "Rentalcars.com", "color": "#0d9488", "css": "rentalcars"},
@@ -62,6 +64,18 @@ ROUTE_META = {
         "blurb": "서울 ↔ 시카고(ORD) 왕복",
         "chip": "ORD 왕복",
     },
+    "nyc_chi": {
+        "key": "nyc_chi",
+        "label": "뉴욕 → 시카고",
+        "blurb": "국내선 NYC → ORD · 렌트카는 ORD 9/27 픽업",
+        "chip": "국내선",
+    },
+}
+
+TRANSPORT_PLAN = {
+    "nyc_local": "뉴욕 체류: 대중교통(지하철) + 우버 · 렌트카 없음",
+    "nyc_to_chi": "뉴욕 → 시카고: 국내선 항공 (9/26 또는 9/27)",
+    "car": "렌트카: 시카고 ORD 공항 9/27 14:00 인수 · 귀국 전 ORD 반납",
 }
 
 # Dashboard default estimates (KRW, editable in browser)
@@ -139,7 +153,9 @@ def flatten_route_flights(route_rows: list[dict]) -> list[dict]:
     """Turn route JSON into selectable flight options for the dashboard."""
     out: list[dict] = []
     for day in route_rows:
-        ret = day["return_date"]
+        ret = day.get("return_date") or day.get("depart_date")
+        if not ret:
+            continue
         route = day.get("route", "")
         route_label = day.get("route_label") or ROUTE_META.get(route, {}).get("label", route)
         for kind in ("cheapest", "shortest"):
@@ -160,7 +176,8 @@ def flatten_route_flights(route_rows: list[dict]) -> list[dict]:
                     "route_label": route_label,
                     "kind": kind,
                     "kind_label": kind_label,
-                    "return_date": ret,
+                    "return_date": day.get("return_date") or "",
+                    "depart_date": day.get("depart_date") or "",
                     "price": opt["price"],
                     "price_text": opt.get("price_text", fmt_won(opt["price"])),
                     "price_per_person": opt.get("price_per_person") or flight_per_person(opt["price"]),
@@ -172,6 +189,8 @@ def flatten_route_flights(route_rows: list[dict]) -> list[dict]:
                     "carrier_text": opt.get("carrier_text", ""),
                     "self_transfer": opt.get("self_transfer", False),
                     "seller_url": opt.get("seller_url", ""),
+                    "estimate": bool(opt.get("estimate")),
+                    "price_source": opt.get("source") or "KAYAK",
                 }
             )
         for i, opt in enumerate(day.get("cheap_under_17h") or []):
@@ -322,6 +341,11 @@ def lodging_pick_cell(a: dict, is_best: bool) -> str:
           </td>"""
 
 
+def flatten_domestic_flights(route_rows: list[dict]) -> list[dict]:
+    """NYC→ORD one-way options keyed by depart_date."""
+    return [f for f in flatten_route_flights(route_rows) if f.get("route") == "nyc_chi"]
+
+
 def flatten_cars(car_days: list[dict]) -> list[dict]:
     out: list[dict] = []
     seen: set[str] = set()
@@ -364,12 +388,17 @@ def build_trip_data(
     airbnb: dict[str, dict],
     car_days: list[dict] | None = None,
     booked_flight: dict | None = None,
+    domestic_flights: list[dict] | None = None,
 ) -> dict:
     flights = list(route_flights)
     booked_opt = booked_flight_option(booked_flight) if booked_flight else None
     if booked_opt and not any(f["id"] == booked_opt["id"] for f in flights):
         flights.insert(0, booked_opt)
     cars = flatten_cars(car_days or [])
+    domestic = list(domestic_flights or [])
+    best_domestic = (
+        min(domestic, key=lambda x: x.get("price") or 10**12) if domestic else None
+    )
 
     lodging = []
     booked_row_raw = next((a for a in airbnb_all if a.get("booked")), None)
@@ -472,6 +501,9 @@ def build_trip_data(
         "adults": ADULTS,
         "child_ages": CHILD_AGES,
         "car_pickup": CAR_PICKUP,
+        "car_pickup_time": CAR_PICKUP_TIME,
+        "car_route_note": CAR_ROUTE_NOTE,
+        "transport_plan": TRANSPORT_PLAN,
         "date_options": {
             "outbound": outbound_dates,
             "return": return_dates,
@@ -479,6 +511,8 @@ def build_trip_data(
             "checkout": checkout_dates,
             "pickup": pickup_dates,
             "dropoff": dropoff_dates,
+            "domestic_depart": sorted({d.get("depart_date") for d in domestic if d.get("depart_date")})
+            or ["2026-09-26", "2026-09-27"],
         },
         "defaults": {
             "food_per_day": DEFAULT_FOOD_PER_DAY,
@@ -487,11 +521,13 @@ def build_trip_data(
             "misc": DEFAULT_MISC,
         },
         "flights": flights,
+        "domestic_flights": domestic,
         "lodging": lodging,
         "cars": cars,
         "combos": combos,
         "recommended": recommended,
         "best_flight_id": best_flight_id,
+        "best_domestic_flight_id": best_domestic["id"] if best_domestic else None,
         "best_lodging_id": best_lodging_id,
         "best_lodging_checkout": best_lodging_id,
         "best_car_id": best_car_id,
@@ -719,7 +755,73 @@ def render_booked_flight(booked: dict | None, *, interactive: bool = True, dom_i
     </section>"""
 
 
-def render_flights(chi_days: list[dict], nyc_days: list[dict], booked: dict | None = None) -> str:
+def _render_domestic_nyc_chi(domestic_days: list[dict]) -> str:
+    if not domestic_days:
+        return """
+        <section class="card" id="domestic-nyc-chi">
+          <p class="route-kicker">DOMESTIC · NYC → ORD</p>
+          <h3>뉴욕 → 시카고 국내선</h3>
+          <p class="muted">데이터가 없습니다. <code>python sync_nyc_chi_flight.py</code>를 실행하세요.</p>
+        </section>"""
+    cards = []
+    for day in domestic_days:
+        depart = day.get("depart_date", "")
+        for kind in ("cheapest", "shortest"):
+            opt = day.get(kind)
+            if not opt or opt.get("price") is None:
+                continue
+            kind_label = "최저가" if kind == "cheapest" else "최단시간"
+            fid = f"nyc_chi:{kind}:{depart}"
+            est = " · 추정" if opt.get("estimate") else ""
+            src = opt.get("source") or "KAYAK"
+            cards.append(f"""
+            <article class="date-card domestic-card" data-domestic-depart="{depart}" data-route="nyc_chi">
+              <header class="date-card-head">
+                <div>
+                  <p class="date-kicker">NYC → ORD · {_fmt_date_ko(depart)}</p>
+                  <h3>{kind_label}{est}</h3>
+                  <p class="muted">출처: {src} · {opt.get('carrier_text','')} · {opt.get('stops_text','')}</p>
+                </div>
+                <div class="date-card-price">
+                  <strong>{opt.get('price_text') or fmt_won(opt.get('price'))}</strong>
+                  <span class="muted">4명 · 1인 {opt.get('price_per_person_text') or flight_per_person_text(opt.get('price'))}</span>
+                </div>
+              </header>
+              <p class="muted">{opt.get('duration_text','')}</p>
+              <div class="opt-actions">
+                <label class="pick-label">
+                  <input type="radio" name="domestic-flight-pick" class="domestic-flight-pick" value="{fid}"
+                    data-price="{opt.get('price') or 0}" data-depart="{depart}">
+                  <span>경비에 담기</span>
+                </label>
+                {BTN.format(url=opt.get('seller_url') or '#')}
+              </div>
+            </article>""")
+    departs = sorted({d.get("depart_date") for d in domestic_days if d.get("depart_date")})
+    opts = "".join(
+        f'<option value="{d}">{_fmt_date_ko(d)} ({d})</option>' for d in departs
+    )
+    return f"""
+    <section class="card" id="domestic-nyc-chi">
+      <div class="route-hero-copy" style="margin-bottom:12px;">
+        <p class="route-kicker">DOMESTIC BRIDGE</p>
+        <h2>뉴욕 → 시카고 국내선</h2>
+        <p class="muted">뉴욕은 대중교통·우버로 이동한 뒤, 국내선으로 시카고(ORD)에 도착합니다. 렌트카는 ORD 9/27 픽업.</p>
+      </div>
+      <label class="field-label" for="domestic-depart">출발일</label>
+      <select id="domestic-depart" class="date-select">{opts}</select>
+      <div class="domestic-grid" style="margin-top:14px;display:grid;gap:12px;">
+        {''.join(cards) if cards else '<p class="muted">선택 가능한 요금이 없습니다.</p>'}
+      </div>
+    </section>"""
+
+
+def render_flights(
+    chi_days: list[dict],
+    nyc_days: list[dict],
+    booked: dict | None = None,
+    domestic_days: list[dict] | None = None,
+) -> str:
     returns = sorted(
         {d["return_date"] for d in chi_days + nyc_days}
         or {"2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"}
@@ -738,9 +840,19 @@ def render_flights(chi_days: list[dict], nyc_days: list[dict], booked: dict | No
         note="출국·귀국일을 고르면 해당 일정의 최저가 / 최단시간만 표시됩니다.",
     )
     return f"""
+    <section class="card transport-plan-card">
+      <p class="route-kicker">TRANSPORT PLAN</p>
+      <h3>이동 계획</h3>
+      <ul class="transport-plan-list">
+        <li>{TRANSPORT_PLAN['nyc_local']}</li>
+        <li>{TRANSPORT_PLAN['nyc_to_chi']}</li>
+        <li>{TRANSPORT_PLAN['car']}</li>
+      </ul>
+    </section>
     {render_booked_flight(booked)}
+    {_render_domestic_nyc_chi(domestic_days or [])}
     {date_bar}
-    <div class="route-switch" role="tablist" aria-label="항공 루트">
+    <div class="route-switch" role="tablist" aria-label="국제선 항공 루트">
       <button type="button" class="route-tab active" role="tab" aria-selected="true" data-route="nyc_in">
         <span class="route-tab-title">뉴욕 인 · 시카고 아웃</span>
         <span class="route-tab-sub">SEL→NYC / ORD→SEL</span>
@@ -750,7 +862,7 @@ def render_flights(chi_days: list[dict], nyc_days: list[dict], booked: dict | No
         <span class="route-tab-sub">SEL↔ORD 왕복</span>
       </button>
     </div>
-    <p class="flight-hint muted">위에 <strong>예약 완료</strong> 항공권이 기본 선택됩니다. 아래는 같은 루트의 비교 후보입니다.</p>
+    <p class="flight-hint muted">위에 <strong>예약 완료</strong> 국제선이 기본 선택됩니다. 뉴욕→시카고 국내선은 별도 선택하세요.</p>
     <p id="flight-empty" class="empty-filter muted" hidden>선택한 날짜의 항공 데이터가 없습니다.</p>
     {_route_panel("nyc_in", nyc_days, True)}
     {_route_panel("chi_round", chi_days, False)}
@@ -893,13 +1005,14 @@ def render_cars(car_days: list[dict]) -> str:
                     if x
                 )
                 route_loc = c.get("location") or ""
-                pu = c.get("pickup_code") or ""
-                route_bit = f"{pu}→ORD" if pu else ""
+                pu = c.get("pickup_code") or "ORD"
+                do = c.get("dropoff_code") or "ORD"
+                route_bit = f"{pu}→{do}" if pu else "ORD"
                 cards.append(f"""
                 <article class="car-card">
                   <div class="car-card-top">
                     <div>
-                      <p class="car-cat"><span class="car-src-tag {src}">{src_label}</span> {cat}{' · '+route_bit if route_bit else ''}</p>
+                      <p class="car-cat"><span class="car-src-tag {src}">{src_label}</span> {cat} · {route_bit}</p>
                       <h3 class="car-model">{c.get('model','')}</h3>
                       <p class="muted">{specs or '스펙 정보 없음'}{(' · '+route_loc) if route_loc else ''}</p>
                     </div>
@@ -923,7 +1036,7 @@ def render_cars(car_days: list[dict]) -> str:
 
         panels.append(f"""
         <div class="car-date-panel {active}" data-car-panel="{drop}">
-          <p class="muted" style="margin:0 0 12px;">인수 {_fmt_date_ko(day.get('pickup_date', CAR_PICKUP))} {day.get('pickup_time', '18:00')} · 뉴욕 → 반납 {_fmt_date_ko(drop)} {day.get('dropoff_time', '10:00')} · ORD 편도</p>
+          <p class="muted" style="margin:0 0 12px;">인수 {_fmt_date_ko(day.get('pickup_date', CAR_PICKUP))} {day.get('pickup_time', CAR_PICKUP_TIME)} · ORD → 반납 {_fmt_date_ko(drop)} {day.get('dropoff_time', '10:00')} · ORD</p>
           {''.join(cat_blocks) if cat_blocks else '<p class="muted">상세 목록 없음 · 위 사이트별 최저가를 확인하세요.</p>'}
         </div>""")
 
@@ -937,9 +1050,9 @@ def render_cars(car_days: list[dict]) -> str:
           data-price-text="{cheapest.get('price_text') or ''}"
           data-meta="{src_label} · {cheapest.get('category') or ''} · {cheapest.get('model') or ''}">
           <div class="route-hero-copy">
-            <p class="route-kicker">NYC → ORD ONE-WAY</p>
-            <h2>렌트카 · 뉴욕 인수 · 시카고 반납</h2>
-            <p class="muted" id="car-hero-blurb">DiscoverCars · Rentalcars.com · KAYAK · {CAR_ROUTE_NOTE} · 인수 {CAR_PICKUP} 18:00 · 반납 {CAR_DROPOFF_DEFAULT}</p>
+            <p class="route-kicker">ORD AIRPORT RENTAL</p>
+            <h2>렌트카 · 시카고 ORD 9/27 픽업</h2>
+            <p class="muted" id="car-hero-blurb">DiscoverCars · Rentalcars.com · KAYAK · {CAR_ROUTE_NOTE} · 인수 {CAR_PICKUP} {CAR_PICKUP_TIME} · 반납 {CAR_DROPOFF_DEFAULT}</p>
           </div>
           <div class="route-stats">
             <div class="route-stat">
@@ -964,7 +1077,7 @@ def render_cars(car_days: list[dict]) -> str:
         compare_table = f"""
         <section class="card" id="car-compare-card">
           <div class="legend">{legend}</div>
-          <p class="muted" style="margin:0 0 12px;" id="car-compare-hint">편도 뉴욕(JFK/LGA/EWR)→시카고 ORD · 사이트별 최저가 · ○ 선택 → 여행경비 반영 · 전기차·미니밴 포함 · 귀국편 10/10 06:00이면 반납 시각을 앞당기세요.</p>
+          <p class="muted" style="margin:0 0 12px;" id="car-compare-hint">ORD 공항 인수({CAR_PICKUP} {CAR_PICKUP_TIME})·반납 · 사이트별 최저가 · ○ 선택 → 여행경비 반영 · 뉴욕 체류 중에는 렌트하지 않습니다 · 귀국편 전 반납 시각을 앞당기세요.</p>
           {f'<p class="muted" style="margin:0 0 12px;padding:10px 12px;border-left:3px solid var(--accent,#2a6);background:rgba(0,0,0,.03);" id="car-minivan-note">{html.escape(minivan_note)}</p>' if minivan_note else ''}
           <div class="table-wrap">
           <table class="car-compare-table">
@@ -1273,10 +1386,16 @@ def render_dashboard_shell(combo_html: str, booked_flight_html: str = "") -> str
 
     <div class="dash-grid dash-grid-tabs">
       <article class="dash-card" data-kind="flight">
-        <div class="dash-card-head"><span>✈️</span><h3>비행기</h3></div>
+        <div class="dash-card-head"><span>✈️</span><h3>국제선</h3></div>
         <p class="dash-amount" id="amt-flight">₩0</p>
         <p class="dash-sub" id="sub-flight">항공권 탭</p>
         <p class="dash-detail" id="detail-flight">미선택 · <a href="#" data-goto="flights">항공권 탭에서 선택</a></p>
+      </article>
+      <article class="dash-card" data-kind="domestic">
+        <div class="dash-card-head"><span>🛫</span><h3>뉴욕→시카고</h3></div>
+        <p class="dash-amount" id="amt-domestic">₩0</p>
+        <p class="dash-sub" id="sub-domestic">국내선</p>
+        <p class="dash-detail" id="detail-domestic">미선택 · <a href="#" data-goto="flights">항공권 탭에서 선택</a></p>
       </article>
       <article class="dash-card" data-kind="lodging">
         <div class="dash-card-head"><span>🏠</span><h3>숙박</h3></div>
@@ -1285,7 +1404,7 @@ def render_dashboard_shell(combo_html: str, booked_flight_html: str = "") -> str
         <p class="dash-detail" id="detail-lodging">미선택 · <a href="#" data-goto="lodging">숙박 탭에서 선택</a></p>
       </article>
       <article class="dash-card" data-kind="car">
-        <div class="dash-card-head"><span>🚗</span><h3>렌트카</h3></div>
+        <div class="dash-card-head"><span>🚗</span><h3>렌트카 (ORD 9/27)</h3></div>
         <p class="dash-amount" id="amt-car">₩0</p>
         <p class="dash-sub">렌트카 탭</p>
         <p class="dash-detail" id="detail-car">미선택 · <a href="#" data-goto="cars">렌트카 탭에서 선택</a></p>
@@ -1330,7 +1449,8 @@ def render_dashboard_shell(combo_html: str, booked_flight_html: str = "") -> str
         <div class="bar-chart" id="bar-chart"></div>
       </div>
       <p class="muted" style="margin-top:12px;">
-        ※ 비행기·숙박·렌트카는 각 탭 선택값, 동부·시카고는 일정 대략 지출, 식비·여행비는 해당 탭 입력값입니다.
+        ※ 국제선·뉴욕→시카고 국내선·숙박·렌트카는 각 탭 선택값, 동부·시카고는 일정 대략 지출, 식비·여행비는 해당 탭 입력값입니다.
+        뉴욕 체류는 대중교통·우버, 렌트카는 ORD 9/27 픽업입니다.
       </p>
     </section>"""
 
@@ -1746,6 +1866,10 @@ def render_page(
       .east-lodging-top {{ flex-direction: column; }}
       .east-lodging-price {{ text-align: left; }}
     }}
+    .transport-plan-card {{ border-left: 4px solid #0ea5e9; }}
+    .transport-plan-list {{ margin: 8px 0 0; padding-left: 1.2rem; line-height: 1.55; }}
+    .transport-plan-list li {{ margin: 4px 0; }}
+    .domestic-card.is-picked {{ outline: 2px solid #0ea5e9; }}
     .dashboard-hero {{ background: linear-gradient(135deg, #0d7a5f 0%, #0a5c48 100%); color: #fff; }}
     .dashboard-hero .muted {{ color: rgba(255,255,255,.78); }}
     .dash-hero-inner {{ display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; }}
@@ -1942,7 +2066,7 @@ def render_page(
     const pct = (part, total) => total ? Math.round(part / total * 100) : 0;
 
     const COLORS = {{
-      flight: '#0770e3', lodging: '#ff385c', car: '#6366f1',
+      flight: '#0770e3', domestic: '#0ea5e9', lodging: '#ff385c', car: '#6366f1',
       east: '#4f46e5', chicago: '#c45c26', food: '#f59e0b', misc: '#64748b'
     }};
     const PLAN = TRIP.plan_budgets || {{}};
@@ -2071,10 +2195,10 @@ def render_page(
       const detailHint = document.getElementById('car-detail-hint');
       if (labelEl) labelEl.textContent = dropoff ? `${{fmtDateKo(dropoff)}} 반납 최저가` : '선택일 최저가';
       if (blurbEl) blurbEl.textContent = dropoff
-        ? `DiscoverCars · Rentalcars.com · KAYAK · 인수 ${{TRIP.car_pickup}} · 반납 ${{dropoff}}`
-        : `DiscoverCars · Rentalcars.com · KAYAK · 전기차 포함 · 인수 ${{TRIP.car_pickup}}`;
+        ? `DiscoverCars · Rentalcars.com · KAYAK · ORD 인수 ${{TRIP.car_pickup}} ${{TRIP.car_pickup_time || '14:00'}} · 반납 ${{dropoff}}`
+        : `DiscoverCars · Rentalcars.com · KAYAK · ORD 공항 · 인수 ${{TRIP.car_pickup}}`;
       if (hintEl) hintEl.textContent = dropoff
-        ? `${{fmtDateKo(dropoff)}} 반납 기준 사이트 최저가입니다. ○ 선택 → 여행경비 반영 · 아래 목록에 전기차(EV)도 포함됩니다.`
+        ? `${{fmtDateKo(dropoff)}} 반납 기준 ORD 렌트 최저가입니다. ○ 선택 → 여행경비 반영 · 뉴욕 체류 중 렌트 없음.`
         : '반납일을 고르면 해당일 사이트 최저가만 표시됩니다.';
       if (detailHint) detailHint.textContent = dropoff
         ? `${{fmtDateKo(dropoff)}} 반납 · 상세 차종·옵션입니다.`
@@ -2146,6 +2270,14 @@ def render_page(
       if (carEmpty) carEmpty.hidden = carVisible > 0;
       showCarDate(dates.dropoff);
       updateCarHero(dates.dropoff);
+
+      const domesticSel = document.getElementById('domestic-depart');
+      const domesticDepart = domesticSel?.value
+        || (DATE_OPTS.domestic_depart || [])[0]
+        || '2026-09-26';
+      document.querySelectorAll('.domestic-card').forEach(card => {{
+        card.hidden = card.dataset.domesticDepart !== domesticDepart;
+      }});
     }}
 
     function onEndDateChange(nextEnd, opts = {{}}) {{
@@ -2239,6 +2371,10 @@ def render_page(
       return (TRIP.cars || []).find(c => c.id === id) || null;
     }}
 
+    function findDomestic(id) {{
+      return (TRIP.domestic_flights || []).find(f => f.id === id) || null;
+    }}
+
     function cheapestLodgingForCheckout(checkout) {{
       const rows = TRIP.lodging.filter(l => l.checkout_date === checkout);
       if (!rows.length) return null;
@@ -2251,10 +2387,14 @@ def render_page(
       const dates = getTripDates();
       const flightId = TRIP.booked_flight_id
         || (findFlight(saved.flightId) ? saved.flightId : TRIP.best_flight_id);
+      const domesticFlightId = findDomestic(saved.domesticFlightId)
+        ? saved.domesticFlightId
+        : TRIP.best_domestic_flight_id;
       const carId = findCar(saved.carId) ? saved.carId : TRIP.best_car_id;
       const pickedCar = findCar(carId);
       return {{
         flightId,
+        domesticFlightId,
         lodgingCheckout: TRIP.booked_lodging_id
           || (findLodging(saved.lodgingCheckout)
             ? saved.lodgingCheckout
@@ -2282,6 +2422,9 @@ def render_page(
       document.querySelectorAll('.flight-pick').forEach(el => {{
         el.checked = el.value === state.flightId;
       }});
+      document.querySelectorAll('.domestic-flight-pick').forEach(el => {{
+        el.checked = el.value === state.domesticFlightId;
+      }});
       document.querySelectorAll('.lodging-pick').forEach(el => {{
         el.checked = el.value === state.lodgingCheckout;
       }});
@@ -2289,7 +2432,7 @@ def render_page(
         el.checked = el.value === state.carId;
       }});
       document.querySelectorAll('.date-card').forEach(card => {{
-        const checked = card.querySelector('.flight-pick:checked');
+        const checked = card.querySelector('.flight-pick:checked, .domestic-flight-pick:checked');
         card.classList.toggle('is-picked', !!checked);
       }});
       document.querySelectorAll('tr[data-return]').forEach(tr => {{
@@ -2438,18 +2581,20 @@ def render_page(
     function renderDashboard() {{
       const state = readInputs();
       const flight = findFlight(state.flightId);
+      const domestic = findDomestic(state.domesticFlightId);
       const lodging = findLodging(state.lodgingCheckout);
       const car = findCar(state.carId);
       const nights = lodging?.nights || 0;
 
       const flightAmt = flight?.price || 0;
+      const domesticAmt = domestic?.price || 0;
       const lodgingAmt = lodging?.price || 0;
       const carAmt = state.car;
       const eastAmt = PLAN.east?.total || 0;
       const chicagoAmt = PLAN.chicago?.total || 0;
       const foodAmt = state.foodTotal ?? ((state.foodPerDay || 0) * (state.foodDays || 0));
       const miscAmt = state.misc || 0;
-      const total = flightAmt + lodgingAmt + carAmt + eastAmt + chicagoAmt + foodAmt + miscAmt;
+      const total = flightAmt + domesticAmt + lodgingAmt + carAmt + eastAmt + chicagoAmt + foodAmt + miscAmt;
 
       document.getElementById('total-budget').textContent = fmt(total);
       const flightPerPerson = flight?.price_per_person || (flightAmt ? Math.round(flightAmt / TRIP.guests) : 0);
@@ -2458,6 +2603,15 @@ def render_page(
       document.getElementById('sub-flight').textContent = flight
         ? (flightBooked ? `예약완료 · 1인 ${{fmt(flightPerPerson)}}` : `4명 합계 · 1인 ${{fmt(flightPerPerson)}}`)
         : '항공권 탭';
+      const domesticPp = domestic?.price_per_person || (domesticAmt ? Math.round(domesticAmt / TRIP.guests) : 0);
+      const amtDom = document.getElementById('amt-domestic');
+      if (amtDom) amtDom.textContent = fmt(domesticAmt);
+      const subDom = document.getElementById('sub-domestic');
+      if (subDom) {{
+        subDom.textContent = domestic
+          ? `${{domestic.depart_date || ''}} · 1인 ${{fmt(domesticPp)}}`
+          : '국내선 NYC→ORD';
+      }}
       document.getElementById('amt-lodging').textContent = fmt(lodgingAmt);
       document.getElementById('amt-car').textContent = fmt(carAmt);
       document.getElementById('amt-east').textContent = fmt(eastAmt);
@@ -2480,13 +2634,20 @@ def render_page(
         ? `${{flightBooked ? '✅ ' : ''}}${{flight.source_label}} · 귀국 ${{flight.return_date}} · 4명 ${{fmt(flightAmt)}}<br><span class="muted">${{flight.duration_text || ''}} · ${{flight.carrier_text || ''}}</span> · <a href="#" data-goto="flights">변경</a>`
         : '미선택 · <a href="#" data-goto="flights">항공권 탭에서 선택</a>';
 
+      const detailDom = document.getElementById('detail-domestic');
+      if (detailDom) {{
+        detailDom.innerHTML = domestic
+          ? `${{domestic.source_label}} · ${{domestic.depart_date}} · 4명 ${{fmt(domesticAmt)}}<br><span class="muted">${{domestic.duration_text || ''}} · ${{domestic.carrier_text || ''}} · ${{domestic.price_source || 'KAYAK'}}</span> · <a href="#" data-goto="flights">변경</a>`
+          : '미선택 · <a href="#" data-goto="flights">항공권 탭에서 선택</a>';
+      }}
+
       document.getElementById('detail-lodging').innerHTML = lodging
         ? `${{lodging.title}}<br><span class="muted">체크아웃 ${{lodging.checkout_date}} · ${{nights}}박 · ${{lodging.distance_text}}</span> · <a href="#" data-goto="lodging">변경</a>`
         : '미선택 · <a href="#" data-goto="lodging">숙박 탭에서 선택</a>';
 
       const carOpts = car ? ((car.options || []).slice(0, 2).join(' · ') || car.location || 'ORD') : '';
       document.getElementById('detail-car').innerHTML = car
-        ? `${{car.source_label || ''}} · ${{car.category}} · ${{car.model}} · ${{fmt(carAmt)}}<br><span class="muted">${{car.pickup_date}}~${{car.dropoff_date}} · ${{carOpts}}</span> · <a href="#" data-goto="cars">변경</a>`
+        ? `${{car.source_label || ''}} · ${{car.category}} · ${{car.model}} · ${{fmt(carAmt)}}<br><span class="muted">ORD ${{car.pickup_date}}~${{car.dropoff_date}} · ${{carOpts}}</span> · <a href="#" data-goto="cars">변경</a>`
         : '미선택 · <a href="#" data-goto="cars">렌트카 탭에서 선택</a>';
 
       const foodCalc = document.getElementById('food-calc');
@@ -2514,11 +2675,12 @@ def render_page(
       document.getElementById('trip-summary').textContent = mismatch
         ? '⚠️ 항공 귀국일과 숙박 체크아웃이 다릅니다. 일정을 맞추면 더 정확합니다.'
         : (total
-          ? `비행기 ${{fmt(flightAmt)}} + 숙박 ${{fmt(lodgingAmt)}} + 렌트 ${{fmt(carAmt)}} + 동부 ${{fmt(eastAmt)}} + 시카고 ${{fmt(chicagoAmt)}} + 식비 ${{fmt(foodAmt)}} + 여행비 ${{fmt(miscAmt)}}`
-          : '항공권·숙박·렌트카를 선택하면 합계가 계산됩니다.');
+          ? `국제선 ${{fmt(flightAmt)}} + NYC→CHI ${{fmt(domesticAmt)}} + 숙박 ${{fmt(lodgingAmt)}} + 렌트 ${{fmt(carAmt)}} + 동부 ${{fmt(eastAmt)}} + 시카고 ${{fmt(chicagoAmt)}} + 식비 ${{fmt(foodAmt)}} + 여행비 ${{fmt(miscAmt)}}`
+          : '항공권·국내선·숙박·렌트카를 선택하면 합계가 계산됩니다.');
 
       const summaryItems = [
-        ['비행기', flightAmt, 'flight'],
+        ['국제선', flightAmt, 'flight'],
+        ['뉴욕→시카고', domesticAmt, 'domestic'],
         ['숙박', lodgingAmt, 'lodging'],
         ['렌트카', carAmt, 'car'],
         ['동부 3일', eastAmt, 'east'],
@@ -2608,6 +2770,31 @@ def render_page(
           else renderDashboard();
         }});
       }});
+
+      document.querySelectorAll('.domestic-flight-pick').forEach(el => {{
+        el.addEventListener('change', () => {{
+          const s = getState();
+          s.domesticFlightId = el.value;
+          saveState(s);
+          renderDashboard();
+        }});
+      }});
+      const domesticSel = document.getElementById('domestic-depart');
+      if (domesticSel) {{
+        domesticSel.addEventListener('change', () => {{
+          applyDateFilters();
+          const visible = [...document.querySelectorAll('.domestic-card:not([hidden]) .domestic-flight-pick')];
+          if (visible.length) {{
+            const s = getState();
+            const current = findDomestic(s.domesticFlightId);
+            if (!current || current.depart_date !== domesticSel.value) {{
+              s.domesticFlightId = visible[0].value;
+              saveState(s);
+            }}
+          }}
+          renderDashboard();
+        }});
+      }}
 
       document.querySelectorAll('.lodging-pick').forEach(el => {{
         el.addEventListener('change', () => {{
@@ -2800,14 +2987,19 @@ def main() -> None:
     now_kst = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S KST")
     chi_days = load_route_rows(ROUTE_CHI_FILE)
     nyc_days = load_route_rows(ROUTE_NYC_FILE)
+    domestic_days = load_route_rows(ROUTE_NYC_CHI_FILE)
     booked_flight = load_booked_flight()
     car_days = load_route_rows(CAR_COMPARE_FILE) or load_route_rows(CAR_FILE)
     route_flights = flatten_route_flights(nyc_days) + flatten_route_flights(chi_days)
     route_flights.sort(key=lambda x: (x["price"], x.get("duration_minutes") or 10**9))
+    domestic_flights = flatten_domestic_flights(domestic_days)
+    domestic_flights.sort(key=lambda x: (x.get("price") or 10**12, x.get("depart_date") or ""))
     airbnb_all = load_lodging_list(AIRBNB_LODGING)
     airbnb = load_lodging_cheapest(airbnb_all)
-    trip_data = build_trip_data(route_flights, airbnb_all, airbnb, car_days, booked_flight)
-    flights_html = render_flights(chi_days, nyc_days, booked_flight)
+    trip_data = build_trip_data(
+        route_flights, airbnb_all, airbnb, car_days, booked_flight, domestic_flights
+    )
+    flights_html = render_flights(chi_days, nyc_days, booked_flight, domestic_days)
     lodging_html = render_lodging(airbnb_all, airbnb)
     cars_html = render_cars(car_days)
     chicago_plan_html = itinerary_plans.render_chicago_plan()

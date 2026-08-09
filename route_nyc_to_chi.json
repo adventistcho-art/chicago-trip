@@ -1,0 +1,88 @@
+[
+  {
+    "depart_date": "2026-09-26",
+    "route": "nyc_chi",
+    "route_label": "뉴욕 → 시카고",
+    "cheapest": {
+      "kind": "cheapest",
+      "price_per_person": 300000,
+      "price_per_person_text": "₩300,000",
+      "price": 1200000,
+      "price_text": "₩1,200,000",
+      "duration_text": "약 2시간 30분",
+      "duration_minutes": 150,
+      "stops_text": "직항 후보",
+      "carrier_text": "KAYAK 검색 확인",
+      "self_transfer": false,
+      "seller_url": "https://www.kayak.co.kr/flights/NYC-ORD/2026-09-26/1adults?sort=price_a",
+      "synced_at": "2026-08-09T11:34:33+09:00",
+      "source": "KAYAK",
+      "estimate": true
+    },
+    "shortest": {
+      "kind": "shortest",
+      "price_per_person": 300000,
+      "price_per_person_text": "₩300,000",
+      "price": 1200000,
+      "price_text": "₩1,200,000",
+      "duration_text": "약 2시간 30분",
+      "duration_minutes": 150,
+      "stops_text": "직항 후보",
+      "carrier_text": "KAYAK 검색 확인",
+      "self_transfer": false,
+      "seller_url": "https://www.kayak.co.kr/flights/NYC-ORD/2026-09-26/1adults?sort=duration_a",
+      "synced_at": "2026-08-09T11:34:33+09:00",
+      "source": "KAYAK",
+      "estimate": true
+    },
+    "seller_urls": {
+      "cheapest": "https://www.kayak.co.kr/flights/NYC-ORD/2026-09-26/1adults?sort=price_a",
+      "shortest": "https://www.kayak.co.kr/flights/NYC-ORD/2026-09-26/1adults?sort=duration_a"
+    },
+    "synced_at": "2026-08-09T11:34:33+09:00",
+    "note": "스크래핑 실패 시 추정가 · KAYAK에서 확정"
+  },
+  {
+    "depart_date": "2026-09-27",
+    "route": "nyc_chi",
+    "route_label": "뉴욕 → 시카고",
+    "cheapest": {
+      "kind": "cheapest",
+      "price_per_person": 300000,
+      "price_per_person_text": "₩300,000",
+      "price": 1200000,
+      "price_text": "₩1,200,000",
+      "duration_text": "약 2시간 30분",
+      "duration_minutes": 150,
+      "stops_text": "직항 후보",
+      "carrier_text": "KAYAK 검색 확인",
+      "self_transfer": false,
+      "seller_url": "https://www.kayak.co.kr/flights/NYC-ORD/2026-09-27/1adults?sort=price_a",
+      "synced_at": "2026-08-09T11:35:22+09:00",
+      "source": "KAYAK",
+      "estimate": true
+    },
+    "shortest": {
+      "kind": "shortest",
+      "price_per_person": 300000,
+      "price_per_person_text": "₩300,000",
+      "price": 1200000,
+      "price_text": "₩1,200,000",
+      "duration_text": "약 2시간 30분",
+      "duration_minutes": 150,
+      "stops_text": "직항 후보",
+      "carrier_text": "KAYAK 검색 확인",
+      "self_transfer": false,
+      "seller_url": "https://www.kayak.co.kr/flights/NYC-ORD/2026-09-27/1adults?sort=duration_a",
+      "synced_at": "2026-08-09T11:35:22+09:00",
+      "source": "KAYAK",
+      "estimate": true
+    },
+    "seller_urls": {
+      "cheapest": "https://www.kayak.co.kr/flights/NYC-ORD/2026-09-27/1adults?sort=price_a",
+      "shortest": "https://www.kayak.co.kr/flights/NYC-ORD/2026-09-27/1adults?sort=duration_a"
+    },
+    "synced_at": "2026-08-09T11:35:22+09:00",
+    "note": "스크래핑 실패 시 추정가 · KAYAK에서 확정"
+  }
+]
