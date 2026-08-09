@@ -273,7 +273,7 @@ def scrape_discover(page, drop: str) -> list[dict]:
     cars = keep_gas_and_ev(cars)
     print(f"  found {len(cars)} (ev={sum(1 for c in cars if c.get('electric'))})")
     for c in cars[:3]:
-        print(f"  - {c['price_text']} | {c['category']} | {c['model']}")
+        print(f"  - {c.get('price'):,} KRW | {c['category']} | {c['model']}")
     return cars
 
 
@@ -354,7 +354,7 @@ def scrape_rentalcars(page, drop: str) -> list[dict]:
     cars = keep_gas_and_ev(cars)
     print(f"  found {len(cars)} (ev={sum(1 for c in cars if c.get('electric'))})")
     for c in cars[:3]:
-        print(f"  - {c['price_text']} | {c['category']} | {c['model']}")
+        print(f"  - {c.get('price'):,} KRW | {c['category']} | {c['model']}")
     return cars
 
 
@@ -471,9 +471,10 @@ def main() -> int:
         bits = []
         for key, label in (("discover", "DC"), ("rentalcars", "RC"), ("kayak", "KY")):
             c = day["sources"][key].get("cheapest") or {}
-            bits.append(f"{label}:{c.get('price_text', '-')}")
+            price = c.get("price")
+            bits.append(f"{label}:{price:,}" if price else f"{label}:-")
         ev_n = sum(1 for c in day["cars"] if c.get("electric") or c.get("category") == "전기차")
-        print(day["dropoff_date"], " · ".join(bits), f"· EV:{ev_n}")
+        print(day["dropoff_date"], " | ".join(bits), f"| EV:{ev_n}")
     ok = any(
         (d["sources"]["discover"]["cars"] or d["sources"]["rentalcars"]["cars"] or d["sources"]["kayak"]["cars"])
         for d in results

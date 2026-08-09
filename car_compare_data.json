@@ -4,611 +4,2108 @@
     "dropoff_date": "2026-10-08",
     "pickup_location": "ORD",
     "dropoff_location": "ORD",
-    "pickup_time": "14:00",
-    "dropoff_time": "10:00",
-    "route_note": "시카고 ORD 공항 인수·반납 · 뉴욕 체류 중 렌트 없음",
     "nights": 11,
     "sources": {
       "discover": {
         "label": "DiscoverCars",
-        "url": "https://www.discovercars.com/usa-illinois/chicago/ord",
-        "cars": [],
-        "cheapest": null,
-        "note": "sync_car_compare.py 실행 후 갱신"
+        "url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-HVZ8?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+        "cars": [
+          {
+            "id": "car:discover:2026-10-08:이코노미:Toyota Yaris:675635",
+            "source": "discover",
+            "model": "Toyota Yaris",
+            "category": "이코노미",
+            "price": 675635,
+            "price_text": "₩675,635",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-HVZ8?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+            "synced_at": "2026-08-09T11:36:40+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-08:컴팩트:Nissan Versa:688485",
+            "source": "discover",
+            "model": "Nissan Versa",
+            "category": "컴팩트",
+            "price": 688485,
+            "price_text": "₩688,485",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-XNYZ?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZjYxMzYwZmQ5YzMyNjE5OGZiNDczODM1MmY5MDI1OSJ9",
+            "synced_at": "2026-08-09T11:36:40+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-08:컴팩트:Ford Focus:695000",
+            "source": "discover",
+            "model": "Ford Focus",
+            "category": "컴팩트",
+            "price": 695000,
+            "price_text": "₩695,000",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-FDJU?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+            "synced_at": "2026-08-09T11:36:40+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-08:이코노미:Chevrolet Spark:695000",
+            "source": "discover",
+            "model": "Chevrolet Spark",
+            "category": "이코노미",
+            "price": 695000,
+            "price_text": "₩695,000",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-4KUG?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+            "synced_at": "2026-08-09T11:36:40+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-08:중형:Nissan Rogue:700592",
+            "source": "discover",
+            "model": "Nissan Rogue",
+            "category": "중형",
+            "price": 700592,
+            "price_text": "₩700,592",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-BMT6?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+            "synced_at": "2026-08-09T11:36:40+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-08:컴팩트:Chevrolet Trax:705916",
+            "source": "discover",
+            "model": "Chevrolet Trax",
+            "category": "컴팩트",
+            "price": 705916,
+            "price_text": "₩705,916",
+            "seats": 5,
+            "bags": 2,
+            "doors": 5,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Thrifty",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-LCJY?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJiZGM1MTdiOWM0MjYwYjQ1ZTc0MWY3Y2YzOTdmYTE0NCJ9",
+            "synced_at": "2026-08-09T11:36:40+09:00"
+          }
+        ],
+        "cheapest": {
+          "id": "car:discover:2026-10-08:이코노미:Toyota Yaris:675635",
+          "source": "discover",
+          "model": "Toyota Yaris",
+          "category": "이코노미",
+          "price": 675635,
+          "price_text": "₩675,635",
+          "seats": 4,
+          "bags": 2,
+          "doors": 4,
+          "location": "ORD · DiscoverCars",
+          "options": [
+            "무료 취소"
+          ],
+          "supplier": "Europcar",
+          "electric": false,
+          "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-HVZ8?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+          "synced_at": "2026-08-09T11:36:40+09:00"
+        }
       },
       "rentalcars": {
         "label": "Rentalcars.com",
-        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=14:00&doDate=2026/10/08&doTime=10:00&currency=KRW",
+        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=12:00&doDate=2026/10/08&doTime=12:00&currency=KRW",
         "cars": [],
-        "cheapest": null,
-        "note": "사이트에서 확인"
+        "cheapest": null
       },
       "kayak": {
         "label": "KAYAK",
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-08?sort=price_a",
-        "cars": [
-          {
-            "id": "car:kayak:ORD:2026-10-08:중형:Toyota Corolla:720000",
-            "source": "kayak",
-            "model": "Toyota Corolla 동급",
-            "category": "중형",
-            "price": 720000,
-            "price_text": "₩720,000",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD · 시카고 오헤어",
-            "options": [
-              "자동",
-              "에어컨"
-            ],
-            "electric": false,
-            "pickup_code": "ORD",
-            "dropoff_code": "ORD",
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-08?sort=price_a",
-            "synced_at": "2026-08-09T11:33:40+09:00",
-            "estimate": true
-          }
-        ],
-        "cheapest": {
-          "id": "car:kayak:ORD:2026-10-08:중형:Toyota Corolla:720000",
-          "source": "kayak",
-          "model": "Toyota Corolla 동급",
-          "category": "중형",
-          "price": 720000,
-          "price_text": "₩720,000",
-          "seats": 5,
-          "bags": 2,
-          "doors": 4,
-          "location": "ORD · 시카고 오헤어",
-          "options": [
-            "자동",
-            "에어컨"
-          ],
-          "electric": false,
-          "pickup_code": "ORD",
-          "dropoff_code": "ORD",
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-08?sort=price_a",
-          "synced_at": "2026-08-09T11:33:40+09:00",
-          "estimate": true
-        },
-        "note": "시드 추정가 · sync로 교체 권장"
+        "cars": [],
+        "cheapest": null
       }
     },
     "cars": [
       {
-        "id": "car:kayak:ORD:2026-10-08:중형:Toyota Corolla:720000",
-        "source": "kayak",
-        "model": "Toyota Corolla 동급",
-        "category": "중형",
-        "price": 720000,
-        "price_text": "₩720,000",
+        "id": "car:discover:2026-10-08:이코노미:Toyota Yaris:675635",
+        "source": "discover",
+        "model": "Toyota Yaris",
+        "category": "이코노미",
+        "price": 675635,
+        "price_text": "₩675,635",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-HVZ8?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+        "synced_at": "2026-08-09T11:36:40+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-08:컴팩트:Nissan Versa:688485",
+        "source": "discover",
+        "model": "Nissan Versa",
+        "category": "컴팩트",
+        "price": 688485,
+        "price_text": "₩688,485",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-XNYZ?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZjYxMzYwZmQ5YzMyNjE5OGZiNDczODM1MmY5MDI1OSJ9",
+        "synced_at": "2026-08-09T11:36:40+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-08:컴팩트:Ford Focus:695000",
+        "source": "discover",
+        "model": "Ford Focus",
+        "category": "컴팩트",
+        "price": 695000,
+        "price_text": "₩695,000",
         "seats": 5,
         "bags": 2,
         "doors": 4,
-        "location": "ORD · 시카고 오헤어",
+        "location": "ORD · DiscoverCars",
         "options": [
-          "자동",
-          "에어컨"
+          "무료 취소"
         ],
+        "supplier": "Hertz",
         "electric": false,
-        "pickup_code": "ORD",
-        "dropoff_code": "ORD",
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-08?sort=price_a",
-        "synced_at": "2026-08-09T11:33:40+09:00",
-        "estimate": true
+        "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-FDJU?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+        "synced_at": "2026-08-09T11:36:40+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-08:이코노미:Chevrolet Spark:695000",
+        "source": "discover",
+        "model": "Chevrolet Spark",
+        "category": "이코노미",
+        "price": 695000,
+        "price_text": "₩695,000",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-4KUG?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+        "synced_at": "2026-08-09T11:36:40+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-08:중형:Nissan Rogue:700592",
+        "source": "discover",
+        "model": "Nissan Rogue",
+        "category": "중형",
+        "price": 700592,
+        "price_text": "₩700,592",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-BMT6?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+        "synced_at": "2026-08-09T11:36:40+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-08:컴팩트:Chevrolet Trax:705916",
+        "source": "discover",
+        "model": "Chevrolet Trax",
+        "category": "컴팩트",
+        "price": 705916,
+        "price_text": "₩705,916",
+        "seats": 5,
+        "bags": 2,
+        "doors": 5,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Thrifty",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/e60af007-8d55-45f5-8a7d-262e68647ab8-LCJY?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJiZGM1MTdiOWM0MjYwYjQ1ZTc0MWY3Y2YzOTdmYTE0NCJ9",
+        "synced_at": "2026-08-09T11:36:40+09:00"
       }
     ],
-    "synced_at": "2026-08-09T11:33:40+09:00"
+    "synced_at": "2026-08-09T11:37:01+09:00"
   },
   {
     "pickup_date": "2026-09-27",
     "dropoff_date": "2026-10-09",
     "pickup_location": "ORD",
     "dropoff_location": "ORD",
-    "pickup_time": "14:00",
-    "dropoff_time": "10:00",
-    "route_note": "시카고 ORD 공항 인수·반납 · 뉴욕 체류 중 렌트 없음",
     "nights": 12,
     "sources": {
       "discover": {
         "label": "DiscoverCars",
-        "url": "https://www.discovercars.com/usa-illinois/chicago/ord",
-        "cars": [],
-        "cheapest": null,
-        "note": "sync_car_compare.py 실행 후 갱신"
+        "url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-QNY4?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+        "cars": [
+          {
+            "id": "car:discover:2026-10-09:이코노미:Toyota Yaris:736547",
+            "source": "discover",
+            "model": "Toyota Yaris",
+            "category": "이코노미",
+            "price": 736547,
+            "price_text": "₩736,547",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-QNY4?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+            "synced_at": "2026-08-09T11:37:10+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-09:컴팩트:Chevrolet Trax:744070",
+            "source": "discover",
+            "model": "Chevrolet Trax",
+            "category": "컴팩트",
+            "price": 744070,
+            "price_text": "₩744,070",
+            "seats": 5,
+            "bags": 2,
+            "doors": 5,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Thrifty",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-GQ3B?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI5NDA2ZWQ0ZGM4ZmE4OGY4NDYwZmM5MjQ3YTZmZDdlMiJ9",
+            "synced_at": "2026-08-09T11:37:10+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-09:컴팩트:Nissan Versa:750570",
+            "source": "discover",
+            "model": "Nissan Versa",
+            "category": "컴팩트",
+            "price": 750570,
+            "price_text": "₩750,570",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-PB38?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIxYzczMTQ2MGVjZmNiZjFhMTEzMmFhNjJkMjg2ODNjNCJ9",
+            "synced_at": "2026-08-09T11:37:10+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-09:컴팩트:Ford Focus:758254",
+            "source": "discover",
+            "model": "Ford Focus",
+            "category": "컴팩트",
+            "price": 758254,
+            "price_text": "₩758,254",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-V79H?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+            "synced_at": "2026-08-09T11:37:10+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-09:이코노미:Chevrolet Spark:758254",
+            "source": "discover",
+            "model": "Chevrolet Spark",
+            "category": "이코노미",
+            "price": 758254,
+            "price_text": "₩758,254",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-9HRM?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+            "synced_at": "2026-08-09T11:37:10+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-09:중형:Nissan Rogue:764352",
+            "source": "discover",
+            "model": "Nissan Rogue",
+            "category": "중형",
+            "price": 764352,
+            "price_text": "₩764,352",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-9GU4?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+            "synced_at": "2026-08-09T11:37:10+09:00"
+          }
+        ],
+        "cheapest": {
+          "id": "car:discover:2026-10-09:이코노미:Toyota Yaris:736547",
+          "source": "discover",
+          "model": "Toyota Yaris",
+          "category": "이코노미",
+          "price": 736547,
+          "price_text": "₩736,547",
+          "seats": 4,
+          "bags": 2,
+          "doors": 4,
+          "location": "ORD · DiscoverCars",
+          "options": [
+            "무료 취소"
+          ],
+          "supplier": "Europcar",
+          "electric": false,
+          "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-QNY4?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+          "synced_at": "2026-08-09T11:37:10+09:00"
+        }
       },
       "rentalcars": {
         "label": "Rentalcars.com",
-        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=14:00&doDate=2026/10/09&doTime=10:00&currency=KRW",
+        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=12:00&doDate=2026/10/09&doTime=12:00&currency=KRW",
         "cars": [],
-        "cheapest": null,
-        "note": "사이트에서 확인"
+        "cheapest": null
       },
       "kayak": {
         "label": "KAYAK",
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-09?sort=price_a",
-        "cars": [
-          {
-            "id": "car:kayak:ORD:2026-10-09:중형:Toyota Corolla:760000",
-            "source": "kayak",
-            "model": "Toyota Corolla 동급",
-            "category": "중형",
-            "price": 760000,
-            "price_text": "₩760,000",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD · 시카고 오헤어",
-            "options": [
-              "자동",
-              "에어컨"
-            ],
-            "electric": false,
-            "pickup_code": "ORD",
-            "dropoff_code": "ORD",
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-09?sort=price_a",
-            "synced_at": "2026-08-09T11:33:40+09:00",
-            "estimate": true
-          }
-        ],
-        "cheapest": {
-          "id": "car:kayak:ORD:2026-10-09:중형:Toyota Corolla:760000",
-          "source": "kayak",
-          "model": "Toyota Corolla 동급",
-          "category": "중형",
-          "price": 760000,
-          "price_text": "₩760,000",
-          "seats": 5,
-          "bags": 2,
-          "doors": 4,
-          "location": "ORD · 시카고 오헤어",
-          "options": [
-            "자동",
-            "에어컨"
-          ],
-          "electric": false,
-          "pickup_code": "ORD",
-          "dropoff_code": "ORD",
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-09?sort=price_a",
-          "synced_at": "2026-08-09T11:33:40+09:00",
-          "estimate": true
-        },
-        "note": "시드 추정가 · sync로 교체 권장"
+        "cars": [],
+        "cheapest": null
       }
     },
     "cars": [
       {
-        "id": "car:kayak:ORD:2026-10-09:중형:Toyota Corolla:760000",
-        "source": "kayak",
-        "model": "Toyota Corolla 동급",
-        "category": "중형",
-        "price": 760000,
-        "price_text": "₩760,000",
+        "id": "car:discover:2026-10-09:이코노미:Toyota Yaris:736547",
+        "source": "discover",
+        "model": "Toyota Yaris",
+        "category": "이코노미",
+        "price": 736547,
+        "price_text": "₩736,547",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-QNY4?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+        "synced_at": "2026-08-09T11:37:10+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-09:컴팩트:Chevrolet Trax:744070",
+        "source": "discover",
+        "model": "Chevrolet Trax",
+        "category": "컴팩트",
+        "price": 744070,
+        "price_text": "₩744,070",
+        "seats": 5,
+        "bags": 2,
+        "doors": 5,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Thrifty",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-GQ3B?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI5NDA2ZWQ0ZGM4ZmE4OGY4NDYwZmM5MjQ3YTZmZDdlMiJ9",
+        "synced_at": "2026-08-09T11:37:10+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-09:컴팩트:Nissan Versa:750570",
+        "source": "discover",
+        "model": "Nissan Versa",
+        "category": "컴팩트",
+        "price": 750570,
+        "price_text": "₩750,570",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-PB38?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIxYzczMTQ2MGVjZmNiZjFhMTEzMmFhNjJkMjg2ODNjNCJ9",
+        "synced_at": "2026-08-09T11:37:10+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-09:컴팩트:Ford Focus:758254",
+        "source": "discover",
+        "model": "Ford Focus",
+        "category": "컴팩트",
+        "price": 758254,
+        "price_text": "₩758,254",
         "seats": 5,
         "bags": 2,
         "doors": 4,
-        "location": "ORD · 시카고 오헤어",
+        "location": "ORD · DiscoverCars",
         "options": [
-          "자동",
-          "에어컨"
+          "무료 취소"
         ],
+        "supplier": "Hertz",
         "electric": false,
-        "pickup_code": "ORD",
-        "dropoff_code": "ORD",
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-09?sort=price_a",
-        "synced_at": "2026-08-09T11:33:40+09:00",
-        "estimate": true
+        "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-V79H?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+        "synced_at": "2026-08-09T11:37:10+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-09:이코노미:Chevrolet Spark:758254",
+        "source": "discover",
+        "model": "Chevrolet Spark",
+        "category": "이코노미",
+        "price": 758254,
+        "price_text": "₩758,254",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-9HRM?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+        "synced_at": "2026-08-09T11:37:10+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-09:중형:Nissan Rogue:764352",
+        "source": "discover",
+        "model": "Nissan Rogue",
+        "category": "중형",
+        "price": 764352,
+        "price_text": "₩764,352",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/8c37fac7-d550-4b95-bfe0-3b607baf5bec-9GU4?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0wOVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+        "synced_at": "2026-08-09T11:37:10+09:00"
       }
     ],
-    "synced_at": "2026-08-09T11:33:40+09:00"
+    "synced_at": "2026-08-09T11:37:31+09:00"
   },
   {
     "pickup_date": "2026-09-27",
     "dropoff_date": "2026-10-10",
     "pickup_location": "ORD",
     "dropoff_location": "ORD",
-    "pickup_time": "14:00",
-    "dropoff_time": "10:00",
-    "route_note": "시카고 ORD 공항 인수·반납 · 뉴욕 체류 중 렌트 없음",
     "nights": 13,
     "sources": {
       "discover": {
         "label": "DiscoverCars",
-        "url": "https://www.discovercars.com/usa-illinois/chicago/ord",
-        "cars": [],
-        "cheapest": null,
-        "note": "sync_car_compare.py 실행 후 갱신"
+        "url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-AKAJ?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+        "cars": [
+          {
+            "id": "car:discover:2026-10-10:이코노미:Toyota Yaris:797476",
+            "source": "discover",
+            "model": "Toyota Yaris",
+            "category": "이코노미",
+            "price": 797476,
+            "price_text": "₩797,476",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-AKAJ?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+            "synced_at": "2026-08-09T11:37:39+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-10:컴팩트:Nissan Versa:812638",
+            "source": "discover",
+            "model": "Nissan Versa",
+            "category": "컴팩트",
+            "price": 812638,
+            "price_text": "₩812,638",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-PTV2?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZjYxMzYwZmQ5YzMyNjE5OGZiNDczODM1MmY5MDI1OSJ9",
+            "synced_at": "2026-08-09T11:37:39+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-10:컴팩트:Ford Focus:821507",
+            "source": "discover",
+            "model": "Ford Focus",
+            "category": "컴팩트",
+            "price": 821507,
+            "price_text": "₩821,507",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-KCWB?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+            "synced_at": "2026-08-09T11:37:39+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-10:이코노미:Chevrolet Spark:821507",
+            "source": "discover",
+            "model": "Chevrolet Spark",
+            "category": "이코노미",
+            "price": 821507,
+            "price_text": "₩821,507",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-HAT5?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+            "synced_at": "2026-08-09T11:37:39+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-10:중형:Nissan Rogue:828113",
+            "source": "discover",
+            "model": "Nissan Rogue",
+            "category": "중형",
+            "price": 828113,
+            "price_text": "₩828,113",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-CC4L?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+            "synced_at": "2026-08-09T11:37:39+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-10:컴팩트:Chevrolet Trax:833930",
+            "source": "discover",
+            "model": "Chevrolet Trax",
+            "category": "컴팩트",
+            "price": 833930,
+            "price_text": "₩833,930",
+            "seats": 5,
+            "bags": 2,
+            "doors": 5,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Thrifty",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-JJNB?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJkNTI3OGMwNmE2MjMzNjQ0N2M2MTlkZTcyYmFlM2FhMyJ9",
+            "synced_at": "2026-08-09T11:37:39+09:00"
+          }
+        ],
+        "cheapest": {
+          "id": "car:discover:2026-10-10:이코노미:Toyota Yaris:797476",
+          "source": "discover",
+          "model": "Toyota Yaris",
+          "category": "이코노미",
+          "price": 797476,
+          "price_text": "₩797,476",
+          "seats": 4,
+          "bags": 2,
+          "doors": 4,
+          "location": "ORD · DiscoverCars",
+          "options": [
+            "무료 취소"
+          ],
+          "supplier": "Europcar",
+          "electric": false,
+          "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-AKAJ?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+          "synced_at": "2026-08-09T11:37:39+09:00"
+        }
       },
       "rentalcars": {
         "label": "Rentalcars.com",
-        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=14:00&doDate=2026/10/10&doTime=10:00&currency=KRW",
+        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=12:00&doDate=2026/10/10&doTime=12:00&currency=KRW",
         "cars": [],
-        "cheapest": null,
-        "note": "사이트에서 확인"
+        "cheapest": null
       },
       "kayak": {
         "label": "KAYAK",
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-10?sort=price_a",
         "cars": [
           {
-            "id": "car:kayak:ORD:2026-10-10:중형:Toyota Corolla:800000",
+            "id": "car:kayak:2026-10-10:스탠다드 SUV:쉐보레 Blazer:948496",
             "source": "kayak",
-            "model": "Toyota Corolla 동급",
-            "category": "중형",
-            "price": 800000,
-            "price_text": "₩800,000",
+            "model": "쉐보레 Blazer",
+            "category": "스탠다드 SUV",
+            "price": 948496,
+            "price_text": "₩948,496",
             "seats": 5,
             "bags": 2,
             "doors": 4,
-            "location": "ORD · 시카고 오헤어",
+            "location": "EWR: 뉴어크 리버티 국제공항",
             "options": [
-              "자동",
-              "에어컨"
+              "5인 이상"
             ],
+            "supplier": "",
             "electric": false,
-            "pickup_code": "ORD",
-            "dropoff_code": "ORD",
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-10?sort=price_a",
-            "synced_at": "2026-08-09T11:33:40+09:00",
-            "estimate": true
+            "seller_url": "https://www.kayak.co.kr/cars/EWR-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-09T11:36:23+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:미니밴:크라이슬러 Pacifica:1079728",
+            "source": "kayak",
+            "model": "크라이슬러 Pacifica",
+            "category": "미니밴",
+            "price": 1079728,
+            "price_text": "₩1,079,728",
+            "seats": 7,
+            "bags": 4,
+            "doors": 4,
+            "location": "EWR: 뉴어크 리버티 국제공항",
+            "options": [
+              "5인 이상",
+              "또는 동급 미니밴(인수 시 Odyssey/Sienna/Carnival 등 대체 가능)",
+              "7인승"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/EWR-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-09T11:36:23+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:이코노미:쉐보레 Spark:1101824",
+            "source": "kayak",
+            "model": "쉐보레 Spark",
+            "category": "이코노미",
+            "price": 1101824,
+            "price_text": "₩1,101,824",
+            "seats": 4,
+            "bags": 1,
+            "doors": 4,
+            "location": "148 W 83rd St, 뉴욕",
+            "options": [],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/NYC-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-09T11:36:23+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:컴팩트:포드 Focus:1110752",
+            "source": "kayak",
+            "model": "포드 Focus",
+            "category": "컴팩트",
+            "price": 1110752,
+            "price_text": "₩1,110,752",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "148 W 83rd St, 뉴욕",
+            "options": [
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/NYC-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-09T11:36:23+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:중형:기아 K4:1119664",
+            "source": "kayak",
+            "model": "기아 K4",
+            "category": "중형",
+            "price": 1119664,
+            "price_text": "₩1,119,664",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "148 W 83rd St, 뉴욕",
+            "options": [
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/NYC-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-09T11:36:23+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:풀사이즈:쉐보레 Malibu:1131536",
+            "source": "kayak",
+            "model": "쉐보레 Malibu",
+            "category": "풀사이즈",
+            "price": 1131536,
+            "price_text": "₩1,131,536",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "148 W 83rd St, 뉴욕",
+            "options": [
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": false,
+            "seller_url": "https://www.kayak.co.kr/cars/NYC-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+            "synced_at": "2026-08-09T11:36:23+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1205280",
+            "source": "kayak",
+            "model": "전기차 (업체 배정)",
+            "category": "전기차",
+            "price": 1205280,
+            "price_text": "₩1,205,280",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "LGA: 뉴욕 라과디아공항",
+            "options": [
+              "Fully electric",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": true,
+            "seller_url": "https://www.kayak.co.kr/cars/LGA-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+            "synced_at": "2026-08-09T11:36:23+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:전기차:기아 니로:1320352",
+            "source": "kayak",
+            "model": "기아 니로",
+            "category": "전기차",
+            "price": 1320352,
+            "price_text": "₩1,320,352",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "LGA: 뉴욕 라과디아공항",
+            "options": [
+              "Fully electric",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": true,
+            "seller_url": "https://www.kayak.co.kr/cars/LGA-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+            "synced_at": "2026-08-09T11:36:23+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1332208",
+            "source": "kayak",
+            "model": "전기차 (업체 배정)",
+            "category": "전기차",
+            "price": 1332208,
+            "price_text": "₩1,332,208",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "LGA: 뉴욕 라과디아공항",
+            "options": [
+              "Fully electric"
+            ],
+            "supplier": "",
+            "electric": true,
+            "seller_url": "https://www.kayak.co.kr/cars/LGA-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+            "synced_at": "2026-08-09T11:36:23+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1717632",
+            "source": "kayak",
+            "model": "전기차 (업체 배정)",
+            "category": "전기차",
+            "price": 1717632,
+            "price_text": "₩1,717,632",
+            "seats": 4,
+            "bags": 1,
+            "doors": 2,
+            "location": "LGA: 뉴욕 라과디아공항",
+            "options": [
+              "Fully electric",
+              "무료 취소"
+            ],
+            "supplier": "",
+            "electric": true,
+            "seller_url": "https://www.kayak.co.kr/cars/LGA-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+            "synced_at": "2026-08-09T11:36:23+09:00"
+          },
+          {
+            "id": "car:kayak:2026-10-10:전기차:쉐보레 Bolt EUV:1796832",
+            "source": "kayak",
+            "model": "쉐보레 Bolt EUV",
+            "category": "전기차",
+            "price": 1796832,
+            "price_text": "₩1,796,832",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "LGA: 뉴욕 라과디아공항",
+            "options": [
+              "Fully electric",
+              "무료 취소",
+              "5인 이상"
+            ],
+            "supplier": "",
+            "electric": true,
+            "seller_url": "https://www.kayak.co.kr/cars/LGA-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+            "synced_at": "2026-08-09T11:36:23+09:00"
           }
         ],
         "cheapest": {
-          "id": "car:kayak:ORD:2026-10-10:중형:Toyota Corolla:800000",
+          "id": "car:kayak:2026-10-10:스탠다드 SUV:쉐보레 Blazer:948496",
           "source": "kayak",
-          "model": "Toyota Corolla 동급",
-          "category": "중형",
-          "price": 800000,
-          "price_text": "₩800,000",
+          "model": "쉐보레 Blazer",
+          "category": "스탠다드 SUV",
+          "price": 948496,
+          "price_text": "₩948,496",
           "seats": 5,
           "bags": 2,
           "doors": 4,
-          "location": "ORD · 시카고 오헤어",
+          "location": "EWR: 뉴어크 리버티 국제공항",
           "options": [
-            "자동",
-            "에어컨"
+            "5인 이상"
           ],
+          "supplier": "",
           "electric": false,
-          "pickup_code": "ORD",
-          "dropoff_code": "ORD",
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-10?sort=price_a",
-          "synced_at": "2026-08-09T11:33:40+09:00",
-          "estimate": true
-        },
-        "note": "시드 추정가 · sync로 교체 권장"
+          "seller_url": "https://www.kayak.co.kr/cars/EWR-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+          "synced_at": "2026-08-09T11:36:23+09:00"
+        }
       }
     },
     "cars": [
       {
-        "id": "car:kayak:ORD:2026-10-10:중형:Toyota Corolla:800000",
+        "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1205280",
         "source": "kayak",
-        "model": "Toyota Corolla 동급",
-        "category": "중형",
-        "price": 800000,
-        "price_text": "₩800,000",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1205280,
+        "price_text": "₩1,205,280",
         "seats": 5,
         "bags": 2,
         "doors": 4,
-        "location": "ORD · 시카고 오헤어",
+        "location": "LGA: 뉴욕 라과디아공항",
         "options": [
-          "자동",
-          "에어컨"
+          "Fully electric",
+          "5인 이상"
         ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/LGA-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-09T11:36:23+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:기아 니로:1320352",
+        "source": "kayak",
+        "model": "기아 니로",
+        "category": "전기차",
+        "price": 1320352,
+        "price_text": "₩1,320,352",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "LGA: 뉴욕 라과디아공항",
+        "options": [
+          "Fully electric",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/LGA-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-09T11:36:23+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1332208",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1332208,
+        "price_text": "₩1,332,208",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "LGA: 뉴욕 라과디아공항",
+        "options": [
+          "Fully electric"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/LGA-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-09T11:36:23+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:전기차 (업체 배정):1717632",
+        "source": "kayak",
+        "model": "전기차 (업체 배정)",
+        "category": "전기차",
+        "price": 1717632,
+        "price_text": "₩1,717,632",
+        "seats": 4,
+        "bags": 1,
+        "doors": 2,
+        "location": "LGA: 뉴욕 라과디아공항",
+        "options": [
+          "Fully electric",
+          "무료 취소"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/LGA-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-09T11:36:23+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:전기차:쉐보레 Bolt EUV:1796832",
+        "source": "kayak",
+        "model": "쉐보레 Bolt EUV",
+        "category": "전기차",
+        "price": 1796832,
+        "price_text": "₩1,796,832",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "LGA: 뉴욕 라과디아공항",
+        "options": [
+          "Fully electric",
+          "무료 취소",
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": true,
+        "seller_url": "https://www.kayak.co.kr/cars/LGA-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a&fs=ecoclass=Electric",
+        "synced_at": "2026-08-09T11:36:23+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-10:이코노미:Toyota Yaris:797476",
+        "source": "discover",
+        "model": "Toyota Yaris",
+        "category": "이코노미",
+        "price": 797476,
+        "price_text": "₩797,476",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
         "electric": false,
-        "pickup_code": "ORD",
-        "dropoff_code": "ORD",
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-10?sort=price_a",
-        "synced_at": "2026-08-09T11:33:40+09:00",
-        "estimate": true
+        "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-AKAJ?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+        "synced_at": "2026-08-09T11:37:39+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-10:컴팩트:Nissan Versa:812638",
+        "source": "discover",
+        "model": "Nissan Versa",
+        "category": "컴팩트",
+        "price": 812638,
+        "price_text": "₩812,638",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-PTV2?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZjYxMzYwZmQ5YzMyNjE5OGZiNDczODM1MmY5MDI1OSJ9",
+        "synced_at": "2026-08-09T11:37:39+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-10:컴팩트:Ford Focus:821507",
+        "source": "discover",
+        "model": "Ford Focus",
+        "category": "컴팩트",
+        "price": 821507,
+        "price_text": "₩821,507",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-KCWB?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+        "synced_at": "2026-08-09T11:37:39+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-10:이코노미:Chevrolet Spark:821507",
+        "source": "discover",
+        "model": "Chevrolet Spark",
+        "category": "이코노미",
+        "price": 821507,
+        "price_text": "₩821,507",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-HAT5?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+        "synced_at": "2026-08-09T11:37:39+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-10:중형:Nissan Rogue:828113",
+        "source": "discover",
+        "model": "Nissan Rogue",
+        "category": "중형",
+        "price": 828113,
+        "price_text": "₩828,113",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-CC4L?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+        "synced_at": "2026-08-09T11:37:39+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-10:컴팩트:Chevrolet Trax:833930",
+        "source": "discover",
+        "model": "Chevrolet Trax",
+        "category": "컴팩트",
+        "price": 833930,
+        "price_text": "₩833,930",
+        "seats": 5,
+        "bags": 2,
+        "doors": 5,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Thrifty",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/77425bfc-060d-4cb9-aaf9-6d8604ed8f3b-JJNB?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMFQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJkNTI3OGMwNmE2MjMzNjQ0N2M2MTlkZTcyYmFlM2FhMyJ9",
+        "synced_at": "2026-08-09T11:37:39+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:스탠다드 SUV:쉐보레 Blazer:948496",
+        "source": "kayak",
+        "model": "쉐보레 Blazer",
+        "category": "스탠다드 SUV",
+        "price": 948496,
+        "price_text": "₩948,496",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "EWR: 뉴어크 리버티 국제공항",
+        "options": [
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": false,
+        "seller_url": "https://www.kayak.co.kr/cars/EWR-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-09T11:36:23+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:미니밴:크라이슬러 Pacifica:1079728",
+        "source": "kayak",
+        "model": "크라이슬러 Pacifica",
+        "category": "미니밴",
+        "price": 1079728,
+        "price_text": "₩1,079,728",
+        "seats": 7,
+        "bags": 4,
+        "doors": 4,
+        "location": "EWR: 뉴어크 리버티 국제공항",
+        "options": [
+          "5인 이상",
+          "또는 동급 미니밴(인수 시 Odyssey/Sienna/Carnival 등 대체 가능)",
+          "7인승"
+        ],
+        "supplier": "",
+        "electric": false,
+        "seller_url": "https://www.kayak.co.kr/cars/EWR-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-09T11:36:23+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:이코노미:쉐보레 Spark:1101824",
+        "source": "kayak",
+        "model": "쉐보레 Spark",
+        "category": "이코노미",
+        "price": 1101824,
+        "price_text": "₩1,101,824",
+        "seats": 4,
+        "bags": 1,
+        "doors": 4,
+        "location": "148 W 83rd St, 뉴욕",
+        "options": [],
+        "supplier": "",
+        "electric": false,
+        "seller_url": "https://www.kayak.co.kr/cars/NYC-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-09T11:36:23+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:컴팩트:포드 Focus:1110752",
+        "source": "kayak",
+        "model": "포드 Focus",
+        "category": "컴팩트",
+        "price": 1110752,
+        "price_text": "₩1,110,752",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "148 W 83rd St, 뉴욕",
+        "options": [
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": false,
+        "seller_url": "https://www.kayak.co.kr/cars/NYC-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-09T11:36:23+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:중형:기아 K4:1119664",
+        "source": "kayak",
+        "model": "기아 K4",
+        "category": "중형",
+        "price": 1119664,
+        "price_text": "₩1,119,664",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "148 W 83rd St, 뉴욕",
+        "options": [
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": false,
+        "seller_url": "https://www.kayak.co.kr/cars/NYC-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-09T11:36:23+09:00"
+      },
+      {
+        "id": "car:kayak:2026-10-10:풀사이즈:쉐보레 Malibu:1131536",
+        "source": "kayak",
+        "model": "쉐보레 Malibu",
+        "category": "풀사이즈",
+        "price": 1131536,
+        "price_text": "₩1,131,536",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "148 W 83rd St, 뉴욕",
+        "options": [
+          "5인 이상"
+        ],
+        "supplier": "",
+        "electric": false,
+        "seller_url": "https://www.kayak.co.kr/cars/NYC-a1800/ORD-a1000/2026-09-24/2026-10-10?sort=price_a",
+        "synced_at": "2026-08-09T11:36:23+09:00"
       }
     ],
-    "synced_at": "2026-08-09T11:33:40+09:00"
+    "synced_at": "2026-08-09T11:38:00+09:00"
   },
   {
     "pickup_date": "2026-09-27",
     "dropoff_date": "2026-10-11",
     "pickup_location": "ORD",
     "dropoff_location": "ORD",
-    "pickup_time": "14:00",
-    "dropoff_time": "10:00",
-    "route_note": "시카고 ORD 공항 인수·반납 · 뉴욕 체류 중 렌트 없음",
     "nights": 14,
     "sources": {
       "discover": {
         "label": "DiscoverCars",
-        "url": "https://www.discovercars.com/usa-illinois/chicago/ord",
-        "cars": [],
-        "cheapest": null,
-        "note": "sync_car_compare.py 실행 후 갱신"
+        "url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-4ERH?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+        "cars": [
+          {
+            "id": "car:discover:2026-10-11:이코노미:Toyota Yaris:858371",
+            "source": "discover",
+            "model": "Toyota Yaris",
+            "category": "이코노미",
+            "price": 858371,
+            "price_text": "₩858,371",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-4ERH?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+            "synced_at": "2026-08-09T11:38:09+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-11:컴팩트:Nissan Versa:874723",
+            "source": "discover",
+            "model": "Nissan Versa",
+            "category": "컴팩트",
+            "price": 874723,
+            "price_text": "₩874,723",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-RR62?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZjYxMzYwZmQ5YzMyNjE5OGZiNDczODM1MmY5MDI1OSJ9",
+            "synced_at": "2026-08-09T11:38:09+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-11:컴팩트:Ford Focus:883972",
+            "source": "discover",
+            "model": "Ford Focus",
+            "category": "컴팩트",
+            "price": 883972,
+            "price_text": "₩883,972",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-399W?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+            "synced_at": "2026-08-09T11:38:09+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-11:이코노미:Chevrolet Spark:883972",
+            "source": "discover",
+            "model": "Chevrolet Spark",
+            "category": "이코노미",
+            "price": 883972,
+            "price_text": "₩883,972",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-QE8F?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+            "synced_at": "2026-08-09T11:38:09+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-11:중형:Nissan Rogue:891099",
+            "source": "discover",
+            "model": "Nissan Rogue",
+            "category": "중형",
+            "price": 891099,
+            "price_text": "₩891,099",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-GFGP?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+            "synced_at": "2026-08-09T11:38:09+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-11:중형:Kia K4:906113",
+            "source": "discover",
+            "model": "Kia K4",
+            "category": "중형",
+            "price": 906113,
+            "price_text": "₩906,113",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-4K5D?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZTlkMTdmMTZhMmI4MTI4MTY3OGM3ZDhkMDk3MWYwZCJ9",
+            "synced_at": "2026-08-09T11:38:09+09:00"
+          }
+        ],
+        "cheapest": {
+          "id": "car:discover:2026-10-11:이코노미:Toyota Yaris:858371",
+          "source": "discover",
+          "model": "Toyota Yaris",
+          "category": "이코노미",
+          "price": 858371,
+          "price_text": "₩858,371",
+          "seats": 4,
+          "bags": 2,
+          "doors": 4,
+          "location": "ORD · DiscoverCars",
+          "options": [
+            "무료 취소"
+          ],
+          "supplier": "Europcar",
+          "electric": false,
+          "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-4ERH?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+          "synced_at": "2026-08-09T11:38:09+09:00"
+        }
       },
       "rentalcars": {
         "label": "Rentalcars.com",
-        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=14:00&doDate=2026/10/11&doTime=10:00&currency=KRW",
+        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=12:00&doDate=2026/10/11&doTime=12:00&currency=KRW",
         "cars": [],
-        "cheapest": null,
-        "note": "사이트에서 확인"
+        "cheapest": null
       },
       "kayak": {
         "label": "KAYAK",
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-11?sort=price_a",
-        "cars": [
-          {
-            "id": "car:kayak:ORD:2026-10-11:중형:Toyota Corolla:850000",
-            "source": "kayak",
-            "model": "Toyota Corolla 동급",
-            "category": "중형",
-            "price": 850000,
-            "price_text": "₩850,000",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD · 시카고 오헤어",
-            "options": [
-              "자동",
-              "에어컨"
-            ],
-            "electric": false,
-            "pickup_code": "ORD",
-            "dropoff_code": "ORD",
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-11?sort=price_a",
-            "synced_at": "2026-08-09T11:33:40+09:00",
-            "estimate": true
-          }
-        ],
-        "cheapest": {
-          "id": "car:kayak:ORD:2026-10-11:중형:Toyota Corolla:850000",
-          "source": "kayak",
-          "model": "Toyota Corolla 동급",
-          "category": "중형",
-          "price": 850000,
-          "price_text": "₩850,000",
-          "seats": 5,
-          "bags": 2,
-          "doors": 4,
-          "location": "ORD · 시카고 오헤어",
-          "options": [
-            "자동",
-            "에어컨"
-          ],
-          "electric": false,
-          "pickup_code": "ORD",
-          "dropoff_code": "ORD",
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-11?sort=price_a",
-          "synced_at": "2026-08-09T11:33:40+09:00",
-          "estimate": true
-        },
-        "note": "시드 추정가 · sync로 교체 권장"
+        "cars": [],
+        "cheapest": null
       }
     },
     "cars": [
       {
-        "id": "car:kayak:ORD:2026-10-11:중형:Toyota Corolla:850000",
-        "source": "kayak",
-        "model": "Toyota Corolla 동급",
-        "category": "중형",
-        "price": 850000,
-        "price_text": "₩850,000",
+        "id": "car:discover:2026-10-11:이코노미:Toyota Yaris:858371",
+        "source": "discover",
+        "model": "Toyota Yaris",
+        "category": "이코노미",
+        "price": 858371,
+        "price_text": "₩858,371",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-4ERH?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+        "synced_at": "2026-08-09T11:38:09+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-11:컴팩트:Nissan Versa:874723",
+        "source": "discover",
+        "model": "Nissan Versa",
+        "category": "컴팩트",
+        "price": 874723,
+        "price_text": "₩874,723",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-RR62?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZjYxMzYwZmQ5YzMyNjE5OGZiNDczODM1MmY5MDI1OSJ9",
+        "synced_at": "2026-08-09T11:38:09+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-11:컴팩트:Ford Focus:883972",
+        "source": "discover",
+        "model": "Ford Focus",
+        "category": "컴팩트",
+        "price": 883972,
+        "price_text": "₩883,972",
         "seats": 5,
         "bags": 2,
         "doors": 4,
-        "location": "ORD · 시카고 오헤어",
+        "location": "ORD · DiscoverCars",
         "options": [
-          "자동",
-          "에어컨"
+          "무료 취소"
         ],
+        "supplier": "Hertz",
         "electric": false,
-        "pickup_code": "ORD",
-        "dropoff_code": "ORD",
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-11?sort=price_a",
-        "synced_at": "2026-08-09T11:33:40+09:00",
-        "estimate": true
+        "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-399W?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+        "synced_at": "2026-08-09T11:38:09+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-11:이코노미:Chevrolet Spark:883972",
+        "source": "discover",
+        "model": "Chevrolet Spark",
+        "category": "이코노미",
+        "price": 883972,
+        "price_text": "₩883,972",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-QE8F?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+        "synced_at": "2026-08-09T11:38:09+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-11:중형:Nissan Rogue:891099",
+        "source": "discover",
+        "model": "Nissan Rogue",
+        "category": "중형",
+        "price": 891099,
+        "price_text": "₩891,099",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-GFGP?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+        "synced_at": "2026-08-09T11:38:09+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-11:중형:Kia K4:906113",
+        "source": "discover",
+        "model": "Kia K4",
+        "category": "중형",
+        "price": 906113,
+        "price_text": "₩906,113",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/4cfa3134-a10b-48d8-88af-4d3c67ce50e1-4K5D?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMVQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZTlkMTdmMTZhMmI4MTI4MTY3OGM3ZDhkMDk3MWYwZCJ9",
+        "synced_at": "2026-08-09T11:38:09+09:00"
       }
     ],
-    "synced_at": "2026-08-09T11:33:40+09:00"
+    "synced_at": "2026-08-09T11:38:30+09:00"
   },
   {
     "pickup_date": "2026-09-27",
     "dropoff_date": "2026-10-12",
     "pickup_location": "ORD",
     "dropoff_location": "ORD",
-    "pickup_time": "14:00",
-    "dropoff_time": "10:00",
-    "route_note": "시카고 ORD 공항 인수·반납 · 뉴욕 체류 중 렌트 없음",
     "nights": 15,
     "sources": {
       "discover": {
         "label": "DiscoverCars",
-        "url": "https://www.discovercars.com/usa-illinois/chicago/ord",
-        "cars": [],
-        "cheapest": null,
-        "note": "sync_car_compare.py 실행 후 갱신"
+        "url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-TXN8?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJjZDkzOGE1MGI0NDE4ZDIwZTBlNTljMDM3ZGYzZjMwMSJ9",
+        "cars": [
+          {
+            "id": "car:discover:2026-10-12:이코노미:Toyota Yaris:919283",
+            "source": "discover",
+            "model": "Toyota Yaris",
+            "category": "이코노미",
+            "price": 919283,
+            "price_text": "₩919,283",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-TXN8?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJjZDkzOGE1MGI0NDE4ZDIwZTBlNTljMDM3ZGYzZjMwMSJ9",
+            "synced_at": "2026-08-09T11:38:39+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-12:컴팩트:Nissan Versa:936808",
+            "source": "discover",
+            "model": "Nissan Versa",
+            "category": "컴팩트",
+            "price": 936808,
+            "price_text": "₩936,808",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-E7HM?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZjYxMzYwZmQ5YzMyNjE5OGZiNDczODM1MmY5MDI1OSJ9",
+            "synced_at": "2026-08-09T11:38:39+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-12:컴팩트:Chevrolet Trax:937380",
+            "source": "discover",
+            "model": "Chevrolet Trax",
+            "category": "컴팩트",
+            "price": 937380,
+            "price_text": "₩937,380",
+            "seats": 5,
+            "bags": 2,
+            "doors": 5,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Thrifty",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-UTBL?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI0NTNkNzBmNTQ5ZDNmNjUwMzUzM2E4NzdiMTBjYzg4ZiJ9",
+            "synced_at": "2026-08-09T11:38:39+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-12:컴팩트:Ford Focus:947225",
+            "source": "discover",
+            "model": "Ford Focus",
+            "category": "컴팩트",
+            "price": 947225,
+            "price_text": "₩947,225",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-HSRM?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+            "synced_at": "2026-08-09T11:38:39+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-12:이코노미:Chevrolet Spark:947225",
+            "source": "discover",
+            "model": "Chevrolet Spark",
+            "category": "이코노미",
+            "price": 947225,
+            "price_text": "₩947,225",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-74TX?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+            "synced_at": "2026-08-09T11:38:39+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-12:중형:Nissan Rogue:954859",
+            "source": "discover",
+            "model": "Nissan Rogue",
+            "category": "중형",
+            "price": 954859,
+            "price_text": "₩954,859",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-N6R8?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+            "synced_at": "2026-08-09T11:38:39+09:00"
+          }
+        ],
+        "cheapest": {
+          "id": "car:discover:2026-10-12:이코노미:Toyota Yaris:919283",
+          "source": "discover",
+          "model": "Toyota Yaris",
+          "category": "이코노미",
+          "price": 919283,
+          "price_text": "₩919,283",
+          "seats": 4,
+          "bags": 2,
+          "doors": 4,
+          "location": "ORD · DiscoverCars",
+          "options": [
+            "무료 취소"
+          ],
+          "supplier": "Europcar",
+          "electric": false,
+          "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-TXN8?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJjZDkzOGE1MGI0NDE4ZDIwZTBlNTljMDM3ZGYzZjMwMSJ9",
+          "synced_at": "2026-08-09T11:38:39+09:00"
+        }
       },
       "rentalcars": {
         "label": "Rentalcars.com",
-        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=14:00&doDate=2026/10/12&doTime=10:00&currency=KRW",
+        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=12:00&doDate=2026/10/12&doTime=12:00&currency=KRW",
         "cars": [],
-        "cheapest": null,
-        "note": "사이트에서 확인"
+        "cheapest": null
       },
       "kayak": {
         "label": "KAYAK",
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-12?sort=price_a",
-        "cars": [
-          {
-            "id": "car:kayak:ORD:2026-10-12:중형:Toyota Corolla:900000",
-            "source": "kayak",
-            "model": "Toyota Corolla 동급",
-            "category": "중형",
-            "price": 900000,
-            "price_text": "₩900,000",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD · 시카고 오헤어",
-            "options": [
-              "자동",
-              "에어컨"
-            ],
-            "electric": false,
-            "pickup_code": "ORD",
-            "dropoff_code": "ORD",
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-12?sort=price_a",
-            "synced_at": "2026-08-09T11:33:40+09:00",
-            "estimate": true
-          }
-        ],
-        "cheapest": {
-          "id": "car:kayak:ORD:2026-10-12:중형:Toyota Corolla:900000",
-          "source": "kayak",
-          "model": "Toyota Corolla 동급",
-          "category": "중형",
-          "price": 900000,
-          "price_text": "₩900,000",
-          "seats": 5,
-          "bags": 2,
-          "doors": 4,
-          "location": "ORD · 시카고 오헤어",
-          "options": [
-            "자동",
-            "에어컨"
-          ],
-          "electric": false,
-          "pickup_code": "ORD",
-          "dropoff_code": "ORD",
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-12?sort=price_a",
-          "synced_at": "2026-08-09T11:33:40+09:00",
-          "estimate": true
-        },
-        "note": "시드 추정가 · sync로 교체 권장"
+        "cars": [],
+        "cheapest": null
       }
     },
     "cars": [
       {
-        "id": "car:kayak:ORD:2026-10-12:중형:Toyota Corolla:900000",
-        "source": "kayak",
-        "model": "Toyota Corolla 동급",
-        "category": "중형",
-        "price": 900000,
-        "price_text": "₩900,000",
+        "id": "car:discover:2026-10-12:이코노미:Toyota Yaris:919283",
+        "source": "discover",
+        "model": "Toyota Yaris",
+        "category": "이코노미",
+        "price": 919283,
+        "price_text": "₩919,283",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-TXN8?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJjZDkzOGE1MGI0NDE4ZDIwZTBlNTljMDM3ZGYzZjMwMSJ9",
+        "synced_at": "2026-08-09T11:38:39+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-12:컴팩트:Nissan Versa:936808",
+        "source": "discover",
+        "model": "Nissan Versa",
+        "category": "컴팩트",
+        "price": 936808,
+        "price_text": "₩936,808",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-E7HM?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZjYxMzYwZmQ5YzMyNjE5OGZiNDczODM1MmY5MDI1OSJ9",
+        "synced_at": "2026-08-09T11:38:39+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-12:컴팩트:Chevrolet Trax:937380",
+        "source": "discover",
+        "model": "Chevrolet Trax",
+        "category": "컴팩트",
+        "price": 937380,
+        "price_text": "₩937,380",
+        "seats": 5,
+        "bags": 2,
+        "doors": 5,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Thrifty",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-UTBL?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI0NTNkNzBmNTQ5ZDNmNjUwMzUzM2E4NzdiMTBjYzg4ZiJ9",
+        "synced_at": "2026-08-09T11:38:39+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-12:컴팩트:Ford Focus:947225",
+        "source": "discover",
+        "model": "Ford Focus",
+        "category": "컴팩트",
+        "price": 947225,
+        "price_text": "₩947,225",
         "seats": 5,
         "bags": 2,
         "doors": 4,
-        "location": "ORD · 시카고 오헤어",
+        "location": "ORD · DiscoverCars",
         "options": [
-          "자동",
-          "에어컨"
+          "무료 취소"
         ],
+        "supplier": "Hertz",
         "electric": false,
-        "pickup_code": "ORD",
-        "dropoff_code": "ORD",
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-12?sort=price_a",
-        "synced_at": "2026-08-09T11:33:40+09:00",
-        "estimate": true
+        "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-HSRM?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+        "synced_at": "2026-08-09T11:38:39+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-12:이코노미:Chevrolet Spark:947225",
+        "source": "discover",
+        "model": "Chevrolet Spark",
+        "category": "이코노미",
+        "price": 947225,
+        "price_text": "₩947,225",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-74TX?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+        "synced_at": "2026-08-09T11:38:39+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-12:중형:Nissan Rogue:954859",
+        "source": "discover",
+        "model": "Nissan Rogue",
+        "category": "중형",
+        "price": 954859,
+        "price_text": "₩954,859",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/4c954bbd-11d6-4acb-bd35-1f74bdcd7d36-N6R8?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xMlQxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+        "synced_at": "2026-08-09T11:38:39+09:00"
       }
     ],
-    "synced_at": "2026-08-09T11:33:40+09:00"
+    "synced_at": "2026-08-09T11:39:00+09:00"
   },
   {
     "pickup_date": "2026-09-27",
     "dropoff_date": "2026-10-13",
     "pickup_location": "ORD",
     "dropoff_location": "ORD",
-    "pickup_time": "14:00",
-    "dropoff_time": "10:00",
-    "route_note": "시카고 ORD 공항 인수·반납 · 뉴욕 체류 중 렌트 없음",
     "nights": 16,
     "sources": {
       "discover": {
         "label": "DiscoverCars",
-        "url": "https://www.discovercars.com/usa-illinois/chicago/ord",
-        "cars": [],
-        "cheapest": null,
-        "note": "sync_car_compare.py 실행 후 갱신"
+        "url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-4T8J?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+        "cars": [
+          {
+            "id": "car:discover:2026-10-13:이코노미:Toyota Yaris:980195",
+            "source": "discover",
+            "model": "Toyota Yaris",
+            "category": "이코노미",
+            "price": 980195,
+            "price_text": "₩980,195",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-4T8J?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+            "synced_at": "2026-08-09T11:39:10+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-13:컴팩트:Chevrolet Trax:998563",
+            "source": "discover",
+            "model": "Chevrolet Trax",
+            "category": "컴팩트",
+            "price": 998563,
+            "price_text": "₩998,563",
+            "seats": 5,
+            "bags": 2,
+            "doors": 5,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Thrifty",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-ZV62?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI4ZjMxOGNhNjY4YjdlNWEwMTI4ODYyOWMwZjhhNzdmMiJ9",
+            "synced_at": "2026-08-09T11:39:10+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-13:컴팩트:Nissan Versa:998876",
+            "source": "discover",
+            "model": "Nissan Versa",
+            "category": "컴팩트",
+            "price": 998876,
+            "price_text": "₩998,876",
+            "seats": 5,
+            "bags": 3,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Europcar",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-BNMJ?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZjYxMzYwZmQ5YzMyNjE5OGZiNDczODM1MmY5MDI1OSJ9",
+            "synced_at": "2026-08-09T11:39:10+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-13:컴팩트:Ford Focus:1010479",
+            "source": "discover",
+            "model": "Ford Focus",
+            "category": "컴팩트",
+            "price": 1010479,
+            "price_text": "₩1,010,479",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-6UJK?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+            "synced_at": "2026-08-09T11:39:10+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-13:이코노미:Chevrolet Spark:1010479",
+            "source": "discover",
+            "model": "Chevrolet Spark",
+            "category": "이코노미",
+            "price": 1010479,
+            "price_text": "₩1,010,479",
+            "seats": 4,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-T9VZ?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+            "synced_at": "2026-08-09T11:39:10+09:00"
+          },
+          {
+            "id": "car:discover:2026-10-13:중형:Nissan Rogue:1018620",
+            "source": "discover",
+            "model": "Nissan Rogue",
+            "category": "중형",
+            "price": 1018620,
+            "price_text": "₩1,018,620",
+            "seats": 5,
+            "bags": 2,
+            "doors": 4,
+            "location": "ORD · DiscoverCars",
+            "options": [
+              "무료 취소"
+            ],
+            "supplier": "Hertz",
+            "electric": false,
+            "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-J23L?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+            "synced_at": "2026-08-09T11:39:10+09:00"
+          }
+        ],
+        "cheapest": {
+          "id": "car:discover:2026-10-13:이코노미:Toyota Yaris:980195",
+          "source": "discover",
+          "model": "Toyota Yaris",
+          "category": "이코노미",
+          "price": 980195,
+          "price_text": "₩980,195",
+          "seats": 4,
+          "bags": 2,
+          "doors": 4,
+          "location": "ORD · DiscoverCars",
+          "options": [
+            "무료 취소"
+          ],
+          "supplier": "Europcar",
+          "electric": false,
+          "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-4T8J?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+          "synced_at": "2026-08-09T11:39:10+09:00"
+        }
       },
       "rentalcars": {
         "label": "Rentalcars.com",
-        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=14:00&doDate=2026/10/13&doTime=10:00&currency=KRW",
+        "url": "https://www.rentalcars.com/SearchResults.do?locationCode=ORD&driversAge=30&puDate=2026/09/27&puTime=12:00&doDate=2026/10/13&doTime=12:00&currency=KRW",
         "cars": [],
-        "cheapest": null,
-        "note": "사이트에서 확인"
+        "cheapest": null
       },
       "kayak": {
         "label": "KAYAK",
         "url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-13?sort=price_a",
-        "cars": [
-          {
-            "id": "car:kayak:ORD:2026-10-13:중형:Toyota Corolla:950000",
-            "source": "kayak",
-            "model": "Toyota Corolla 동급",
-            "category": "중형",
-            "price": 950000,
-            "price_text": "₩950,000",
-            "seats": 5,
-            "bags": 2,
-            "doors": 4,
-            "location": "ORD · 시카고 오헤어",
-            "options": [
-              "자동",
-              "에어컨"
-            ],
-            "electric": false,
-            "pickup_code": "ORD",
-            "dropoff_code": "ORD",
-            "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-13?sort=price_a",
-            "synced_at": "2026-08-09T11:33:40+09:00",
-            "estimate": true
-          }
-        ],
-        "cheapest": {
-          "id": "car:kayak:ORD:2026-10-13:중형:Toyota Corolla:950000",
-          "source": "kayak",
-          "model": "Toyota Corolla 동급",
-          "category": "중형",
-          "price": 950000,
-          "price_text": "₩950,000",
-          "seats": 5,
-          "bags": 2,
-          "doors": 4,
-          "location": "ORD · 시카고 오헤어",
-          "options": [
-            "자동",
-            "에어컨"
-          ],
-          "electric": false,
-          "pickup_code": "ORD",
-          "dropoff_code": "ORD",
-          "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-13?sort=price_a",
-          "synced_at": "2026-08-09T11:33:40+09:00",
-          "estimate": true
-        },
-        "note": "시드 추정가 · sync로 교체 권장"
+        "cars": [],
+        "cheapest": null
       }
     },
     "cars": [
       {
-        "id": "car:kayak:ORD:2026-10-13:중형:Toyota Corolla:950000",
-        "source": "kayak",
-        "model": "Toyota Corolla 동급",
-        "category": "중형",
-        "price": 950000,
-        "price_text": "₩950,000",
+        "id": "car:discover:2026-10-13:이코노미:Toyota Yaris:980195",
+        "source": "discover",
+        "model": "Toyota Yaris",
+        "category": "이코노미",
+        "price": 980195,
+        "price_text": "₩980,195",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-4T8J?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiJmZGI1NzgzYmNkYTRmYWNkZDY3MmFhNzhlNzc5ZDZhNiJ9",
+        "synced_at": "2026-08-09T11:39:10+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-13:컴팩트:Chevrolet Trax:998563",
+        "source": "discover",
+        "model": "Chevrolet Trax",
+        "category": "컴팩트",
+        "price": 998563,
+        "price_text": "₩998,563",
+        "seats": 5,
+        "bags": 2,
+        "doors": 5,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Thrifty",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-ZV62?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI4ZjMxOGNhNjY4YjdlNWEwMTI4ODYyOWMwZjhhNzdmMiJ9",
+        "synced_at": "2026-08-09T11:39:10+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-13:컴팩트:Nissan Versa:998876",
+        "source": "discover",
+        "model": "Nissan Versa",
+        "category": "컴팩트",
+        "price": 998876,
+        "price_text": "₩998,876",
+        "seats": 5,
+        "bags": 3,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Europcar",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-BNMJ?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIyZjYxMzYwZmQ5YzMyNjE5OGZiNDczODM1MmY5MDI1OSJ9",
+        "synced_at": "2026-08-09T11:39:10+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-13:컴팩트:Ford Focus:1010479",
+        "source": "discover",
+        "model": "Ford Focus",
+        "category": "컴팩트",
+        "price": 1010479,
+        "price_text": "₩1,010,479",
         "seats": 5,
         "bags": 2,
         "doors": 4,
-        "location": "ORD · 시카고 오헤어",
+        "location": "ORD · DiscoverCars",
         "options": [
-          "자동",
-          "에어컨"
+          "무료 취소"
         ],
+        "supplier": "Hertz",
         "electric": false,
-        "pickup_code": "ORD",
-        "dropoff_code": "ORD",
-        "seller_url": "https://www.kayak.co.kr/cars/ORD/2026-09-27/2026-10-13?sort=price_a",
-        "synced_at": "2026-08-09T11:33:40+09:00",
-        "estimate": true
+        "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-6UJK?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiI3OTNjNmVlZGIwYjI2YjQ4MWFmMWIwZGRjY2M1YjM4YyJ9",
+        "synced_at": "2026-08-09T11:39:10+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-13:이코노미:Chevrolet Spark:1010479",
+        "source": "discover",
+        "model": "Chevrolet Spark",
+        "category": "이코노미",
+        "price": 1010479,
+        "price_text": "₩1,010,479",
+        "seats": 4,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-T9VZ?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIwYWZlOTA5NDE4OWE1NzU3MWQ3M2Y1ODYwNzExZmMwMSJ9",
+        "synced_at": "2026-08-09T11:39:10+09:00"
+      },
+      {
+        "id": "car:discover:2026-10-13:중형:Nissan Rogue:1018620",
+        "source": "discover",
+        "model": "Nissan Rogue",
+        "category": "중형",
+        "price": 1018620,
+        "price_text": "₩1,018,620",
+        "seats": 5,
+        "bags": 2,
+        "doors": 4,
+        "location": "ORD · DiscoverCars",
+        "options": [
+          "무료 취소"
+        ],
+        "supplier": "Hertz",
+        "electric": false,
+        "seller_url": "https://www.discovercars.com/en/offer/9c5f956d-eeb6-4741-b042-b435f9a91fa3-J23L?sq=eyJQaWNrdXBMb2NhdGlvbklkIjo0NzM5LCJEcm9wT2ZmTG9jYXRpb25JZCI6NDczOSwiUGlja3VwRGF0ZVRpbWUiOiIyMDI2LTA5LTI3VDEyOjAwOjAwIiwiRHJvcE9mZkRhdGVUaW1lIjoiMjAyNi0xMC0xM1QxMjowMDowMCIsIlJlc2lkZW5jZUNvdW50cnkiOiJLUiIsIkRyaXZlckFnZSI6MzAsIkhhc2giOiIzNjRkYTA1ZjNhNmNjZTNkYmNmMzU1NWE1OWFkODliNCJ9",
+        "synced_at": "2026-08-09T11:39:10+09:00"
       }
     ],
-    "synced_at": "2026-08-09T11:33:40+09:00"
+    "synced_at": "2026-08-09T11:39:30+09:00"
   }
 ]
