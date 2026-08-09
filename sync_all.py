@@ -286,6 +286,27 @@ def run_sync() -> int:
     if airbnb_rows:
         save_json(AIRBNB_FILE, airbnb_rows)
 
+    log("[NYC→ORD 국내선]")
+    try:
+        env = os.environ.copy()
+        # Reuse headed/headless preference from this sync run
+        if headless_mode():
+            env["SYNC_HEADLESS"] = "1"
+        r = subprocess.run(
+            [sys.executable, str(ROOT / "sync_nyc_chi_flight.py")],
+            cwd=str(ROOT),
+            env=env,
+            check=False,
+        )
+        if r.returncode != 0:
+            errors.append("NYC→ORD domestic flight sync failed")
+            log("NYC→ORD 국내선 수집 실패(또는 부분 실패) · 직전 실검색가 유지 가능")
+        else:
+            log("NYC→ORD 국내선 수집 완료")
+    except Exception as exc:
+        errors.append(f"NYC→ORD: {exc}")
+        log(f"NYC→ORD 국내선 오류: {exc}")
+
     build_html.main()
     log("flights.html 재생성 완료")
     deploy_to_github()

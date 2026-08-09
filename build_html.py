@@ -761,25 +761,31 @@ def _render_domestic_nyc_chi(domestic_days: list[dict]) -> str:
         <section class="card" id="domestic-nyc-chi">
           <p class="route-kicker">DOMESTIC · NYC → ORD</p>
           <h3>뉴욕 → 시카고 국내선</h3>
-          <p class="muted">데이터가 없습니다. <code>python sync_nyc_chi_flight.py</code>를 실행하세요.</p>
+          <p class="muted">실검색 데이터가 없습니다. <code>python sync_nyc_chi_flight.py</code> 또는 <code>sync_once.bat</code>를 실행하세요.</p>
         </section>"""
     cards = []
+    synced_bits = []
     for day in domestic_days:
         depart = day.get("depart_date", "")
+        if day.get("synced_at"):
+            synced_bits.append(f"{depart}: {day['synced_at']}")
+        urls = day.get("seller_urls") or {}
+        has_live = False
         for kind in ("cheapest", "shortest"):
             opt = day.get(kind)
-            if not opt or opt.get("price") is None:
+            # Skip invented estimates — only show live scrape results
+            if not opt or opt.get("price") is None or opt.get("estimate"):
                 continue
+            has_live = True
             kind_label = "최저가" if kind == "cheapest" else "최단시간"
             fid = f"nyc_chi:{kind}:{depart}"
-            est = " · 추정" if opt.get("estimate") else ""
             src = opt.get("source") or "KAYAK"
             cards.append(f"""
             <article class="date-card domestic-card" data-domestic-depart="{depart}" data-route="nyc_chi">
               <header class="date-card-head">
                 <div>
                   <p class="date-kicker">NYC → ORD · {_fmt_date_ko(depart)}</p>
-                  <h3>{kind_label}{est}</h3>
+                  <h3>{kind_label} · KAYAK 실검색</h3>
                   <p class="muted">출처: {src} · {opt.get('carrier_text','')} · {opt.get('stops_text','')}</p>
                 </div>
                 <div class="date-card-price">
@@ -787,7 +793,7 @@ def _render_domestic_nyc_chi(domestic_days: list[dict]) -> str:
                   <span class="muted">4명 · 1인 {opt.get('price_per_person_text') or flight_per_person_text(opt.get('price'))}</span>
                 </div>
               </header>
-              <p class="muted">{opt.get('duration_text','')}</p>
+              <p class="muted">{opt.get('duration_text','')} · 동기화 {opt.get('synced_at','')}</p>
               <div class="opt-actions">
                 <label class="pick-label">
                   <input type="radio" name="domestic-flight-pick" class="domestic-flight-pick" value="{fid}"
@@ -797,21 +803,38 @@ def _render_domestic_nyc_chi(domestic_days: list[dict]) -> str:
                 {BTN.format(url=opt.get('seller_url') or '#')}
               </div>
             </article>""")
+        if not has_live:
+            cheap_url = urls.get("cheapest") or (
+                f"https://www.kayak.co.kr/flights/NYC-ORD/{depart}/2adults/children-7-8?sort=price_a"
+            )
+            cards.append(f"""
+            <article class="date-card domestic-card" data-domestic-depart="{depart}" data-route="nyc_chi">
+              <header class="date-card-head">
+                <div>
+                  <p class="date-kicker">NYC → ORD · {_fmt_date_ko(depart)}</p>
+                  <h3>실검색 대기</h3>
+                  <p class="muted">{html.escape(day.get('note') or '동기화 후 요금이 표시됩니다')}</p>
+                </div>
+              </header>
+              <div class="opt-actions">{BTN.format(url=cheap_url).replace('선택하기', 'KAYAK에서 검색')}</div>
+            </article>""")
     departs = sorted({d.get("depart_date") for d in domestic_days if d.get("depart_date")})
     opts = "".join(
         f'<option value="{d}">{_fmt_date_ko(d)} ({d})</option>' for d in departs
     )
+    sync_note = " · ".join(synced_bits[:2]) if synced_bits else "정기 동기화: sync_all.py (3시간)"
     return f"""
     <section class="card" id="domestic-nyc-chi">
       <div class="route-hero-copy" style="margin-bottom:12px;">
         <p class="route-kicker">DOMESTIC BRIDGE</p>
         <h2>뉴욕 → 시카고 국내선</h2>
-        <p class="muted">뉴욕은 대중교통·우버로 이동한 뒤, 국내선으로 시카고(ORD)에 도착합니다. 렌트카는 ORD 9/27 픽업.</p>
+        <p class="muted">KAYAK 실검색 요금만 표시합니다(추정 없음). 뉴욕은 대중교통·우버, 렌트카는 ORD 9/27 픽업.</p>
+        <p class="muted" style="margin-top:6px;">동기화: {html.escape(sync_note)}</p>
       </div>
       <label class="field-label" for="domestic-depart">출발일</label>
       <select id="domestic-depart" class="date-select">{opts}</select>
       <div class="domestic-grid" style="margin-top:14px;display:grid;gap:12px;">
-        {''.join(cards) if cards else '<p class="muted">선택 가능한 요금이 없습니다.</p>'}
+        {''.join(cards) if cards else '<p class="muted">선택 가능한 실검색 요금이 없습니다. sync_nyc_chi_flight.py를 실행하세요.</p>'}
       </div>
     </section>"""
 
