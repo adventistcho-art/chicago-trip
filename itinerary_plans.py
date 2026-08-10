@@ -12,6 +12,792 @@ def fmt_won(amount: int | None) -> str:
     return f"₩{amount:,}"
 
 
+# Booked Airbnb — transport estimates are from this home base.
+CHI_HOME = {
+    "name": "숙소 (Hyde Park)",
+    "address": "6115 South Langley Avenue, Chicago, IL 60637",
+    "area": "Woodlawn · UChicago 인근",
+}
+
+# Clickable Chicago destinations → parking / Uber / CTA·Metra guidance.
+# Fares are approximate KRW (family of 4, 2026 시즌 변동 가능).
+def _maps(q: str) -> str:
+    return f"https://www.google.com/maps/search/?api=1&query={quote_plus(q)}"
+
+
+CHI_PLACES: dict[str, dict] = {
+    "ord_pickup": {
+        "name": "ORD 도착 · 렌트카 픽업",
+        "address": "10000 W O'Hare Ave, Chicago, IL 60666",
+        "drive_min": "공항 내 셔틀/워크",
+        "parking": {
+            "name": "렌트카 센터 (각 업체 픽업 구역)",
+            "address": "O'Hare Rental Car Facility · 공항 안내 전광판/앱 확인",
+            "note": "터미널 → Airport Transit System(ATS) 또는 업체 셔틀 → Rental Car Center. 별도 관광 주차 불필요.",
+            "maps": _maps("O'Hare Rental Car Center"),
+        },
+        "uber": {
+            "dropoff": "숙소로 이동 시",
+            "address": CHI_HOME["address"],
+            "fare": "ORD→숙소 편도 약 ₩55,000–80,000 (UberX) · XL ₩75,000–110,000",
+            "note": "렌트 픽업이 목표면 우버 대신 렌트 셔틀. 우버 승차는 Terminal 픽업존.",
+        },
+        "transit": {
+            "route": "CTA Blue Line (공항) → 시내 환승 (렌트 없을 때)",
+            "steps": [
+                "터미널 내 CTA Blue Line ‘O'Hare’역",
+                "시내(Clark/Lake 등) 환승 후 Green/버스 → Hyde Park",
+                "짐·아이 있으면 렌트/우버 권장",
+            ],
+            "fare": "CTA 1인 $2.50 · 4명 편도 약 ₩14,000 + Hyde Park 환승",
+            "note": "귀국일 ORD 이동은 아래 ‘ORD 이동’ 카드 참고.",
+        },
+    },
+    "home_checkin": {
+        "name": "숙소 체크인",
+        "address": CHI_HOME["address"],
+        "drive_min": "—",
+        "parking": {
+            "name": "숙소 인근 노상/지정 주차",
+            "address": "6115 S Langley Ave 주변 (구역 표지 확인)",
+            "note": "거주 허가(permit) 구역·시간제 표지 확인. 가능하면 숙소 호스트 안내에 따르세요.",
+            "maps": _maps(CHI_HOME["address"]),
+        },
+        "uber": {
+            "dropoff": CHI_HOME["name"],
+            "address": CHI_HOME["address"],
+            "fare": "시내→숙소는 출발지에 따라 상이",
+            "note": "하차 주소: 6115 S Langley Ave, Chicago",
+        },
+        "transit": {
+            "route": "Metra Electric 59th / CTA #2·#6 + 도보",
+            "steps": [
+                "Metra Electric → 59th St (University of Chicago) 하차",
+                "동쪽으로 Langley Ave 도보 약 10–15분",
+                "또는 CTA 버스 정류장에서 하차 후 도보",
+            ],
+            "fare": "Metra/CTA 편도 1인 약 $2.50–6",
+            "note": "짐 많으면 우버·렌트 권장.",
+        },
+    },
+    "millennium": {
+        "name": "Millennium Park · Cloud Gate",
+        "address": "201 E Randolph St, Chicago, IL 60601",
+        "drive_min": "약 25–40분",
+        "parking": {
+            "name": "Millennium Park Garage (Grant Park North)",
+            "address": "5 S Columbus Dr, Chicago, IL 60601",
+            "note": "Cloud Gate·콩 조형물 도보 5분. 종일 대략 $30–45. Grant Park South Garage(221 S Columbus)도 대안.",
+            "maps": _maps("Millennium Park Garage 5 S Columbus Dr Chicago"),
+        },
+        "uber": {
+            "dropoff": "Cloud Gate / The Bean",
+            "address": "Millennium Park, 201 E Randolph St, Chicago, IL 60601",
+            "fare": "편도 약 ₩40,000–55,000 (UberX) · 4명 XL 약 ₩55,000–75,000",
+            "note": "Randolph St / Michigan Ave 인근 하차. 혼잡·행사 시 할증.",
+        },
+        "transit": {
+            "route": "Metra Electric → Millennium 또는 CTA #6 Jackson Park Express",
+            "steps": [
+                "숙소 → Metra 59th St (도보/짧은 우버)",
+                "Metra Electric northbound → Millennium Station",
+                "도보 5분 Cloud Gate",
+                "대안: CTA 버스 #6 → Michigan & Randolph",
+            ],
+            "fare": "Metra 편도 약 $4–6/인 · CTA $2.50/인 · 4명 왕복 대략 ₩55,000–85,000",
+            "note": "Ventra 앱/카드. CTA는 만 7세 미만 보호자 동반 시 무료.",
+        },
+    },
+    "art_institute": {
+        "name": "Art Institute of Chicago",
+        "address": "111 S Michigan Ave, Chicago, IL 60603",
+        "drive_min": "약 25–40분",
+        "parking": {
+            "name": "Grant Park South Garage 또는 Millennium Park Garage",
+            "address": "221 S Columbus Dr / 5 S Columbus Dr, Chicago",
+            "note": "미술관 동편 지하·그랜트파크 주차장. 종일 약 $30–45. Michigan Ave 노상은 짧고 비쌈.",
+            "maps": _maps("Grant Park South Garage Chicago"),
+        },
+        "uber": {
+            "dropoff": "Art Institute of Chicago main entrance",
+            "address": "111 S Michigan Ave, Chicago, IL 60603",
+            "fare": "편도 약 ₩40,000–55,000 · XL ₩55,000–75,000",
+            "note": "Michigan Ave 쪽 하차 후 계단/입구.",
+        },
+        "transit": {
+            "route": "Metra → Millennium + 도보 또는 CTA Brown/Green/Orange/Pink → Adams/Wabash",
+            "steps": [
+                "Metra Electric → Millennium Station → 도보 8분",
+                "또는 CTA Loop ‘Adams/Wabash’ 하차 → 도보 3분",
+            ],
+            "fare": "편도 CTA $2.50/인 · 4명 왕복 약 ₩28,000 + Hyde Park 접근비",
+            "note": "아이 동반 시 Metra가 좌석·짐에 편할 수 있음.",
+        },
+    },
+    "riverwalk": {
+        "name": "Chicago Riverwalk",
+        "address": "Chicago Riverwalk, Chicago, IL 60601",
+        "drive_min": "약 25–40분",
+        "parking": {
+            "name": "Marina City / Wacker 인근 유료 주차장",
+            "address": "300 N State St 인근 또는 233 E Wacker Dr garage",
+            "note": "리버워크는 강변 보행로라 자차는 근처 건물 주차 후 도보. 종일 $35–55 흔함.",
+            "maps": _maps("Chicago Riverwalk parking garage"),
+        },
+        "uber": {
+            "dropoff": "Chicago Riverwalk · Michigan Ave bridge",
+            "address": "401 N Michigan Ave, Chicago, IL 60611",
+            "fare": "편도 약 ₩42,000–58,000 · XL ₩58,000–78,000",
+            "note": "Michigan Ave Bridge / Wacker Dr 하차 후 계단으로 강변.",
+        },
+        "transit": {
+            "route": "CTA Red Line → Grand 또는 Brown Line → State/Lake + 도보",
+            "steps": [
+                "Hyde Park에서 #6 또는 Metra→CTA 환승",
+                "State/Lake · Clark/Lake · Grand(Red) 하차",
+                "도보로 리버워크 진입",
+            ],
+            "fare": "CTA $2.50/인 · 4명 왕복 약 ₩28,000+",
+            "note": "루프·매그마일 일정과 묶어 이동하면 환승 최소.",
+        },
+    },
+    "navy_pier": {
+        "name": "Navy Pier",
+        "address": "600 E Grand Ave, Chicago, IL 60611",
+        "drive_min": "약 30–45분",
+        "parking": {
+            "name": "Navy Pier Parking Garage",
+            "address": "600 E Grand Ave, Chicago, IL 60611",
+            "note": "피어 건물 주차장. 시간제·이벤트 시 할증. 종일 대략 $40–60. 저녁 야경은 만차 주의.",
+            "maps": _maps("Navy Pier Parking Garage"),
+        },
+        "uber": {
+            "dropoff": "Navy Pier main entrance",
+            "address": "600 E Grand Ave, Chicago, IL 60611",
+            "fare": "편도 약 ₩45,000–65,000 · XL ₩65,000–90,000",
+            "note": "Grand Ave 입구 하차. 피어 끝 관람차·배 일정 확인.",
+        },
+        "transit": {
+            "route": "CTA #2 / #29 / #65 버스 또는 Red Line Grand + 버스",
+            "steps": [
+                "시내까지 Metra/CTA 후",
+                "버스 #2 Hyde Park Express(일부 시간) 또는 #29 State → Navy Pier",
+                "Red Line Grand 하차 후 #65 등 환승",
+            ],
+            "fare": "CTA $2.50/인 · 4명 왕복 약 ₩28,000–40,000",
+            "note": "밤늦은 귀가면 우버가 편함.",
+        },
+    },
+    "shedd": {
+        "name": "Shedd Aquarium",
+        "address": "1200 S Lake Shore Dr, Chicago, IL 60605",
+        "drive_min": "약 20–35분",
+        "parking": {
+            "name": "Museum Campus North Garage (Adler/Shedd)",
+            "address": "1200 S Lake Shore Dr / Museum Campus, Chicago",
+            "note": "수족관·Adler 공용 캠퍼스 주차. 종일 약 $30–40. 예약(온라인) 가능 시 유리.",
+            "maps": _maps("Shedd Aquarium parking garage"),
+        },
+        "uber": {
+            "dropoff": "Shedd Aquarium entrance",
+            "address": "1200 S Lake Shore Dr, Chicago, IL 60605",
+            "fare": "편도 약 ₩35,000–50,000 · XL ₩50,000–70,000",
+            "note": "Museum Campus 드롭오프 존.",
+        },
+        "transit": {
+            "route": "Metra → Roosevelt + 도보/버스 또는 CTA Roosevelt + #146/#130",
+            "steps": [
+                "Metra Electric → Museum Campus/11th St 또는 Roosevelt 인근",
+                "CTA Red/Orange/Green Roosevelt → 버스 #146/#130 Museum Campus",
+                "도보 시 Roosevelt에서 동쪽으로 15–20분",
+            ],
+            "fare": "CTA/Metra 편도 약 $2.50–6/인 · 4명 왕복 약 ₩45,000–70,000",
+            "note": "Field·Adler와 같은 날이면 자차·하루 주차가 효율적.",
+        },
+    },
+    "field_adler": {
+        "name": "Field Museum / Adler Planetarium",
+        "address": "1400 S Lake Shore Dr / 1300 S Lake Shore Dr, Chicago, IL 60605",
+        "drive_min": "약 20–35분",
+        "parking": {
+            "name": "Museum Campus 주차장 (Field East / Adler)",
+            "address": "1400 S Lake Shore Dr, Chicago, IL 60605",
+            "note": "Field Museum East Garage 또는 Adler lot. Shedd와 하루 티켓·주차 공유하기 좋음. 약 $30–40.",
+            "maps": _maps("Field Museum East Garage Chicago"),
+        },
+        "uber": {
+            "dropoff": "Field Museum 또는 Adler Planetarium",
+            "address": "1400 S Lake Shore Dr, Chicago, IL 60605",
+            "fare": "편도 약 ₩35,000–50,000 · XL ₩50,000–70,000",
+            "note": "두 곳 도보 이동 가능 · 한 번 하차 후 캠퍼스 워킹.",
+        },
+        "transit": {
+            "route": "Shedd와 동일 · Museum Campus 버스",
+            "steps": [
+                "CTA Roosevelt + Museum Campus 버스",
+                "또는 Metra + 도보",
+            ],
+            "fare": "CTA $2.50/인 · 4명 왕복 약 ₩28,000+",
+            "note": "Adler는 캠퍼스 끝이라 도보 추가 10분.",
+        },
+    },
+    "grant_park": {
+        "name": "Grant Park",
+        "address": "337 E Randolph St, Chicago, IL 60601",
+        "drive_min": "약 25–40분",
+        "parking": {
+            "name": "Grant Park North / South Garage",
+            "address": "25 N Michigan Ave 인근 · Columbus Dr 지하",
+            "note": "Millennium과 동일 주차 인프라. 공원 산책이면 Millennium Garage 추천.",
+            "maps": _maps("Grant Park North Garage Chicago"),
+        },
+        "uber": {
+            "dropoff": "Grant Park / Buckingham Fountain",
+            "address": "301 S Columbus Dr, Chicago, IL 60605",
+            "fare": "편도 약 ₩40,000–55,000",
+            "note": "분수(Buckingham) 기준으로 하차 지정 가능.",
+        },
+        "transit": {
+            "route": "Metra Millennium 또는 CTA Loop",
+            "steps": ["Millennium Station 하차 후 남쪽 Grant Park 산책"],
+            "fare": "Metra/CTA 편도 약 $2.50–6/인",
+            "note": "미술관·밀레니엄과 묶기 좋음.",
+        },
+    },
+    "msi": {
+        "name": "Museum of Science and Industry",
+        "address": "5700 S Lake Shore Dr, Chicago, IL 60637",
+        "drive_min": "약 8–15분",
+        "parking": {
+            "name": "MSI West Parking Lot / Garage",
+            "address": "5700 S Lake Shore Dr, Chicago, IL 60637",
+            "note": "박물관 서편 주차. 입장객 요금 대략 $25–30대. 숙소에서 매우 가까움.",
+            "maps": _maps("Museum of Science and Industry parking"),
+        },
+        "uber": {
+            "dropoff": "MSI main entrance",
+            "address": "5700 S Lake Shore Dr, Chicago, IL 60637",
+            "fare": "편도 약 ₩12,000–20,000 · XL ₩18,000–28,000",
+            "note": "짧은 거리 · 날씨 나쁘면 우버가 편함.",
+        },
+        "transit": {
+            "route": "도보·버스 #6 / #2 또는 Metra 55th-56th-57th",
+            "steps": [
+                "숙소에서 동쪽으로 Lake Shore 방면 도보 약 20–30분",
+                "또는 CTA #6/#2 → MSI 정류장",
+                "Metra 55th-56th-57th 하차 후 도보",
+            ],
+            "fare": "버스 $2.50/인 · 가까우면 도보 무료",
+            "note": "가족·유모치면 짧은 우버/자차 추천.",
+        },
+    },
+    "uchicago": {
+        "name": "University of Chicago 캠퍼스",
+        "address": "5801 S Ellis Ave, Chicago, IL 60637",
+        "drive_min": "약 5–10분",
+        "parking": {
+            "name": "캠퍼스 유료 주차 / 주변 미터기",
+            "address": "Ellis Ave · University Ave 일대",
+            "note": "방문객 주차는 Campus North Garage 등. 짧은 산책이면 숙소 주차 후 도보가 나을 수 있음.",
+            "maps": _maps("University of Chicago Campus North Parking"),
+        },
+        "uber": {
+            "dropoff": "UChicago Main Quadrangle",
+            "address": "5801 S Ellis Ave, Chicago, IL 60637",
+            "fare": "편도 약 ₩8,000–15,000",
+            "note": "대부분 도보 가능 거리.",
+        },
+        "transit": {
+            "route": "도보 우선",
+            "steps": ["숙소에서 캠퍼스까지 도보 약 15–25분", "필요 시 버스 #172/#171 캠퍼스 셔틀성 노선"],
+            "fare": "도보 무료 · 버스 $2.50",
+            "note": "근처 카페·서점(57th)과 함께.",
+        },
+    },
+    "promontory": {
+        "name": "Promontory Point",
+        "address": "5491 S Shore Dr, Chicago, IL 60615",
+        "drive_min": "약 10–15분",
+        "parking": {
+            "name": "Promontory Point / 인근 노상·롯",
+            "address": "5491 S Shore Dr, Chicago, IL 60615",
+            "note": "포인트 입구 소규모 주차. 주말 만차 시 MSI·호숫가 도로 대안. 무료/저가 구간 표지 확인.",
+            "maps": _maps("Promontory Point Chicago parking"),
+        },
+        "uber": {
+            "dropoff": "Promontory Point",
+            "address": "5491 S Shore Dr, Chicago, IL 60615",
+            "fare": "편도 약 ₩12,000–22,000",
+            "note": "피크닉·호수 뷰.",
+        },
+        "transit": {
+            "route": "버스 #6 또는 도보+짧은 우버",
+            "steps": ["#6 Jackson Park Express → 55th/Lake Shore 인근", "도보로 포인트 진입"],
+            "fare": "버스 $2.50/인",
+            "note": "짐·아이 간식이면 자차/우버 편함.",
+        },
+    },
+    "lp_zoo": {
+        "name": "Lincoln Park Zoo",
+        "address": "2001 N Clark St, Chicago, IL 60614",
+        "drive_min": "약 35–55분",
+        "parking": {
+            "name": "Lincoln Park Zoo Parking Lots (North/South)",
+            "address": "2001 N Clark St / Stockton Dr, Chicago, IL 60614",
+            "note": "동물원 공식 주차. 대략 $20–35. 주말 오전 일찍 도착 권장. 거리 미터기는 제한적.",
+            "maps": _maps("Lincoln Park Zoo parking"),
+        },
+        "uber": {
+            "dropoff": "Lincoln Park Zoo East Gate / Café Brauer",
+            "address": "2001 N Clark St, Chicago, IL 60614",
+            "fare": "편도 약 ₩50,000–70,000 · XL ₩70,000–95,000",
+            "note": "북쪽으로 거리 김 · 왕복 우버면 예산 크게 증가.",
+        },
+        "transit": {
+            "route": "CTA Red Line → Fullerton/North/Clark + 버스 또는 #22/#36",
+            "steps": [
+                "시내까지 Metra/CTA 후 Red Line northbound",
+                "Fullerton 또는 North/Clybourn 하차 후 버스·도보",
+                "버스 #151/#156 등 Lake Shore/Stockton 방면",
+            ],
+            "fare": "CTA 환승 포함 편도 약 $2.50–5/인 · 4명 왕복 약 ₩45,000–70,000",
+            "note": "가족·하루 일정이면 자차 하루 주차가 편한 편.",
+        },
+    },
+    "lp_conservatory": {
+        "name": "Lincoln Park Conservatory",
+        "address": "2391 N Stockton Dr, Chicago, IL 60614",
+        "drive_min": "약 35–55분",
+        "parking": {
+            "name": "Lincoln Park Zoo / Conservatory 인근 주차",
+            "address": "Stockton Dr · Zoo South Lot",
+            "note": "동물원 주차 후 도보 5–10분. 별도 소규모 롯 있음.",
+            "maps": _maps("Lincoln Park Conservatory parking"),
+        },
+        "uber": {
+            "dropoff": "Lincoln Park Conservatory",
+            "address": "2391 N Stockton Dr, Chicago, IL 60614",
+            "fare": "편도 약 ₩50,000–70,000",
+            "note": "동물원과 같은 날 묶기.",
+        },
+        "transit": {
+            "route": "동물원과 동일 동선",
+            "steps": ["Lincoln Park Zoo에서 도보 이동"],
+            "fare": "추가 교통비 없음(도보)",
+            "note": "동물원 일정에 포함.",
+        },
+    },
+    "north_ave_beach": {
+        "name": "North Avenue Beach",
+        "address": "1600 N Lake Shore Dr, Chicago, IL 60610",
+        "drive_min": "약 35–50분",
+        "parking": {
+            "name": "North Avenue Beach 유료 롯 / 인근",
+            "address": "1600 N Lake Shore Dr, Chicago, IL 60610",
+            "note": "해변 시즌 유료 주차. 만차 시 Lincoln Park 쪽 주차 후 도보.",
+            "maps": _maps("North Avenue Beach parking Chicago"),
+        },
+        "uber": {
+            "dropoff": "North Avenue Beach",
+            "address": "1600 N Lake Shore Dr, Chicago, IL 60610",
+            "fare": "편도 약 ₩48,000–68,000",
+            "note": "링컨파크 일정과 연계.",
+        },
+        "transit": {
+            "route": "CTA #151 Sheridan 또는 Red Line + 도보",
+            "steps": ["Red Line North/Clybourn 또는 Clark/Division 후 버스·도보", "#151 → North Ave Beach"],
+            "fare": "CTA $2.50/인",
+            "note": "수영·모래놀이 짐이면 자차/우버.",
+        },
+    },
+    "arch_cruise": {
+        "name": "Architecture River Cruise",
+        "address": "Chicago's First Lady · 112 E Wacker Dr 또는 Wendella 하역장",
+        "drive_min": "약 25–40분",
+        "parking": {
+            "name": "Wacker / Michigan 인근 주차장",
+            "address": "233 E Wacker Dr · 155 N Michigan Ave garage 등",
+            "note": "선사(First Lady, Wendella, Shoreline)마다 승선지가 다름 · 예약 확인서의 dock 주소로 주차. 종일 $35–55.",
+            "maps": _maps("112 E Wacker Dr Chicago parking"),
+        },
+        "uber": {
+            "dropoff": "예약 선사 승선 부두",
+            "address": "예: 112 E Wacker Dr, Chicago, IL 60601",
+            "fare": "편도 약 ₩42,000–58,000",
+            "note": "출항 30–40분 전 도착. 우버가 주차 스트레스 적음.",
+        },
+        "transit": {
+            "route": "CTA State/Lake · Clark/Lake + 도보",
+            "steps": ["루프 역 하차 후 Wacker Dr 강변으로 도보 5–10분"],
+            "fare": "CTA $2.50/인",
+            "note": "예약 시간 엄수 · 겨울·바람 대비.",
+        },
+    },
+    "loop": {
+        "name": "The Loop 워킹",
+        "address": "The Loop, Chicago, IL 60602",
+        "drive_min": "약 25–40분",
+        "parking": {
+            "name": "Loop 공용 주차장 (예: Self Park / Grant Park)",
+            "address": "200 N Dearborn · Millennium Garage 등",
+            "note": "루프는 주차비 높음($40+). 가능하면 교외·하이드파크에서 대중교통·우버 권장.",
+            "maps": _maps("Grant Park North Garage Chicago"),
+        },
+        "uber": {
+            "dropoff": "Chicago Loop · State & Madison",
+            "address": "1 N State St, Chicago, IL 60602",
+            "fare": "편도 약 ₩40,000–55,000",
+            "note": "도보 관광 중심 · 하차 후 워킹.",
+        },
+        "transit": {
+            "route": "Metra Electric → Millennium / CTA Loop",
+            "steps": ["Metra → Millennium Station", "또는 CTA로 Clark/Lake·Washington 하차"],
+            "fare": "Metra/CTA 편도 약 $2.50–6/인",
+            "note": "루프는 대중교통이 가장 효율적.",
+        },
+    },
+    "willis": {
+        "name": "Willis Tower Skydeck",
+        "address": "233 S Wacker Dr, Chicago, IL 60606",
+        "drive_min": "약 25–40분",
+        "parking": {
+            "name": "Self Park · 211 W Adams / 인근 타워 주차",
+            "address": "211 W Adams St, Chicago, IL 60606",
+            "note": "Skydeck 공식 제휴·인근 Self Park. 사전 요금 확인. 대략 $40–55.",
+            "maps": _maps("Willis Tower parking 211 W Adams"),
+        },
+        "uber": {
+            "dropoff": "Willis Tower Skydeck entrance",
+            "address": "233 S Wacker Dr, Chicago, IL 60606",
+            "fare": "편도 약 ₩40,000–55,000",
+            "note": "Jackson Blvd 입구 쪽 하차 안내 따름.",
+        },
+        "transit": {
+            "route": "CTA Brown/Orange/Pink/Purple → Quincy 또는 Clinton",
+            "steps": ["Quincy역 하차 후 도보 3분", "Metra 이용 시 Union Station → 도보 10분"],
+            "fare": "CTA $2.50/인",
+            "note": "사전 입장권·보안 검색 줄 감안.",
+        },
+    },
+    "hancock": {
+        "name": "360 CHICAGO / John Hancock",
+        "address": "875 N Michigan Ave, Chicago, IL 60611",
+        "drive_min": "약 30–45분",
+        "parking": {
+            "name": "875 N Michigan Ave Building Garage / 인근",
+            "address": "875 N Michigan Ave, Chicago, IL 60611",
+            "note": "빌딩 지하·인근 유료 주차. Magnificent Mile 요금 높음($45–60). Water Tower Place garage 대안.",
+            "maps": _maps("875 N Michigan Ave parking"),
+        },
+        "uber": {
+            "dropoff": "360 CHICAGO",
+            "address": "875 N Michigan Ave, Chicago, IL 60611",
+            "fare": "편도 약 ₩45,000–65,000 · XL ₩65,000–85,000",
+            "note": "매그마일 쇼핑과 같은 날 우버 왕복이 주차보다 쌀 수 있음.",
+        },
+        "transit": {
+            "route": "CTA Red Line → Chicago 하차 + 도보",
+            "steps": ["Red Line ‘Chicago’ 하차", "동쪽으로 Michigan Ave 도보 10분"],
+            "fare": "CTA $2.50/인 · 4명 왕복 약 ₩28,000+",
+            "note": "버스 #146/#151도 Michigan Ave 경유.",
+        },
+    },
+    "water_tower": {
+        "name": "Water Tower · 쇼핑",
+        "address": "163 E Pearson St, Chicago, IL 60611",
+        "drive_min": "약 30–45분",
+        "parking": {
+            "name": "Water Tower Place Garage",
+            "address": "845 N Michigan Ave, Chicago, IL 60611",
+            "note": "몰 이용 시 주차 검증(validation) 가능. 종일 $40–55대.",
+            "maps": _maps("Water Tower Place parking garage"),
+        },
+        "uber": {
+            "dropoff": "Chicago Water Tower / Water Tower Place",
+            "address": "845 N Michigan Ave, Chicago, IL 60611",
+            "fare": "편도 약 ₩45,000–65,000",
+            "note": "360 CHICAGO와 도보권.",
+        },
+        "transit": {
+            "route": "CTA Red Line Chicago + 도보",
+            "steps": ["Red Line Chicago → Michigan Ave 도보"],
+            "fare": "CTA $2.50/인",
+            "note": "매그마일 일정과 통합.",
+        },
+    },
+    "mag_mile_shops": {
+        "name": "American Girl / Lego Store",
+        "address": "American Girl 835 N Michigan · Lego 520 N Michigan",
+        "drive_min": "약 30–45분",
+        "parking": {
+            "name": "Water Tower Place / 520 N Michigan 인근",
+            "address": "845 N Michigan Ave 또는 520 N Michigan Ave",
+            "note": "두 매장 도보 거리. Water Tower 주차 후 이동 추천.",
+            "maps": _maps("Water Tower Place Chicago"),
+        },
+        "uber": {
+            "dropoff": "Water Tower Place",
+            "address": "845 N Michigan Ave, Chicago, IL 60611",
+            "fare": "편도 약 ₩45,000–65,000",
+            "note": "아이 쇼핑·짐이면 우버 왕복 고려.",
+        },
+        "transit": {
+            "route": "CTA Red Line Chicago",
+            "steps": ["Chicago역 하차 후 Michigan Ave 도보"],
+            "fare": "CTA $2.50/인",
+            "note": "영업시간 확인.",
+        },
+    },
+    "oak_park": {
+        "name": "Oak Park (Frank Lloyd Wright)",
+        "address": "209 S Oak Park Ave / 951 Chicago Ave, Oak Park, IL 60302",
+        "drive_min": "약 40–60분",
+        "parking": {
+            "name": "Oak Park 마을 공영·미터 / FLW Trust 방문객 주차",
+            "address": "951 Chicago Ave, Oak Park, IL 60302 (Home & Studio 인근)",
+            "note": "자차 데이트립에 적합. 마을 미터·garage. Home and Studio 투어 예약 필수.",
+            "maps": _maps("Frank Lloyd Wright Home and Studio parking"),
+        },
+        "uber": {
+            "dropoff": "Frank Lloyd Wright Home and Studio",
+            "address": "951 Chicago Ave, Oak Park, IL 60302",
+            "fare": "편도 약 ₩55,000–85,000 · 왕복·대기비 커서 비추천",
+            "note": "당일 왕복이면 렌트카가 훨씬 유리.",
+        },
+        "transit": {
+            "route": "CTA Green Line → Oak Park 또는 Harlem/Lake",
+            "steps": [
+                "Green Line westbound → Oak Park 하차",
+                "도보/버스 short hop → Home & Studio·Unity Temple",
+            ],
+            "fare": "CTA $2.50/인 · 4명 왕복 약 ₩28,000",
+            "note": "짐 없이 건축 투어만이면 Green Line도 가능.",
+        },
+    },
+    "outlet": {
+        "name": "교외 아울렛 / 지역 공원",
+        "address": "예: Fashion Outlets of Chicago, 5220 Fashion Outlets Way, Rosemont, IL 60018",
+        "drive_min": "약 40–55분 (Rosemont)",
+        "parking": {
+            "name": "아울렛·공원 무료/공용 주차",
+            "address": "해당 시설 주차장",
+            "note": "자차 추천. Rosemont 아울렛은 무료 주차. 지역 주립공원도 주차비 소액인 경우 많음.",
+            "maps": _maps("Fashion Outlets of Chicago"),
+        },
+        "uber": {
+            "dropoff": "목적 시설명",
+            "address": "예약·검색한 주소",
+            "fare": "편도 약 ₩55,000–90,000 · 왕복 부담 큼",
+            "note": "근교는 렌트카가 원칙.",
+        },
+        "transit": {
+            "route": "CTA Blue Line → Rosemont + 짧은 버스/우버",
+            "steps": ["Blue Line Rosemont", "아울렛 셔틀·우버 연결"],
+            "fare": "CTA $2.50 + 연결 우버",
+            "note": "가족 쇼핑·짐이면 자차.",
+        },
+    },
+    "home_evening": {
+        "name": "저녁은 숙소 근처",
+        "address": CHI_HOME["address"],
+        "drive_min": "—",
+        "parking": {
+            "name": "숙소 주차",
+            "address": CHI_HOME["address"],
+            "note": "추가 이동 없음.",
+            "maps": _maps(CHI_HOME["address"]),
+        },
+        "uber": {
+            "dropoff": "숙소",
+            "address": CHI_HOME["address"],
+            "fare": "—",
+            "note": "근처 식당은 도보·짧은 우버.",
+        },
+        "transit": {
+            "route": "도보",
+            "steps": ["53rd/57th St 식당가로 도보·버스"],
+            "fare": "도보 또는 버스 $2.50",
+            "note": "여유 저녁.",
+        },
+    },
+    "revisit": {
+        "name": "좋아하는 장소 재방문",
+        "address": "일정에서 고른 목적지",
+        "drive_min": "목적지에 따름",
+        "parking": {
+            "name": "해당 목적지 주차 안내 참고",
+            "address": "재방문 장소의",
+            "note": "밀레니엄·MSI·링컨파크 등 이미 열어본 카드의 주차 정보 재사용.",
+            "maps": _maps("Chicago IL"),
+        },
+        "uber": {
+            "dropoff": "선택 목적지",
+            "address": "앱에서 장소명 검색",
+            "fare": "하이드파크 기준 시내 ₩35,000–70,000대",
+            "note": "왕복 예산 미리 잡기.",
+        },
+        "transit": {
+            "route": "Metra Electric / CTA #6 · Red·Green",
+            "steps": ["자주 쓰는 동선: Metra→Millennium 또는 #6→Michigan Ave"],
+            "fare": "편도 $2.50–6/인",
+            "note": "Ventra 잔액 충전.",
+        },
+    },
+    "lakefront_picnic": {
+        "name": "호숫가 피크닉",
+        "address": "57th Street Beach / Promontory Point, Chicago, IL 60637",
+        "drive_min": "약 8–15분",
+        "parking": {
+            "name": "57th Street Beach / Point 인근",
+            "address": "5700 S Lake Shore Dr 일대",
+            "note": "MSI·포인트와 공유 주차. 주말 오전 유리.",
+            "maps": _maps("57th Street Beach Chicago"),
+        },
+        "uber": {
+            "dropoff": "57th Street Beach",
+            "address": "5700 S Lake Shore Dr, Chicago, IL 60637",
+            "fare": "편도 약 ₩12,000–20,000",
+            "note": "피크닉 짐이면 우버/자차.",
+        },
+        "transit": {
+            "route": "도보 또는 버스 #6",
+            "steps": ["숙소에서 호수 방면 도보", "#6 하차 후 도보"],
+            "fare": "도보 무료 · 버스 $2.50",
+            "note": "날씨·바람 챙기기.",
+        },
+    },
+    "deep_dish": {
+        "name": "시카고 딥디시 피자",
+        "address": "예: Giordano's / Lou Malnati's (다중 지점)",
+        "drive_min": "지점별 10–35분",
+        "parking": {
+            "name": "해당 지점 발렛·인근 롯",
+            "address": "예약 지점 주소",
+            "note": "시내 지점은 주차비 높음. Hyde Park·South Loop 지점 추천.",
+            "maps": _maps("Lou Malnati's Hyde Park Chicago"),
+        },
+        "uber": {
+            "dropoff": "예약한 피자 레스토랑",
+            "address": "앱/예약 확인 주소",
+            "fare": "근거리 ₩12,000–25,000 · 시내 ₩40,000–60,000",
+            "note": "대기 길면 테이크아웃+숙소.",
+        },
+        "transit": {
+            "route": "지점별 CTA/버스",
+            "steps": ["예약 지점 기준으로 Google Maps 대중교통"],
+            "fare": "CTA $2.50/인",
+            "note": "주말 저녁 예약 권장.",
+        },
+    },
+    "checkout": {
+        "name": "숙소 체크아웃",
+        "address": CHI_HOME["address"],
+        "drive_min": "—",
+        "parking": {
+            "name": "숙소 주차 정리 후 ORD 이동",
+            "address": CHI_HOME["address"],
+            "note": "체크아웃 오전 11:00 · 짐 싣고 렌트 반납 동선 확보.",
+            "maps": _maps(CHI_HOME["address"]),
+        },
+        "uber": {
+            "dropoff": "ORD (렌트 없을 때)",
+            "address": "Chicago O'Hare International Airport",
+            "fare": "숙소→ORD 약 ₩55,000–80,000",
+            "note": "렌트 반납이면 자차로 ORD.",
+        },
+        "transit": {
+            "route": "비추천(짐) · 비상시 Metra+Blue",
+            "steps": ["짐 있으면 우버/렌트"],
+            "fare": "—",
+            "note": "출국 당일은 여유 있게.",
+        },
+    },
+    "ord_return": {
+        "name": "ORD 이동 · 렌트 반납",
+        "address": "O'Hare Rental Car Return, Chicago, IL 60666",
+        "drive_min": "약 45–70분 (교통 따라)",
+        "parking": {
+            "name": "렌트카 반납 (Rental Car Return)",
+            "address": "O'Hare Rental Car Center · Follow ‘Rental Car Return’ 표지",
+            "note": "귀국편 ORD 06:00 출발이면 심야·새벽 이동. 반납 후 ATS로 터미널. 공항 장기주차 아님.",
+            "maps": _maps("O'Hare Rental Car Return"),
+        },
+        "uber": {
+            "dropoff": "ORD Terminal (렌트 없을 때)",
+            "address": "Chicago O'Hare International Airport",
+            "fare": "숙소→ORD 약 ₩55,000–85,000 · XL ₩75,000–110,000",
+            "note": "새벽 비행이면 전날 밤 공항 호텔도 검토.",
+        },
+        "transit": {
+            "route": "CTA Blue Line → O'Hare (짐·새벽엔 비추천)",
+            "steps": [
+                "시내까지 이동 후 Blue Line to O'Hare",
+                "터미널 연결",
+            ],
+            "fare": "CTA $5 공항 요금대(정책 확인) · 4명+짐이면 우버/렌트",
+            "note": "06:00 출발 → 공항 03:00대 도착 목표.",
+        },
+    },
+    "airport_food": {
+        "name": "공항 식사·쇼핑",
+        "address": "ORD Terminals, Chicago, IL 60666",
+        "drive_min": "터미널 내",
+        "parking": {
+            "name": "해당 없음 (보안 통과 후)",
+            "address": "탑승 터미널",
+            "note": "렌트 반납·체크인 후 터미널 식당가.",
+            "maps": _maps("O'Hare Airport Terminal food court"),
+        },
+        "uber": {
+            "dropoff": "—",
+            "address": "터미널 내부",
+            "fare": "—",
+            "note": "이미 공항 도착 후.",
+        },
+        "transit": {
+            "route": "터미널 도보",
+            "steps": ["보안 검색 후 게이트 근처 식사"],
+            "fare": "—",
+            "note": "액체·수하물 규정 주의.",
+        },
+    },
+}
+
+# Map itinerary place labels → CHI_PLACES keys
+CHI_PLACE_KEYS = {
+    "ORD 도착 · 렌트카 픽업(9/27)": "ord_pickup",
+    "숙소 체크인": "home_checkin",
+    "Millennium Park · Cloud Gate": "millennium",
+    "Art Institute of Chicago": "art_institute",
+    "Chicago Riverwalk": "riverwalk",
+    "Navy Pier (야경)": "navy_pier",
+    "Shedd Aquarium": "shedd",
+    "Field Museum 또는 Adler Planetarium": "field_adler",
+    "Grant Park": "grant_park",
+    "Museum of Science and Industry": "msi",
+    "University of Chicago 캠퍼스": "uchicago",
+    "Promontory Point": "promontory",
+    "Lincoln Park Zoo (무료)": "lp_zoo",
+    "Lincoln Park Conservatory": "lp_conservatory",
+    "North Avenue Beach": "north_ave_beach",
+    "Architecture River Cruise": "arch_cruise",
+    "The Loop 워킹": "loop",
+    "Willis Tower Skydeck (선택)": "willis",
+    "360 CHICAGO / John Hancock": "hancock",
+    "Water Tower · 쇼핑": "water_tower",
+    "American Girl / Lego Store": "mag_mile_shops",
+    "Oak Park (Frank Lloyd Wright) 또는": "oak_park",
+    "Suburban outlet / 지역 공원": "outlet",
+    "저녁은 숙소 근처": "home_evening",
+    "좋아하는 장소 재방문": "revisit",
+    "호숫가 피크닉": "lakefront_picnic",
+    "시카고 딥디시 피자": "deep_dish",
+    "숙소 체크아웃": "checkout",
+    "ORD 이동": "ord_return",
+    "공항 식사·쇼핑": "airport_food",
+}
+
+
 CHICAGO_10 = {
     "title": "시카고 10일 여행계획",
     "subtitle": "가족 4명(성인2·어린이2) · Hyde Park/UChicago 거점 · 대략 지출 포함",
@@ -20,7 +806,7 @@ CHICAGO_10 = {
             "day": 1,
             "title": "도착 · 렌트 픽업 · 시내 첫인상",
             "places": ["ORD 도착 · 렌트카 픽업(9/27)", "숙소 체크인", "Millennium Park · Cloud Gate"],
-            "tips": "공항에서 렌트 인수 후 숙소 이동 · 시차 적응 위주",
+            "tips": "공항에서 렌트 인수 후 숙소 이동 · 시차 적응 위주 · 장소 클릭 시 주차·우버·대중교통",
             "spend": [
                 {"item": "시내 교통/주차", "amount": 60000},
                 {"item": "식사", "amount": 120000},
@@ -31,7 +817,7 @@ CHICAGO_10 = {
             "day": 2,
             "title": "미술관 · 강변",
             "places": ["Art Institute of Chicago", "Chicago Riverwalk", "Navy Pier (야경)"],
-            "tips": "미술관은 어린이 할인/무료 요일 확인",
+            "tips": "미술관은 어린이 할인/무료 요일 확인 · 각 장소 탭에서 이동수단 비교",
             "spend": [
                 {"item": "미술관 입장(4명)", "amount": 180000},
                 {"item": "식사", "amount": 130000},
@@ -42,7 +828,7 @@ CHICAGO_10 = {
             "day": 3,
             "title": "박물관 캠퍼스",
             "places": ["Shedd Aquarium", "Field Museum 또는 Adler Planetarium", "Grant Park"],
-            "tips": "CityPASS/박물관 콤보권 비교 추천",
+            "tips": "CityPASS/박물관 콤보권 비교 추천 · Museum Campus는 자차 하루 주차 효율",
             "spend": [
                 {"item": "수족관·박물관(4명)", "amount": 320000},
                 {"item": "식사", "amount": 140000},
@@ -64,7 +850,7 @@ CHICAGO_10 = {
             "day": 5,
             "title": "링컨파크 · 동물원",
             "places": ["Lincoln Park Zoo (무료)", "Lincoln Park Conservatory", "North Avenue Beach"],
-            "tips": "무료 코스로 예산 절약 데이",
+            "tips": "무료 코스로 예산 절약 데이 · 거리는 멀어 자차·우버 비교",
             "spend": [
                 {"item": "식사", "amount": 130000},
                 {"item": "교통", "amount": 60000},
@@ -119,7 +905,7 @@ CHICAGO_10 = {
             "day": 10,
             "title": "출국 준비",
             "places": ["숙소 체크아웃", "ORD 이동", "공항 식사·쇼핑"],
-            "tips": "공항 3시간 전 도착 권장 · 짐 여유",
+            "tips": "공항 3시간 전 도착 권장 · 귀국편 06:00이면 심야 이동",
             "spend": [
                 {"item": "공항 이동", "amount": 100000},
                 {"item": "공항 식사", "amount": 120000},
@@ -127,7 +913,10 @@ CHICAGO_10 = {
             ],
         },
     ],
-    "budget_note": "위 금액은 4명 기준 대략치(KRW)이며 시즌·환율·할인에 따라 달라집니다. 항공·숙박·렌트 총액은 다른 탭 선택값을 참고하세요.",
+    "budget_note": (
+        "위 금액은 4명 기준 대략치(KRW)입니다. 일정 장소 이름을 누르면 "
+        f"숙소({CHI_HOME['address']}) 기준 자차 주차·우버·대중교통 안내가 열립니다."
+    ),
 }
 
 EAST_COAST_3 = {
@@ -373,8 +1162,22 @@ def plan_budget_summary() -> dict:
     }
 
 
-def _render_day_card(day: dict, accent: str = "") -> str:
-    places = "".join(f"<li>{p}</li>" for p in day.get("places") or [])
+def _render_day_places(places: list[str], *, clickable: bool = False) -> str:
+    bits = []
+    for p in places or []:
+        key = CHI_PLACE_KEYS.get(p) if clickable else None
+        if key and key in CHI_PLACES:
+            bits.append(
+                f'<li><button type="button" class="chi-place-btn" data-chi-place="{key}">'
+                f"{p}<span class=\"chi-place-go\">이동수단 →</span></button></li>"
+            )
+        else:
+            bits.append(f"<li>{p}</li>")
+    return "".join(bits)
+
+
+def _render_day_card(day: dict, accent: str = "", *, chi_places: bool = False) -> str:
+    places = _render_day_places(day.get("places") or [], clickable=chi_places)
     spend_rows = "".join(
         f"<tr><td>{s['item']}</td><td class='price'>{fmt_won(s['amount'])}</td></tr>"
         for s in day.get("spend") or []
@@ -389,7 +1192,7 @@ def _render_day_card(day: dict, accent: str = "") -> str:
         <h3>{day['title']}</h3>
         <span class="itin-day-total">{fmt_won(total)}</span>
       </header>
-      <ul class="itin-places">{places}</ul>
+      <ul class="itin-places{" chi-places-clickable" if chi_places else ""}">{places}</ul>
       {tip_html}
       <table class="itin-spend">
         <thead><tr><th>지출 항목</th><th>대략</th></tr></thead>
@@ -398,9 +1201,90 @@ def _render_day_card(day: dict, accent: str = "") -> str:
     </article>"""
 
 
+def _chi_mode_panel(mode_key: str, title: str, body: dict, place: dict) -> str:
+    if mode_key == "parking":
+        maps = body.get("maps") or _maps(body.get("address") or place.get("address") or "")
+        return f"""
+        <div class="chi-mode-panel" data-chi-mode-panel="parking" hidden>
+          <p class="chi-mode-lead"><strong>추천 주차</strong> · 숙소에서 자차 {place.get('drive_min', '')}</p>
+          <p><strong>{body.get('name', '')}</strong></p>
+          <p class="muted">주소: {body.get('address', '')}</p>
+          <p>{body.get('note', '')}</p>
+          <p class="muted">목적지: {place.get('address', '')}</p>
+          <p><a class="chi-maps-link" href="{maps}" target="_blank" rel="noopener noreferrer">Google 지도에서 주차 찾기</a></p>
+        </div>"""
+    if mode_key == "uber":
+        maps = _maps(body.get("address") or place.get("address") or "")
+        return f"""
+        <div class="chi-mode-panel" data-chi-mode-panel="uber" hidden>
+          <p class="chi-mode-lead"><strong>우버 하차</strong> · {body.get('dropoff', '')}</p>
+          <p class="muted">주소: {body.get('address', '')}</p>
+          <p><strong>대략 요금</strong> {body.get('fare', '')}</p>
+          <p>{body.get('note', '')}</p>
+          <p class="muted">출발 기준: {CHI_HOME['address']}</p>
+          <p><a class="chi-maps-link" href="{maps}" target="_blank" rel="noopener noreferrer">하차 주소 지도</a></p>
+        </div>"""
+    # transit
+    steps = "".join(f"<li>{s}</li>" for s in (body.get("steps") or []))
+    return f"""
+    <div class="chi-mode-panel" data-chi-mode-panel="transit" hidden>
+      <p class="chi-mode-lead"><strong>대중교통</strong> · {body.get('route', '')}</p>
+      <ol class="chi-transit-steps">{steps}</ol>
+      <p><strong>대략 요금</strong> {body.get('fare', '')}</p>
+      <p>{body.get('note', '')}</p>
+      <p class="muted">Ventra 카드/앱 · CTA 기본 $2.50/인 · 만 7세 미만은 보호자 동반 시 CTA 무료인 경우가 많습니다.</p>
+    </div>"""
+
+
+def render_chicago_transport_modal() -> str:
+    blocks = []
+    for key, place in CHI_PLACES.items():
+        parking = place.get("parking") or {}
+        uber = place.get("uber") or {}
+        transit = place.get("transit") or {}
+        dest_maps = _maps(place.get("address") or "")
+        blocks.append(f"""
+        <article class="chi-place-detail" data-chi-detail="{key}" hidden>
+          <h3 id="chi-transport-title-{key}">{place['name']}</h3>
+          <p class="muted">목적지 주소: {place.get('address', '')} ·
+            <a href="{dest_maps}" target="_blank" rel="noopener noreferrer">지도</a>
+          </p>
+          <div class="chi-mode-switch" role="tablist" aria-label="이동수단">
+            <button type="button" class="chi-mode-tab active" data-chi-mode="parking" aria-selected="true">🚗 자차·주차</button>
+            <button type="button" class="chi-mode-tab" data-chi-mode="uber" aria-selected="false">🚕 우버</button>
+            <button type="button" class="chi-mode-tab" data-chi-mode="transit" aria-selected="false">🚇 대중교통</button>
+          </div>
+          {_chi_mode_panel("parking", "자차", parking, place)}
+          {_chi_mode_panel("uber", "우버", uber, place)}
+          {_chi_mode_panel("transit", "대중교통", transit, place)}
+        </article>""")
+    return f"""
+    <div id="chi-transport-modal" class="nyc-modal chi-transport-modal" hidden role="dialog" aria-modal="true"
+      aria-labelledby="chi-transport-modal-title">
+      <div class="nyc-modal-backdrop" data-chi-close></div>
+      <div class="nyc-modal-panel">
+        <header class="nyc-modal-head">
+          <div>
+            <p class="date-kicker">FROM HYDE PARK</p>
+            <h2 id="chi-transport-modal-title">목적지 이동 안내</h2>
+            <p class="muted">숙소 {CHI_HOME['address']} 기준 · 요금은 대략치(시즌·혼잡·환율 변동)</p>
+          </div>
+          <button type="button" class="nyc-modal-close" data-chi-close aria-label="닫기">×</button>
+        </header>
+        <div id="chi-transport-body">
+          {''.join(blocks)}
+        </div>
+        <footer class="nyc-modal-foot">
+          <button type="button" class="nyc-modal-secondary" data-chi-close>닫기</button>
+        </footer>
+      </div>
+    </div>
+    """
+
+
 def render_chicago_plan() -> str:
     plan = CHICAGO_10
-    days_html = "".join(_render_day_card(d) for d in plan["days"])
+    days_html = "".join(_render_day_card(d, chi_places=True) for d in plan["days"])
     total = _plan_total(plan["days"])
     return f"""
     <section class="route-hero card itin-hero chi-itin-hero">
@@ -418,7 +1302,9 @@ def render_chicago_plan() -> str:
       </div>
     </section>
     <p class="flight-hint muted">{plan['budget_note']}</p>
+    <p class="flight-hint muted">장소 이름(이동수단 →)을 누르면 <strong>자차 주차 · 우버 · 지하철/버스</strong> 안내가 각각 표시됩니다.</p>
     <div class="itin-stack">{days_html}</div>
+    {render_chicago_transport_modal()}
     """
 
 

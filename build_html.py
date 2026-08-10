@@ -8,6 +8,7 @@ import json
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
+import chicago_epic_plan
 import itinerary_plans
 import travel_tips
 
@@ -1524,6 +1525,7 @@ def render_page(
     east_plan_html: str,
     food_plan_html: str,
     misc_plan_html: str,
+    epic_plan_html: str,
     tips_html: str,
     dashboard_html: str,
     trip_data: dict,
@@ -1924,11 +1926,46 @@ def render_page(
       padding: 8px 16px; font-weight: 600; cursor: pointer;
     }}
     body.nyc-modal-open {{ overflow: hidden; }}
+    .chi-place-btn {{
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      width: 100%; text-align: left; border: 1px solid #cbd5e1; background: #fff;
+      border-radius: 10px; padding: 8px 10px; margin: 0 0 6px; cursor: pointer;
+      font: inherit; color: inherit; transition: border-color .12s ease, background .12s ease;
+    }}
+    .chi-place-btn:hover {{ border-color: #0ea5e9; background: #f0f9ff; }}
+    .chi-place-go {{
+      flex-shrink: 0; font-size: 0.72rem; font-weight: 800; color: #0369a1;
+      background: #e0f2fe; border-radius: 999px; padding: 3px 8px;
+    }}
+    .itin-places.chi-places-clickable {{ list-style: none; padding-left: 0; }}
+    .chi-mode-switch {{
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 14px;
+    }}
+    .chi-mode-tab {{
+      border: 1px solid var(--line); background: #f8fafc; border-radius: 999px;
+      padding: 8px 12px; font-weight: 700; font-size: 0.86rem; cursor: pointer; color: #334155;
+    }}
+    .chi-mode-tab.active {{
+      background: #0f172a; color: #fff; border-color: #0f172a;
+    }}
+    .chi-mode-panel {{
+      padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: #fafbfc;
+      line-height: 1.55;
+    }}
+    .chi-mode-panel[hidden] {{ display: none !important; }}
+    .chi-mode-lead {{ margin: 0 0 10px; }}
+    .chi-transit-steps {{ margin: 0 0 10px; padding-left: 1.2rem; }}
+    .chi-maps-link {{
+      display: inline-block; margin-top: 4px; font-weight: 700; color: #0369a1; text-decoration: none;
+    }}
+    .chi-place-detail[hidden] {{ display: none !important; }}
+    .chi-transport-modal .nyc-modal-panel {{ width: min(720px, 100%); }}
     @media (max-width: 700px) {{
       .nyc-hotel-head {{ flex-direction: column; }}
       .nyc-hotel-price {{ text-align: left; }}
       .east-lodging-top {{ flex-direction: column; }}
       .east-lodging-price {{ text-align: left; }}
+      .chi-mode-tab {{ flex: 1 1 auto; text-align: center; }}
     }}
     .transport-plan-card {{ border-left: 4px solid #0ea5e9; }}
     .transport-plan-list {{ margin: 8px 0 0; padding-left: 1.2rem; line-height: 1.55; }}
@@ -2052,6 +2089,7 @@ def render_page(
       .itin-day-head {{ align-items: flex-start; }}
     }}
     {travel_tips.tips_styles()}
+    {chicago_epic_plan.epic_styles()}
   </style>
 </head>
 <body>
@@ -2070,6 +2108,7 @@ def render_page(
         <button class="tab" role="tab" aria-selected="false" data-panel="east-plan">🗽 동부 3일</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="food-plan">🍽️ 식비</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="misc-plan">🎫 여행비</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="epic-plan">🍁 알찬 16일</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="tips-plan">💳 결제·할인</button>
       </nav>
     </header>
@@ -2112,6 +2151,11 @@ def render_page(
     <div id="misc-plan" class="panel" role="tabpanel">
       <p class="meta">선물·현지교통·예비비 등 기타 여행비 · 여행경비에 자동 반영</p>
       {misc_plan_html}
+    </div>
+
+    <div id="epic-plan" class="panel" role="tabpanel">
+      <p class="meta">슬리핑 비어 던스 포함 15박 16일 · 예상비 · 거리 · 행사 영상 · 9/24~10/9</p>
+      {epic_plan_html}
     </div>
 
     <div id="tips-plan" class="panel" role="tabpanel">
@@ -3037,16 +3081,69 @@ def render_page(
     document.querySelectorAll('[data-nyc-close]').forEach(el => {{
       el.addEventListener('click', closeNycHotelModal);
     }});
+
+    function setChiMode(detail, mode) {{
+      if (!detail) return;
+      detail.querySelectorAll('.chi-mode-tab').forEach(tab => {{
+        const on = tab.dataset.chiMode === mode;
+        tab.classList.toggle('active', on);
+        tab.setAttribute('aria-selected', on ? 'true' : 'false');
+      }});
+      detail.querySelectorAll('.chi-mode-panel').forEach(panel => {{
+        panel.hidden = panel.dataset.chiModePanel !== mode;
+      }});
+    }}
+    function openChiTransportModal(placeKey) {{
+      const modal = document.getElementById('chi-transport-modal');
+      if (!modal) return;
+      const detail = modal.querySelector(`[data-chi-detail="${{placeKey}}"]`);
+      if (!detail) return;
+      modal.querySelectorAll('.chi-place-detail').forEach(el => {{ el.hidden = true; }});
+      detail.hidden = false;
+      setChiMode(detail, 'parking');
+      modal.hidden = false;
+      document.body.classList.add('nyc-modal-open');
+      const closeBtn = modal.querySelector('.nyc-modal-close');
+      if (closeBtn) closeBtn.focus();
+    }}
+    function closeChiTransportModal() {{
+      const modal = document.getElementById('chi-transport-modal');
+      if (!modal || modal.hidden) return;
+      modal.hidden = true;
+      if (!document.getElementById('nyc-hotel-modal') || document.getElementById('nyc-hotel-modal').hidden) {{
+        document.body.classList.remove('nyc-modal-open');
+      }}
+    }}
+    document.querySelectorAll('.chi-place-btn').forEach(btn => {{
+      btn.addEventListener('click', () => openChiTransportModal(btn.dataset.chiPlace));
+    }});
+    document.querySelectorAll('[data-chi-close]').forEach(el => {{
+      el.addEventListener('click', closeChiTransportModal);
+    }});
+    document.querySelectorAll('.chi-mode-tab').forEach(tab => {{
+      tab.addEventListener('click', () => {{
+        const detail = tab.closest('.chi-place-detail');
+        setChiMode(detail, tab.dataset.chiMode);
+      }});
+    }});
     document.addEventListener('keydown', e => {{
-      if (e.key === 'Escape') closeNycHotelModal();
+      if (e.key !== 'Escape') return;
+      const chiModal = document.getElementById('chi-transport-modal');
+      if (chiModal && !chiModal.hidden) {{
+        closeChiTransportModal();
+        return;
+      }}
+      closeNycHotelModal();
     }});
 
     {travel_tips.tips_scripts()}
+    {chicago_epic_plan.epic_scripts()}
 
     const hashPanel = {{
       '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging', '#cars': 'cars',
       '#chi-plan': 'chi-plan', '#east-plan': 'east-plan',
-      '#food-plan': 'food-plan', '#misc-plan': 'misc-plan', '#tips-plan': 'tips-plan'
+      '#food-plan': 'food-plan', '#misc-plan': 'misc-plan',
+      '#epic-plan': 'epic-plan', '#tips-plan': 'tips-plan'
     }}[location.hash];
     if (hashPanel) document.querySelector(`[data-panel="${{hashPanel}}"]`).click();
 
@@ -3080,6 +3177,7 @@ def main() -> None:
     food_plan_html = render_food_tab()
     misc_plan_html = render_misc_tab()
     tips_html = travel_tips.render_tips_tab()
+    epic_plan_html = chicago_epic_plan.render_epic_plan()
     combo_html = render_combo_analysis(trip_data.get("combos", []))
     booked_flight_html = render_booked_flight(
         booked_flight, interactive=False, dom_id="booked-flight-dash"
@@ -3093,6 +3191,7 @@ def main() -> None:
         east_plan_html,
         food_plan_html,
         misc_plan_html,
+        epic_plan_html,
         tips_html,
         dashboard_html,
         trip_data,

@@ -740,6 +740,107 @@
       }
     }
     
+    
+    .epic-hero {
+      background: linear-gradient(135deg, #9a3412 0%, #c2410c 45%, #ea580c 100%);
+      color: #fff;
+    }
+    .epic-hero .muted { color: rgba(255,255,255,.82); }
+    .epic-hero .route-stat strong { color: #fff7ed; }
+    .epic-summary { margin-bottom: 16px; }
+    .epic-summary-list { margin: 8px 0 12px; padding-left: 1.2rem; line-height: 1.6; }
+    .epic-week-nav {
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px;
+    }
+    .epic-week-tab {
+      border: 1px solid var(--line); background: #fff; border-radius: 14px;
+      padding: 10px 14px; cursor: pointer; font-weight: 700; color: #334155;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+      min-width: 120px;
+    }
+    .epic-week-tab span { font-size: 0.75rem; font-weight: 600; color: #64748b; }
+    .epic-week-tab.active {
+      background: #9a3412; color: #fff; border-color: #9a3412;
+    }
+    .epic-week-tab.active span { color: rgba(255,255,255,.85); }
+    .epic-week-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+      margin-bottom: 18px;
+    }
+    .epic-week-card {
+      border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px;
+      background: linear-gradient(180deg, #fff7ed 0%, #fff 55%);
+    }
+    .epic-week-card h3 { margin: 4px 0 6px; font-size: 1.05rem; }
+    .epic-stack { display: grid; gap: 14px; }
+    .epic-day {
+      border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px;
+      background: #fff; box-shadow: 0 1px 2px rgba(15,23,42,.04);
+    }
+    .epic-day-head {
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .epic-day-head h3 { margin: 4px 0 0; font-size: 1.15rem; }
+    .epic-date {
+      display: inline-block; font-size: 0.78rem; font-weight: 800; letter-spacing: .03em;
+      color: #9a3412; background: #ffedd5; border-radius: 999px; padding: 3px 9px;
+    }
+    .epic-day-meta { text-align: right; }
+    .epic-pill {
+      display: inline-block; font-size: 0.75rem; font-weight: 700;
+      background: #f1f5f9; color: #475569; border-radius: 999px; padding: 3px 8px;
+      margin-bottom: 6px;
+    }
+    .epic-day-total { display: block; font-size: 1.2rem; color: #c2410c; }
+    .epic-distance { margin: 8px 0 4px; }
+    .epic-drive { margin: 0 0 10px; font-size: 0.9rem; }
+    .epic-sub { margin: 14px 0 6px; font-size: 0.92rem; color: #475569; }
+    .epic-flow { margin: 0 0 8px; padding-left: 1.2rem; line-height: 1.55; }
+    .epic-places { margin: 0; padding-left: 1.1rem; line-height: 1.45; }
+    .epic-place-note { font-size: 0.88rem; color: #475569; }
+    .epic-spend {
+      width: 100%; border-collapse: collapse; margin: 10px 0 8px; font-size: 0.92rem;
+    }
+    .epic-spend th, .epic-spend td {
+      border-bottom: 1px solid var(--line); padding: 7px 8px; text-align: left;
+    }
+    .epic-spend .price { text-align: right; font-weight: 700; white-space: nowrap; }
+    .epic-tip {
+      margin: 10px 0; padding: 10px 12px; background: #fff7ed; border-left: 3px solid #ea580c;
+      font-size: 0.9rem; line-height: 1.5;
+    }
+    .epic-media-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;
+    }
+    .epic-media {
+      margin: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+      background: #fafbfc;
+    }
+    .epic-thumb-link {
+      position: relative; display: block; aspect-ratio: 16/9; background: #0f172a;
+    }
+    .epic-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .epic-play {
+      position: absolute; left: 10px; bottom: 10px; background: rgba(0,0,0,.72); color: #fff;
+      font-size: 0.72rem; font-weight: 800; padding: 4px 8px; border-radius: 999px;
+    }
+    .epic-media figcaption { padding: 8px 10px; font-size: 0.84rem; font-weight: 700; }
+    .epic-media figcaption a { color: #9a3412; text-decoration: none; }
+    .epic-embed-details { border-top: 1px solid var(--line); padding: 8px 10px 10px; }
+    .epic-embed-details summary {
+      cursor: pointer; font-size: 0.8rem; font-weight: 700; color: #475569;
+    }
+    .epic-embed-wrap { margin-top: 8px; position: relative; padding-top: 56.25%; }
+    .epic-embed {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 8px;
+    }
+    @media (max-width: 800px) {
+      .epic-week-grid { grid-template-columns: 1fr; }
+      .epic-day-head { flex-direction: column; }
+      .epic-day-meta { text-align: left; }
+    }
+    
   </style>
 </head>
 <body>
@@ -747,7 +848,7 @@
     <header>
       <h1>서울 → 시카고 여행계획</h1>
       <p class="meta">
-        성인 2명 · 유소아 2명 (만 7·8세) · 동기화: 2026-08-10 18:20:34 KST · 3시간마다 자동 갱신
+        성인 2명 · 유소아 2명 (만 7·8세) · 동기화: 2026-08-10 19:02:00 KST · 3시간마다 자동 갱신
       </p>
       <nav class="tabs" role="tablist">
         <button class="tab active" role="tab" aria-selected="true" data-panel="dashboard">💰 여행경비</button>
@@ -758,6 +859,7 @@
         <button class="tab" role="tab" aria-selected="false" data-panel="east-plan">🗽 동부 3일</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="food-plan">🍽️ 식비</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="misc-plan">🎫 여행비</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="epic-plan">🍁 알찬 16일</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="tips-plan">💳 결제·할인</button>
       </nav>
     </header>
@@ -6529,6 +6631,891 @@
     </section>
     </div>
 
+    <div id="epic-plan" class="panel" role="tabpanel">
+      <p class="meta">슬리핑 비어 던스 포함 15박 16일 · 예상비 · 거리 · 행사 영상 · 9/24~10/9</p>
+      
+    <section class="route-hero card epic-hero">
+      <div class="route-hero-copy">
+        <p class="route-kicker">CHICAGO · 15N / 16D</p>
+        <h2>슬리핑 비어 던스 포함 알찬 동선</h2>
+        <p class="muted">2026.9.24(목) ~ 10.9(금) · 가족 4명 · 도심 대중교통 + 미시간 로드트립 + 가을 축제</p>
+      </div>
+      <div class="route-stats">
+        <div class="route-stat">
+          <span class="muted">현지 활동·로드트립 예상</span>
+          <strong>₩6,945,000</strong>
+          <span class="muted">항공·시카고 장기숙박·전체 렌트료 별도 · 대략치</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card epic-summary">
+      <h3>한눈에 보기</h3>
+      <ul class="epic-summary-list">
+        <li><strong>1주차 (9/24–28)</strong> 도심 핵심 · 박물관 · Jack’s Pumpkin · 옥토버페스트 · 리버크루즈 — <em>대중교통</em></li>
+        <li><strong>2주차 (9/29–10/2)</strong> 렌트 픽업 → Saugatuck/Holland → Traverse City · Sleeping Bear · Apple Picking · Indiana Dunes 복귀</li>
+        <li><strong>3주차 (10/3–9)</strong> Apple Fest · 어린이박물관 · Richardson Farm · Brookfield · 호박등불 · 출국</li>
+      </ul>
+      <p class="muted">※ 가을 축제·야간 호박전시는 <strong>해마다 날짜가 바뀝니다</strong>. 티켓 오픈 시 공식 사이트로 확정하세요.
+      로드트립 숙박비는 일자 카드에 포함(트래버스시티 3박 대략). 시카고 Airbnb·국제선·렌트 일당은 다른 탭 금액을 더하세요.</p>
+      <p class="muted">거리·유류·입장료는 2026 시즌 변동·환율(약 $1≈₩1400) 가정 대략치입니다.</p>
+    </section>
+
+    <div class="epic-week-nav" role="tablist"><button type="button" class="epic-week-tab active" data-epic-week-btn="all" aria-selected="true">전체<span>9/24 ~ 10/9</span></button><button type="button" class="epic-week-tab" data-epic-week-btn="w1" aria-selected="false">1주차<span>9/24(목) ~ 9/28(월)</span></button><button type="button" class="epic-week-tab" data-epic-week-btn="w2" aria-selected="false">2주차<span>9/29(화) ~ 10/2(금)</span></button><button type="button" class="epic-week-tab" data-epic-week-btn="w3" aria-selected="false">3주차<span>10/3(토) ~ 10/9(금)</span></button></div>
+    <div class="epic-week-grid">
+        <article class="epic-week-card" data-epic-week-card="w1">
+          <p class="date-kicker">1주차</p>
+          <h3>시카고 도심 핵심 · 가을 팝업</h3>
+          <p class="muted">9/24(목) ~ 9/28(월) · 대중교통 · 하루 2~3곳</p>
+          <p>도착 직인 후 네이비피어·박물관캠퍼스·MSI·옥토버페스트·리버크루즈까지 도심을 압축 체험.</p>
+        </article>
+        <article class="epic-week-card" data-epic-week-card="w2">
+          <p class="date-kicker">2주차</p>
+          <h3>슬리핑 비어 던스 로드트립</h3>
+          <p class="muted">9/29(화) ~ 10/2(금) · 렌트카 · M-22 해안 도로</p>
+          <p>시카고→소거턱/홀랜드→트래버스시티 거점 · Dune Climb · Pierce Stocking · 사과따기 · 인디애나 던스 경유 복귀.</p>
+        </article>
+        <article class="epic-week-card" data-epic-week-card="w3">
+          <p class="date-kicker">3주차</p>
+          <h3>농장 축제 & 할로윈 카운트다운</h3>
+          <p class="muted">10/3(토) ~ 10/9(금) · 자차·근교 데이트립</p>
+          <p>애플페스트·링컨파크·리차드슨 농장·브룩필드·호박등불·쇼핑 마무리 후 ORD 출국.</p>
+        </article></div>
+
+    <div class="epic-stack">
+      
+    <article class="epic-day" data-epic-week="w1">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">9/24(목)</span>
+          <h3>도착 & 도심 구경</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">대중교통 / 우버</span>
+          <strong class="epic-day-total">₩330,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · ORD→시내 약 27km · 피어↔밀레니엄 도보·버스 3km대</p>
+      <p class="muted epic-drive">첫날은 렌트 없이 CTA/우버 권장</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>시카고 도착 후 숙소 체크인</li><li>Navy Pier 대관람차</li><li>Millennium Park · Chicago Bean 사진</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Navy Pier</strong><span class='muted'> · 600 E Grand Ave, Chicago, IL 60611</span><br><span class='epic-place-note'>대관람차(Centennial Wheel) · 호숫가 산책</span></li><li><strong>Millennium Park / Cloud Gate</strong><span class='muted'> · 201 E Randolph St, Chicago, IL 60601</span><br><span class='epic-place-note'>빈(The Bean) 야경·황금시간 촬영</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>이동(ORD→숙소·시내)</td><td class='price'>₩90,000</td></tr><tr><td>대관람차(4명)</td><td class='price'>₩100,000</td></tr><tr><td>식사·간식</td><td class='price'>₩140,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩330,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">시차 적응 위주 · 짐은 숙소에 두고 가볍게. 행사·날씨에 따라 피어 혼잡.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=vfozrRFSKuM" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/vfozrRFSKuM/hqdefault.jpg" alt="Navy Pier · Centennial Wheel" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=vfozrRFSKuM" target="_blank" rel="noopener noreferrer">Navy Pier · Centennial Wheel</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/vfozrRFSKuM" title="Navy Pier · Centennial Wheel"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure>
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=ZKq5fL1hxhs" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/ZKq5fL1hxhs/hqdefault.jpg" alt="Millennium Park · Cloud Gate (The Bean)" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=ZKq5fL1hxhs" target="_blank" rel="noopener noreferrer">Millennium Park · Cloud Gate (The Bean)</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/ZKq5fL1hxhs" title="Millennium Park · Cloud Gate (The Bean)"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w1">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">9/25(금)</span>
+          <h3>박물관 & 전망대</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">대중교통 / 우버</span>
+          <strong class="epic-day-total">₩740,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · Museum Campus 도보권 · Skydeck까지 약 2–3km</p>
+      <p class="muted epic-drive">Museum Campus ↔ Willis는 CTA/우버</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>오전 Shedd Aquarium (돌고래·해양생물)</li><li>오후 Field Museum (Sue 공룡)</li><li>저녁 Willis Tower Skydeck 103층</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Shedd Aquarium</strong><span class='muted'> · 1200 S Lake Shore Dr, Chicago, IL 60605</span><br><span class='epic-place-note'>돌고래 쇼 타임테이블 사전 확인</span></li><li><strong>Field Museum</strong><span class='muted'> · 1400 S Lake Shore Dr, Chicago, IL 60605</span><br><span class='epic-place-note'>T. rex Sue · 자연사 핵심</span></li><li><strong>Willis Tower Skydeck</strong><span class='muted'> · 233 S Wacker Dr, Chicago, IL 60606</span><br><span class='epic-place-note'>The Ledge 유리바닥 · 야경 예약 권장</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>Shedd+Field (4명, CityPASS 시 절약)</td><td class='price'>₩380,000</td></tr><tr><td>Skydeck (4명)</td><td class='price'>₩180,000</td></tr><tr><td>식사·교통</td><td class='price'>₩180,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩740,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">CityPASS·Go City로 Shedd+Field+Skydeck 묶음 비교. 스카이덱은 일몰 전후 타임슬롯.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=R65SK8gIUhI" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/R65SK8gIUhI/hqdefault.jpg" alt="Shedd Aquarium walkthrough" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=R65SK8gIUhI" target="_blank" rel="noopener noreferrer">Shedd Aquarium walkthrough</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/R65SK8gIUhI" title="Shedd Aquarium walkthrough"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure>
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=GyBTWEsYFxk" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/GyBTWEsYFxk/hqdefault.jpg" alt="Field Museum · Sue" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=GyBTWEsYFxk" target="_blank" rel="noopener noreferrer">Field Museum · Sue</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/GyBTWEsYFxk" title="Field Museum · Sue"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure>
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=DmSk42LDLKw" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/DmSk42LDLKw/hqdefault.jpg" alt="Willis Tower Skydeck / The Ledge" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=DmSk42LDLKw" target="_blank" rel="noopener noreferrer">Willis Tower Skydeck / The Ledge</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/DmSk42LDLKw" title="Willis Tower Skydeck / The Ledge"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w1">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">9/26(토)</span>
+          <h3>과학 체험 & 야외 축제</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">Metra / CTA + 우버</span>
+          <strong class="epic-day-total">₩540,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · 숙소→MSI 약 2–4km · MSI→Jack’s 약 14km</p>
+      <p class="muted epic-drive">Jack’s는 Goose Island · 우버 또는 버스+도보</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>오전 MSI (U-505 잠수함)</li><li>오후 Jack’s Pumpkin Pop-Up (호박·옥수수 미로)</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Museum of Science and Industry</strong><span class='muted'> · 5700 S Lake Shore Dr, Chicago, IL 60637</span><br><span class='epic-place-note'>U-505 · 아이 친화 · Hyde Park 거점이면 최적</span></li><li><strong>Jack’s Pumpkin Pop-Up</strong><span class='muted'> · 1265 W Le Moyne St, Chicago, IL 60642</span><br><span class='epic-place-note'>2026시즌 대략 9/19–11/1 · 타임입장 티켓</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>MSI 입장(4명)</td><td class='price'>₩200,000</td></tr><tr><td>Jack’s 입장·체험(4명)</td><td class='price'>₩180,000</td></tr><tr><td>식사·교통</td><td class='price'>₩160,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩540,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">Jack’s는 주말 혼잡 · 오전 MSI → 오후 타임슬롯 예약. 야외라 바람·비 대비.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=4Sv3NdH2w_o" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/4Sv3NdH2w_o/hqdefault.jpg" alt="MSI · U-505 / 과학산업박물관" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=4Sv3NdH2w_o" target="_blank" rel="noopener noreferrer">MSI · U-505 / 과학산업박물관</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/4Sv3NdH2w_o" title="MSI · U-505 / 과학산업박물관"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure>
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=wh6JBEM8cyg" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/wh6JBEM8cyg/hqdefault.jpg" alt="Jack’s Pumpkin Pop-Up Chicago" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=wh6JBEM8cyg" target="_blank" rel="noopener noreferrer">Jack’s Pumpkin Pop-Up Chicago</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/wh6JBEM8cyg" title="Jack’s Pumpkin Pop-Up Chicago"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w1">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">9/27(일)</span>
+          <h3>독일 가을 축제</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">CTA / 우버</span>
+          <strong class="epic-day-total">₩390,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · Art Institute↔Lincoln Square 약 12–15km</p>
+      <p class="muted epic-drive">브라운라인 Western 또는 우버</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>오전 Art Institute (어린이 체험관)</li><li>오후 Lincoln Square Oktoberfest</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Art Institute of Chicago</strong><span class='muted'> · 111 S Michigan Ave, Chicago, IL 60603</span><br><span class='epic-place-note'>Ryan Learning Center 등 키즈 프로그램 확인</span></li><li><strong>Lincoln Square Oktoberfest</strong><span class='muted'> · Lincoln Square, Chicago (Lincoln Ave / Leland 일대)</span><br><span class='epic-place-note'>독일 소시지·프레첼·라이브 · 연중 날짜 변동 → 공식 공지 확인</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>미술관(4명)</td><td class='price'>₩180,000</td></tr><tr><td>옥토버페스트 먹거리</td><td class='price'>₩160,000</td></tr><tr><td>교통</td><td class='price'>₩50,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩390,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">축제 주말은 일찍 도착. 알콜 구역·키즈 존 구분 확인.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=NOUX3_CUP-Q" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/NOUX3_CUP-Q/hqdefault.jpg" alt="Art Institute of Chicago" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=NOUX3_CUP-Q" target="_blank" rel="noopener noreferrer">Art Institute of Chicago</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/NOUX3_CUP-Q" title="Art Institute of Chicago"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure>
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=wh6JBEM8cyg" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/wh6JBEM8cyg/hqdefault.jpg" alt="가을 시카고 야외 축제 분위기 참고" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=wh6JBEM8cyg" target="_blank" rel="noopener noreferrer">가을 시카고 야외 축제 분위기 참고</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/wh6JBEM8cyg" title="가을 시카고 야외 축제 분위기 참고"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w1">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">9/28(월)</span>
+          <h3>크루즈 & 쇼핑</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">도보 / CTA</span>
+          <strong class="epic-day-total">₩600,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · Riverwalk↔Mag Mile 도보권 (2–3km)</p>
+      <p class="muted epic-drive">주차 부담 큰 구간 · 대중교통 유리</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>오전 Architecture River Cruise</li><li>오후 Magnificent Mile 쇼핑</li><li>딥디시 피자 파티</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Architecture River Cruise</strong><span class='muted'> · Chicago Riverwalk docks (Michigan Ave / State St 일대)</span><br><span class='epic-place-note'> Wendella / First Lady / Shoreline 등 사전예약</span></li><li><strong>Magnificent Mile</strong><span class='muted'> · N Michigan Ave, Chicago, IL 60611</span><br><span class='epic-place-note'>Water Tower · 기념품 · 패밀리 스토어</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>리버 크루즈(4명)</td><td class='price'>₩220,000</td></tr><tr><td>딥디시·식사</td><td class='price'>₩180,000</td></tr><tr><td>쇼핑·기념품</td><td class='price'>₩200,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩600,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">크루즈는 오전 타임이 여유. 피자는 Giordano’s / Lou Malnati’s / Pequod’s 등.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=hLQvkiCdBmE" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/hLQvkiCdBmE/hqdefault.jpg" alt="Chicago Architecture River Cruise" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=hLQvkiCdBmE" target="_blank" rel="noopener noreferrer">Chicago Architecture River Cruise</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/hLQvkiCdBmE" title="Chicago Architecture River Cruise"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure>
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=Y5Q5ZZ-JN40" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/Y5Q5ZZ-JN40/hqdefault.jpg" alt="Chicago deep dish pizza" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=Y5Q5ZZ-JN40" target="_blank" rel="noopener noreferrer">Chicago deep dish pizza</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/Y5Q5ZZ-JN40" title="Chicago deep dish pizza"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w2">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">9/29(화)</span>
+          <h3>미시간호 해안 마을 북상</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">렌트카 (다운타운/시내 픽업)</span>
+          <strong class="epic-day-total">₩630,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · CHI→Saugatuck/Holland ≈ 220–240km · 약 2.5–3시간 · Holland→Traverse City ≈ 250km · 약 3시간</p>
+      <p class="muted epic-drive">총 주행 약 470–500km · M-22 해안선은 다음 날부터</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>오전 렌트 수령 후 시카고 출발</li><li>Saugatuck / Holland (풍차·해변)</li><li>Traverse City 방면 북상 · 숙소 체크인</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Saugatuck / Douglas</strong><span class='muted'> · Saugatuck, MI 49453</span><br><span class='epic-place-note'>예술 마을 · Oval Beach</span></li><li><strong>Holland Windmill Island</strong><span class='muted'> · 1 Lincoln Ave, Holland, MI 49423</span><br><span class='epic-place-note'>네덜란드 풍차 마을 포토</span></li><li><strong>Traverse City 숙소</strong><span class='muted'> · Traverse City, MI 49684</span><br><span class='epic-place-note'>슬리핑비어 거점 · 2~3박</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>유류·톨 (당일)</td><td class='price'>₩120,000</td></tr><tr><td>마을 입장·간식</td><td class='price'>₩80,000</td></tr><tr><td>식사</td><td class='price'>₩150,000</td></tr><tr><td>트래버스시티 숙박(1박)</td><td class='price'>₩280,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩630,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">아이 있으면 운전 교대·휴게 자주. 숙소는 Glen Arbor/Empire도 대안(공원 더 가까움).</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=VHgPAQAGbpg" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/VHgPAQAGbpg/hqdefault.jpg" alt="Saugatuck / Michigan lakeshore towns" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=VHgPAQAGbpg" target="_blank" rel="noopener noreferrer">Saugatuck / Michigan lakeshore towns</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/VHgPAQAGbpg" title="Saugatuck / Michigan lakeshore towns"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure>
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=Mxr1w5Cw-WU" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/Mxr1w5Cw-WU/hqdefault.jpg" alt="Sleeping Bear Dunes 미리보기" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=Mxr1w5Cw-WU" target="_blank" rel="noopener noreferrer">Sleeping Bear Dunes 미리보기</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/Mxr1w5Cw-WU" title="Sleeping Bear Dunes 미리보기"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w2">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">9/30(수)</span>
+          <h3>던스 마을 & 트레일 (중간일)</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">렌트카</span>
+          <strong class="epic-day-total">₩485,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · TC↔Empire/Glen Arbor ≈ 40–55km · 왕복 약 1.5시간대</p>
+      <p class="muted epic-drive">M-22 / M-109 해안 드라이브 시작</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>오전 Empire Bluff 또는 Sleeping Bear Point 트레일</li><li>Glen Arbor 마을 점심·기념품</li><li>해변·호수 산책 · 일찍 휴식</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Empire Bluff Trail</strong><span class='muted'> · Empire, MI 49630</span><br><span class='epic-place-note'>왕복 약 2.4km · 미시간호 절경</span></li><li><strong>Glen Arbor</strong><span class='muted'> · Glen Arbor, MI 49636</span><br><span class='epic-place-note'>Cherry Republic · 마을 카페</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>국립호안 입장(차량)</td><td class='price'>₩45,000</td></tr><tr><td>식사·기념품</td><td class='price'>₩160,000</td></tr><tr><td>숙박(1박)</td><td class='price'>₩280,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩485,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">원안 3박4일 중 ‘여유일’. 바람·모래 대비 모자·물. NPS 주간 패스($25/차량대 수준) 확인.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=Mxr1w5Cw-WU" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/Mxr1w5Cw-WU/hqdefault.jpg" alt="Sleeping Bear Dunes · Empire / overlooks" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=Mxr1w5Cw-WU" target="_blank" rel="noopener noreferrer">Sleeping Bear Dunes · Empire / overlooks</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/Mxr1w5Cw-WU" title="Sleeping Bear Dunes · Empire / overlooks"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w2">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">10/1(목)</span>
+          <h3>슬리핑 비어 던스 집중</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">렌트카</span>
+          <strong class="epic-day-total">₩520,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · Dune Climb↔Pierce Stocking ≈ 10km대 · Scenic Drive 7.5마일(약 12km) 루프</p>
+      <p class="muted epic-drive">차 안에서 전망 · 아이와 모래썰매</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>오전 Dune Climb (모래언덕·썰매)</li><li>오후 Pierce Stocking Scenic Drive</li><li>저녁 Traverse City 체리 디저트</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Dune Climb</strong><span class='muted'> · 6748 S Dune Hwy, Glen Arbor, MI 49636</span><br><span class='epic-place-note'>높이 체감 큰 모래벽 · 내려올 때 최고</span></li><li><strong>Pierce Stocking Scenic Drive</strong><span class='muted'> · Pierce Stocking Scenic Dr, Empire, MI</span><br><span class='epic-place-note'>12개 전망 스톱 · Lake Michigan Overlook</span></li><li><strong>Traverse City downtown</strong><span class='muted'> · Front St, Traverse City, MI</span><br><span class='epic-place-note'>체리 파이·아이스크림</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>공원 패스(이미 구매 시 제외)</td><td class='price'>—</td></tr><tr><td>모래썰매·간식</td><td class='price'>₩60,000</td></tr><tr><td>체리 디저트·저녁</td><td class='price'>₩180,000</td></tr><tr><td>숙박(1박)</td><td class='price'>₩280,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩520,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">절벽 가장자리 안전 주의(특히 Overlook). 모래·운동화·여분 옷. 일몰 전 드라이브 완료.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=Mxr1w5Cw-WU" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/Mxr1w5Cw-WU/hqdefault.jpg" alt="Dune Climb + Pierce Stocking" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=Mxr1w5Cw-WU" target="_blank" rel="noopener noreferrer">Dune Climb + Pierce Stocking</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/Mxr1w5Cw-WU" title="Dune Climb + Pierce Stocking"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w2">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">10/2(금)</span>
+          <h3>사과따기 · 남하 · 시카고 복귀</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">렌트카</span>
+          <strong class="epic-day-total">₩450,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · TC→과수원 근교 20–40km · TC→Indiana Dunes ≈ 480–520km · 약 5–6시간 · Dunes→CHI ≈ 70–90km · 약 1–1.5시간</p>
+      <p class="muted epic-drive">장거리 운전일 · 일찍 출발 권장</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>오전 과수원 Apple Picking</li><li>남하하며 Indiana Dunes 들르기</li><li>시카고 숙소 복귀</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Apple orchard (TC 근교)</strong><span class='muted'> · Traverse City / Old Mission / Leelanau 일대</span><br><span class='epic-place-note'>시즌 U-pick · 농장별 운영일 확인</span></li><li><strong>Indiana Dunes National Park</strong><span class='muted'> · 1100 N Mineral Springs Rd, Porter, IN 46304</span><br><span class='epic-place-note'>West Beach 또는 Indiana Dunes State Park 짧게</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>사과따기·농장</td><td class='price'>₩80,000</td></tr><tr><td>유류·톨 (장거리)</td><td class='price'>₩180,000</td></tr><tr><td>Indiana Dunes 주차/간식</td><td class='price'>₩50,000</td></tr><tr><td>식사</td><td class='price'>₩140,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩450,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">운전 피로 크면 던스는 스킵하고 직행도 OK. 렌트는 시카고에서 계속 사용(3주차 근교).</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=qat0Pakzur4" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/qat0Pakzur4/hqdefault.jpg" alt="Indiana Dunes National Park" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=qat0Pakzur4" target="_blank" rel="noopener noreferrer">Indiana Dunes National Park</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/qat0Pakzur4" title="Indiana Dunes National Park"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure>
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=Mxr1w5Cw-WU" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/Mxr1w5Cw-WU/hqdefault.jpg" alt="Sleeping Bear 여운 · 모래언덕" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=Mxr1w5Cw-WU" target="_blank" rel="noopener noreferrer">Sleeping Bear 여운 · 모래언덕</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/Mxr1w5Cw-WU" title="Sleeping Bear 여운 · 모래언덕"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w3">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">10/3(토)</span>
+          <h3>애플 페스트 & 동물원</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">CTA / 우버 / 자차</span>
+          <strong class="epic-day-total">₩300,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · Lincoln Square↔Lincoln Park Zoo ≈ 6–8km</p>
+      <p class="muted epic-drive">축제 주차 어려움 · 대중교통 유리</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>오전 Lincoln Square Apple Fest</li><li>오후 Lincoln Park Zoo (무료)</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Lincoln Square Apple Fest</strong><span class='muted'> · Lincoln Square, Chicago</span><br><span class='epic-place-note'>사과·파이·사이더 도넛 · 연례 주말 행사(날짜 공지 확인)</span></li><li><strong>Lincoln Park Zoo</strong><span class='muted'> · 2001 N Clark St, Chicago, IL 60614</span><br><span class='epic-place-note'>기본 입장 무료 · 주차·특별전 유료</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>페스트 먹거리(4명)</td><td class='price'>₩120,000</td></tr><tr><td>교통·주차</td><td class='price'>₩50,000</td></tr><tr><td>식사</td><td class='price'>₩130,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩300,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">애플페스트는 오전 일찍. 동물원은 해질녘 전 핵심 존만.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=IlEZraDeuBs" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/IlEZraDeuBs/hqdefault.jpg" alt="Lincoln Park Zoo Chicago" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=IlEZraDeuBs" target="_blank" rel="noopener noreferrer">Lincoln Park Zoo Chicago</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/IlEZraDeuBs" title="Lincoln Park Zoo Chicago"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w3">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">10/4(일)</span>
+          <h3>휴식 & 도심 산책</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">CTA / 도보</span>
+          <strong class="epic-day-total">₩340,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · Navy Pier↔Riverwalk ≈ 2–3km</p>
+      <p class="muted epic-drive">가벼운 동선</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>오전 Navy Pier 어린이 박물관</li><li>오후 Chicago Riverwalk 카페</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Chicago Children’s Museum</strong><span class='muted'> · 700 E Grand Ave, Chicago, IL 60611</span><br><span class='epic-place-note'>Navy Pier 내 · 연령대별 체험</span></li><li><strong>Chicago Riverwalk</strong><span class='muted'> · Chicago Riverwalk, Chicago, IL</span><br><span class='epic-place-note'>카페·보트 구경 · 여유 데이</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>어린이박물관(4명)</td><td class='price'>₩120,000</td></tr><tr><td>카페·간식</td><td class='price'>₩80,000</td></tr><tr><td>식사·교통</td><td class='price'>₩140,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩340,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">로드트립 피로 회복일. 비 오면 실내 위주.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=vfozrRFSKuM" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/vfozrRFSKuM/hqdefault.jpg" alt="Navy Pier 재방문 · 어린이박물관 인근" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=vfozrRFSKuM" target="_blank" rel="noopener noreferrer">Navy Pier 재방문 · 어린이박물관 인근</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/vfozrRFSKuM" title="Navy Pier 재방문 · 어린이박물관 인근"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w3">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">10/5(월)</span>
+          <h3>세계 최대 옥수수 미로</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">렌트카</span>
+          <strong class="epic-day-total">₩420,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · 시카고→Richardson Farm ≈ 90–100km · 약 1시간 15분</p>
+      <p class="muted epic-drive">왕복 약 2.5시간 + 하루 올인</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>Richardson Adventure Farm 종일</li><li>옥수수 미로·호박밭·대형 미끄럼틀·트랙터</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Richardson Adventure Farm</strong><span class='muted'> · 909 English Prairie Rd, Spring Grove, IL 60081</span><br><span class='epic-place-note'>2026 시즌 대략 9/12–11/1 · 사전 티켓</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>입장·액티비티(4명)</td><td class='price'>₩220,000</td></tr><tr><td>유류·주차</td><td class='price'>₩60,000</td></tr><tr><td>식사·간식</td><td class='price'>₩140,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩420,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">편한 신발·모기·진흙 대비. 평일 방문이 대기 적음.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=JCZ5e6tOTj8" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/JCZ5e6tOTj8/hqdefault.jpg" alt="Richardson Adventure Farm corn maze" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=JCZ5e6tOTj8" target="_blank" rel="noopener noreferrer">Richardson Adventure Farm corn maze</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/JCZ5e6tOTj8" title="Richardson Adventure Farm corn maze"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w3">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">10/6(화)</span>
+          <h3>동물원 트릭오어트리트</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">렌트카 / Metra</span>
+          <strong class="epic-day-total">₩320,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · 시내→Brookfield Zoo ≈ 25–30km · 약 40–50분</p>
+      <p class="muted epic-drive">주차 넉넉한 편</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>Brookfield Zoo 가을 이벤트 · 동물 관람</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Brookfield Zoo</strong><span class='muted'> · 8400 31st St, Brookfield, IL 60513</span><br><span class='epic-place-note'>가을 한정 Boo!/핼러윈 프로그램은 연도별 공지</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>입장·주차(4명)</td><td class='price'>₩180,000</td></tr><tr><td>식사·기념품</td><td class='price'>₩140,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩320,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">이벤트 데이는 티켓 타임슬롯. 유모차·왜건 대여 확인.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=Am9Xf5V3u-c" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/Am9Xf5V3u-c/hqdefault.jpg" alt="Brookfield Zoo Chicago" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=Am9Xf5V3u-c" target="_blank" rel="noopener noreferrer">Brookfield Zoo Chicago</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/Am9Xf5V3u-c" title="Brookfield Zoo Chicago"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w3">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">10/7(수)</span>
+          <h3>1,000개 호박 등불</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">렌트카</span>
+          <strong class="epic-day-total">₩280,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · 시내→Chicago Botanic Garden ≈ 40–45km · 약 45–60분</p>
+      <p class="muted epic-drive">저녁 입장 · 오후는 휴식</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>오전·오후 휴식</li><li>저녁 Night of 1,000 Jack-O’-Lanterns</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Chicago Botanic Garden</strong><span class='muted'> · 1000 Lake Cook Rd, Glencoe, IL 60022</span><br><span class='epic-place-note'>야간 타임티켓 필수 · 2026 운영일은 공식 사이트 확인(해마다 변동)</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>야간 티켓(4명)</td><td class='price'>₩200,000</td></tr><tr><td>유류·주차·간식</td><td class='price'>₩80,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩280,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">어두워서 아이 손잡기·따뜻한 외투. 날짜가 안 맞으면 주말 슬롯으로 조정.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <div class="epic-media-grid">
+          <figure class="epic-media">
+            <a class="epic-thumb-link" href="https://www.youtube.com/watch?v=0TOXqXh-p9s" target="_blank" rel="noopener noreferrer">
+              <img class="epic-thumb" src="https://img.youtube.com/vi/0TOXqXh-p9s/hqdefault.jpg" alt="Night of 1,000 Jack-O’-Lanterns" loading="lazy"
+                onerror="this.style.display='none'" />
+              <span class="epic-play">▶ YouTube</span>
+            </a>
+            <figcaption>
+              <a href="https://www.youtube.com/watch?v=0TOXqXh-p9s" target="_blank" rel="noopener noreferrer">Night of 1,000 Jack-O’-Lanterns</a>
+            </figcaption>
+            <details class="epic-embed-details">
+              <summary>이 페이지에서 미리보기</summary>
+              <div class="epic-embed-wrap">
+                <iframe class="epic-embed" data-src="https://www.youtube.com/embed/0TOXqXh-p9s" title="Night of 1,000 Jack-O’-Lanterns"
+                  loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </details>
+          </figure></div>
+    </article>
+    <article class="epic-day" data-epic-week="w3">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">10/8(목)</span>
+          <h3>쇼핑 & 마무리</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">CTA / 우버</span>
+          <strong class="epic-day-total">₩400,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · 시내 쇼핑권 5km 이내</p>
+      <p class="muted epic-drive">렌트는 짐·공항용으로 유지하거나 전날 반납 검토</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>기념품 쇼핑</li><li>좋아하는 레스토랑 마무리 저녁</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>Water Tower / Mag Mile 또는 로컬 숍</strong><span class='muted'> · 835 N Michigan Ave 일대</span><br><span class='epic-place-note'>딥디시 소스·기념품·아울렛은 취향껏</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>쇼핑</td><td class='price'>₩200,000</td></tr><tr><td>저녁 식사</td><td class='price'>₩200,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩400,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">짐 무게·액체 규정 체크. 익일 새벽 공항이면 일찍 종료.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <p class="muted">이 날은 별도 영상 없이 일정만 정리했습니다.</p>
+    </article>
+    <article class="epic-day" data-epic-week="w3">
+      <header class="epic-day-head">
+        <div>
+          <span class="epic-date">10/9(금)</span>
+          <h3>귀국</h3>
+        </div>
+        <div class="epic-day-meta">
+          <span class="epic-pill">렌트카 → ORD 반납</span>
+          <strong class="epic-day-total">₩200,000</strong>
+        </div>
+      </header>
+      <p class="epic-distance"><strong>거리·시간</strong> · Hyde Park→ORD ≈ 40–50km · 약 45–75분(교통 따라)</p>
+      <p class="muted epic-drive">새벽 출발편이면 전날 밤 이동·호텔도 검토</p>
+      <h4 class="epic-sub">동선</h4>
+      <ol class='epic-flow'><li>체크아웃</li><li>렌트 반납</li><li>ORD 출발</li></ol>
+      <h4 class="epic-sub">장소 · 주소</h4>
+      <ul class='epic-places'><li><strong>O’Hare International Airport (ORD)</strong><span class='muted'> · 10000 W O'Hare Ave, Chicago, IL 60666</span><br><span class='epic-place-note'>국제선 3시간 전 · 렌트 셔틀 여유</span></li></ul>
+      
+    <table class="epic-spend">
+      <thead><tr><th>예상 지출 (4명)</th><th>대략</th></tr></thead>
+      <tbody><tr><td>공항 이동·주차/셔틀</td><td class='price'>₩80,000</td></tr><tr><td>공항 식사</td><td class='price'>₩120,000</td></tr></tbody>
+      <tfoot><tr><th>일 합계</th><th class="price">₩200,000</th></tr></tfoot>
+    </table>
+      <p class="epic-tip">귀국편 06:00대면 심야 이동. 반납 전 주유·사진 기록.</p>
+      <h4 class="epic-sub">관련 영상 · 미리보기</h4>
+      <p class="muted">이 날은 별도 영상 없이 일정만 정리했습니다.</p>
+    </article>
+    </div>
+    
+    </div>
+
     <div id="tips-plan" class="panel" role="tabpanel">
       <p class="meta">트래블로그 · 트래블월렛(트래블페이) · 신용카드 · 뉴욕·시카고 사전예약·할인 팁</p>
       
@@ -8010,11 +8997,41 @@
       });
     })();
     
+    
+    (function() {
+      const tabs = document.querySelectorAll('[data-epic-week-btn]');
+      const days = document.querySelectorAll('.epic-day');
+      const cards = document.querySelectorAll('[data-epic-week-card]');
+      if (!tabs.length) return;
+      function show(week) {
+        tabs.forEach(t => {
+          const on = t.dataset.epicWeekBtn === week;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        days.forEach(d => {
+          d.hidden = !(week === 'all' || d.dataset.epicWeek === week);
+        });
+        cards.forEach(c => {
+          c.hidden = !(week === 'all' || c.dataset.epicWeekCard === week);
+        });
+      }
+      tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.epicWeekBtn)));
+      document.querySelectorAll('.epic-embed-details').forEach(det => {
+        det.addEventListener('toggle', () => {
+          if (!det.open) return;
+          const iframe = det.querySelector('iframe[data-src]');
+          if (iframe && !iframe.src) iframe.src = iframe.dataset.src;
+        });
+      });
+    })();
+    
 
     const hashPanel = {
       '#dashboard': 'dashboard', '#flights': 'flights', '#lodging': 'lodging', '#cars': 'cars',
       '#chi-plan': 'chi-plan', '#east-plan': 'east-plan',
-      '#food-plan': 'food-plan', '#misc-plan': 'misc-plan', '#tips-plan': 'tips-plan'
+      '#food-plan': 'food-plan', '#misc-plan': 'misc-plan',
+      '#epic-plan': 'epic-plan', '#tips-plan': 'tips-plan'
     }[location.hash];
     if (hashPanel) document.querySelector(`[data-panel="${hashPanel}"]`).click();
 
