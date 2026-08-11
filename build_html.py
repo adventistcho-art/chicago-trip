@@ -25,6 +25,7 @@ ROUTE_CHI_FILE = ROOT / "route_chi_roundtrip.json"
 ROUTE_NYC_FILE = ROOT / "route_nyc_in_chi_out.json"
 ROUTE_NYC_CHI_FILE = ROOT / "route_nyc_to_chi.json"
 BOOKED_FLIGHT_FILE = ROOT / "booked_flight.json"
+CHI_AM_COMPARE_FILE = ROOT / "chi_am_compare.json"
 CAR_FILE = ROOT / "car_rental_data.json"
 CAR_COMPARE_FILE = ROOT / "car_compare_data.json"
 AIRBNB_LODGING = ROOT / "airbnb_lodging_data.json"
@@ -110,6 +111,49 @@ def flight_per_person_text(total: int | None) -> str:
 
 def load_route_rows(path: Path) -> list[dict]:
     return load_list(path)
+
+
+def load_chi_am_compare() -> dict | None:
+    if not CHI_AM_COMPARE_FILE.exists():
+        return None
+    try:
+        data = json.loads(CHI_AM_COMPARE_FILE.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+    return data if data.get("offers") or data.get("sources") else None
+
+
+def chi_am_flight_option(offer: dict) -> dict:
+    """Selectable flight option from multi-OTA morning compare row."""
+    src = offer.get("source") or "compare"
+    ret = offer.get("return_date") or "2026-10-09"
+    return {
+        "id": f"chi_am:{src}:{ret}",
+        "route": "chi_round",
+        "route_label": offer.get("route_label") or "시카고 인 · 시카고 아웃",
+        "kind": "chi_am",
+        "kind_label": offer.get("source_label") or src,
+        "outbound_date": offer.get("outbound_date") or OUTBOUND,
+        "return_date": ret,
+        "price": offer["price"],
+        "price_text": offer.get("price_text") or fmt_won(offer["price"]),
+        "price_per_person": offer.get("price_per_person") or flight_per_person(offer["price"]),
+        "price_per_person_text": offer.get("price_per_person_text")
+        or flight_per_person_text(offer["price"]),
+        "duration_text": offer.get("duration_text", ""),
+        "duration_minutes": offer.get("duration_minutes"),
+        "stops_text": offer.get("stops_text", ""),
+        "carrier_text": offer.get("carrier_text", ""),
+        "self_transfer": False,
+        "seller_url": offer.get("seller_url", ""),
+        "chi_am": True,
+        "source": src,
+        "source_label": offer.get("source_label") or src,
+        "depart_outbound": offer.get("depart_outbound", ""),
+        "depart_return": offer.get("depart_return", ""),
+        "note": offer.get("note", ""),
+        "synced_at": offer.get("synced_at", ""),
+    }
 
 
 def load_booked_flight() -> dict | None:
@@ -391,11 +435,22 @@ def build_trip_data(
     car_days: list[dict] | None = None,
     booked_flight: dict | None = None,
     domestic_flights: list[dict] | None = None,
+    chi_am_compare: dict | None = None,
 ) -> dict:
     flights = list(route_flights)
-    booked_opt = booked_flight_option(booked_flight) if booked_flight else None
-    if booked_opt and not any(f["id"] == booked_opt["id"] for f in flights):
-        flights.insert(0, booked_opt)
+    chi_am_opts = [
+        chi_am_flight_option(o) for o in (chi_am_compare or {}).get("offers") or [] if o.get("price")
+    ]
+    for opt in reversed(chi_am_opts):
+        if not any(f["id"] == opt["id"] for f in flights):
+            flights.insert(0, opt)
+    # NYC 예약완료 항공은 비교 리스트가 있을 때 기본 선택에서 제외
+    booked_opt = None
+    if not chi_am_opts and booked_flight:
+        booked_opt = booked_flight_option(booked_flight)
+        if booked_opt and not any(f["id"] == booked_opt["id"] for f in flights):
+            flights.insert(0, booked_opt)
+    chi_am_best = chi_am_opts[0] if chi_am_opts else None
     cars = flatten_cars(car_days or [])
     domestic = list(domestic_flights or [])
     best_domestic = (
@@ -438,7 +493,9 @@ def build_trip_data(
         best_lodging = booked_lodging
     combos = analyze_combos(flights, airbnb)
     recommended = combos[0] if combos else None
-    if booked_opt:
+    if chi_am_best:
+        best_flight_id = chi_am_best["id"]
+    elif booked_opt:
         best_flight_id = booked_opt["id"]
     elif booked_lodging:
         best_flight_id = recommended["flight_id"] if recommended else (best_flight["id"] if best_flight else None)
@@ -477,7 +534,9 @@ def build_trip_data(
 
     best_car_id = None
     prefer_drop = None
-    if booked_opt:
+    if chi_am_best:
+        prefer_drop = chi_am_best.get("return_date")
+    elif booked_opt:
         prefer_drop = booked_opt.get("return_date")
     elif recommended:
         prefer_drop = recommended.get("return_date")
@@ -498,7 +557,8 @@ def build_trip_data(
         "checkin": (booked_row_raw or {}).get("checkin") or CHECKIN,
         "lodging_note": LODGING_NOTE,
         "booked_lodging_id": booked_lodging["id"] if booked_lodging else None,
-        "booked_flight_id": booked_opt["id"] if booked_opt else None,
+        "booked_flight_id": (chi_am_best or booked_opt)["id"] if (chi_am_best or booked_opt) else None,
+        "chi_am_best_id": chi_am_best["id"] if chi_am_best else None,
         "guests": GUESTS,
         "adults": ADULTS,
         "child_ages": CHILD_AGES,
@@ -740,6 +800,124 @@ def _render_booked_leg_block(title: str, block: dict) -> str:
       </div>"""
 
 
+def render_chi_am_compare(
+    compare: dict | None, *, interactive: bool = True, dom_id: str = "chi-am-compare-hero"
+) -> str:
+    if not compare:
+        return """
+    <section class="hero card chi-am-hero" id="chi-am-compare-hero">
+      <div class="booked-flight-copy">
+        <p class="route-kicker">CHI ROUND · MORNING · ≤17H</p>
+        <h2>시카고 인 · 시카고 아웃 최저가 비교</h2>
+        <p class="muted">9/24 오전 출국 · 10/9 오전 귀국 · 편도 17시간 이하 · KAYAK · 스카이스캐너 · 구글</p>
+        <p class="muted">아직 실검색 데이터가 없습니다. <code>python sync_chi_am_compare.py</code> 를 실행하세요.</p>
+      </div>
+    </section>"""
+    # Prefer priced offers first; always show all 3 source cards when available
+    source_rows = []
+    sources = compare.get("sources") or {}
+    for key in ("kayak", "skyscanner", "google"):
+        if key in sources:
+            source_rows.append(sources[key])
+    if not source_rows:
+        source_rows = list(compare.get("offers") or [])
+    priced = [o for o in source_rows if o.get("price")]
+    priced.sort(key=lambda x: x["price"])
+    if not priced and not source_rows:
+        return render_chi_am_compare(None, interactive=interactive, dom_id=dom_id)
+    best = priced[0] if priced else None
+    best_opt = chi_am_flight_option(best) if best else None
+    synced = compare.get("synced_at") or (best or {}).get("synced_at") or ""
+    # Display order: best first, then others by source order
+    display = []
+    seen = set()
+    if best:
+        display.append(best)
+        seen.add(best.get("source"))
+    for o in source_rows:
+        if o.get("source") in seen:
+            continue
+        display.append(o)
+        seen.add(o.get("source"))
+    cards = []
+    for i, raw in enumerate(display):
+        empty = bool(raw.get("empty") or not raw.get("price"))
+        opt = chi_am_flight_option(raw) if raw.get("price") else None
+        is_best = bool(best and raw.get("source") == best.get("source"))
+        label = raw.get("source_label") or raw.get("source") or ""
+        badge = "최저가" if is_best else label
+        dep = ""
+        if raw.get("depart_outbound") or raw.get("depart_return"):
+            dep = (
+                f"<p class='muted'>출국 이륙 {html.escape(str(raw.get('depart_outbound') or '오전'))}"
+                f" · 귀국 이륙 {html.escape(str(raw.get('depart_return') or '오전'))}</p>"
+            )
+        note = f"<p class='muted'>{html.escape(raw.get('note') or '')}</p>" if raw.get("note") else ""
+        price_html = (
+            f"<strong>{html.escape(raw.get('price_text') or '-')}</strong>"
+            f"<span class='muted'>4명 · 1인 {html.escape(raw.get('price_per_person_text') or '-')}</span>"
+            if not empty
+            else f"<strong class='muted'>{html.escape(raw.get('price_text') or '결과 없음')}</strong>"
+        )
+        if interactive and opt and not empty:
+            checked = " checked" if is_best else ""
+            actions = f"""
+            <div class="opt-actions">
+              <label class="pick-label">
+                <input type="radio" name="flight-pick" class="flight-pick" value="{opt['id']}"
+                  data-price="{opt['price']}" data-return="{opt['return_date']}" data-source="chi_round"{checked}>
+                <span>{"경비 기본" if is_best else "경비에 담기"}</span>
+              </label>
+              {BTN.format(url=raw.get('seller_url') or '#')}
+            </div>"""
+        else:
+            actions = f"""
+            <div class="opt-actions">
+              {"<button type='button' class='cta-btn' data-goto='flights'>항공권 탭에서 보기</button>" if not empty else ""}
+              {BTN.format(url=raw.get('seller_url') or '#').replace('선택하기', '사이트에서 확인')}
+            </div>"""
+        cards.append(f"""
+        <article class="chi-am-card {'best' if is_best else ''} {'empty' if empty else ''}" data-source="{html.escape(str(raw.get('source') or ''))}">
+          <header class="chi-am-card-head">
+            <div>
+              <p class="date-kicker">{html.escape(label)}</p>
+              <h3>{html.escape(badge if is_best else (raw.get('carrier_text') or label))}</h3>
+            </div>
+            <div class="chi-am-price">{price_html}</div>
+          </header>
+          <p>{html.escape(raw.get('carrier_text') or '')} · {html.escape(raw.get('stops_text') or '')}</p>
+          <p><strong>{html.escape(raw.get('duration_text') or '')}</strong></p>
+          {dep}
+          {note}
+          {actions}
+        </article>""")
+    hero_price = best_opt["price_text"] if best_opt else "—"
+    hero_sub = (
+        f"3사 중 최저 · {html.escape(best.get('source_label') or '')} · 1인 {best_opt['price_per_person_text']}"
+        if best_opt and best
+        else "조건에 맞는 자동추출 결과 없음 · 사이트 링크로 확인"
+    )
+    urls = compare.get("urls") or {}
+    link_bits = []
+    for key, label in (("kayak", "KAYAK"), ("skyscanner", "스카이스캐너"), ("google", "구글")):
+        if urls.get(key):
+            link_bits.append(
+                f'<a href="{html.escape(urls[key])}" target="_blank" rel="noopener noreferrer">{label} 검색</a>'
+            )
+    return f"""
+    <section class="hero card chi-am-hero" id="{dom_id}">
+      <div class="booked-flight-copy" style="width:100%">
+        <p class="route-kicker">CHI ROUND · MORNING · ≤17H · 여행경비 기본</p>
+        <h2>시카고 인 · 시카고 아웃 최저가 비교</h2>
+        <p class="muted">출국 9/24 오전 · 귀국 10/9 오전 · 편도 17시간 이하 · 성인2·아동7·8세</p>
+        <p class="hero-price" style="color:var(--sky)">{hero_price}</p>
+        <p class="opt-sub">{hero_sub}</p>
+        <p class="muted">동기화 {html.escape(synced)} · {' · '.join(link_bits)}</p>
+        <div class="chi-am-grid">{''.join(cards)}</div>
+      </div>
+    </section>"""
+
+
 def render_booked_flight(booked: dict | None, *, interactive: bool = True, dom_id: str = "booked-flight-hero") -> str:
     if not booked:
         return ""
@@ -883,12 +1061,17 @@ def render_flights(
     nyc_days: list[dict],
     booked: dict | None = None,
     domestic_days: list[dict] | None = None,
+    chi_am_compare: dict | None = None,
 ) -> str:
     returns = sorted(
         {d["return_date"] for d in chi_days + nyc_days}
         or {"2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13"}
     )
-    end_selected = (booked or {}).get("return_date") or (returns[0] if returns else None)
+    end_selected = (
+        (chi_am_compare or {}).get("return_date")
+        or (booked or {}).get("return_date")
+        or (returns[0] if returns else None)
+    )
     date_bar = render_date_filter(
         prefix="flights",
         start_id="flight-outbound",
@@ -901,33 +1084,44 @@ def render_flights(
         end_selected=end_selected,
         note="출국·귀국일을 고르면 해당 일정의 최저가 / 최단시간만 표시됩니다.",
     )
+    hero = render_chi_am_compare(chi_am_compare, interactive=True)
+    # 이전 NYC 예약 항공은 참고용으로만 접어둠
+    booked_ref = ""
+    if booked and not (chi_am_compare or {}).get("offers"):
+        booked_ref = render_booked_flight(booked)
+    elif booked:
+        booked_ref = f"""
+        <details class="card" style="margin:12px 0;">
+          <summary class="muted">이전 참고: 뉴욕 인 · 시카고 아웃 예약안 (아시아나)</summary>
+          {render_booked_flight(booked, interactive=False)}
+        </details>"""
     return f"""
     <section class="card transport-plan-card">
       <p class="route-kicker">TRANSPORT PLAN</p>
       <h3>이동 계획</h3>
       <ul class="transport-plan-list">
-        <li>{TRANSPORT_PLAN['nyc_local']}</li>
-        <li>{TRANSPORT_PLAN['nyc_to_chi']}</li>
+        <li>국제선: 서울 → 시카고(ORD) 9/24 오전 인 · 10/9 오전 아웃 (편도 17시간 이하 우선)</li>
         <li>{TRANSPORT_PLAN['car']}</li>
       </ul>
     </section>
-    {render_booked_flight(booked)}
+    {hero}
+    {booked_ref}
     {_render_domestic_nyc_chi(domestic_days or [])}
     {date_bar}
     <div class="route-switch" role="tablist" aria-label="국제선 항공 루트">
-      <button type="button" class="route-tab active" role="tab" aria-selected="true" data-route="nyc_in">
-        <span class="route-tab-title">뉴욕 인 · 시카고 아웃</span>
-        <span class="route-tab-sub">SEL→NYC / ORD→SEL</span>
-      </button>
-      <button type="button" class="route-tab" role="tab" aria-selected="false" data-route="chi_round">
+      <button type="button" class="route-tab active" role="tab" aria-selected="true" data-route="chi_round">
         <span class="route-tab-title">시카고 인 · 시카고 아웃</span>
         <span class="route-tab-sub">SEL↔ORD 왕복</span>
       </button>
+      <button type="button" class="route-tab" role="tab" aria-selected="false" data-route="nyc_in">
+        <span class="route-tab-title">뉴욕 인 · 시카고 아웃</span>
+        <span class="route-tab-sub">SEL→NYC / ORD→SEL</span>
+      </button>
     </div>
-    <p class="flight-hint muted">위에 <strong>예약 완료</strong> 국제선이 기본 선택됩니다. 뉴욕→시카고 국내선은 별도 선택하세요.</p>
+    <p class="flight-hint muted">위 <strong>3사 비교(오전·17h 이하)</strong>가 여행경비 기본 선택입니다. 날짜별 KAYAK 상세는 아래 카드에서 고르세요.</p>
     <p id="flight-empty" class="empty-filter muted" hidden>선택한 날짜의 항공 데이터가 없습니다.</p>
-    {_route_panel("nyc_in", nyc_days, True)}
-    {_route_panel("chi_round", chi_days, False)}
+    {_route_panel("chi_round", chi_days, True)}
+    {_route_panel("nyc_in", nyc_days, False)}
     """
 
 
@@ -1677,9 +1871,28 @@ def render_page(
     .booked-itin-block {{ margin-top: 12px; }}
     .booked-itin-block + .booked-itin-block {{ margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }}
     .booked-flight-legs {{ margin: 8px 0 0; padding-left: 1.1rem; line-height: 1.55; }}
+    .chi-am-hero {{
+      display: block; border-left: 5px solid var(--sky);
+      background: linear-gradient(135deg, #eff6ff 0%, #fff 55%);
+    }}
+    .chi-am-grid {{
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px;
+    }}
+    .chi-am-card {{
+      border: 1px solid var(--line); border-radius: 14px; padding: 14px; background: #fff;
+    }}
+    .chi-am-card.best {{ border-color: #93c5fd; box-shadow: 0 0 0 2px rgba(37,99,235,.12); }}
+    .chi-am-card-head {{
+      display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; margin-bottom: 8px;
+    }}
+    .chi-am-card-head h3 {{ margin: 4px 0 0; font-size: 1.05rem; }}
+    .chi-am-price {{ text-align: right; }}
+    .chi-am-price strong {{ display: block; font-size: 1.25rem; color: var(--sky); }}
     @media (max-width: 900px) {{
       .booked-flight-hero {{ grid-template-columns: 1fr; }}
       .booked-flight-shot img {{ max-height: none; }}
+      .chi-am-grid {{ grid-template-columns: 1fr; }}
+      .chi-am-price {{ text-align: left; }}
     }}
     .opt-extra {{ margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border); }}
     .opt-extra-title {{ font-size: 0.88rem; font-weight: 700; margin: 0 0 10px; color: #0369a1; }}
@@ -3159,6 +3372,7 @@ def main() -> None:
     nyc_days = load_route_rows(ROUTE_NYC_FILE)
     domestic_days = load_route_rows(ROUTE_NYC_CHI_FILE)
     booked_flight = load_booked_flight()
+    chi_am_compare = load_chi_am_compare()
     car_days = load_route_rows(CAR_COMPARE_FILE) or load_route_rows(CAR_FILE)
     route_flights = flatten_route_flights(nyc_days) + flatten_route_flights(chi_days)
     route_flights.sort(key=lambda x: (x["price"], x.get("duration_minutes") or 10**9))
@@ -3167,9 +3381,17 @@ def main() -> None:
     airbnb_all = load_lodging_list(AIRBNB_LODGING)
     airbnb = load_lodging_cheapest(airbnb_all)
     trip_data = build_trip_data(
-        route_flights, airbnb_all, airbnb, car_days, booked_flight, domestic_flights
+        route_flights,
+        airbnb_all,
+        airbnb,
+        car_days,
+        booked_flight,
+        domestic_flights,
+        chi_am_compare,
     )
-    flights_html = render_flights(chi_days, nyc_days, booked_flight, domestic_days)
+    flights_html = render_flights(
+        chi_days, nyc_days, booked_flight, domestic_days, chi_am_compare
+    )
     lodging_html = render_lodging(airbnb_all, airbnb)
     cars_html = render_cars(car_days)
     chicago_plan_html = itinerary_plans.render_chicago_plan()
@@ -3179,8 +3401,8 @@ def main() -> None:
     tips_html = travel_tips.render_tips_tab()
     epic_plan_html = chicago_epic_plan.render_epic_plan()
     combo_html = render_combo_analysis(trip_data.get("combos", []))
-    booked_flight_html = render_booked_flight(
-        booked_flight, interactive=False, dom_id="booked-flight-dash"
+    booked_flight_html = render_chi_am_compare(
+        chi_am_compare, interactive=False, dom_id="booked-flight-dash"
     )
     dashboard_html = render_dashboard_shell(combo_html, booked_flight_html)
     page = render_page(
